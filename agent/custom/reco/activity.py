@@ -56,18 +56,18 @@ class FindFirstUnplayedStageByCheckmark(CustomRecognition):
 
     # 简单难度下的关卡坐标 (x, y, w, h)
     EASY_COORDS = [
-        (449, 139, 61, 57),
-        (931, 178, 66, 53),
-        (613, 410, 66, 55),
+        ((449, 139, 61, 57),(339,210,91,61)),  # 左上
+        ((931, 178, 66, 53), (815,240,60,51)),  # 右上
+        ((613, 410, 66, 55), (497,481,61,54))   # 下
     ]
 
     # 普通/高难难度下的关卡坐标 (x, y, w, h)
     NORMAL_HARD_COORDS = [
-        (403, 143, 62, 56),
-        (1037, 143, 61, 60),
-        (378, 449, 58, 56),
-        (957, 477, 63, 60),
-        (758, 227, 63, 52),
+        ((403, 143, 62, 56), (326,209,66,35)),       # 左上
+        ((1037, 143, 61, 60), (948,204,59,53)),  # 右上
+        ((378, 449, 58, 56), (286,509,37,39)),    # 左下
+        ((957, 477, 63, 60), (886,517,50,46)),    # 右下
+        ((758, 227, 63, 52), (601,297,80,63))     # 中间
     ]
 
     # 难度前缀映射
@@ -78,9 +78,9 @@ class FindFirstUnplayedStageByCheckmark(CustomRecognition):
         根据难度返回关卡列表，每个关卡包含id、检测区域和点击区域。
         """
         if difficulty == "Easy":
-            coords = self.EASY_COORDS
+            coords_data_list = self.EASY_COORDS
         elif difficulty in ("Normal", "Hard"):
-            coords = self.NORMAL_HARD_COORDS
+            coords_data_list = self.NORMAL_HARD_COORDS
         else:
             return []
 
@@ -88,10 +88,10 @@ class FindFirstUnplayedStageByCheckmark(CustomRecognition):
         return [
             {
                 "id": f"{prefix}{i + 1}关",
-                "checkmark_roi": [x, y, w, h],  # 检查“√”的区域
-                "click_target": [x - 30, y + 30, w, h],  # 未通关时点击的区域
+                "checkmark_roi": list(checkmark_coord_tuple),  # 检查“√”的区域
+                "click_target": list(click_target_coord_tuple),  # 未通关时点击的区域
             }
-            for i, (x, y, w, h) in enumerate(coords)
+            for i, (checkmark_coord_tuple, click_target_coord_tuple) in enumerate(coords_data_list)
         ]
 
     def analyze(

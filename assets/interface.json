@@ -1567,6 +1567,17 @@
                     }
                 },
                 {
+                    "name": "日常出勤（速刷）",
+                    "pipeline_override": {
+                        "Alarm_FindStage": {
+                            "custom_recognition_param": {
+                                "difficulty": "Easy",
+                                "mode": "Quickly"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "雨迹追查",
                     "pipeline_override": {
                         "Alarm_End": {
