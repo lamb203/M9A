@@ -705,5 +705,49 @@
                 "threshold": 0.7
             }
         }
+    },
+    "DefaultCombatProcess": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    22,
+                    28,
+                    205,
+                    46
+                ],
+                "expected": "回合"
+            }
+        }
+    },
+    "DefaultCombatVictory": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    678,
+                    10,
+                    473,
+                    240
+                ],
+                "expected": [
+                    "战斗",
+                    "胜利"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    },
+    "DefaultCombat": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "CombatHandler"
+            }
+        },
+        "post_delay": 4000,
+        "timeout": 60000
     }
 }

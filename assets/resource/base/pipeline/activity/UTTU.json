@@ -1,0 +1,156 @@
+{
+    "SpecialOfferWeek": {
+        "next": [
+            "Alarm_Action2",
+            "Alarm_Action1.1",
+            "Alarm_Action1"
+        ],
+        "interrupt": [
+            "UTTU_EnterSOWStage",
+            "UTTU_EnterSOW"
+        ]
+    },
+    "UTTU_EnterSOW": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    587,
+                    103,
+                    98,
+                    43
+                ],
+                "expected": "特贩周"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    576,
+                    587,
+                    134,
+                    32
+                ]
+            }
+        },
+        "next": [
+            "UTTU_EnterSOWStage",
+            "UTTU_EnterSOW"
+        ]
+    },
+    "UTTU_EnterSOWStage": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    941,
+                    604,
+                    123,
+                    40
+                ],
+                "expected": "开始阅读",
+                "only_rec": true
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "UTTU_EnterSOWCombat",
+            "UTTU_EnterSOWStage"
+        ]
+    },
+    "UTTU_EnterSOWCombat": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1031,
+                    629,
+                    140,
+                    42
+                ],
+                "expected": "开始"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "UTTU_Combat",
+            "UTTU_EnterSOWCombat"
+        ]
+    },
+    "UTTU_Victory": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    578,
+                    611,
+                    91,
+                    27
+                ],
+                "expected": "获得"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    248,
+                    551,
+                    110,
+                    52
+                ]
+            }
+        }
+    },
+    "UTTU_Combat": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "CombatHandler",
+                "custom_recognition_param": {
+                    "victory_node": "UTTU_Victory"
+                }
+            }
+        },
+        "post_delay": 4000,
+        "timeout": 60000,
+        "next": [
+            "UTTU_Combat",
+            "UTTU_StageEnd1",
+            "UTTU_StageEnd2"
+        ]
+    },
+    "UTTU_StageEnd1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    771,
+                    209,
+                    81,
+                    25
+                ],
+                "expected": "敌人等级"
+            }
+        }
+    },
+    "UTTU_StageEnd2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    579,
+                    108,
+                    114,
+                    37
+                ],
+                "expected": "特贩周"
+            }
+        }
+    }
+}
