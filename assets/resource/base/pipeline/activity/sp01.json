@@ -94,7 +94,7 @@
             // "Sub_Sp01RPS",
             "Sub_SailingRecord",
             "Sub_Sp01DataCollect",
-            "Sp01Messagers",
+            // "Sp01Messagers",
             "Sp01DailyEnter",
             "HomeFlag"
         ],
