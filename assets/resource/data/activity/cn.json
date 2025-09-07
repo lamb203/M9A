@@ -166,5 +166,21 @@
                 "end_time": 1757969999000
             }
         }
+    },
+    "3.1": {
+        "version_name": "长夜鸣笛",
+        "start_time": 1758247200000,
+        "end_time": 1761857999000,
+        "activity": {
+            "combat": {
+                "event_type": "SideStory",
+                "start_time": 1758247200000,
+                "end_time": 1761598799000
+            },
+            "re-release": {
+                "start_time": 1760648400000,
+                "end_time": 1761512399000
+            }
+        }
     }
 }
