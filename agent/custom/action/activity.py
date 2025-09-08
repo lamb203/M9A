@@ -29,6 +29,7 @@ class DuringAct(CustomAction):
     ) -> CustomAction.RunResult:
 
         resource = json.loads(argv.custom_action_param)["resource"]
+        DuringAct.resource = resource
 
         with open(f"resource/data/activity/{resource}.json", encoding="utf-8") as f:
             data = json.load(f)
@@ -47,10 +48,10 @@ class DuringAct(CustomAction):
                             }
                         }
                     )
-                    # 若为主线版本，将 "ActivityMainChapter" 设为不可用
+                    # 若为主线版本，将 next 设为不可用
                     if item["activity"]["combat"]["event_type"] == "MainStory":
                         context.override_pipeline(
-                            {"ActivityMainChapter": {"enabled": False}}
+                            {"CombatActivityOverride": {"enabled": False}}
                         )
                         logger.info(f"当前为主线版本：{key} {item['version_name']}")
                         logger.info(
@@ -58,11 +59,6 @@ class DuringAct(CustomAction):
                         )
                         logger.info("如果您需要刷取主线关卡，请改用常规作战功能")
                         return CustomAction.RunResult(success=True)
-                    # 若为活动版本，做一些可能的覆盖
-                    if item["activity"]["combat"].get("override"):
-                        context.override_pipeline(
-                            item["activity"]["combat"].get("override")
-                        )
                     logger.info(f"当前版本：{key} {item['version_name']}")
                     logger.info(
                         f"距离作战结束还剩 {ms_timestamp_diff_to_dhm(now, item['activity']['combat']['end_time'])}"
@@ -73,6 +69,48 @@ class DuringAct(CustomAction):
 
         context.override_next("JudgeDuringAct", [])
         logger.info("当前不在活动时间内，跳过当前任务")
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("CombatActivityOverride")
+class CombatActivityOverride(CustomAction):
+    """
+    数据中如有override字段，则进行覆盖
+    参数格式：
+    {
+        "mode": 0 | 1
+    }
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        mode = json.loads(argv.custom_action_param)["mode"]
+
+        with open(
+            f"resource/data/activity/{DuringAct.resource}.json", encoding="utf-8"
+        ) as f:
+            data = json.load(f)
+
+        now = int(time.time() * 1000)
+
+        for key in reversed(list(data.keys())):
+            item = data[key]
+            if now < item["activity"]["combat"]["end_time"]:
+                if now > item["activity"]["combat"]["start_time"]:
+                    if mode == 0 and item["activity"]["combat"].get("override"):
+                        context.override_pipeline(
+                            item["activity"]["combat"].get("override")
+                        )
+                    elif mode == 1 and item["activity"]["re-release"].get("override"):
+                        context.override_pipeline(
+                            item["activity"]["re-release"].get("override")
+                        )
+                    return CustomAction.RunResult(success=True)
+
         return CustomAction.RunResult(success=True)
 
 

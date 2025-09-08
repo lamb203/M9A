@@ -16,6 +16,17 @@
             }
         },
         "next": [
+            "CombatActivityOverride"
+        ]
+    },
+    "CombatActivityOverride": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "CombatActivityOverride"
+            }
+        },
+        "next": [
             "FlagInActivityMain"
         ],
         "interrupt": [

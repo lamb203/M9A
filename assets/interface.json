@@ -950,11 +950,30 @@
             "cases": [
                 {
                     "name": "No",
-                    "pipeline_override": {}
+                    "pipeline_override": {
+                        "CombatActivityOverride": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "mode": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
                 },
                 {
                     "name": "Yes",
                     "pipeline_override": {
+                        "CombatActivityOverride": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "mode": 1
+                                    }
+                                }
+                            }
+                        },
                         "JudgeDuringRe_release": {
                             "enabled": true
                         }

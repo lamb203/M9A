@@ -163,7 +163,39 @@
                 "name": "圣火纪行：东区黎明",
                 "alias": "圣火",
                 "start_time": 1757106000000,
-                "end_time": 1757969999000
+                "end_time": 1757969999000,
+                "override": {
+                    "EnterTheActivityMain": {
+                        "action": {
+                            "param": {
+                                "target": [
+                                    881,
+                                    127,
+                                    156,
+                                    55
+                                ]
+                            }
+                        }
+                    },
+                    "FlagInActivityMain": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    1033,
+                                    610,
+                                    168,
+                                    64
+                                ],
+                                "expected": "步入剧情"
+                            }
+                        }
+                    },
+                    "JudgeDuringRe_release": {
+                        "next": [
+                            "ActivityMainChapter"
+                        ]
+                    }
+                }
             }
         }
     },
