@@ -140,8 +140,10 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 2000,
         "next": [
-            "EatCandyConfirm"
+            "EatCandyConfirm",
+            "EatSmallCandy"
         ]
     },
     "EatBigCandy": {
@@ -160,8 +162,10 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 2000,
         "next": [
-            "EatCandyConfirm"
+            "EatCandyConfirm",
+            "EatBigCandy"
         ]
     },
     "EatCandyConfirm": {
