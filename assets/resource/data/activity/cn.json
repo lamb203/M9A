@@ -207,7 +207,33 @@
             "combat": {
                 "event_type": "SideStory",
                 "start_time": 1758247200000,
-                "end_time": 1761598799000
+                "end_time": 1761598799000,
+                "override": {
+                    "FlagInActivityMain": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    1010,
+                                    30,
+                                    46,
+                                    25
+                                ],
+                                "only_rec": true
+                            }
+                        }
+                    },
+                    "ActivityMainChapter": {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "expected": [
+                                    "欢迎",
+                                    "乘车"
+                                ]
+                            }
+                        }
+                    }
+                }
             },
             "re-release": {
                 "start_time": 1760648400000,
