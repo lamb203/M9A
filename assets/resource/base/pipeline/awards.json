@@ -596,8 +596,7 @@
                 "template": [
                     "Awards/JukeboxBadge1.png",
                     "Awards/JukeboxBadge2.png",
-                    "Awards/JukeboxBadge3.png",
-                    "Awards/JukeboxBadge_sp01.png"
+                    "Awards/JukeboxBadge3.png"
                 ],
                 "threshold": 0.85
             }

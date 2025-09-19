@@ -222,14 +222,6 @@
             "name": "翻斗棋速刷",
             "entry": "CritterCrash",
             "doc": "[size:15][color:tomato]在翻斗棋界面启动，仅支持1600分以下速刷。[/color][/size]"
-        },
-        {
-            "name": "刺客信条联动每日任务",
-            "entry": "Sp01Daily",
-            "option": [
-                "航海记难度"
-            ],
-            "doc": "[size:15][color:tomato]航海记困难难度成功概率约25%[/color][/size]"
         }
     ],
     "advanced": {
@@ -1951,38 +1943,6 @@
                                     "custom_recognition_param": {
                                         "difficulty": "Hard",
                                         "mode": "Quickly"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "航海记难度": {
-            "cases": [
-                {
-                    "name": "简单",
-                    "pipeline_override": {
-                        "SailingRecordSelectTarget": {
-                            "recognition": {
-                                "param": {
-                                    "custom_recognition_param": {
-                                        "level": 0
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "困难",
-                    "pipeline_override": {
-                        "SailingRecordSelectTarget": {
-                            "recognition": {
-                                "param": {
-                                    "custom_recognition_param": {
-                                        "level": 1
                                     }
                                 }
                             }

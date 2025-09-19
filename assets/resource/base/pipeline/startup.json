@@ -16,7 +16,6 @@
             "AccumulatedSignIn",
             "BirthdayReward",
             "Reward",
-            "sp01calendar",
             "SignInReward",
             "ClosePage",
             "Confirm",
@@ -52,7 +51,6 @@
             "BirthdayReward",
             "SignInReward",
             "Reward",
-            "sp01calendar",
             "ClosePage",
             "StartGame",
             "Confirm",
@@ -90,7 +88,6 @@
             "AccumulatedSignIn",
             "BirthdayReward",
             "Reward",
-            "sp01calendar",
             "SignInReward",
             "ClickTarot",
             "Confirm",
@@ -153,7 +150,6 @@
             "AccumulatedSignIn",
             "BirthdayReward",
             "Reward",
-            "sp01calendar",
             "SignInReward",
             "ClickTarot",
             "Confirm",
@@ -430,8 +426,7 @@
                     138
                 ],
                 "template": [
-                    "StartUp/BackButton.png",
-                    "StartUp/BackButton_sp01.png"
+                    "StartUp/BackButton.png"
                 ],
                 "green_mask": true
             }
@@ -473,8 +468,7 @@
                 ],
                 "template": [
                     "StartUp/HomeButton.png",
-                    "StartUp/HomeButton_White.png",
-                    "StartUp/HomeButton_sp01.png"
+                    "StartUp/HomeButton_White.png"
                 ]
             }
         },
@@ -752,34 +746,6 @@
         },
         "action": {
             "type": "Click"
-        }
-    },
-    "sp01calendar": {
-        // 刺客信条联动版本月卡
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "template": [
-                    "StartUp/Canlendarsp01.png"
-                ],
-                "roi": [
-                    635,
-                    70,
-                    450,
-                    187
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    1075,
-                    103,
-                    22,
-                    22
-                ]
-            }
         }
     }
 }
