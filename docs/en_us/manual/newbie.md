@@ -499,7 +499,7 @@ At least configure **`Resource Type`** and **`Connection`**. When configured inc
       <blockquote>
         <ul>
           <li>You need to select the 1999 server installed in the emulator.</li>
-          <li>Currently supports: <b>Official Server</b>, <b>Bilibili Server</b>, <b>International Server (EN)</b>, <b>International Server (JP)</b>, <b>OPPO Server</b>, <b>Xiaomi Server</b>, <b>QQ Server</b>.</li>
+          <li>Currently supports: <b>Official Server</b>, <b>Bilibili Server</b>, <b>International Server (EN)</b>, <b>International Server (JP)</b>, <b>OPPO Server</b>, <b>Xiaomi Server</b>.</li>
         </ul>
       </blockquote>
     </details>
