@@ -166,5 +166,21 @@
                 }
             }
         }
+    },
+    "2.8": {
+        "version_name": "复乐园",
+        "start_time": 1758290400000,
+        "end_time": 1761555599000,
+        "activity": {
+            "combat": {
+                "event_type": "MainStory",
+                "start_time": 1758290400000,
+                "end_time": 1761555599000
+            },
+            "anecdote": {
+                "start_time": 1758704400000,
+                "end_time": 1759913999000
+            }
+        }
     }
 }
