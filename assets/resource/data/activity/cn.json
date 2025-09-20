@@ -232,6 +232,13 @@
                                 ]
                             }
                         }
+                    },
+                    "ActivityCombatStageNum": {
+                        "recognition": {
+                            "param": {
+                                "expected": "[01][0-9]"
+                            }
+                        }
                     }
                 }
             },
