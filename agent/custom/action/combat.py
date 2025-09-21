@@ -116,26 +116,237 @@ class TeamSelect(CustomAction):
     ) -> CustomAction.RunResult:
 
         team = json.loads(argv.custom_action_param)["team"]
-        target_list = [
-            [794, 406],
-            [794, 466],
-            [797, 525],
-            [798, 586],
-        ]
-        target = target_list[team - 1]
 
-        flag = False
-        while not flag:
+        img = context.tasker.controller.post_screencap().wait().get()
 
-            img = context.tasker.controller.post_screencap().wait().get()
+        if (
+            context.run_recognition(
+                "TeamlistOff",
+                img,
+                {
+                    "TeamlistOff": {
+                        "recognition": {
+                            "param": {"template": "Combat/TeamList_Off_old.png"}
+                        }
+                    }
+                },
+            )
+            is not None
+            or context.run_recognition(
+                "TeamlistOpen",
+                img,
+                {
+                    "TeamlistOpen": {
+                        "recognition": {
+                            "param": {
+                                "roi": [940, 631, 48, 48],
+                                "template": "Combat/TeamList_Open_old.png",
+                            }
+                        }
+                    }
+                },
+            )
+            is not None
+        ):
+            # 旧版
+            target_list = [
+                [794, 406],
+                [794, 466],
+                [797, 525],
+                [798, 586],
+            ]
+            target = target_list[team - 1]
+            flag = False
+            while not flag:
 
-            if context.run_recognition("TeamlistOpen", img) is not None:
-                context.tasker.controller.post_click(target[0], target[1]).wait()
-                time.sleep(1)
-                flag = True
-            elif context.run_recognition("TeamlistOff", img) is not None:
-                context.tasker.controller.post_click(965, 650).wait()
-                time.sleep(1)
+                img = context.tasker.controller.post_screencap().wait().get()
+
+                if (
+                    context.run_recognition(
+                        "TeamlistOpen",
+                        img,
+                        {
+                            "TeamlistOpen": {
+                                "recognition": {
+                                    "param": {
+                                        "roi": [940, 631, 48, 48],
+                                        "template": "Combat/TeamList_Open_old.png",
+                                    }
+                                }
+                            }
+                        },
+                    )
+                    is not None
+                ):
+                    context.tasker.controller.post_click(target[0], target[1]).wait()
+                    time.sleep(1)
+                    flag = True
+                elif (
+                    context.run_recognition(
+                        "TeamlistOff",
+                        img,
+                        {
+                            "TeamlistOff": {
+                                "recognition": {
+                                    "param": {"template": "Combat/TeamList_Off_old.png"}
+                                }
+                            }
+                        },
+                    )
+                    is not None
+                ):
+                    context.tasker.controller.post_click(965, 650).wait()
+                    time.sleep(1)
+        elif (
+            context.run_recognition(
+                "TeamlistOff",
+                img,
+                {
+                    "TeamlistOff": {
+                        "recognition": {
+                            "param": {"template": "Combat/TeamList_Off.png"}
+                        }
+                    }
+                },
+            )
+            is not None
+        ):
+            # 新版
+            flag = False
+            team_names, team_uses = [], {}
+            while not flag:
+
+                img = context.tasker.controller.post_screencap().wait().get()
+
+                if (
+                    context.run_recognition(
+                        "TeamlistOpen",
+                        img,
+                        {
+                            "TeamlistOpen": {
+                                "recognition": {
+                                    "param": {
+                                        "roi": [36, 63, 137, 141],
+                                        "template": "Combat/TeamList_Open.png",
+                                    },
+                                }
+                            }
+                        },
+                    )
+                    is not None
+                ):
+                    # 识别到在队伍选择界面
+                    reco_result = context.run_recognition("TeamListEditRoi", img)
+                    if reco_result is None or not reco_result.filterd_results:
+                        logger.error("未识别到成员队列")
+                        return CustomAction.RunResult(success=False)
+                    else:
+                        # 识别到每个队伍左上角标志，获取每个队伍的名称和按键位置
+                        team_rois = reco_result.filterd_results
+                        team_name_rois, team_confirm_rois = [], []
+                        for team_roi in team_rois:
+                            x, y, w, h = team_roi.box
+                            team_name_rois.append([x + 38, y, w + 72, h])
+                            team_confirm_rois.append([x + 708, y + 73, w + 108, h + 32])
+                        for i in range(len(team_name_rois)):
+                            # 识别每个队伍名称
+                            reco_detail = context.run_recognition(
+                                "TeamListOCR",
+                                img,
+                                {
+                                    "TeamListOCR": {
+                                        "recognition": {
+                                            "param": {
+                                                "roi": team_name_rois[i],
+                                                "ecpected": ".*",
+                                                "only_rec": True,
+                                            }
+                                        }
+                                    }
+                                },
+                            )
+                            team_name = reco_detail.best_result.text
+                            if team_name not in team_names:
+                                team_names.append(team_name)
+                            # 队伍名称为新增，识别使用&使用中状态
+                            reco_detail = context.run_recognition(
+                                "TeamListOCR",
+                                img,
+                                {
+                                    "TeamListOCR": {
+                                        "recognition": {
+                                            "param": {
+                                                "roi": team_confirm_rois[i],
+                                                "ecpected": "使用",
+                                                "only_rec": False,
+                                            }
+                                        }
+                                    }
+                                },
+                            )
+                            team_use_text, team_use_roi = (
+                                reco_detail.best_result.text,
+                                reco_detail.best_result.box,
+                            )
+                            if "使用中" in team_use_text:
+                                team_use_status = 1
+                            elif "使用" in team_use_text:
+                                team_use_status = 0
+                            team_uses.update(
+                                {
+                                    team_name: {
+                                        "roi": team_use_roi,
+                                        "status": team_use_status,
+                                    }
+                                }
+                            )
+                        # 识别完当页所有队伍信息，判断目标队伍是否存在
+                        if team > len(team_names):
+                            # 目标队伍不在当页，翻页并进行下一轮识别
+                            context.tasker.controller.post_swipe(
+                                980, 630, 980, 190, 1000
+                            ).wait()
+                            time.sleep(1)
+                            continue
+                        elif team <= len(team_names):
+                            # 目标队伍在当前页，进行队伍选择
+                            target_team_name = team_names[team - 1]
+                            target_team_use = team_uses[target_team_name]
+                            if target_team_use["status"] == 1:
+                                # 目标队伍已是使用中，直接退出
+                                flag = True
+                                context.tasker.post_task("BackButton").wait()
+                                time.sleep(1)
+                                break
+                            elif target_team_use["status"] == 0:
+                                # 目标队伍非使用中，点击使用并自动退出当前界面
+                                x, y, w, h = target_team_use["roi"]
+                                context.tasker.controller.post_click(
+                                    x + w // 2, y + h // 2
+                                ).wait()
+                                time.sleep(1)
+                                flag = True
+                                break
+                elif (
+                    context.run_recognition(
+                        "TeamlistOff",
+                        img,
+                        {
+                            "TeamlistOff": {
+                                "recognition": {
+                                    "param": {"template": "Combat/TeamList_Off.png"}
+                                }
+                            }
+                        },
+                    )
+                    is not None
+                ):
+                    # 识别到不在队伍选择界面，点击打开
+                    context.tasker.controller.post_click(965, 650).wait()
+                    time.sleep(1)
+        else:
+            logger.debug("未识别到队伍选择界面")
+            return CustomAction.RunResult(success=False)
 
         return CustomAction.RunResult(success=True)
 

@@ -381,7 +381,7 @@
                     48,
                     48
                 ],
-                "template": "Limbo/LimboTeamList_Off.png",
+                "template": "Combat/TeamList_Off.png",
                 "threshold": 0.9
             }
         }
@@ -391,13 +391,36 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    940,
-                    631,
-                    48,
-                    48
+                    36,
+                    63,
+                    137,
+                    141
                 ],
-                "template": "Limbo/LimboTeamList_Open.png",
+                "template": "Combat/TeamList_Open.png",
                 "threshold": 0.9
+            }
+        }
+    },
+    "TeamListEditRoi": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    350,
+                    78,
+                    62,
+                    605
+                ],
+                "template": "Combat/TeamList_Edit.png",
+                "threshold": 0.9
+            }
+        }
+    },
+    "TeamListOCR": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": ".*"
             }
         }
     },
