@@ -236,6 +236,8 @@ class TeamSelect(CustomAction):
                     is not None
                 ):
                     # 识别到在队伍选择界面
+                    time.sleep(2)  # 等待界面稳定
+                    img = context.tasker.controller.post_screencap().wait().get()
                     reco_result = context.run_recognition("TeamListEditRoi", img)
                     if reco_result is None or not reco_result.filterd_results:
                         logger.error("未识别到成员队列")
@@ -315,7 +317,7 @@ class TeamSelect(CustomAction):
                             if target_team_use["status"] == 1:
                                 # 目标队伍已是使用中，直接退出
                                 flag = True
-                                context.tasker.post_task("BackButton").wait()
+                                context.run_task("BackButton")
                                 time.sleep(1)
                                 break
                             elif target_team_use["status"] == 0:
