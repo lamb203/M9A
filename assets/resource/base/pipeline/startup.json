@@ -100,15 +100,26 @@
     },
     "HomeLoading": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "Custom",
             "param": {
-                "roi": [
-                    459,
-                    359,
-                    364,
-                    152
-                ],
-                "template": "StartUp/HomeLoading.png"
+                "custom_recognition": "MultiRecognition",
+                "custom_recognition_param": {
+                    "nodes": [
+                        "HomeLoading_Old",
+                        "HomeLoading_NewRightDown",
+                        "HomeLoading_OCR"
+                    ],
+                    "logic": {
+                        "type": "CUSTOM",
+                        "expression": "$0 OR $1 AND $2"
+                    },
+                    "return": [
+                        459,
+                        359,
+                        364,
+                        152
+                    ]
+                }
             }
         },
         "post_wait_freezes": {
@@ -121,8 +132,7 @@
             ]
         }
     },
-    "HomeLoading_wait": {
-        "doc": "专供启动时使用，与原版分开以防止ReturnMain大面积报错",
+    "HomeLoading_Old": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -133,6 +143,61 @@
                     152
                 ],
                 "template": "StartUp/HomeLoading.png"
+            }
+        }
+    },
+    "HomeLoading_NewRightDown": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1101,
+                    612,
+                    179,
+                    108
+                ],
+                "template": "StartUp/HomeLoading_NewRightDown.png"
+            }
+        }
+    },
+    "HomeLoading_OCR": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    415,
+                    469,
+                    417,
+                    30
+                ],
+                "expected": ".*",
+                "only_rec": true
+            }
+        }
+    },
+    "HomeLoading_wait": {
+        "doc": "专供启动时使用，与原版分开以防止ReturnMain大面积报错",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "MultiRecognition",
+                "custom_recognition_param": {
+                    "nodes": [
+                        "HomeLoading_Old",
+                        "HomeLoading_NewRightDown",
+                        "HomeLoading_OCR"
+                    ],
+                    "logic": {
+                        "type": "CUSTOM",
+                        "expression": "$0 OR $1 AND $2"
+                    },
+                    "return": [
+                        459,
+                        359,
+                        364,
+                        152
+                    ]
+                }
             }
         },
         "action": {
