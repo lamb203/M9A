@@ -44,9 +44,9 @@
             "param": {
                 "only_rec": true,
                 "roi": [
-                    952,
+                    963,
                     640,
-                    70,
+                    59,
                     37
                 ],
                 "expected": [

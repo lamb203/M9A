@@ -1,0 +1,14 @@
+{
+    "RecognizeStageAp": {
+        "recognition": {
+            "param": {
+                "roi": [
+                    952,
+                    640,
+                    70,
+                    37
+                ]
+            }
+        }
+    }
+}
