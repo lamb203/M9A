@@ -467,38 +467,7 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "expected": 0,
-                "model": "LimbDetection.onnx"
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": [
-            "LimboActionFlag_1",
-            "LimboStageLightest_1"
-        ]
-    },
-    "LimboStageLightest_1_存档": {
-        "doc": "最靓的位置，要多点几次",
-        "recognition": {
-            "type": "ColorMatch",
-            "param": {
-                "roi": [
-                    0,
-                    70,
-                    1280,
-                    560
-                ],
-                "method": 6,
-                "order_by": "Random",
-                "count": 10,
-                "connected": true,
-                "upper": [
-                    255
-                ],
-                "lower": [
-                    200
-                ]
+                "model": "LimboDet.onnx"
             }
         },
         "action": {
@@ -524,62 +493,22 @@
             }
         },
         "next": [
-            "LimboTeamSelection_1",
-            "LimboActionFlag_1"
-        ]
-    },
-    "LimboTeamSelection_1": {
-        "doc": "深眠，选择队伍1，列表未展开",
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    940,
-                    631,
-                    48,
-                    48
-                ],
-                "template": "Limbo/LimboTeamList_Off.png",
-                "threshold": 0.9
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": [
-            "LimboTeamSelection_11",
             "LimboTeamSelection_1"
         ]
     },
-    "LimboTeamSelection_11": {
-        "doc": "深眠，选择队伍1，列表已展开，选择队伍1",
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    940,
-                    631,
-                    48,
-                    48
-                ],
-                "template": "Limbo/LimboTeamList_Open.png",
-                "threshold": 0.9
-            }
-        },
+    "LimboTeamSelection_1": {
+        "doc": "深眠，选择队伍1",
         "action": {
-            "type": "Click",
+            "type": "Custom",
             "param": {
-                "target": [
-                    799,
-                    404,
-                    127,
-                    32
-                ]
+                "custom_action": "TeamSelect",
+                "custom_action_param": {
+                    "team": 1
+                }
             }
         },
         "next": [
-            "LimboAction_1",
-            "LimboTeamSelection_11"
+            "LimboAction_1"
         ]
     },
     "LimboAction_1": {
@@ -661,38 +590,7 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "expected": 0,
-                "model": "LimbDetection.onnx"
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": [
-            "LimboActionFlag_2",
-            "LimboStageLightest_2"
-        ]
-    },
-    "LimboStageLightest_2_存档": {
-        "doc": "最靓的位置，要多点几次",
-        "recognition": {
-            "type": "ColorMatch",
-            "param": {
-                "roi": [
-                    0,
-                    70,
-                    1280,
-                    560
-                ],
-                "method": 6,
-                "order_by": "Random",
-                "count": 10,
-                "connected": true,
-                "upper": [
-                    255
-                ],
-                "lower": [
-                    200
-                ]
+                "model": "LimboDet.onnx"
             }
         },
         "action": {
@@ -717,60 +615,21 @@
             }
         },
         "next": [
-            "LimboTeamSelection_2",
-            "LimboActionFlag_2"
-        ]
-    },
-    "LimboTeamSelection_2": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    940,
-                    631,
-                    48,
-                    48
-                ],
-                "template": "Limbo/LimboTeamList_Off.png",
-                "threshold": 0.9
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": [
-            "LimboTeamSelection_22",
             "LimboTeamSelection_2"
         ]
     },
-    "LimboTeamSelection_22": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    940,
-                    631,
-                    48,
-                    48
-                ],
-                "template": "Limbo/LimboTeamList_Open.png",
-                "threshold": 0.9
-            }
-        },
+    "LimboTeamSelection_2": {
         "action": {
-            "type": "Click",
+            "type": "Custom",
             "param": {
-                "target": [
-                    798,
-                    463,
-                    128,
-                    33
-                ]
+                "custom_action": "TeamSelect",
+                "custom_action_param": {
+                    "team": 2
+                }
             }
         },
         "next": [
-            "LimboAction_2",
-            "LimboTeamSelection_22"
+            "LimboAction_2"
         ]
     },
     "LimboAction_2": {

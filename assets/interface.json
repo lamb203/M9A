@@ -1018,15 +1018,12 @@
                 {
                     "name": "一",
                     "pipeline_override": {
-                        "LimboTeamSelection_11": {
+                        "LimboTeamSelection_1": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        799,
-                                        404,
-                                        127,
-                                        32
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 1
+                                    }
                                 }
                             }
                         }
@@ -1035,15 +1032,12 @@
                 {
                     "name": "二",
                     "pipeline_override": {
-                        "LimboTeamSelection_11": {
+                        "LimboTeamSelection_1": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        798,
-                                        463,
-                                        128,
-                                        33
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 2
+                                    }
                                 }
                             }
                         }
@@ -1052,15 +1046,12 @@
                 {
                     "name": "三",
                     "pipeline_override": {
-                        "LimboTeamSelection_11": {
+                        "LimboTeamSelection_1": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        797,
-                                        522,
-                                        129,
-                                        34
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 3
+                                    }
                                 }
                             }
                         }
@@ -1069,15 +1060,12 @@
                 {
                     "name": "四",
                     "pipeline_override": {
-                        "LimboTeamSelection_11": {
+                        "LimboTeamSelection_1": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        795,
-                                        580,
-                                        130,
-                                        34
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 4
+                                    }
                                 }
                             }
                         }
@@ -1090,15 +1078,12 @@
                 {
                     "name": "二",
                     "pipeline_override": {
-                        "LimboTeamSelection_22": {
+                        "LimboTeamSelection_2": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        798,
-                                        463,
-                                        128,
-                                        33
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 2
+                                    }
                                 }
                             }
                         }
@@ -1107,15 +1092,12 @@
                 {
                     "name": "三",
                     "pipeline_override": {
-                        "LimboTeamSelection_22": {
+                        "LimboTeamSelection_2": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        797,
-                                        522,
-                                        129,
-                                        34
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 3
+                                    }
                                 }
                             }
                         }
@@ -1124,15 +1106,12 @@
                 {
                     "name": "四",
                     "pipeline_override": {
-                        "LimboTeamSelection_22": {
+                        "LimboTeamSelection_2": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        795,
-                                        580,
-                                        130,
-                                        34
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 4
+                                    }
                                 }
                             }
                         }
@@ -1141,15 +1120,12 @@
                 {
                     "name": "一",
                     "pipeline_override": {
-                        "LimboTeamSelection_22": {
+                        "LimboTeamSelection_2": {
                             "action": {
                                 "param": {
-                                    "target": [
-                                        799,
-                                        404,
-                                        127,
-                                        32
-                                    ]
+                                    "custom_action_param": {
+                                        "team": 1
+                                    }
                                 }
                             }
                         }
