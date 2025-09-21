@@ -386,7 +386,7 @@ class TargetCount(CustomAction):
             combat_times = _safe_int(get_text_safe(img, "RecognizeCombatTimes"))
             if combat_times == 0 or stage_ap == 0:
                 logger.debug("识别失败，combat_times 或 stage_ap 为0")
-                return 0
+                return 999
             stage_ap = stage_ap // combat_times
             logger.debug(f"剩余体力: {remaining_ap}, 关卡体力: {stage_ap}")
             return remaining_ap // stage_ap if stage_ap else 0
@@ -397,6 +397,9 @@ class TargetCount(CustomAction):
 
         while True:
             available_count = _get_available_count()
+            if available_count == 999:
+                logger.debug("识别失败，任务结束")
+                return CustomAction.RunResult(success=False)
             # 判断本轮最大可刷次数
             if target_count > 0:
                 left_count = target_count - already_count
@@ -409,7 +412,10 @@ class TargetCount(CustomAction):
                     context.run_task("EatCandy")
 
                     available_count = _get_available_count()
-                    if target_count > 0:
+                    if available_count == 999:
+                        logger.debug("识别失败，任务结束")
+                        return CustomAction.RunResult(success=False)
+                    if target_count:
                         left_count = target_count - already_count
                         times = min(4, available_count, left_count)
                     else:
