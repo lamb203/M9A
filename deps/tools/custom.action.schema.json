@@ -20,6 +20,7 @@
                 "TeamSelect",
                 "CombatTargetLevel",
                 "SummonlngSwipe",
+                "GoodDreamWellFishing",
                 "SOD_DifficultySelect",
                 "ActivityTargetLevel",
                 "SelectChapter",
@@ -77,6 +78,9 @@
         },
         {
             "$ref": "#/$defs/SummonlngSwipe"
+        },
+        {
+            "$ref": "#/$defs/GoodDreamWellFishing"
         },
         {
             "$ref": "#/$defs/SOD_DifficultySelect"
@@ -492,6 +496,14 @@
                 "custom_action": {
                     "const": "SummonlngSwipe",
                     "description": "分派魔精滑动名片。"
+                }
+            }
+        },
+        "GoodDreamWellFishing": {
+            "properties": {
+                "custom_action": {
+                    "const": "GoodDreamWellFishing",
+                    "description": "好梦井打捞。"
                 }
             }
         },

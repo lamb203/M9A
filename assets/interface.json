@@ -77,6 +77,7 @@
             "name": "收取荒原",
             "entry": "Wilderness",
             "option": [
+                "好梦井",
                 "魔精收菜",
                 "交付订单"
             ]
@@ -872,6 +873,26 @@
                                     ]
                                 }
                             }
+                        }
+                    }
+                }
+            ]
+        },
+        "好梦井": {
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "EnterGoodDreamWell": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "EnterGoodDreamWell": {
+                            "enabled": false
                         }
                     }
                 }
