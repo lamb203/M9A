@@ -92,6 +92,7 @@ class GoodDreamWellFishing(CustomAction):
                             "roi": [919, 145, 102, 327],
                             "only_rec": False,
                             "expected": "打捞",
+                            "order_by": "Vertical",
                             "index": index,
                         },
                     }
