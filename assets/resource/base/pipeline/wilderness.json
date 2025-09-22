@@ -637,6 +637,7 @@
                 212
             ]
         },
+        "pre_delay": 3000,
         "next": [
             "CollectProduct",
             "AutoAssignCritters",
@@ -664,6 +665,7 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 3000,
         "next": [
             "CollectProductNext"
         ]
