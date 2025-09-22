@@ -464,15 +464,26 @@
     "LimboStageLightest_1": {
         "doc": "最靓的位置，要多点几次",
         "recognition": {
-            "type": "NeuralNetworkDetect",
+            "type": "Custom",
             "param": {
-                "expected": 0,
-                "model": "LimboDet.onnx"
+                "custom_recognition": "Count",
+                "custom_recognition_param": {
+                    "target": 70
+                }
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    630,
+                    337,
+                    15,
+                    32
+                ]
+            }
         },
+        "post_delay": 3000,
         "next": [
             "LimboActionFlag_1",
             "LimboStageLightest_1"
@@ -587,15 +598,26 @@
     "LimboStageLightest_2": {
         "doc": "最靓的位置，要多点几次",
         "recognition": {
-            "type": "NeuralNetworkDetect",
+            "type": "Custom",
             "param": {
-                "expected": 0,
-                "model": "LimboDet.onnx"
+                "custom_recognition": "Count",
+                "custom_recognition_param": {
+                    "target": 70
+                }
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    138,
+                    509,
+                    14,
+                    25
+                ]
+            }
         },
+        "post_delay": 3000,
         "next": [
             "LimboActionFlag_2",
             "LimboStageLightest_2"
@@ -975,7 +997,11 @@
             }
         },
         "next": [
-            "HomeButton"
+            "HomeFlag"
+        ],
+        "interrupt": [
+            "HomeButton",
+            "BackButton"
         ]
     }
 }
