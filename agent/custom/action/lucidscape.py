@@ -92,6 +92,7 @@ class LucidscapeStatusDetect(CustomAction):
 
         stage = json.loads(argv.custom_action_param)["stage"]
 
+        time.sleep(3)
         img = context.tasker.controller.post_screencap().wait().get()
 
         # Finish
