@@ -13,9 +13,10 @@
             }
         },
         "next": [
-            "EnterTheShow"
+            "EnterTheShowFlag"
         ],
         "interrupt": [
+            "EnterTheShow",
             "ReturnMain"
         ]
     },
@@ -92,6 +93,7 @@
         "next": []
     },
     "EnterTheShow": {
+        // 请不要为该任务加next，一般应当放于interrupt使用
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -118,10 +120,7 @@
                 133,
                 26
             ]
-        },
-        "next": [
-            "EnterTheShowFlag"
-        ]
+        }
     },
     "EnterTheShowFlag": {
         "recognition": {
