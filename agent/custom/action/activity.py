@@ -150,6 +150,10 @@ class DuringAnecdote(CustomAction):
                     logger.info(
                         f"距离轶事结束还剩 {ms_timestamp_diff_to_dhm(now, item['activity']['anecdote']['end_time'])}"
                     )
+                    if item["activity"]["anecdote"].get("override"):
+                        context.override_pipeline(
+                            item["activity"]["anecdote"].get("override")
+                        )
                     return CustomAction.RunResult(success=True)
                 continue
             break

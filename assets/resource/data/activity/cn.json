@@ -242,6 +242,73 @@
                     }
                 }
             },
+            "anecdote": {
+                "start_time": 1758747600000,
+                "end_time": 1759957199000,
+                "override": {
+                    "ActivityMainFlag": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    1186,
+                                    31,
+                                    41,
+                                    22
+                                ]
+                            }
+                        }
+                    },
+                    "ActivityMainSelectAnecdote": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    33,
+                                    392,
+                                    285,
+                                    246
+                                ]
+                            }
+                        }
+                    },
+                    "ActivitySwipeToLeftUp": {
+                        "recognition": {
+                            "type": "Custom",
+                            "param": {
+                                "custom_recognition": "Count",
+                                "custom_recognition_param": {
+                                    "target": 10
+                                }
+                            }
+                        },
+                        "action": {
+                            "type": "Swipe",
+                            "param": {
+                                "begin": [
+                                    191,
+                                    617,
+                                    10,
+                                    11
+                                ],
+                                "end": [
+                                    102,
+                                    463,
+                                    10,
+                                    11
+                                ],
+                                "duration": 1000
+                            }
+                        }
+                    },
+                    "JudgeDuringAnecdote": {
+                        "interrupt": [
+                            "EnterTheActivityMain",
+                            "ActivityMainSelectAnecdote",
+                            "ReturnMain",
+                            "ActivitySwipeToLeftUp"
+                        ]
+                    }
+                }
+            },
             "re-release": {
                 "start_time": 1760648400000,
                 "end_time": 1761512399000
