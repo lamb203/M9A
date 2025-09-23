@@ -54,7 +54,8 @@
             ]
         },
         "next": [
-            "StartGameFlag"
+            "StartGameFlag",
+            "SettingEntry"
         ],
         "interrupt": [
             "AccountExitConfirm",
