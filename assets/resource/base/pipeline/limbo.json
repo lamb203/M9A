@@ -2,6 +2,7 @@
     "Limbo": {
         "doc": "深眠域",
         "next": [
+            "LimboEntryEnd",
             "LimboEnd",
             "LimboStageFlag",
             "LimboStageRightest"
@@ -123,6 +124,40 @@
                 194
             ]
         }
+    },
+    "LimboEntryEnd": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    343,
+                    497,
+                    107,
+                    24
+                ],
+                "only_rec": true,
+                "expected": "700/700"
+            }
+        },
+        "next": [
+            "ResetReturnMain"
+        ]
+    },
+    "ResetReturnMain": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "NodeOverride",
+                "custom_action_param": {
+                    "ReturnMain": {
+                        "enabled": true
+                    }
+                }
+            }
+        },
+        "next": [
+            "ReturnMain"
+        ]
     },
     "LimboStageRightest": {
         "doc": "深眠域，点击最右侧的深眠片段",

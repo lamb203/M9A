@@ -2,6 +2,7 @@
     "Lucidscape": {
         "doc": "醒梦域",
         "next": [
+            "LucidscapeEntryEnd",
             "FlagInLucidscape"
         ],
         "interrupt": [
@@ -12,6 +13,24 @@
             "ClickBlank",
             "ArtificialSleepwalking",
             "ReturnMain"
+        ]
+    },
+    "LucidscapeEntryEnd": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    861,
+                    499,
+                    103,
+                    21
+                ],
+                "only_rec": true,
+                "expected": "700/700"
+            }
+        },
+        "next": [
+            "ResetReturnMain"
         ]
     },
     "FlagInLucidscape": {
