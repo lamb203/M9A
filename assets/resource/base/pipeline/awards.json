@@ -655,11 +655,11 @@
         "next": [
             "Sub_CollectJukebox",
             "Sub_JukeboxAwardsBadge",
-            "NoJukeboxAwards",
-            "ExitEdition"
+            "NoJukeboxAwards"
         ],
         "interrupt": [
             "ObtainedAwards",
+            "ExitEdition",
             "JukeboxExitPurchase"
         ]
     },
@@ -676,19 +676,8 @@
                 "expected": "光碟"
             }
         },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target_offset": [
-                    46,
-                    46,
-                    0,
-                    0
-                ]
-            }
-        },
         "next": [
-            "Sub_JukeboxAwardsBadge"
+            "BackButtonWithDelay"
         ]
     },
     "Sub_CollectJukebox": {
