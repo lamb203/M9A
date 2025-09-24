@@ -7,7 +7,8 @@
 
 基于全新架构的 亿韭韭韭 小助手。图像技术 + 模拟控制，解放双手！  
 由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 强力驱动！  
-<a href="https://github.com/MAA1999/M9A" target="_blank" style="font-weight: bold;">🔗 本项目 GitHub 仓库</a>
+<a href="https://github.com/MAA1999/M9A" target="_blank" style="font-weight: bold;">🔗 本项目 GitHub 仓库</a><br>
+🌟喜欢本项目就在仓库右上角点个星星吧🌟
 
 </div>
 
@@ -32,9 +33,9 @@
 
 - 启动/关闭游戏
 - 切换账号
-- 收取荒原、魔精收取生产物品
+- 收取荒原、魔精生产、交付订单、好梦井
 - 每日心相（意志解析）
-- 刷体力、最优材料关卡、活动关卡、吃糖选项
+- 刷体力、最优材料关卡、活动关卡
 - 自动深眠域
 - 自动醒梦域
 - 银行购物
