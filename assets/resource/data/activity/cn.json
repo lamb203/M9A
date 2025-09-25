@@ -270,7 +270,7 @@
                             }
                         }
                     },
-                    "ActivitySwipeToLeftUp": {
+                    "SwipeRightForAnecdote": {
                         "recognition": {
                             "type": "Custom",
                             "param": {
@@ -299,13 +299,26 @@
                             }
                         }
                     },
+                    "ActivityMainAnecdoteFlag": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    1087,
+                                    526,
+                                    131,
+                                    44
+                                ]
+                            }
+                        }
+                    },
                     "JudgeDuringAnecdote": {
-                        "interrupt": [
-                            "EnterTheActivityMain",
-                            "ActivityMainSelectAnecdote",
-                            "ReturnMain",
-                            "ActivitySwipeToLeftUp"
-                        ]
+                        "next": [
+                            "focus"
+                        ],
+                        "interrupt": []
+                    },
+                    "focus": {
+                        "focus": "当前任务只适用旧版轶事派遣，请手动完成当期轶事"
                     }
                 }
             },
