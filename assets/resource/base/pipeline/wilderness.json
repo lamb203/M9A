@@ -94,7 +94,9 @@
             "FlagInGoodDreamWellFinish"
         ],
         "interrupt": [
-            "PositionGoodDreamWellCenter"
+            "PositionGoodDreamWellCenter",
+            "SkipButton",
+            "ClickBlank"
         ]
     },
     "PositionGoodDreamWellCenter": {
@@ -143,6 +145,10 @@
         "next": [
             "FlagInGoodDreamWellFishing",
             "FlagInGoodDreamWellCenter"
+        ],
+        "interrupt": [
+            "SkipButton",
+            "ClickBlank"
         ]
     },
     "FlagInGoodDreamWellFinish": {
