@@ -17,6 +17,7 @@
         ],
         "interrupt": [
             "EnterTheShow",
+            "ShowClickStory",
             "ReturnMain"
         ]
     },
@@ -124,6 +125,56 @@
     },
     "EnterTheShowFlag": {
         "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "MultiRecognition",
+                "custom_recognition_param": {
+                    "nodes": [
+                        "EnterTheShowFlag1",
+                        "EnterTheShowFlag2"
+                    ],
+                    "return": [
+                        73,
+                        662,
+                        62,
+                        34
+                    ]
+                }
+            }
+        },
+        "next_code": "set in code"
+    },
+    "EnterTheShowFlag1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    73,
+                    662,
+                    62,
+                    34
+                ],
+                "expected": "故事",
+                "only_rec": true
+            }
+        }
+    },
+    "EnterTheShowFlag2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1154,
+                    20,
+                    106,
+                    95
+                ],
+                "template": "Combat/ShowFlag.png"
+            }
+        }
+    },
+    "ShowClickStory": {
+        "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
@@ -136,7 +187,9 @@
                 "only_rec": true
             }
         },
-        "next_code": "set in code"
+        "action": {
+            "type": "Click"
+        }
     },
     "MainChapter_X": {
         "action": {
