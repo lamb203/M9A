@@ -139,7 +139,8 @@
             "type": "Click"
         },
         "next": [
-            "Replaying"
+            "Replaying",
+            "StartReplay"
         ]
     },
     "Replaying": {
