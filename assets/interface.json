@@ -3,7 +3,8 @@
     "url": "https://github.com/MAA1999/M9A",
     "mirrorchyan_rid": "M9A",
     "mirrorchyan_multiplatform": true,
-    "mfa_max_version": "v1.6.5",
+    "mfa_max_version": "v1.6.9",
+    "mfa_min_version": "v1.6.9",
     "controller": [
         {
             "name": "ADB 默认方式",
