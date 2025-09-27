@@ -25,6 +25,37 @@ Refactoring `sub nodes` involves the following steps:
 >
 > All the above changes must consider all nodes using the `sub node`. Do not overlook any!
 
+Here is an example, assuming that the current node before reconstruction is as follows:
+
+```jsonc
+"Start": {
+    "next": [ "Sub_A", "B", "Sub_C", "D" ]
+    // Here we assume that Sub_A can be judged last, and Sub_C must be after B and before D.
+}
+```
+
+It can be changed to the following form:
+
+```jsonc
+"Start": {
+    "next": [ "B", "C", "D" ],
+    "interrupt": [ "A" ]
+},
+"A": {
+    "next": A.nextlist // The original next list of node A
+},
+"B": {
+    "next": B.nextlist
+},
+"C": {
+    "next": [ "B", "C", "D" ] + C.nextlist, // The next list of the Start node is merged with the original list of the C node, paying attention to the order and other issues
+    "interrupt": [ "A" ]
+},
+"D": {
+    "next": D.nextlist
+}
+```
+
 ### Other Nodes
 
 Next, refactor other nodes based on their specific purposes.
