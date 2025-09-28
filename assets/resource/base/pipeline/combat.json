@@ -23,34 +23,25 @@
     },
     "ReturnMainStoryChapter": {
         "next": [
-            "ReturnMainStoryChapterFalse",
             "ReturnMainStoryChapterTrue"
+        ],
+        "interrupt": [
+            "ReturnMainStoryChapterFalse"
         ]
     },
     "ReturnMainStoryChapterTrue": {
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    0,
-                    90,
-                    1257,
-                    49
+                    57,
+                    122,
+                    1037,
+                    356
                 ],
-                "expected": [
-                    "生者",
-                    "余众",
-                    "旅行",
-                    "归来",
-                    "故事",
-                    "根须"
-                ]
+                "template": "Combat/MainStoryBigChapter.png"
             }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": []
+        }
     },
     "ReturnMainStoryChapterFalse": {
         "recognition": {
@@ -72,8 +63,10 @@
                 ]
             }
         },
-        "inverse": true,
-        "next": []
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000
     },
     "SelectMainStoryChapter": {
         "recognition": {
@@ -91,7 +84,7 @@
         "action": {
             "type": "Click"
         },
-        "next": []
+        "post_delay": 3000
     },
     "EnterTheShow": {
         // 请不要为该任务加next，一般应当放于interrupt使用

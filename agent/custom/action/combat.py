@@ -477,15 +477,33 @@ class SelectChapter(CustomAction):
 
         # 返回大章节
         context.run_task("ReturnMainStoryChapter", {"ReturnMainStoryChapter": {}})
-        context.run_task(
-            "SelectMainStoryChapter",
-            {
-                "SelectMainStoryChapter": {
-                    "template": f"Combat/MainStoryChapter_{SelectCombatStage.mainStoryChapter}.png",
-                    "next": [],
-                }
-            },
-        )
+
+        flag, count = False, 0
+        while not flag:
+            context.run_task(
+                "SelectMainStoryChapter",
+                {
+                    "SelectMainStoryChapter": {
+                        "template": f"Combat/MainStoryChapter_{SelectCombatStage.mainStoryChapter}.png"
+                    }
+                },
+            )
+            img = context.tasker.controller.post_screencap().wait().get()
+            count += 1
+            if (
+                context.run_recognition(
+                    "SelectMainStoryChapter",
+                    img,
+                    {
+                        "SelectMainStoryChapter": {
+                            "template": f"Combat/MainStoryChapter_{SelectCombatStage.mainStoryChapter}.png"
+                        }
+                    },
+                )
+                is None
+                or count >= 5
+            ):
+                flag = True
 
         return CustomAction.RunResult(success=True)
 
