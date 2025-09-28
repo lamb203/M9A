@@ -121,7 +121,8 @@
                 133,
                 26
             ]
-        }
+        },
+        "post_delay": 5000
     },
     "EnterTheShowFlag": {
         "recognition": {
