@@ -430,6 +430,15 @@
         ]
     },
     "SwipeLeftForChapter": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "Count",
+                "custom_recognition_param": {
+                    "target": 10
+                }
+            }
+        },
         "action": {
             "type": "Swipe",
             "param": {
@@ -476,6 +485,15 @@
         }
     },
     "SwipeLeftAndFindStage": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "Count",
+                "custom_recognition_param": {
+                    "target": 30
+                }
+            }
+        },
         "next": [
             "TargetStageName",
             "TheFarLeftOfStageList",
