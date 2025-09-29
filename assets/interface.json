@@ -843,6 +843,41 @@
                     }
                 },
                 {
+                    "name": "吃7天内过期的糖",
+                    "pipeline_override": {
+                        "MiniCandy": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "[1-6]天",
+                                        "小时"
+                                    ]
+                                }
+                            }
+                        },
+                        "SmallCandy": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "[1-6]天",
+                                        "小时"
+                                    ]
+                                }
+                            }
+                        },
+                        "BigCandy": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "[1-6]天",
+                                        "小时"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "吃14天内过期的糖",
                     "pipeline_override": {
                         "MiniCandy": {
