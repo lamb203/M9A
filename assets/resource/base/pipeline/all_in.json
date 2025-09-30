@@ -207,7 +207,9 @@
             "Victory",
             "WaitReplay"
         ],
-        "interrupt": []
+        "interrupt": [
+            "CombatEntering"
+        ]
     },
     "WaitReplay": {
         "recognition": {
