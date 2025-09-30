@@ -833,6 +833,13 @@
                                 }
                             }
                         },
+                        "OverflowCandy": {
+                            "recognition": {
+                                "param": {
+                                    "expected": "小时"
+                                }
+                            }
+                        },
                         "BigCandy": {
                             "recognition": {
                                 "param": {
@@ -856,6 +863,16 @@
                             }
                         },
                         "SmallCandy": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "[1-6]天",
+                                        "小时"
+                                    ]
+                                }
+                            }
+                        },
+                        "OverflowCandy": {
                             "recognition": {
                                 "param": {
                                     "expected": [
@@ -891,6 +908,16 @@
                             }
                         },
                         "SmallCandy": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "天",
+                                        "小时"
+                                    ]
+                                }
+                            }
+                        },
+                        "OverflowCandy": {
                             "recognition": {
                                 "param": {
                                     "expected": [

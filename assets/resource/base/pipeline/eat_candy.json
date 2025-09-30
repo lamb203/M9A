@@ -49,6 +49,7 @@
         "next": [
             "MiniCandy",
             "SmallCandy",
+            "OverflowCandy",
             "BigCandy",
             "QuitEatCandyPage"
         ]
@@ -85,6 +86,23 @@
         },
         "next": [
             "EatSmallCandy"
+        ]
+    },
+    "OverflowCandy": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    402,
+                    34,
+                    139,
+                    178
+                ],
+                "expected_code": "Set in code."
+            }
+        },
+        "next": [
+            "EatOverflowCandy"
         ]
     },
     "BigCandy": {
@@ -145,6 +163,28 @@
         "next": [
             "EatCandyConfirm",
             "EatSmallCandy"
+        ]
+    },
+    "EatOverflowCandy": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    403,
+                    35,
+                    137,
+                    123
+                ],
+                "template": "EatCandy/OverflowCandy.png"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 5000,
+        "next": [
+            "EatCandyConfirm",
+            "EatOverflowCandy"
         ]
     },
     "EatBigCandy": {
