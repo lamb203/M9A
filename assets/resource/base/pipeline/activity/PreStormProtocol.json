@@ -1,16 +1,25 @@
 {
     "PreStormProtocol": {
         "recognition": {
-            "type": "OCR",
+            "type": "Custom",
             "param": {
-                "roi": [
-                    1075,
-                    616,
-                    99,
-                    46
-                ],
-                "only_rec": true,
-                "expected": "模拟"
+                "custom_recognition": "Count",
+                "custom_recognition_param": {
+                    "target": 200,
+                    "recognition": {
+                        "type": "OCR",
+                        "param": {
+                            "roi": [
+                                1075,
+                                616,
+                                99,
+                                46
+                            ],
+                            "only_rec": true,
+                            "expected": "模拟"
+                        }
+                    }
+                }
             }
         },
         "action": {
