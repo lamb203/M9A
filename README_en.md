@@ -44,6 +44,7 @@ Powered by [MaaFramework](https://github.com/MaaXYZ/MaaFramework)!
 - When the Alarm Sounds
 - Continuous clear (under testing)
 - Critter Crash (below 1600 points)
+- Pre-Storm Protocol
 
 ## Instructions for use
 

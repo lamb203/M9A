@@ -1,0 +1,81 @@
+{
+    "PreStormProtocol": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1075,
+                    616,
+                    99,
+                    46
+                ],
+                "only_rec": true,
+                "expected": "模拟"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "PreStormProtocolGiveUp",
+            "PreStormProtocol"
+        ],
+        "interrupt": [
+            "PreStormProtocolReport",
+            "Confirm",
+            "BackButton"
+        ]
+    },
+    "PreStormProtocolReport": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    640,
+                    50,
+                    56,
+                    30
+                ],
+                "only_rec": true,
+                "expected": "报告"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    627,
+                    645,
+                    33,
+                    24
+                ]
+            }
+        }
+    },
+    "PreStormProtocolGiveUp": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    857,
+                    616,
+                    54,
+                    57
+                ],
+                "template": "PreStormProtocol/GiveUp.png"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "PreStormProtocolGiveUp",
+            "PreStormProtocol"
+        ],
+        "interrupt": [
+            "PreStormProtocolReport",
+            "Confirm",
+            "BackButton"
+        ]
+    }
+}

@@ -225,6 +225,11 @@
             "name": "翻斗棋速刷",
             "entry": "CritterCrash",
             "doc": "[size:15][color:tomato]在翻斗棋界面启动，仅支持1600分以下速刷。[/color][/size]"
+        },
+        {
+            "name": "雨前漫游指南",
+            "entry": "PreStormProtocol",
+            "doc": "该任务需单独运行。运行前请先手动过一遍游戏内教程，之后将游戏停于雨前漫游指南活动主页面并结束尚未完成的模拟"
         }
     ],
     "advanced": {
