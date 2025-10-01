@@ -655,7 +655,7 @@ class TargetCount(CustomAction):
                         break
                 if times <= 0:
                     logger.debug(
-                        f"吃糖后体力不够，任务结束。总共刷了 {already_count} 次"
+                        f"尝试吃糖后体力不够，任务结束。总共刷了 {already_count} 次"
                     )
                     break
             # 刷图流程

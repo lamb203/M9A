@@ -938,6 +938,14 @@
                             }
                         }
                     }
+                },
+                {
+                    "name": "不吃糖",
+                    "pipeline_override": {
+                        "EatCandy": {
+                            "next": []
+                        }
+                    }
                 }
             ]
         },

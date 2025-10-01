@@ -1,5 +1,10 @@
 {
     "EatCandy": {
+        "next": [
+            "EatCandyNext"
+        ]
+    },
+    "EatCandyNext": {
         "recognition": {
             "type": "OCR",
             "param": {
