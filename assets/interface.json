@@ -228,8 +228,11 @@
         },
         {
             "name": "雨前漫游指南",
-            "entry": "PreStormProtocol",
-            "doc": "该任务需单独运行。运行前请先手动过一遍游戏内教程，之后将游戏停于雨前漫游指南活动主页面并结束尚未完成的模拟"
+            "entry": "PreStormProtocolStart",
+            "option": [
+                "雨前漫游刷取模式"
+            ],
+            "doc": "该任务需单独运行。运行前请将游戏停在小游戏主页面。\n该任务分为两种情况：\n1.未击败教程中第三天的boss（即点击“开始模拟”后不是难度选择界面）\n2.已击败教程中第三天的boss（即点击“开始模拟”后进入难度选择界面）\n\n请根据个人情况选择对应选项。"
         }
     ],
     "advanced": {
@@ -2020,6 +2023,26 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            ]
+        },
+        "雨前漫游刷取模式": {
+            "cases": [
+                {
+                    "name": "未击败教程中boss",
+                    "pipeline_override": {
+                        "PreStormProtocol1": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "已击败教程中boss",
+                    "pipeline_override": {
+                        "PreStormProtocol": {
+                            "enabled": false
                         }
                     }
                 }
