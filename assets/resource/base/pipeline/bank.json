@@ -136,20 +136,16 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
-                    267,
-                    612,
-                    146,
-                    44
+                    330,
+                    602,
+                    330,
+                    64
                 ],
-                "replace": [
-                    "免费",
-                    ""
-                ],
-                "expected": ".+"
+                "expected": "免费"
             }
         },
+        "inverse": true,
         "action": {
             "type": "Custom",
             "param": {
