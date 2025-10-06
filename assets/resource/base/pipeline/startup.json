@@ -667,6 +667,32 @@
         },
         "post_delay": 3000
     },
+    "ClosePageFirst": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1040,
+                    40,
+                    239,
+                    166
+                ],
+                "template": [
+                    "StartUp/CloseRewardPage_2.2.png",
+                    "StartUp/CloseRewardPage_2.4.png",
+                    "StartUp/CloseItemDetail.png"
+                ],
+                "green_mask": true,
+                "threshold": 0.6,
+                "order_by": "Score"
+            }
+        },
+        "post_delay": 3000,
+        "next": [
+            "SignInReward",
+            "ClosePage"
+        ]
+    },
     "ClosePage": {
         // 用于关闭各种页面，如签到、公告、物品详情页
         "recognition": {
@@ -691,7 +717,23 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 3000
+        "post_delay": 3000,
+        "next": [
+            "OverrideClosePageFirst"
+        ]
+    },
+    "OverrideClosePageFirst": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "NodeOverride",
+                "custom_action_param": {
+                    "ClosePageFirst": {
+                        "post_delay": 200
+                    }
+                }
+            }
+        }
     },
     "SignInReward": {
         // 领取签到奖励
