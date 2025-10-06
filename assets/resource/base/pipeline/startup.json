@@ -220,7 +220,6 @@
             "Confirm",
             "ClickBlank",
             "ClosePage",
-            "SkipOpeningAnimation",
             "ClickHomeCount"
         ]
     },
@@ -401,29 +400,6 @@
         "post_wait_freezes": {
             "time": 300,
             "target": "HomeLoading_wait"
-        }
-    },
-    "SkipOpeningAnimation": {
-        "recognition": {
-            "type": "Custom",
-            "param": {
-                "custom_recognition": "Count",
-                "custom_recognition_param": {
-                    "target": 15
-                }
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": "HomeLoading_wait",
-                "target_offset": [
-                    110,
-                    0,
-                    -110,
-                    0
-                ]
-            }
         }
     },
     "HomeFlag": {
