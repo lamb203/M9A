@@ -67,6 +67,7 @@
         "interrupt": [
             "偶人",
             "缪斯赠予",
+            "1-1选择",
             "1-3战斗",
             "1-5结算",
             "获得奖励"
@@ -123,12 +124,12 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    50,
-                    113,
-                    1211,
-                    123
+                    133,
+                    362,
+                    975,
+                    59
                 ],
-                "expected": "偶人"
+                "expected": "赛后补给间"
             }
         },
         "action": {
@@ -157,8 +158,10 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
-            "购买偶人1"
+            "购买偶人1",
+            "购买偶人"
         ]
     },
     "购买偶人1": {
@@ -177,17 +180,110 @@
         "action": {
             "type": "Click"
         },
-        "next": "进入事件"
+        "post_wait_freezes": 50,
+        "next": [
+            "进入事件",
+            "购买偶人1"
+        ]
+    },
+    "1-1选择": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    605,
+                    15,
+                    69,
+                    32
+                ],
+                "expected": "1-1"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    604,
+                    258,
+                    59,
+                    49
+                ]
+            }
+        },
+        "next": "1-1选择1",
+        "interrupt": "进入事件"
+    },
+    "1-1选择1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    405,
+                    599,
+                    68,
+                    40
+                ],
+                "expected": "选择"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": "1-1选择3",
+        "interrupt": "1-1选择2"
+    },
+    "1-1选择2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    566,
+                    280,
+                    149,
+                    44
+                ],
+                "expected": "获得偶"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    559,
+                    496,
+                    160,
+                    52
+                ]
+            }
+        }
+    },
+    "1-1选择3": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    95,
+                    564,
+                    83,
+                    34
+                ],
+                "expected": "队伍评级"
+            }
+        }
     },
     "缪斯赠予": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    576,
-                    407,
-                    130,
-                    42
+                    116,
+                    347,
+                    1058,
+                    78
                 ],
                 "expected": "缪斯赠予"
             }
@@ -266,10 +362,10 @@
             "type": "Click",
             "param": {
                 "target": [
-                    996,
-                    205,
-                    93,
-                    84
+                    835,
+                    223,
+                    111,
+                    80
                 ]
             }
         },
@@ -355,10 +451,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    121,
-                    577,
-                    35,
-                    33
+                    144,
+                    517,
+                    33,
+                    36
                 ],
                 "expected": "口"
             }
@@ -402,6 +498,7 @@
                 "expected": "回合"
             }
         },
+        "pre_delay": 5000,
         "timeout": 60000,
         "next": [
             "战斗",
@@ -443,10 +540,10 @@
             "type": "Click",
             "param": {
                 "target": [
-                    576,
-                    260,
-                    127,
-                    97
+                    835,
+                    223,
+                    111,
+                    80
                 ]
             }
         },
