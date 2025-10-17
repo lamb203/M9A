@@ -499,24 +499,24 @@
     "LimboStageLightest_1": {
         "doc": "最靓的位置，要多点几次",
         "recognition": {
-            "type": "Custom",
+            "type": "NeuralNetworkDetect",
             "param": {
-                "custom_recognition": "Count",
-                "custom_recognition_param": {
-                    "target": 70
-                }
+                "model": "limbo_stage_lightest.onnx",
+                "labels": [
+                    "mojing",
+                    "objects",
+                    "people"
+                ],
+                "expected": [
+                    0,
+                    1,
+                    2
+                ],
+                "threshold": 0.5
             }
         },
         "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    630,
-                    337,
-                    15,
-                    32
-                ]
-            }
+            "type": "Click"
         },
         "post_delay": 3000,
         "next": [
@@ -633,24 +633,24 @@
     "LimboStageLightest_2": {
         "doc": "最靓的位置，要多点几次",
         "recognition": {
-            "type": "Custom",
+            "type": "NeuralNetworkDetect",
             "param": {
-                "custom_recognition": "Count",
-                "custom_recognition_param": {
-                    "target": 70
-                }
+                "model": "limbo_stage_lightest.onnx",
+                "labels": [
+                    "mojing",
+                    "objects",
+                    "people"
+                ],
+                "expected": [
+                    0,
+                    1,
+                    2
+                ],
+                "threshold": 0.5
             }
         },
         "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    138,
-                    509,
-                    14,
-                    25
-                ]
-            }
+            "type": "Click"
         },
         "post_delay": 3000,
         "next": [
