@@ -722,9 +722,9 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    736,
+                    568,
                     624,
-                    53,
+                    221,
                     66
                 ],
                 "template": "Combat/IsReplay.png",
