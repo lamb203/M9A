@@ -31,14 +31,33 @@
             "type": "Click"
         },
         "next": [
-            "EnterWilderness",
+            "FlagInWilderness",
+            "EnterWilderness"
+        ],
+        "interrupt": [
+            "HomeLoading"
+        ]
+    },
+    "FlagInWilderness": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    1168,
+                    148,
+                    86,
+                    24
+                ],
+                "expected": "古厅定位"
+            }
+        },
+        "post_delay": 1500,
+        "next": [
             "EnterGoodDreamWell",
             "EnterProduct",
             "EnterTrade",
             "EnterAncientHall"
-        ],
-        "interrupt": [
-            "HomeLoading"
         ]
     },
     "EnterGoodDreamWell": {
