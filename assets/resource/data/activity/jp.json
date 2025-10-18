@@ -182,5 +182,25 @@
                 "end_time": 1759867199000
             }
         }
+    },
+    "3.0": {
+        "version_name": "果てなき道を進みて",
+        "start_time": 1761786000000,
+        "end_time": 1765396799000,
+        "activity": {
+            "combat": {
+                "event_type": "MainStory",
+                "start_time": 1761786000000,
+                "end_time": 1765137599000
+            },
+            "anecdote": {
+                "start_time": 1762372800000,
+                "end_time": 1763582399000
+            },
+            "re-release": {
+                "start_time": 1764273600000,
+                "end_time": 1765137599000
+            }
+        }
     }
 }
