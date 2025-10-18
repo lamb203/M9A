@@ -323,8 +323,25 @@
                 }
             },
             "re-release": {
+                "name": "地球上最后的夜晚",
+                "alias": "地球上最后的夜晚",
                 "start_time": 1760648400000,
-                "end_time": 1761512399000
+                "end_time": 1761512399000,
+                "override": {
+                    "FlagInActivityMain": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    1010,
+                                    30,
+                                    46,
+                                    25
+                                ],
+                                "only_rec": true
+                            }
+                        }
+                    }
+                }
             }
         }
     }
