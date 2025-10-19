@@ -94,8 +94,10 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1000,
         "next": [
-            "SetReplaysTimes"
+            "SetReplaysTimes",
+            "OpenReplaysTimes"
         ]
     },
     "SetReplaysTimes": {
@@ -116,6 +118,7 @@
             "type": "Click"
         },
         "next": [
+            "SetReplaysTimes",
             "StartReplay"
         ]
     },
