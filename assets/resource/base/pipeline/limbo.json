@@ -838,8 +838,10 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
-            "LimboObtainedAwards_1"
+            "LimboObtainedAwards_1",
+            "LimboAwards"
         ]
     },
     "LimboObtainedAwards_1": {
