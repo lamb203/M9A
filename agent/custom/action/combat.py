@@ -322,11 +322,29 @@ class TeamSelect(CustomAction):
                                 break
                             elif target_team_use["status"] == 0:
                                 # 目标队伍非使用中，点击使用并自动退出当前界面
-                                x, y, w, h = target_team_use["roi"]
-                                context.tasker.controller.post_click(
-                                    x + w // 2, y + h // 2
-                                ).wait()
-                                time.sleep(1)
+                                retry = 0
+                                while True:
+                                    retry += 1
+                                    if retry > 5:
+                                        logger.warning("队伍选择失败，超过最大重试次数")
+                                        return CustomAction.RunResult(success=True)
+                                    x, y, w, h = target_team_use["roi"]
+                                    context.tasker.controller.post_click(
+                                        x + w // 2, y + h // 2
+                                    ).wait()
+                                    time.sleep(1)
+                                    img = (
+                                        context.tasker.controller.post_screencap()
+                                        .wait()
+                                        .get()
+                                    )
+                                    reco_detail = context.run_recognition(
+                                        "ReadyForAction", img
+                                    )
+
+                                    if reco_detail and reco_detail.box:
+                                        break
+
                                 flag = True
                                 break
                 elif (
