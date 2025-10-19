@@ -344,5 +344,17 @@
                 }
             }
         }
+    },
+    "3.2": {
+        "version_name": "迁流的盛宴",
+        "start_time": 1761789600000,
+        "end_time": 1765659599000,
+        "activity": {
+            "combat": {
+                "event_type": "SideStory",
+                "start_time": 1761789600000,
+                "end_time": 1765400399000
+            }
+        }
     }
 }
