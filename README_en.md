@@ -40,7 +40,7 @@ Powered by [MaaFramework](https://github.com/MaaXYZ/MaaFramework)!
 - Current Anecdote
 - Suspended in the rain: Mystery Sea ("Searching" Weekly Sweep)
 - Outsider interpretation: Echo of the foothills (meat pigeon)
-- Friendly Match
+- Artefact Masters
 - When the Alarm Sounds
 - Continuous clear (under testing)
 - Critter Crash (below 1600 points)
