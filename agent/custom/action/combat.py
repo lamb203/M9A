@@ -441,6 +441,10 @@ class ActivityTargetLevel(CustomAction):
         retry = 0
 
         while cur_level != level:
+            retry += 1
+            if retry > 10:
+                logger.error("切换难度失败，超过最大重试次数，请检查选择难度是否正确")
+                return CustomAction.RunResult(success=False)
             if cur_level == "故事":
                 context.tasker.controller.post_click(1190, 245).wait()
                 time.sleep(0.5)
@@ -458,7 +462,10 @@ class ActivityTargetLevel(CustomAction):
             img = context.tasker.controller.post_screencap().wait().get()
             reco_detail = context.run_recognition("ActivityTargetLevelRec", img)
 
-            cur_level = reco_detail.best_result.text
+            if reco_detail:
+                cur_level = reco_detail.best_result.text
+            else:
+                cur_level = None
 
         return CustomAction.RunResult(success=True)
 
