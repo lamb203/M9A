@@ -230,7 +230,9 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
+            "EatCandyConfirm",
             "QuitEatCandyPage"
         ]
     },
