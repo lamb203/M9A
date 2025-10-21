@@ -640,7 +640,10 @@
                     347,
                     163
                 ],
-                "template": "StartUp/AccumulatedSignIn.png"
+                "template": [
+                    "StartUp/AccumulatedSignIn_new.png",
+                    "StartUp/AccumulatedSignIn.png"
+                ]
             }
         },
         "action": {
