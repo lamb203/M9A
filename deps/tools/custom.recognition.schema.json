@@ -5,12 +5,7 @@
         "custom_recognition": {
             "enum": [
                 "MultiRecognition",
-                "Count",
-                "BankShop",
-                "ActivityRe_releaseChapter",
-                "FindFirstUnplayedStageByCheckmark",
-                "SailingRecordSelectTarget",
-                "StagePromotionComplete"
+                "Count"
             ]
         }
     },
@@ -20,21 +15,6 @@
         },
         {
             "$ref": "#/$defs/Count"
-        },
-        {
-            "$ref": "#/$defs/BankShop"
-        },
-        {
-            "$ref": "#/$defs/ActivityRe_releaseChapter"
-        },
-        {
-            "$ref": "#/$defs/FindFirstUnplayedStageByCheckmark"
-        },
-        {
-            "$ref": "#/$defs/SailingRecordSelectTarget"
-        },
-        {
-            "$ref": "#/$defs/StagePromotionComplete"
         }
     ],
     "$defs": {
@@ -154,38 +134,11 @@
                                     "description": "识别相关字段"
                                 }
                             },
-                            "required": [
-                                "type"
-                            ],
                             "additionalProperties": false,
                             "description": "v2协议的recognition字段"
                         }
                     },
-                    "required": [
-                        "target"
-                    ],
                     "additionalProperties": false
-                }
-            }
-        },
-        "<custom_2>": {
-            "allOf": [
-                {
-                    "$ref": "#/$defs/RequiredParam"
-                }
-            ],
-            "properties": {
-                "custom_recognition": {
-                    "const": "<custom_2>"
-                },
-                "custom_recognition_param": {
-                    "type": "object",
-                    "properties": {
-                        "<param_integer>": {
-                            "type": "integer"
-                        }
-                    },
-                    "unevaluatedProperties": true
                 }
             }
         }
