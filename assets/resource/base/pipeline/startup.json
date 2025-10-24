@@ -22,6 +22,7 @@
             "VictoryReturn",
             "Download",
             "Downloading",
+            "CandyCancel",
             "BackButton",
             "HomeButton",
             "Start1999",
@@ -57,6 +58,7 @@
             "VictoryReturn",
             "Download",
             "Downloading",
+            "CandyCancel",
             "ClickBlank",
             "ClickHomeCount"
         ]
@@ -92,6 +94,7 @@
             "ClickTarot",
             "Confirm",
             "ClosePageFirst",
+            "CandyCancel",
             "BackButton",
             "HomeButton",
             "SkipButton",
@@ -220,6 +223,7 @@
             "Confirm",
             "ClickBlank",
             "ClosePageFirst",
+            "CandyCancel",
             "ClickHomeCount"
         ]
     },
@@ -474,6 +478,7 @@
             "BackButton",
             "HomeButton",
             "SkipButton",
+            "CandyCancel",
             "ClickHomeCount"
         ]
     },
@@ -874,6 +879,24 @@
                     "战斗",
                     "胜利"
                 ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    },
+    "CandyCancel": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    741,
+                    489,
+                    127,
+                    34
+                ],
+                "expected": "以后再说",
+                "only_rec": true
             }
         },
         "action": {
