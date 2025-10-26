@@ -40,6 +40,7 @@ Powered by [MaaFramework](https://github.com/MaaXYZ/MaaFramework)!
 - Current Anecdote
 - Suspended in the rain: Mystery Sea ("Searching" Weekly Sweep)
 - Outsider interpretation: Echo of the foothills (meat pigeon)
+- SSReopen
 - Artefact Masters
 - When the Alarm Sounds
 - Continuous clear (under testing)
