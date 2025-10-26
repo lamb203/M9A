@@ -182,5 +182,27 @@
                 "end_time": 1759913999000
             }
         }
+    },
+    "3.0": {
+        "version_name": "行于漫漫长路上",
+        "start_time": 1761739200000,
+        "end_time": 1765349999000,
+        "activity": {
+            "combat": {
+                "event_type": "MainStory",
+                "start_time": 1761739200000,
+                "end_time": 1765090799000
+            },
+            "anecdote": {
+                "start_time": 1762326000000,
+                "end_time": 1763535599000
+            },
+            "re-release": {
+                "name": "圣火纪行：东区黎明",
+                "alias": "圣火",
+                "start_time": 1764226800000,
+                "end_time": 1765090799000
+            }
+        }
     }
 }
