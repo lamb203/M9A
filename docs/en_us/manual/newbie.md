@@ -46,6 +46,10 @@
 
 ### 2. Install Runtime Environment
 
+>[!NOTE]
+>
+> Windows users can skip this section and run the dependency library installation script after downloading and unzipping in step 3.
+
 <div align="center">
 
 <table>
