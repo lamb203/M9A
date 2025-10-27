@@ -60,6 +60,14 @@
                 "{PROJECT_DIR}/resource/base",
                 "{PROJECT_DIR}/resource/global_jp"
             ]
+        },
+        {
+            "name": "港澳台服",
+            "path": [
+                "{PROJECT_DIR}/resource/base",
+                "{PROJECT_DIR}/resource/global_jp",
+                "{PROJECT_DIR}/resource/tw"
+            ]
         }
     ],
     "agent": {

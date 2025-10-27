@@ -229,7 +229,8 @@
                             "enum": [
                                 "cn",
                                 "en",
-                                "jp"
+                                "jp",
+                                "tw"
                             ],
                             "default": "cn",
                             "description": "资源版本，决定使用的数据和时区"
@@ -261,7 +262,8 @@
                             "enum": [
                                 "cn",
                                 "en",
-                                "jp"
+                                "jp",
+                                "tw"
                             ],
                             "default": "cn",
                             "description": "资源版本，决定使用的数据和时区"
@@ -293,7 +295,8 @@
                             "enum": [
                                 "cn",
                                 "en",
-                                "jp"
+                                "jp",
+                                "tw"
                             ],
                             "default": "cn",
                             "description": "资源版本，决定使用的数据和时区"
@@ -351,7 +354,8 @@
                             "enum": [
                                 "cn",
                                 "en",
-                                "jp"
+                                "jp",
+                                "tw"
                             ],
                             "default": "cn",
                             "description": "资源版本，决定使用的时区"
@@ -656,7 +660,8 @@
                             "enum": [
                                 "cn",
                                 "en",
-                                "jp"
+                                "jp",
+                                "tw"
                             ],
                             "default": "cn",
                             "description": "资源版本，决定使用的时区"

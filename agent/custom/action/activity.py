@@ -20,7 +20,7 @@ class DuringAct(CustomAction):
 
     参数格式：
     {
-        "resource": "cn/en/jp"
+        "resource": "cn/en/jp/tw"
     }
     """
 
@@ -123,7 +123,7 @@ class DuringAnecdote(CustomAction):
 
     参数格式：
     {
-        "resource": "cn/en/jp"
+        "resource": "cn/en/jp/tw"
     }
     """
 
@@ -173,7 +173,7 @@ class DuringRe_release(CustomAction):
 
     参数格式：
     {
-        "resource": "cn/en/jp"
+        "resource": "cn/en/jp/tw"
     }
     """
 
