@@ -262,7 +262,7 @@ The emulator resolution should be `landscape` `16:9` ratio, recommended (and min
 
 ### 6. Getting Started
 
-M9A supports both command line (MaaPiCli) and graphical interface (MFAAvalonia), but before use, you need to extract the archive correctly.
+M9A supports both command line (MaaPiCli) and graphical interface (MFAAvalonia), but before use, you need to extract the archive correctly and change the in-game display language to Simplified Chinese
 
 > [!IMPORTANT]
 > Don't run the program directly from the compression software!
