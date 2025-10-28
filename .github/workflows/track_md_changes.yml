@@ -2,7 +2,7 @@ name: Track MD Changes
 on:
   push:
     paths:
-      - '**.md'
+      - 'docs/**.md'
     branches:
       - 'main'
 jobs:
