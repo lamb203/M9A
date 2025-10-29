@@ -20,13 +20,13 @@ config:
       - title: 用户手册
         icon: 📖
         details: 完整的安装和使用说明
-        link: /zh_cn/manual/新手上路.md
+        link: /zh_cn/manual/newbie.md
       - title: 开发指南
         icon: 🛠️
         details: 面向开发者的技术文档
-        link: /zh_cn/develop/开发前须知.md
+        link: /zh_cn/develop/development.md
       - title: 常见问题
         icon: 💡
         details: 遇到问题？查看常见问题解答
-        link: /zh_cn/manual/常见问题.md
+        link: /zh_cn/manual/faq.md
 ---
