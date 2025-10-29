@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD041 -->
 <div align="center">
 
-<img alt="LOGO" src="https://github.com/user-attachments/assets/b8e4d737-d549-43f3-a2e7-a3727bf615a9" width="256" height="256" />
+<img alt="LOGO" src="https://1999.fan/images/m9a-logo_512x512.png" width="256" height="256" />
 
 # M9A
 
@@ -52,24 +52,24 @@
 
 ## 使用说明
 
-- [新手上路](./docs/zh_cn/manual/新手上路.md)(**使用前必看**)
-- [功能介绍](./docs/zh_cn/manual/功能介绍.md)
-- [MaaPiCli使用说明](./docs/zh_cn/manual/MaaPiCli.md)
-- [连接设置](./docs/zh_cn/manual/连接设置.md)
-- [常见问题](./docs/zh_cn/manual/常见问题.md)
-- [Mirror酱使用说明](./docs/zh_cn/manual/Mirror酱.md)
+- [新手上路](https://1999.fan/zh_cn/manual/newbie.html)(**使用前必看**)
+- [功能介绍](https://1999.fan/zh_cn/manual/introduction.html)
+- [MaaPiCli使用说明](https://1999.fan/zh_cn/manual/cli.html)
+- [连接设置](https://1999.fan/zh_cn/manual/connection.html)
+- [常见问题](https://1999.fan/zh_cn/manual/faq.html)
+- [Mirror酱使用说明](https://1999.fan/zh_cn/manual/MirrorChyan.html)
 
 ## 开发相关
 
-- [开发前须知](./docs/zh_cn/develop/开发前须知.md)
-- [项目结构](./docs/zh_cn/develop/项目结构.md)
-- [interface.json编写](./docs/zh_cn/develop/interface.json编写.md)
-- [Pipeline编写](./docs/zh_cn/develop/Pipeline编写.md)
-- [Custom编写](./docs/zh_cn/develop/Custom编写.md)
-- [Bug排查](./docs/zh_cn/develop/Bug排查.md)
-- [项目重构](./docs/zh_cn/develop/项目重构.md)
-- [外服适配](./docs/zh_cn/develop/外服适配.md)
-- [文档编写](./docs/zh_cn/develop/文档编写.md)
+- [开发前须知](https://1999.fan/zh_cn/develop/development.html)
+- [项目结构](https://1999.fan/zh_cn/develop/structure.html)
+- [interface.json编写](https://1999.fan/zh_cn/develop/interface.html)
+- [Pipeline编写](https://1999.fan/zh_cn/develop/pipeline.html)
+- [Custom编写](https://1999.fan/zh_cn/develop/custom.html)
+- [Bug排查](https://1999.fan/zh_cn/develop/fix.html)
+- [项目重构](https://1999.fan/zh_cn/develop/refactor.html)
+- [外服适配](https://1999.fan/zh_cn/develop/overseas-client-adaptation.html)
+- [文档编写](https://1999.fan/zh_cn/develop/doc.html)
 
 更多文档请前往 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 主仓库查看
 
