@@ -7,7 +7,7 @@ config:
       name: M9A
       text: 文档站 | Documentation
       tagline: 选择语言 | Select Language
-      image: /m9a-logo512x512.png
+      image: /images/m9a-logo_512x512.png
       actions:
         - theme: brand
           text: 简体中文
