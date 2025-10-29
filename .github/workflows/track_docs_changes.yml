@@ -1,8 +1,8 @@
-name: Track MD Changes
+name: Track Docs Changes
 on:
   push:
     paths:
-      - 'docs/**.md'
+      - 'docs/**'
     branches:
       - 'main'
 jobs:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "检测到 .md 文件变更！"
+          echo "检测到 docs/ 文件变更！"
           curl -L \
             -X POST \
             -H "Authorization: Bearer ${{ secrets.pat }}" \
