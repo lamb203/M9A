@@ -1,3 +1,7 @@
+---
+order: 6
+icon: qlementine-icons:debug-16
+---
 # Bug Troubleshooting
 
 Fixing bugs is also an important part of development.  

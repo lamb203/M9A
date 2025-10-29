@@ -1,12 +1,8 @@
+---
+order: 6
+icon: mdi:information-outline
+---
 # Feature Introduction
-
-- [Feature Introduction](#feature-introduction)
-  - [Switch Account](#switch-account)
-  - [Off-Stage Performance: Twilight Chord](#off-stage-performance-twilight-chord)
-    - [Fast Mode](#fast-mode)
-    - [Normal Mode](#normal-mode)
-      - [Pinning Demonstration](#pinning-demonstration)
-      - [Pinning Successful](#pinning-successful)
 
 ## Switch Account
 

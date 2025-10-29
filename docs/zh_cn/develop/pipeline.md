@@ -1,3 +1,7 @@
+---
+order: 4
+icon: eos-icons:pipeline
+---
 # Pipeline 编写
 
 ## 编写规范

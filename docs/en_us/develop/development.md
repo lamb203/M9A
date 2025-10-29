@@ -1,3 +1,7 @@
+---
+order: 1
+icon: iconoir:developer
+---
 # Notes Before Development
 
 > [!NOTE]
@@ -12,7 +16,7 @@
 
 ### I don't know programming and just want to make small changes to JSON files/documents. What should I do?
 
-Check out the [GitHub Pull Request Guide for Beginners](https://maa.plus/docs/zh-cn/develop/pr-tutorial.html).
+Check out the [GitHub Pull Request Guide for Beginners](https://maa.plus/docs/en-us/develop/pr-tutorial.html).
 
 ### I have programming experience but haven't participated in related projects. What should I do?
 
@@ -50,7 +54,7 @@ Check out the [GitHub Pull Request Guide for Beginners](https://maa.plus/docs/zh
 
     Develop the M9A with the debugging/development tools installed in the previous step. The virtual environment will be automatically created in the `.venv` directory.
 
-    Enjoy coding! Before starting, check out the [Related Reading](#related-reading).
+    Enjoy coding! Before starting, check out other parts.
 
 7. Git operations:
 
@@ -111,13 +115,13 @@ Check out the [GitHub Pull Request Guide for Beginners](https://maa.plus/docs/zh
 
     Your modified code has been committed to your repository. Now, you need to submit a Pull Request to the M9A repository and wait for the maintainers to review it.
 
-    [GitHub Pull Request Reference](https://maa.plus/docs/zh-cn/develop/pr-tutorial.html)
+    [GitHub Pull Request Reference](https://maa.plus/docs/en-us/develop/pr-tutorial.html)
 
 ## M9A Formatting Requirements
 
 M9A uses a series of formatting tools to ensure that the code and resource files in the repository are clean and consistent, making them easier to maintain and read.
 
-Please ensure that your code is formatted before submission, or [enable Pre-commit Hooks for automatic formatting](#pre-commit-hooks).
+Please ensure that your code is formatted before submission, or enable Pre-commit Hooks for automatic formatting.
 
 Currently enabled formatting tools:
 
@@ -127,8 +131,6 @@ Currently enabled formatting tools:
 | Markdown | [MarkdownLint](https://github.com/DavidAnson/markdownlint-cli2) |
 
 ### Automatically Format Code Using Pre-commit Hooks
-
-<a id="pre-commit-hooks"></a>
 
 > [!NOTE]
 >
@@ -152,14 +154,3 @@ Manually trigger formatting:
 ```bash
 pre-commit run --all-files
 ```
-
-## Related Reading
-
-- [Project Structure](./Project-Structure.md)
-- [Writing interface.json](./Writing-interface.json.md)
-- [Writing Pipelines](./Writing-Pipelines.md)
-- [Writing Custom Scripts](./Writing-Custom.md)
-- [Bug Troubleshooting](./Bug-Troubleshooting.md)
-- [Project Refactoring](./Project-Refactoring.md)
-- [Adapting for External Servers](./Adapting-Global-Servers.md)
-- [Writing Documentation](./Writing-Documentation.md)

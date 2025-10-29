@@ -1,25 +1,9 @@
+---
+order: 1
+icon: ri:guide-fill
+---
+<!-- markdownlint-disable MD033 -->
 # 新手上路
-
-- [新手上路](#新手上路)
-  - [前置准备](#前置准备)
-    - [1. 确认版本系统](#1-确认版本系统)
-    - [2. 安装运行环境](#2-安装运行环境)
-      - [1. VCRedist x64](#1-vcredist-x64)
-      - [2. .NET 8](#2-net-8)
-      - [3. Python](#3-python)
-    - [3. 下载正确的版本](#3-下载正确的版本)
-    - [4. 确认模拟器和设备支持](#4-确认模拟器和设备支持)
-    - [5 正确设置模拟器分辨率](#5-正确设置模拟器分辨率)
-    - [6. 开始使用](#6-开始使用)
-      - [Windows](#windows)
-      - [macOS](#macos)
-      - [Linux](#linux)
-    - [7. 配置 M9A](#7-配置-m9a)
-      - [首次启动](#首次启动)
-      - [M9A 设置界面](#m9a-设置界面)
-      - [M9A 主界面](#m9a-主界面)
-      - [pip 设置](#pip-设置)
-  - [相关文档](#相关文档)
 
 ## 前置准备
 
@@ -38,7 +22,7 @@
 | --- | --- |
 | Windows 用户 | 绝大部分情况请下载 x86_64 架构 |
 | Mac 用户 | M9A 同时支持搭载 Apple Silicon 和 Intel 芯片的 Mac 电脑<br>但更推荐搭载 Intel 芯片的 Mac 电脑使用 Mac 自带的多系统安装 Windows<br>并使用 Windows 版 M9A 和模拟器 |
-| Android 用户 | M9A 已不再提供 Android 版本发行包<br>如您非常了解手机操作并希望使用 Android 实体设备，请前往 [开发文档](../develop/开发前须知.md) 自行安装<br>可参考 [使用方法](https://github.com/MaaXYZ/MaaFramework/issues/475) ，以及 [MAA文档](https://maa.plus/docs/zh-cn/manual/device/android.html) <br>此方法较为复杂且具有一定风险，不推荐入门玩家使用此方法 |
+| Android 用户 | M9A 已不再提供 Android 版本发行包<br>如您非常了解手机操作并希望使用 Android 实体设备，请前往 [MaaFramework](https://github.com/MaaXYZ/MaaFramework/) 自行安装<br>可参考 [使用方法](https://github.com/MaaXYZ/MaaFramework/issues/475) ，以及 [MAA文档](https://maa.plus/docs/zh-cn/manual/device/android.html) <br>此方法较为复杂且具有一定风险，不推荐入门玩家使用此方法 |
 
 </div>
 
@@ -344,7 +328,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 
 部分配置项在配置错误或未配置时可能会导致 M9A **运行异常**，因此推荐您在开始使用前阅读本章节。
 
-本章将主要介绍如何通过图形界面（MFAAvalonia）配置 M9A 。如果您正在使用命令行版本（MaaPiCli），请参考 [MaaPiCli操作说明](./MaaPiCli.md) 。
+本章将主要介绍如何通过图形界面（MFAAvalonia）配置 M9A 。如果您正在使用命令行版本（MaaPiCli），请参考 [MaaPiCli操作说明](./cli.md) 。
 
 下列演示仅供参考，请以软件实际情况为准。
 
@@ -511,7 +495,7 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
 
 **`连接`**
 
-  M9A 需正确的 ADB 连接才能在**目标**模拟器执行任务。绝大多数情况下，您只需保持有且仅有目标模拟器启动，点击“刷新”即可完成连接。如需手动配置 ADB 参数，请参考 [连接设置](./连接设置.md)。
+  M9A 需正确的 ADB 连接才能在**目标**模拟器执行任务。绝大多数情况下，您只需保持有且仅有目标模拟器启动，点击“刷新”即可完成连接。如需手动配置 ADB 参数，请参考 [连接设置](./connection.md)。
 
   <details>
     <summary>示意图</summary>
@@ -576,7 +560,7 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
 
 >[!IMPORTANT]
 >
-> 大部分任务需在使用前正确配置，少部分任务还需根据任务说明在特定场景执行。启用任务前，请确保您已阅读并理解了该任务的**任务说明**，并结合实际情况对**任务设置**进行配置。更多关于任务的说明请参阅 [功能介绍](./功能介绍.md) 。
+> 大部分任务需在使用前正确配置，少部分任务还需根据任务说明在特定场景执行。启用任务前，请确保您已阅读并理解了该任务的**任务说明**，并结合实际情况对**任务设置**进行配置。更多关于任务的说明请参阅 [功能介绍](./introduction.md) 。
 
 ***
 
@@ -601,11 +585,3 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
 </details>
 
 ***
-
-## 相关文档
-
-- [连接设置](./连接设置.md#连接设置)——介绍了adb连接以及模拟器设置
-- [MaaPiCli操作说明](./MaaPiCli.md)——介绍了 MaaPiCli 使用方法~~翻译文档~~
-- [功能介绍](./功能介绍.md)——介绍了部分功能的注意事项
-- [常见问题](./常见问题.md)——介绍了常见问题及解决策略
-- [Mirror酱使用说明](./Mirror酱.md)——介绍了Mirror酱使用方法

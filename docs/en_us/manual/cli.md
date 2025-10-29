@@ -1,12 +1,8 @@
+---
+order: 4
+icon: material-symbols:terminal
+---
 # MaaPiCli Usage Instructions
-
-- [MaaPiCli Usage Instructions](#maapicli-usage-instructions)
-  - [Select ADB](#select-adb)
-  - [Select Device](#select-device)
-  - [Select Resource](#select-resource)
-  - [Add Task](#add-task)
-  - [Function Menu](#function-menu)
-  - [Advanced Usage](#advanced-usage)
 
 ## Select ADB
 
@@ -28,12 +24,12 @@ Please input [1-2]:
 
 Here, the number after Version indicates the current resource version.
 
-### Select ADB ### translates to the current operation being Select ADB (Android Debug Bridge, usually used here to operate emulators)
+`### Select ADB ###` translates to the current operation being Select ADB (Android Debug Bridge, usually used here to operate emulators)
 
 The following options are listed:
 
-Auto detect (recommended, select when the target emulator is running)
-Manual input (refer to ADB Path and ADB Connection Address to fill in)
+1. Auto detect (recommended, select when the target emulator is running)
+2. Manual input (refer to [ADB Path](./connection.md#adb-path) and [ADB Connection Address](./connection.html#adb-address) to fill in)
 The following Please input [1-2]: translates to Please input [option range], please select as needed.
 
 Here we enter 1 and press Enter to proceed to the next step.
@@ -126,7 +122,7 @@ The following uses selecting "Regular Battle" as an example. After selection, it
 Please input [1-42]:
 ```
 
-## Input option of "作战关卡" for "常规作战" ## translates to Enter the option for "Battle Stage" of "Regular Battle", select as needed
+`## Input option of "作战关卡" for "常规作战" ##` translates to Enter the option for "Battle Stage" of "Regular Battle", select as needed
 
 ## Function Menu
 

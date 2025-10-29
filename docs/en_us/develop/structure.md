@@ -1,3 +1,7 @@
+---
+order: 2
+icon: hugeicons:structure-01
+---
 # Project Structure
 
 ```bash

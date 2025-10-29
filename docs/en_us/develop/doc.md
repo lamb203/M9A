@@ -1,3 +1,7 @@
+---
+order: 9
+icon: jam:write-f
+---
 # Documentation Writing
 
 > [!IMPORTANT]
@@ -41,4 +45,4 @@ To add images to the documentation, follow these steps:
 
 > [!NOTE]
 > Images, GIFs, and videos uploaded by non-organization members should be smaller than 10MB.  
-> [More details](https://docs.github.com/zh/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
+> [More details](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)

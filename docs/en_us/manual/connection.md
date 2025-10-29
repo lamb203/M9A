@@ -1,17 +1,8 @@
+---
+order: 3
+icon: mdi:plug
+---
 # Connection Settings
-
-- [Connection Settings](#connection-settings)
-  - [Auto Detect](#auto-detect)
-  - [Manual Configuration](#manual-configuration)
-    - [ADB Path](#adb-path)
-      - [Using ADB Provided by Emulator](#using-adb-provided-by-emulator)
-      - [Using ADB Provided by Google](#using-adb-provided-by-google)
-    - [ADB Address](#adb-address)
-      - [Emulator Documentation and Reference Addresses](#emulator-documentation-and-reference-addresses)
-      - [Getting Multi-Instance Ports](#getting-multi-instance-ports)
-    - [Touch Control Mode](#touch-control-mode)
-    - [M9A and Emulator Multi-Instance](#m9a-and-emulator-multi-instance)
-    - [ADB Extra Parameters](#adb-extra-parameters)
 
 ## Auto Detect
 

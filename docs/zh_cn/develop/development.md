@@ -1,10 +1,14 @@
+---
+order: 1
+icon: iconoir:developer
+---
 # 开发前须知
 
 > [!NOTE]
 >
 > 只有当您想要开发 M9A 时才需要看当前页面！
 >
-> 用户请转到 [M9A 使用手册](../manual/新手上路.md)。
+> 用户请转到 [M9A 使用手册](../manual/newbie.md)。
 >
 > 开发 MaaFramework 或开发自己的项目请到 [MaaXYZ/MaaFramework](https://github.com/MaaXYZ/MaaFramework)。
 
@@ -50,7 +54,7 @@
 
     使用上一个步骤中安装的调试/开发工具开发M9A，虚拟环境会自动创建在`.venv`目录中。
 
-    开始愉快的改代码吧，开始前查看[相关阅读](#相关阅读)。
+    开始愉快的改代码吧，可以看看别的文档。
 
 7. git 操作
 
@@ -117,7 +121,7 @@
 
 M9A 使用一系列的格式化工具来保证仓库中的代码和资源文件美观统一，以便于维护和阅读
 
-请确保在提交之前已经格式化，或是[启用 Pre-commit Hooks 进行自动格式化](#pre-commit-hooks)
+请确保在提交之前已经格式化，或是启用 Pre-commit Hooks 进行自动格式化
 
 目前启用的格式化工具如下：
 
@@ -127,8 +131,6 @@ M9A 使用一系列的格式化工具来保证仓库中的代码和资源文件�
 | Markdown | [MarkdownLint](https://github.com/DavidAnson/markdownlint-cli2) |
 
 ### 利用 Pre-commit Hooks 自动进行代码格式化
-
-<a id="pre-commit-hooks"></a>
 
 > [!NOTE]
 >
@@ -152,14 +154,3 @@ M9A 使用一系列的格式化工具来保证仓库中的代码和资源文件�
 ```bash
 pre-commit run --all-files
 ```
-
-## 相关阅读
-
-- [项目结构](./项目结构.md)
-- [interface.json编写](./interface.json编写.md)
-- [Pipeline编写](./Pipeline编写.md)
-- [Custom编写](./Custom编写.md)
-- [BUG 排查](./Bug排查.md)
-- [项目重构](./项目重构.md)
-- [外服适配](./外服适配.md)
-- [文档编写](./文档编写.md)

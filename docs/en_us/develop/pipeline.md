@@ -1,3 +1,7 @@
+---
+order: 4
+icon: eos-icons:pipeline
+---
 # Pipeline Writing
 
 ## Writing Standards
@@ -24,7 +28,7 @@ Suffixes are generally `numbers` or `states`, indicating the specific stage or s
 
 ### Node Writing
 
-For detailed content, refer to [Pipeline Protocol Detailed Explanation](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.md)
+For detailed content, refer to [Pipeline Protocol Detailed Explanation](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/en_us/3.1-PipelineProtocol.md)
 
 > [!NOTE]
 >

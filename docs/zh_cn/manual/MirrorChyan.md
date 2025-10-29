@@ -1,8 +1,8 @@
+---
+order: 5
+icon: ic:outline-fast-forward
+---
 # Mirror酱使用说明
-
-- [Mirror酱使用说明](#mirror酱使用说明)
-  - [在 MaaFramework 通用UI上使用](#在-maaframework-通用ui上使用)
-  - [Mirror酱网页使用](#mirror酱网页使用)
 
 Mirror酱是一个第三方应用分发平台，让开源应用的更新更简单。  
 用户付费使用，收益与开发者共享。此外，Mirror酱本身也是开源的。
@@ -11,7 +11,7 @@ Mirror酱是一个第三方应用分发平台，让开源应用的更新更简�
 
 ## 在 MaaFramework 通用UI上使用
 
-部分 MaaFramework 通用UI，如 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)、[MFW-PyQt6](https://github.com/overflow65537/MFW-PyQt6)、[MFAWPF](https://github.com/SweetSmellFox/MFAWPF) 拥有通过 Mirror酱 更新 UI 以及资源（如 M9A ）的功能，在对应设置界面处便可设置。
+部分 MaaFramework 通用UI，如 [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)、[MFW-CFA](https://github.com/overflow65537/MFW-PyQt6)、[MFAWPF](https://github.com/SweetSmellFox/MFAWPF) 拥有通过 Mirror酱 更新 UI 以及资源（如 M9A ）的功能，在对应设置界面处便可设置。
 
 ## Mirror酱网页使用
 

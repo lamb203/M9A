@@ -1,3 +1,7 @@
+---
+order: 3
+icon: tdesign:system-interface
+---
 # interface.json 编写
 
 > [!TIP]

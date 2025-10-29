@@ -1,25 +1,9 @@
+---
+order: 1
+icon: ri:guide-fill
+---
+<!-- markdownlint-disable MD033 -->
 # Getting Started
-
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-    - [1. Confirm System Version](#1-confirm-system-version)
-    - [2. Install Runtime Environment](#2-install-runtime-environment)
-      - [1. VCRedist x64](#1-vcredist-x64)
-      - [2. .NET 8](#2-net-8)
-      - [3. Python](#3-python)
-    - [3. Download the Correct Version](#3-download-the-correct-version)
-    - [4. Confirm Emulator and Device Support](#4-confirm-emulator-and-device-support)
-    - [5. Set Emulator Resolution Correctly](#5-set-emulator-resolution-correctly)
-    - [6. Getting Started](#6-getting-started)
-      - [Windows](#windows)
-      - [macOS](#macos)
-      - [Linux](#linux)
-    - [7. Configure M9A](#7-configure-m9a)
-      - [First Launch](#first-launch)
-      - [M9A Settings Interface](#m9a-settings-interface)
-      - [M9A Main Interface](#m9a-main-interface)
-      - [Pip Settings](#pip-settings)
-  - [Related Documentation](#related-documentation)
 
 ## Prerequisites
 
@@ -38,7 +22,7 @@
 | --- | --- |
 | Windows Users | In most cases, please download the x86_64 architecture |
 | Mac Users | M9A supports both Apple Silicon and Intel chip Mac computers<br>But it's more recommended for Intel chip Mac computers to use Mac's built-in multi-system installation of Windows<br>And use Windows version M9A and emulator |
-| Android Users | M9A no longer provides Android version release packages<br>If you are very familiar with mobile phone operations and wish to use Android physical devices, please go to [Development Documentation](../develop/Notes-Before-Development.md) to install it yourself<br>You can refer to [Usage Method](https://github.com/MaaXYZ/MaaFramework/issues/475), and [MAA Documentation](https://maa.plus/docs/zh-cn/manual/device/android.html)<br>This method is complex and has certain risks, not recommended for beginner players |
+| Android Users | M9A no longer provides Android version release packages<br>If you are very familiar with mobile phone operations and wish to use Android physical devices, please go to [MaaFramework](https://github.com/MaaXYZ/MaaFramework/) to install it yourself<br>You can refer to [Usage Method](https://github.com/MaaXYZ/MaaFramework/issues/475), and [MAA Documentation](https://maa.plus/docs/en-us/manual/device/android.html)<br>This method is complex and has certain risks, not recommended for beginner players |
 
 </div>
 
@@ -243,7 +227,7 @@ For emulator support details, please refer to MAA documentation. **For reference
 
   | | Windows | macOS | Linux | Android |
   | -------- | -------- | ------- | ------- | ------- |
-  | Reference Documentation | [Windows Emulators](https://maa.plus/docs/zh-cn/manual/device/windows.html) | If your device has Apple Silicon, please refer to:<br>[Mac emulators running on Apple Silicon platform](https://maa.plus/docs/zh-cn/manual/device/macos.html#apple-silicon-%E8%8A%AF%E7%89%87)<br>If your device has Intel chip:<br>1. Recommended to use Mac's built-in multi-system to install Windows<br>and refer to Windows section documentation<br>2. Refer to [Mac emulators running on Intel platform](https://maa.plus/docs/zh-cn/manual/device/macos.html#intel-%E8%8A%AF%E7%89%87) | [Linux Emulators and Containers](https://maa.plus/docs/zh-cn/manual/device/linux.html) | [Android Physical Devices](<https://maa.plus/docs/zh-cn/manual/device/android.html>) |
+  | Reference Documentation | [Windows Emulators](https://maa.plus/docs/en-us/manual/device/windows.html) | If your device has Apple Silicon, please refer to:<br>[Mac emulators running on Apple Silicon platform](https://maa.plus/docs/en-us/manual/device/macos.html#apple-silicon-%E8%8A%AF%E7%89%87)<br>If your device has Intel chip:<br>1. Recommended to use Mac's built-in multi-system to install Windows<br>and refer to Windows section documentation<br>2. Refer to [Mac emulators running on Intel platform](https://maa.plus/docs/en-us/manual/device/macos.html#intel-%E8%8A%AF%E7%89%87) | [Linux Emulators and Containers](https://maa.plus/docs/en-us/manual/device/linux.html) | [Android Physical Devices](<https://maa.plus/docs/en-us/manual/device/android.html>) |
 
   </div>
 
@@ -345,7 +329,7 @@ You can configure M9A according to your needs for a better user experience.
 
 Some configuration items may cause M9A to **run abnormally** when configured incorrectly or not configured, so it's recommended to read this section before starting to use.
 
-This chapter will mainly introduce how to configure M9A through the graphical interface (MFAAvalonia). If you are using the command line version (MaaPiCli), please refer to [MaaPiCli Operation Instructions](./MaaPiCli.md).
+This chapter will mainly introduce how to configure M9A through the graphical interface (MFAAvalonia). If you are using the command line version (MaaPiCli), please refer to [MaaPiCli Operation Instructions](./cli.md).
 
 The following demonstrations are for reference only, please refer to the actual software situation.
 
@@ -577,7 +561,7 @@ At least configure **`Resource Type`** and **`Connection`**. When configured inc
 
 >[!IMPORTANT]
 >
-> Most tasks need to be configured correctly before use, and some tasks also need to be executed in specific scenarios according to task descriptions. Before enabling tasks, please ensure you have read and understood the **Task Description** for that task, and configure **Task Settings** according to actual situations. For more information about tasks, please refer to [Feature Introduction](./feature.md).
+> Most tasks need to be configured correctly before use, and some tasks also need to be executed in specific scenarios according to task descriptions. Before enabling tasks, please ensure you have read and understood the **Task Description** for that task, and configure **Task Settings** according to actual situations. For more information about tasks, please refer to [Feature Introduction](./introduction.md).
 
 ***
 
@@ -602,11 +586,3 @@ At least configure **`Resource Type`** and **`Connection`**. When configured inc
 </details>
 
 ***
-
-## Related Documentation
-
-- [Connection Settings](./connection.md): How to configure ADB and connect to the emulator.
-- [MaaPiCli Usage Instructions](./MaaPiCli.md): Introduces the usage of MaaPiCli
-- [Feature Introduction](./feature.md): Introduces the precautions for some features
-- [FAQ](./faq.md): Solutions to common problems.
-- [MirrorChyan Usage Instructions](./MirrorChyan.md): Introduces the usage of MirrorChyan

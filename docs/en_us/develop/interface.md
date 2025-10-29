@@ -1,10 +1,14 @@
+---
+order: 3
+icon: tdesign:system-interface
+---
 # Writing interface.json
 
 > [!TIP]
 >
 > Reference materials:
 > [interface.schema.json](https://github.com/MaaXYZ/MaaFramework/blob/main/tools/interface.schema.json)
-> [ProjectInterface Protocol.md](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.2-ProjectInterface%E5%8D%8F%E8%AE%AE.md)
+> [ProjectInterface Protocol.md](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/en_us/3.2-ProjectInterface.md)
 
 `interface.json` is designed to provide menu configuration.
 

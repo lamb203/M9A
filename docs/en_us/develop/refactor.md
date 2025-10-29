@@ -1,3 +1,7 @@
+---
+index: 7
+icon: carbon:ibm-watsonx-code-assistant-for-z-refactor
+---
 # Project Refactoring
 
 ## Image/Model
@@ -67,7 +71,7 @@ However, ensure that replacements include double quotes to avoid modifying other
 
 #### Simplifying Task Flows and Reducing Coupling
 
-First, read [Node Connections](./Writing-Pipelines.md#node-connections) and refactor towards adhering to connection principles.
+First, read [Node Connections](./pipeline.md#node-connections) and refactor towards adhering to connection principles.
 
 Some nodes can be moved to the `interrupt` of the ancestor node of the current node.  
 After moving, remove unnecessary `next` nodes to avoid continuing the main task chain in the `interrupt`, which could cause errors in subsequent tasks and return to the ancestor node.

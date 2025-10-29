@@ -1,3 +1,7 @@
+---
+order: 6
+icon: qlementine-icons:debug-16
+---
 # Bug 排查
 
 修 bug 也是开发中重要的一环。  
@@ -95,7 +99,7 @@
 
 ## 解决问题
 
-前两种参考[常见问题](../manual/常见问题.md)解决，pipeline 问题根据分析结果修改。
+前两种参考[常见问题](../manual/faq.md)解决，pipeline 问题根据分析结果修改。
 
 ## 验证修复
 
