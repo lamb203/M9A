@@ -52,6 +52,9 @@
         "next": [
             "FlagInBank",
             "EnterBank"
+        ],
+        "interrupt": [
+            "ClickBlank"
         ]
     },
     "FlagInBank": {
