@@ -60,6 +60,7 @@
             "Downloading",
             "CandyCancel",
             "ClickBlank",
+            "SkipButton",
             "ClickHomeCount"
         ]
     },
@@ -597,7 +598,8 @@
                     64
                 ]
             }
-        }
+        },
+        "post_delay": 1500
     },
     "Stop": {},
     "Reward": {
