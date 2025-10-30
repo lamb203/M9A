@@ -7,6 +7,7 @@
             "StartGame"
         ],
         "interrupt": [
+            "Download",
             "GameLoading2",
             "BluePochLogo",
             "Disclaimer",
@@ -20,7 +21,6 @@
             "ClosePageFirst",
             "Confirm",
             "VictoryReturn",
-            "Download",
             "Downloading",
             "CandyCancel",
             "BackButton",
