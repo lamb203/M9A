@@ -38,6 +38,7 @@
             "Sub_MailBadge",
             "Sub_DailyBadge",
             "Sub_JukeboxBadge",
+            "Sub_JukeboxBadge_3.2",
             "HomeFlag"
         ],
         "interrupt": [
@@ -713,31 +714,48 @@
             }
         }
     },
-    "Sub_CarnivalAlbumAwards": {
-        "is_sub": true,
+    "Sub_JukeboxBadge_3.2": {
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    197,
-                    561,
-                    245,
-                    159
+                    372,
+                    28,
+                    46,
+                    41
                 ],
-                "expected": [
-                    "巡游专列"
-                ]
+                "template": "Awards/JukeboxBadge_3.2.png",
+                "threshold": 0.9
             }
         },
         "action": {
             "type": "Click"
         },
-        "post_wait_freezes": 200,
         "next": [
-            "Sub_CollectJukebox"
+            "HomeFlag"
         ],
         "interrupt": [
-            "ObtainedAwards"
+            "JukeboxBadge_3.2_OneClick",
+            "ObtainedAwards",
+            "HomeButton"
         ]
+    },
+    "JukeboxBadge_3.2_OneClick": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1042,
+                    654,
+                    131,
+                    34
+                ],
+                "only_rec": true,
+                "expected": "一键领取"
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
     }
 }
