@@ -219,6 +219,25 @@
             "ReadyForAction"
         ]
     },
+    "ActivityTargetLevelClick": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action_param": {
+                    "clicks": [
+                        [
+                            945,
+                            245
+                        ],
+                        [
+                            1190,
+                            245
+                        ]
+                    ]
+                }
+            }
+        }
+    },
     "ActivityTargetLevelRec": {
         "recognition": {
             "type": "OCR",

@@ -441,6 +441,17 @@ class ActivityTargetLevel(CustomAction):
         valid_levels = {"故事", "意外", "艰难"}
         level = json.loads(argv.custom_action_param)["level"]
 
+        try:
+            click = (
+                context.get_node_data("ActivityTargetLevelClick")
+                .get("action")
+                .get("param")
+                .get("custom_action_param")
+                .get("clicks")
+            )
+        except:
+            click = [[945, 245], [1190, 245]]
+
         if not level or level not in valid_levels:
             logger.error("目标难度不存在")
             return CustomAction.RunResult(success=False)
@@ -464,17 +475,21 @@ class ActivityTargetLevel(CustomAction):
                 logger.error("切换难度失败，超过最大重试次数，请检查选择难度是否正确")
                 return CustomAction.RunResult(success=False)
             if cur_level == "故事":
-                context.tasker.controller.post_click(1190, 245).wait()
+                context.tasker.controller.post_click(click[1][0], click[1][1]).wait()
                 time.sleep(0.5)
             elif cur_level == "艰难":
-                context.tasker.controller.post_click(945, 245).wait()
+                context.tasker.controller.post_click(click[0][0], click[0][1]).wait()
                 time.sleep(0.5)
             else:
                 if level == "故事":
-                    context.tasker.controller.post_click(945, 245).wait()
+                    context.tasker.controller.post_click(
+                        click[0][0], click[0][1]
+                    ).wait()
                     time.sleep(0.5)
                 else:
-                    context.tasker.controller.post_click(1190, 245).wait()
+                    context.tasker.controller.post_click(
+                        click[1][0], click[1][1]
+                    ).wait()
                     time.sleep(0.5)
 
             img = context.tasker.controller.post_screencap().wait().get()
