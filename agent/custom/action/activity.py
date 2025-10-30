@@ -60,6 +60,7 @@ class DuringAct(CustomAction):
                             f"距离版本结束还剩 {ms_timestamp_diff_to_dhm(now, item['end_time'])}"
                         )
                         logger.info("如果您需要刷取主线关卡，请改用常规作战功能")
+                        context.override_next("JudgeDuringAct", [])
                         return CustomAction.RunResult(success=True)
                     logger.info(f"当前版本：{key} {item['version_name']}")
                     logger.info(
@@ -107,7 +108,11 @@ class CombatActivityOverride(CustomAction):
                         context.override_pipeline(
                             item["activity"]["combat"].get("override")
                         )
-                    elif mode == 1 and item["activity"]["re-release"].get("override"):
+                    elif (
+                        mode == 1
+                        and item["activity"].get("re-release")
+                        and item["activity"]["re-release"].get("override")
+                    ):
                         context.override_pipeline(
                             item["activity"]["re-release"].get("override")
                         )
