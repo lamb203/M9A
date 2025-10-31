@@ -78,7 +78,8 @@
                     1280,
                     460
                 ],
-                "template_code": "Set in code"
+                "template_code": "Set in code",
+                "threshold": 0.9
             }
         },
         "action": {
