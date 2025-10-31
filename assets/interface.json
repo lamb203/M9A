@@ -109,7 +109,7 @@
             "advanced": [
                 "作战次数"
             ],
-            "doc": "图看不清可以拉伸下这个小窗口\n![bydjl](https://mojing.org/tjb)"
+            "doc": "图看不清可以拉伸下这个小窗口\n![bydjl](https://api.1999.fan/api/images/mojing_tjb.png)"
         },
         {
             "name": "常规作战（自定义）",
@@ -121,7 +121,7 @@
                 "作战关卡（自定义）",
                 "作战次数"
             ],
-            "doc": "仅限刷材料关卡\n![bydjl](https://mojing.org/tjb)"
+            "doc": "仅限刷材料关卡，选项在高级里\n![bydjl](https://api.1999.fan/api/images/mojing_tjb.png)"
         },
         {
             "name": "活动刷取",
