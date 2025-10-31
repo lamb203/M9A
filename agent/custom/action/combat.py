@@ -530,6 +530,7 @@ class SelectChapter(CustomAction):
             )
             img = context.tasker.controller.post_screencap().wait().get()
             count += 1
+            # 判断是否还能匹配上大章节（位置不同/角度不同）
             if (
                 context.run_recognition(
                     "SelectMainStoryChapter",
@@ -656,9 +657,12 @@ class TargetCount(CustomAction):
         combat_times = cls._safe_int(
             cls.get_text_safe(context, img, "RecognizeCombatTimes")
         )
-        if combat_times == 0 or stage_ap == 0:
-            logger.debug("识别失败，combat_times 或 stage_ap 为0")
+        if stage_ap == 0:
+            logger.debug("stage_ap 为0")
             return 999
+        if combat_times == 0:
+            logger.debug("识别失败，combat_times 为0")
+            return -1
         stage_ap = stage_ap // combat_times
         logger.debug(f"剩余体力: {remaining_ap}, 关卡体力: {stage_ap}")
         return remaining_ap // stage_ap if stage_ap else 0
@@ -675,7 +679,7 @@ class TargetCount(CustomAction):
 
         while True:
             available_count = TargetCount._get_available_count(context)
-            if available_count == 999:
+            if available_count == -1:
                 logger.debug("识别失败，任务结束")
                 return CustomAction.RunResult(success=False)
             # 判断本轮最大可刷次数
@@ -690,7 +694,7 @@ class TargetCount(CustomAction):
                     context.run_task("EatCandy")
 
                     available_count = TargetCount._get_available_count(context)
-                    if available_count == 999:
+                    if available_count == -1:
                         logger.debug("识别失败，任务结束")
                         return CustomAction.RunResult(success=False)
                     if target_count:
@@ -742,52 +746,48 @@ class SSReopenReplay(CustomAction):
         argv: CustomAction.RunArg,
     ) -> CustomAction.RunResult:
 
-        # 判断当前页面类型（有/无复现）
+        # 尝试切换到复现状态
+        context.run_task("SSToReplayIfCan")
+
+        # 看看要不要吃不吃糖
+        available_count = TargetCount._get_available_count(context)
+        if available_count == -1:
+            logger.debug("识别战斗次数失败")
+            available_count = 1
+        elif available_count <= 0:
+            logger.debug("没体力咯，吃个糖")
+            for _ in range(2):  # 最多吃两次糖，防止吃mini糖体力不够
+                context.run_task("EatCandy")
+
+                available_count = TargetCount._get_available_count(context)
+                if available_count == -1:
+                    logger.debug("识别战斗次数失败")
+                    available_count = 1
+            if available_count <= 0:
+                logger.debug(f"尝试吃糖后体力不够，任务结束。")
+                context.run_task("HomeButton")
+                context.tasker.post_stop()
+                return CustomAction.RunResult(success=True)
+
+        # 开始刷图
         img = context.tasker.controller.cached_image
-        reco_detail = context.run_recognition("Has_Replay", img)
-
+        reco_detail = context.run_recognition("SSCannotReplay", img)
         if reco_detail is not None:
-            context.run_task("SSToReplayIfCan")
-            # 看看吃不吃糖
-            available_count = TargetCount._get_available_count(context)
-            if available_count == 999:
-                logger.debug("识别失败，任务结束")
-            elif available_count <= 0:
-                logger.debug("没体力咯，吃个糖")
-                for _ in range(2):  # 最多吃两次糖，防止吃mini糖体力不够
-                    context.run_task("EatCandy")
-
-                    available_count = TargetCount._get_available_count(context)
-                    if available_count == 999:
-                        logger.debug("识别失败，任务结束")
-                        return CustomAction.RunResult(success=False)
-                    elif available_count > 0:
-                        break
-                if available_count <= 0:
-                    logger.debug(f"尝试吃糖后体力不够，任务结束。")
-                    context.run_task("HomeButton")
-                    return CustomAction.RunResult(success=False)
-
-            # 开始刷图
-            reco_detail = context.run_recognition("SSCannotReplay", img)
-            if reco_detail is not None:
-                # 无法复现，直接开始任务
-                context.run_task("SSNoReplay")
-            else:
-                # 可复现
-                context.override_pipeline(
-                    {
-                        "SetReplaysTimes": {
-                            "template": [
-                                f"Combat/SetReplaysTimesX1.png",
-                                f"Combat/SetReplaysTimesX1_selected.png",
-                            ]
-                        }
-                    }
-                )
-                context.run_task("OpenReplaysTimes")
-                context.run_task("SSReopenBackToMain")
-        else:
+            # 无法复现，直接开始任务
             context.run_task("SSNoReplay")
+        else:
+            # 可复现
+            context.override_pipeline(
+                {
+                    "SetReplaysTimes": {
+                        "template": [
+                            f"Combat/SetReplaysTimesX1.png",
+                            f"Combat/SetReplaysTimesX1_selected.png",
+                        ]
+                    }
+                }
+            )
+            context.run_task("OpenReplaysTimes")
+            context.run_task("SSReopenBackToMain")
 
         return CustomAction.RunResult(success=True)

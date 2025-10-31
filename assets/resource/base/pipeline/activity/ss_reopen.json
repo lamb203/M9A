@@ -22,9 +22,9 @@
                 ],
                 "roi": [
                     29,
-                    115,
+                    87,
                     174,
-                    199
+                    227
                 ]
             }
         },
@@ -120,31 +120,35 @@
             }
         }
     },
-    "Has_Replay": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "template": [
-                    "Combat/SwitchToReplay.png",
-                    "Combat/IsReplay.png"
-                ],
-                "roi": [
-                    531,
-                    596,
-                    311,
-                    115
-                ]
-            }
-        }
-    },
     "SSToReplayIfCan": {
         "next": [
             "SSCannotReplay",
             "SSIsReplay"
         ],
         "interrupt": [
-            "SwitchToReplay"
+            "SSSwitchToReplay"
         ]
+    },
+    "SSSwitchToReplay": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    559,
+                    619,
+                    98,
+                    76
+                ],
+                "template": [
+                    "Combat/SwitchToReplay.png",
+                    "Combat/CannotReplay.png"
+                ],
+                "threshold": 0.9
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
     },
     "SSIsReplay": {
         "recognition": {
@@ -199,6 +203,9 @@
         "next": [
             "Victory_NoReplay",
             "SSNoReplay"
+        ],
+        "interrupt": [
+            "EatCandyPage"
         ]
     },
     "Victory_NoReplay": {
