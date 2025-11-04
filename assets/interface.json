@@ -177,7 +177,8 @@
             "name": "领取奖励",
             "entry": "Awards",
             "option": [
-                "获取显影罐"
+                "获取显影罐",
+                "领取邮件奖励"
             ]
         },
         {
@@ -1629,6 +1630,22 @@
                             "next": [
                                 "DevelopmentTank"
                             ]
+                        }
+                    }
+                }
+            ]
+        },
+        "领取邮件奖励": {
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "Sub_MailBadge": {
+                            "enabled": false
                         }
                     }
                 }
