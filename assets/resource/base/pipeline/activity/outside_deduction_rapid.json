@@ -1408,6 +1408,7 @@
         "action": {
             "type": "Click"
         },
+        "pre_delay": 500,
         "post_wait_freezes": {
             "time": 750,
             "target": [
@@ -1416,7 +1417,29 @@
                 40,
                 40
             ]
-        }
+        },
+        "post_delay": 500,
+        "next": [
+            "ODR_SkipAddChar_Confirm",
+            "ODR_SkipAddChar_NoConfirm"
+        ]
+    },
+    "ODR_SkipAddChar_NoConfirm": {
+        "doc": "确认不选择角色",
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    770,
+                    404,
+                    70,
+                    36
+                ],
+                "expected": "确认"
+            }
+        },
+        "inverse": true
     },
     "ODR_Event_Select_SkipText": {
         "doc": "事件——默认最后一个选项",
