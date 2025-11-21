@@ -212,7 +212,7 @@ def _run_pip_command(cmd_args: list, operation_name: str) -> bool:
         for line in iter(process.stdout.readline, ""):
             line = line.rstrip("\n\r")
             if line.strip():  # 只显示非空行
-                print(line)  # 实时显示到终端
+                # print(line)  # 实时显示到终端
                 all_output.append(line)  # 收集到列表中
 
         # 等待进程结束
