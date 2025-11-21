@@ -58,14 +58,14 @@ class SOSSelectNode(CustomAction):
             ]
             if expected_results:
                 img = context.tasker.controller.cached_image
-                
+
                 # BGR2RGB
                 if len(img.shape) == 3 and img.shape[2] == 3:
                     rgb_img = img[:, :, ::-1]
                 else:
                     rgb_img = img
                     logger.warning("当前截图并非三通道")
-                
+
                 timestamp = time.strftime("%Y%m%d_%H%M%S")
                 save_dir = "debug/custom/SOSSelectNode"
                 os.makedirs(save_dir, exist_ok=True)
@@ -744,7 +744,13 @@ class SOSBuyItems(CustomAction):
     ) -> CustomAction.RunResult:
 
         # 获取 interrupts 配置（购买后可能出现的弹窗）
-        interrupts = ["SOSLoseArtefact", "SOSStrengthenArtefact"]
+        interrupts = [
+            "SOSLoseArtefact",
+            "SOSStrengthenArtefact",
+            "SOSWarning",
+            "SOSStatsUpButton",
+            "SOSStatsUp",
+        ]
 
         # 识别右上角当前金雀子儿
         img = context.tasker.controller.post_screencap().wait().get()
