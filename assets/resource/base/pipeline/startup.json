@@ -7,6 +7,7 @@
             "StartGame"
         ],
         "interrupt": [
+            "Start1999",
             "Download",
             "GameLoading2",
             "BluePochLogo",
@@ -25,7 +26,6 @@
             "CandyCancel",
             "BackButton",
             "HomeButton",
-            "Start1999",
             "ClickHomeCount"
         ]
     },
