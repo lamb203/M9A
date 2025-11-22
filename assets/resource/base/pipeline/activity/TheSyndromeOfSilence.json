@@ -586,7 +586,7 @@
             "param": {
                 "custom_action": "SOSSelectNoise",
                 "custom_action_param": {
-                    "level": 4
+                    "level": 0
                 }
             }
         },
@@ -629,7 +629,8 @@
             "SOSNextStep",
             "SOSArtefactsObtained",
             "SOSResonatorObtained",
-            "SOSHarmonicObtained"
+            "SOSHarmonicObtained",
+            "SOS_Skip"
         ]
     },
     "SOSInstrumentSelect": {
@@ -713,7 +714,8 @@
             "SOSGiveup",
             "SOSStart",
             "SOS_Skip",
-            "SOSConfirm"
+            "SOSConfirm",
+            "CloseTip"
         ]
     },
     // 演绎主体逻辑
@@ -1169,7 +1171,8 @@
             "SOSFailed"
         ],
         "interrupt": [
-            "SOSCombatDialog"
+            "SOSCombatDialog",
+            "CloseTip"
         ]
     },
     "SOSCombatDialog": {
@@ -1574,6 +1577,9 @@
         "next": [
             "SOSGoToNextScene",
             "SOSSetOff"
+        ],
+        "interrupt": [
+            "CloseTip"
         ]
     },
     "SOSGoToNextScene": {
@@ -1628,7 +1634,8 @@
             "type": "Click"
         },
         "next": [
-            "SOSFlagInDice"
+            "SOSFlagInDice",
+            "SOSDice"
         ]
     },
     "SOSFlagInDice": {
