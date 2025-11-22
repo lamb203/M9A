@@ -32,25 +32,16 @@ VENV_DIR = Path(project_root_dir) / VENV_NAME
 
 
 def _is_running_in_our_venv():
-    """检查脚本是否在此脚本管理的特定venv中运行。"""
-    current_python = Path(sys.executable).resolve()
+    """检查脚本是否在虚拟环境中运行。"""
+    # 使用 sys.prefix 和 sys.base_prefix 来判断是否在虚拟环境中
+    in_venv = sys.prefix != sys.base_prefix
 
-    logger.debug(f"当前Python解释器: {current_python}")
-
-    if sys.platform.startswith("win"):
-        # Windows: 如果在虚拟环境中，Python应该在 Scripts 目录下
-        if current_python.parent.name == "Scripts":
-            return True
-        else:
-            logger.debug("当前不在目标虚拟环境中")
-            return False
+    if in_venv:
+        logger.debug(f"当前在虚拟环境中运行: {sys.prefix}")
     else:
-        # Linux/Unix: 如果在虚拟环境中，Python应该在 bin 目录下
-        if current_python.parent.name == "bin":
-            return True
-        else:
-            logger.debug("当前不在目标虚拟环境中")
-            return False
+        logger.debug(f"当前不在虚拟环境中，使用系统Python: {sys.prefix}")
+
+    return in_venv
 
 
 def ensure_venv_and_relaunch_if_needed():
