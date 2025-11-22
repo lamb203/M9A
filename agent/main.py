@@ -363,10 +363,22 @@ def agent(is_dev_mode=False):
             version_info = check_resource_version()
             if not version_info["is_latest"]:
                 logger.warning("检测到资源有新版本!")
-                logger.warning(f"当前版本: {version_info['current_version']}")
-                logger.warning(f"最新版本: {version_info['latest_version']}")
+                logger.warning(f"当前资源版本: {version_info['current_version']}")
+                logger.warning(f"最新资源版本: {version_info['latest_version']}")
             elif version_info["error"]:
-                logger.debug(f"版本检查遇到问题: {version_info['error']}")
+                logger.debug(f"资源版本检查遇到问题: {version_info['error']}")
+
+            # 数据热更新
+            from utils.resource_updater import check_and_update_resources
+
+            logger.debug("开始检查部分资源...")
+            update_result = check_and_update_resources()
+            if update_result["updated_files"]:
+                pass
+            elif update_result["error"]:
+                logger.debug(f"热更部分资源更新遇到问题: {update_result['error']}")
+            else:
+                logger.debug("热更部分资源已是最新")
 
         from maa.agent.agent_server import AgentServer
         from maa.toolkit import Toolkit
