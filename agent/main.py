@@ -172,7 +172,7 @@ def find_local_wheels_dir():
 
     if deps_dir.exists() and any(deps_dir.glob("*.whl")):
         whl_count = len(list(deps_dir.glob("*.whl")))
-        logger.info(f"发现本地deps目录包含 {whl_count} 个 whl 文件")
+        logger.debug(f"发现本地deps目录包含 {whl_count} 个 whl 文件")
         return deps_dir
 
     logger.debug("未找到deps目录或目录中无 whl 文件")
@@ -235,7 +235,7 @@ def install_requirements(req_file="requirements.txt", pip_config=None) -> bool:
     # 查找本地deps目录
     deps_dir = find_local_wheels_dir()
     if deps_dir:
-        logger.info(f"使用本地 whl 文件安装，目录: {deps_dir}")
+        logger.debug(f"使用本地 whl 文件安装，目录: {deps_dir}")
 
         cmd = [
             sys.executable,
@@ -315,7 +315,7 @@ def check_and_install_dependencies():
     pip_config = read_pip_config()
     enable_pip_install = pip_config.get("enable_pip_install", True)
 
-    logger.info(f"启用 pip 安装依赖: {enable_pip_install}")
+    logger.debug(f"启用 pip 安装依赖: {enable_pip_install}")
 
     if enable_pip_install:
         logger.info("开始安装/更新依赖")
@@ -380,7 +380,7 @@ def agent(is_dev_mode=False):
             return
 
         socket_id = sys.argv[-1]
-        logger.info(f"socket_id: {socket_id}")
+        logger.debug(f"socket_id: {socket_id}")
 
         AgentServer.start_up(socket_id)
         logger.info("AgentServer启动")
