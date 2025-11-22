@@ -356,6 +356,18 @@ def agent(is_dev_mode=False):
             change_console_level("DEBUG")
             logger.info("开发模式：日志等级已设置为DEBUG")
 
+        if not is_dev_mode:
+            # 检查资源版本
+            from utils.version_checker import check_resource_version
+
+            version_info = check_resource_version()
+            if not version_info["is_latest"]:
+                logger.warning("检测到资源有新版本!")
+                logger.warning(f"当前版本: {version_info['current_version']}")
+                logger.warning(f"最新版本: {version_info['latest_version']}")
+            elif version_info["error"]:
+                logger.debug(f"版本检查遇到问题: {version_info['error']}")
+
         from maa.agent.agent_server import AgentServer
         from maa.toolkit import Toolkit
 
