@@ -1771,6 +1771,25 @@
             }
         }
     },
+    "CloseTip": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1207,
+                    43,
+                    50,
+                    50
+                ],
+                "template": [
+                    "SyndromeOfSilence/CloseTip.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    },
     // 工具节点
     "SOSEventRec": {
         "recognition": {

@@ -127,6 +127,7 @@ class SOSSelectNode(CustomAction):
                         "SOSLoseArtefact",
                         "SOSStrengthenArtefact",
                         "SOSHarmonicObtained",
+                        "CloseTip",
                     ]
                     popup_handled = False
 
@@ -750,6 +751,7 @@ class SOSBuyItems(CustomAction):
             "SOSWarning",
             "SOSStatsUpButton",
             "SOSStatsUp",
+            "CloseTip",
         ]
 
         # 识别右上角当前金雀子儿
