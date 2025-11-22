@@ -371,7 +371,7 @@ def agent(is_dev_mode=False):
             # 数据热更新
             from utils.resource_updater import check_and_update_resources
 
-            logger.debug("开始检查部分资源...")
+            logger.info("开始检查部分资源...")
             update_result = check_and_update_resources()
             if update_result["updated_files"]:
                 pass

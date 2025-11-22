@@ -5,6 +5,7 @@ import hashlib
 import requests
 from pathlib import Path
 from typing import Dict, List, Optional
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from . import logger
 
 
@@ -28,7 +29,7 @@ def calculate_file_hash(file_path: Path) -> str:
 
 def get_all_manifests(api_base_url: str, manifest_path: str, timeout: int) -> List[str]:
     """
-    递归获取所有包含文件的 manifest 路径
+    递归获取所有包含文件的 manifest 路径（并行）
 
     Args:
         api_base_url: API 基础 URL
@@ -45,15 +46,25 @@ def get_all_manifests(api_base_url: str, manifest_path: str, timeout: int) -> Li
         response.raise_for_status()
         manifest = response.json()
 
-        # 如果有 directories，递归获取子目录的 manifest
+        # 如果有 directories，并行递归获取子目录的 manifest
         if "directories" in manifest and manifest["directories"]:
             result = []
-            for directory in manifest["directories"]:
-                # 使用 API 返回的完整 manifest 路径
-                sub_manifest_path = directory["manifest"]
-                result.extend(
-                    get_all_manifests(api_base_url, sub_manifest_path, timeout)
-                )
+            sub_manifest_paths = [d["manifest"] for d in manifest["directories"]]
+            
+            # 使用线程池并行请求
+            with ThreadPoolExecutor(max_workers=5) as executor:
+                futures = {
+                    executor.submit(get_all_manifests, api_base_url, path, timeout): path
+                    for path in sub_manifest_paths
+                }
+                
+                for future in as_completed(futures):
+                    try:
+                        result.extend(future.result())
+                    except Exception as e:
+                        path = futures[future]
+                        logger.warning(f"获取 {path} 失败: {str(e)}")
+            
             return result
 
         # 如果有 files，说明这是最终的文件清单，返回该路径
