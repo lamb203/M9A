@@ -92,7 +92,8 @@
     "SOSWordlessWorkshop": {
         // 沉默者沙龙，好旅伴
         "next": [
-            "SOSWordlessWorkshopEmpty"
+            "SOSWordlessWorkshopEmpty",
+            "SOSWordlessWorkshopEnterGame"
         ],
         "interrupt": [
             "SOSWordlessWorkshopEntry"
