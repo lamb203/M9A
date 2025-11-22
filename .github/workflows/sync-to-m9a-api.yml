@@ -16,6 +16,8 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # 仅在主仓库触发，fork 的仓库不执行
+    if: github.repository == 'MAA1999/M9A'
     
     steps:
       - name: Checkout repository
