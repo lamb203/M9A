@@ -17,7 +17,7 @@ def save_activity_data(resource, data):
     """
 
     # 构建文件路径
-    file_path = f"M9A/api/resource/data/activity/{resource}.json"
+    file_path = f"assets/resource/data/activity/{resource}.json"
 
     # 提取当前要保存的版本号 (只取第一个，假设每次只处理一个版本)
     version_id = next(iter(data.keys()), None)
