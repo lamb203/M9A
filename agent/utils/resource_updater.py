@@ -50,21 +50,23 @@ def get_all_manifests(api_base_url: str, manifest_path: str, timeout: int) -> Li
         if "directories" in manifest and manifest["directories"]:
             result = []
             sub_manifest_paths = [d["manifest"] for d in manifest["directories"]]
-            
+
             # 使用线程池并行请求
             with ThreadPoolExecutor(max_workers=5) as executor:
                 futures = {
-                    executor.submit(get_all_manifests, api_base_url, path, timeout): path
+                    executor.submit(
+                        get_all_manifests, api_base_url, path, timeout
+                    ): path
                     for path in sub_manifest_paths
                 }
-                
+
                 for future in as_completed(futures):
                     try:
                         result.extend(future.result())
                     except Exception as e:
                         path = futures[future]
                         logger.warning(f"获取 {path} 失败: {str(e)}")
-            
+
             return result
 
         # 如果有 files，说明这是最终的文件清单，返回该路径
