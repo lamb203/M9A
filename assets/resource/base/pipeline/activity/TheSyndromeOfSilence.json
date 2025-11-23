@@ -1874,7 +1874,16 @@
                 ]
             }
         },
-        "post_delay": 3000
+        "post_wait_freezes": {
+            "target": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "time": 500,
+            "timeout": 1500
+        }
     },
     "SOSSelectEncounterOption_HSV_Unselected": {
         "recognition": {
