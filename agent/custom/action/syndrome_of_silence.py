@@ -852,7 +852,7 @@ class SOSBuyItems(CustomAction):
         # 第一阶段：遍历所有页面，收集所有可购买物品及其位置信息
 
         # 先滑动到顶部
-        for _ in range(5):
+        for _ in range(3):
             context.run_task(
                 "Swipe",
                 {
