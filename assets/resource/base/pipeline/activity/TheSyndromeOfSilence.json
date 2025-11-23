@@ -2076,5 +2076,22 @@
                 "order_by": "Score"
             }
         }
+    },
+    "SOSEntrustrRec": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    81,
+                    159,
+                    108,
+                    31
+                ],
+                "only_rec": true,
+                "expected": [
+                    "区域委托"
+                ]
+            }
+        }
     }
 }
