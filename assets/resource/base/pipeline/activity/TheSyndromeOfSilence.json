@@ -720,40 +720,11 @@
     },
     // 演绎主体逻辑
     "SOSSelectNode": {
-        // 选择最左侧节点
+        // 选择分数最高的节点,如果目标在委托范围内，向右滑动
         "recognition": {
-            "type": "NeuralNetworkDetect",
+            "type": "Custom",
             "param": {
-                "model": "sos_nodes.onnx",
-                "labels": [
-                    "C", // 已完成节点
-                    "Conflict", // 冲突
-                    "Dangerous", // 险象环生
-                    "Encounter", // 遭遇
-                    "EncounterAlongTheWay", // 途中偶遇
-                    "EntertainmentOnTheWay", // 途中余兴
-                    "FierceBattle", // 恶战
-                    "Message", // 对话
-                    "RestArea", // 休憩处
-                    "ShoppingOpportunity", // 购物契机
-                    "TheHandOfAMasterCraftsman", // 巧匠之手
-                    "TheOnlyWay", // 必经之路
-                    "TreasureLand" // 藏宝地
-                ],
-                "expected": [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12
-                ],
-                "order_by": "Score"
+                "custom_recognition": "SOSSelectNode"
             }
         },
         "action": {
@@ -2058,6 +2029,43 @@
         },
         "action": {
             "type": "Click"
+        }
+    },
+    "SOSSelectNode_rec": {
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "sos_nodes.onnx",
+                "labels": [
+                    "C", // 已完成节点
+                    "Conflict", // 冲突
+                    "Dangerous", // 险象环生
+                    "Encounter", // 遭遇
+                    "EncounterAlongTheWay", // 途中偶遇
+                    "EntertainmentOnTheWay", // 途中余兴
+                    "FierceBattle", // 恶战
+                    "Message", // 对话
+                    "RestArea", // 休憩处
+                    "ShoppingOpportunity", // 购物契机
+                    "TheHandOfAMasterCraftsman", // 巧匠之手
+                    "TheOnlyWay", // 必经之路
+                    "TreasureLand" // 藏宝地
+                ],
+                "expected": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12
+                ],
+                "order_by": "Score"
+            }
         }
     }
 }
