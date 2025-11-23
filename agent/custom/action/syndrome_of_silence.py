@@ -871,7 +871,7 @@ class SOSBuyItems(CustomAction):
         )  # 存储所有可购买的物品: [(item_name, item_price, page_index, result), ...]
         last_screen_texts = set()
         page_index = 0
-        max_scroll_times = 5
+        max_scroll_times = 3
 
         while page_index < max_scroll_times:
             # 截图并识别当前屏幕的物品
@@ -1116,7 +1116,7 @@ class SOSBuyItems(CustomAction):
         if buy_button_reco:
             # 最多重试5次购买
             buy_retry = 0
-            while buy_retry < 5:
+            while buy_retry < 3:
                 context.run_task("SOSBuyButton")
 
                 # 先处理可能出现的弹窗
@@ -1143,7 +1143,7 @@ class SOSBuyItems(CustomAction):
                 else:
                     buy_retry += 1
 
-            logger.error(f"购买失败，已重试5次: {item_name}")
+            logger.error(f"购买失败，已重试3次: {item_name}")
             return False
         else:
             logger.warning(f"未找到购买按钮")
