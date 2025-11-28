@@ -610,95 +610,6 @@
             }
         }
     },
-    "CCDeleteCard": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    846,
-                    530,
-                    78,
-                    76
-                ],
-                "template": [
-                    "CritterCrash/Delete.png"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 3000,
-        "next": [
-            "CCDeleteCardFinished",
-            "CCDeleteCard"
-        ]
-    },
-    "CCDeleteCardNoDelete": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    846,
-                    530,
-                    78,
-                    76
-                ],
-                "template": [
-                    "CritterCrash/Delete.png"
-                ]
-            }
-        }
-    },
-    "CCDeleteCardNoItem": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    846,
-                    530,
-                    78,
-                    76
-                ],
-                "template": [
-                    "../../../tmp/ccclickcards.png"
-                ]
-            }
-        }
-    },
-    "CCDeleteCardFinished": {
-        "recognition": {
-            "type": "Custom",
-            "param": {
-                "custom_recognition": "MultiRecognition",
-                "custom_recognition_param": {
-                    "nodes": [
-                        "CCDeleteCardNoDelete",
-                        "CCDeleteCardNoItem"
-                    ],
-                    "logic": {
-                        "type": "OR"
-                    },
-                    "return": "$1"
-                }
-            }
-        },
-        "inverse": true,
-        "next": [
-            "CCResetCCClickCards"
-        ]
-    },
-    "CCResetCCClickCards": {
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "ResetCount",
-                "custom_action_param": {
-                    "node_name": "CCClickCards"
-                }
-            }
-        }
-    },
     "CCRefreshCard_pre": {
         "recognition": {
             "type": "Custom",
@@ -763,8 +674,7 @@
                 "replace": [
                     "[Oo]",
                     "0"
-                ],
-                "threshold": 0.6
+                ]
             }
         }
     },
@@ -897,25 +807,35 @@
             }
         }
     },
-    "CCClickCards": {
-        "recognition": {
-            "type": "Custom",
+    "CCSellCards": {
+        "action": {
+            "type": "Swipe",
             "param": {
-                "custom_recognition": "Count",
-                "custom_recognition_param": {
-                    "target": 5
-                }
+                "end": [
+                    690,
+                    630,
+                    84,
+                    56
+                ],
+                "duration": 500
             }
         },
-        "action": {
-            "type": "Click",
-            "param": {}
-        },
-        "post_delay": 3000,
+        "post_delay": 1000,
         "next": [
-            "CCDeleteCard",
-            "CCClickCards"
+            "CCSellCardsFinished",
+            "CCSellCards"
         ]
+    },
+    "CCSellCardsFinished": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "CritterCrash/10.png",
+                    "CritterCrash/20.png"
+                ]
+            }
+        }
     },
     "CCSpirit": {
         "recognition": {
