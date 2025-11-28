@@ -867,7 +867,7 @@
             "type": "Click",
             "param": {}
         },
-        "post_delay": 1500,
+        "post_delay": 3000,
         "next": [
             "CCDeleteCard",
             "CCClickCards"
