@@ -347,7 +347,8 @@
             "CCSpirit",
             "CCConfirm",
             "CCBuyCard",
-            "CCRefreshCard",
+            "CCRefreshCard_pre",
+            "CCRefreshCard_post",
             "CCSelectAwardCard",
             "CCStartCombat"
         ]
@@ -654,7 +655,7 @@
         },
         "inverse": true
     },
-    "CCRefreshCard": {
+    "CCRefreshCard_pre": {
         "recognition": {
             "type": "Custom",
             "param": {
@@ -662,7 +663,27 @@
                 "custom_recognition_param": {
                     "nodes": [
                         "CCRemainMoney",
-                        "CCRefreshMoney"
+                        "CCRefreshMoney_pre",
+                        "CCRoundPre"
+                    ],
+                    "return": "$1"
+                }
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    },
+    "CCRefreshCard_post": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "MultiRecognition",
+                "custom_recognition_param": {
+                    "nodes": [
+                        "CCRemainMoney",
+                        "CCRefreshMoney_post",
+                        "CCRoundPost"
                     ],
                     "return": "$1"
                 }
@@ -702,7 +723,7 @@
             }
         }
     },
-    "CCRefreshMoney": {
+    "CCRefreshMoney_pre": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -716,6 +737,26 @@
                 "expected": [
                     "0",
                     "1"
+                ]
+            }
+        }
+    },
+    "CCRefreshMoney_post": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1200,
+                    513,
+                    28,
+                    40
+                ],
+                "only_rec": true,
+                "expected": [
+                    "0",
+                    "1",
+                    "2",
+                    "3"
                 ]
             }
         }
@@ -847,6 +888,40 @@
         },
         "action": {
             "type": "Click"
+        }
+    },
+    "CCRoundPre": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1172,
+                    419,
+                    77,
+                    30
+                ],
+                "only_rec": true,
+                "expected": [
+                    "^[1-6]/"
+                ]
+            }
+        }
+    },
+    "CCRoundPost": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1172,
+                    419,
+                    77,
+                    30
+                ],
+                "only_rec": true,
+                "expected": [
+                    "^(1[0-2]|[1-9])/"
+                ]
+            }
         }
     }
 }
