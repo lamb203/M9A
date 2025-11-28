@@ -672,7 +672,8 @@
         },
         "action": {
             "type": "Click"
-        }
+        },
+        "post_delay": 1500
     },
     "CCRefreshCard_post": {
         "recognition": {
@@ -691,7 +692,8 @@
         },
         "action": {
             "type": "Click"
-        }
+        },
+        "post_delay": 1500
     },
     "CCRemainMoney": {
         "recognition": {
