@@ -631,13 +631,13 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
+        "post_delay": 3000,
         "next": [
             "CCDeleteCardFinished",
             "CCDeleteCard"
         ]
     },
-    "CCDeleteCardFinished": {
+    "CCDeleteCardNoDelete": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -650,6 +650,40 @@
                 "template": [
                     "CritterCrash/Delete.png"
                 ]
+            }
+        }
+    },
+    "CCDeleteCardNoItem": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    846,
+                    530,
+                    78,
+                    76
+                ],
+                "template": [
+                    "../../../tmp/ccclickcards.png"
+                ]
+            }
+        }
+    },
+    "CCDeleteCardFinished": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "MultiRecognition",
+                "custom_recognition_param": {
+                    "nodes": [
+                        "CCDeleteCardNoDelete",
+                        "CCDeleteCardNoItem"
+                    ],
+                    "logic": {
+                        "type": "OR"
+                    },
+                    "return": "$1"
+                }
             }
         },
         "inverse": true
@@ -805,7 +839,8 @@
                     "node_name": "CCDeploy"
                 }
             }
-        }
+        },
+        "post_delay": 1500
     },
     "CCUpdate": {
         "recognition": {

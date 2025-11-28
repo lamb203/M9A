@@ -362,6 +362,21 @@ class CCBuyCard(CustomAction):
                     "CCDeployFinished": {"roi": target_roi},
                 },
             )
+            img = context.tasker.controller.post_screencap().wait().get()
+            # 用 np 截取目标区域图片
+            roi_array = img[
+                target_roi[1] : target_roi[1] + target_roi[3],
+                target_roi[0] : target_roi[0] + target_roi[2],
+            ]
+            # BGR2RGB
+            rgb_array = roi_array[:, :, ::-1]
+            # 转换为 PIL Image
+            img = Image.fromarray(rgb_array)
+            # 保存图片
+            save_path = "tmp/ccclickcards.png"
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            img.save(save_path)
+            logger.debug(f"已保存 CCClickCards 任务目标区域截图: {save_path}")
             context.run_task("CCClickCards", {"CCClickCards": {"target": target_roi}})
             logger.debug(f"成功卖出 {card_name}")
             return CustomAction.RunResult(success=True)
