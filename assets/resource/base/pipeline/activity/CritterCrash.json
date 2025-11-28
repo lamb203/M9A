@@ -727,8 +727,7 @@
                 "custom_recognition_param": {
                     "nodes": [
                         "CCRemainMoney",
-                        "CCRefreshMoney_post",
-                        "CCRoundPost"
+                        "CCRefreshMoney_post"
                     ],
                     "return": "$1"
                 }
