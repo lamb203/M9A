@@ -631,6 +631,7 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
             "CCDeleteCardFinished",
             "CCDeleteCard"
@@ -824,7 +825,7 @@
             "param": {}
         },
         "timeout": 10000,
-        "post_delay": 1000,
+        "post_delay": 3000,
         "next": [
             "CCDeleteCard",
             "CCClickCards"
