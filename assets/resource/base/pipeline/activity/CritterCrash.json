@@ -683,7 +683,21 @@
                 }
             }
         },
-        "inverse": true
+        "inverse": true,
+        "next": [
+            "CCResetCCClickCards"
+        ]
+    },
+    "CCResetCCClickCards": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "ResetCount",
+                "custom_action_param": {
+                    "node_name": "CCClickCards"
+                }
+            }
+        }
     },
     "CCRefreshCard_pre": {
         "recognition": {
