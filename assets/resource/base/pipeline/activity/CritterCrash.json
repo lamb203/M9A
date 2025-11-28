@@ -269,7 +269,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 3000,
         "action": {
             "type": "Click"
         }
@@ -290,7 +290,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 3000,
         "action": {
             "type": "Click"
         }
@@ -310,6 +310,7 @@
                 ]
             }
         },
+        "post_delay": 3000,
         "action": {
             "type": "Click"
         }
