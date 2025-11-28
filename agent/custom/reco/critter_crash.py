@@ -155,6 +155,8 @@ class CCRemainMoney(CustomRecognition):
         reco_detail = context.run_recognition("CCRemainMoney_rec", processed_img)
 
         if reco_detail and reco_detail.box:
-            return CustomRecognition.AnalyzeResult(
-                box=reco_detail.box, detail=json.dumps(reco_detail.raw_detail)
-            )
+            if int(reco_detail.best_result.text) >= 5:
+                return CustomRecognition.AnalyzeResult(
+                    box=reco_detail.box, detail=json.dumps(reco_detail.raw_detail)
+                )
+        return CustomRecognition.AnalyzeResult(box=None, detail="")
