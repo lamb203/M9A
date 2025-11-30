@@ -16,58 +16,58 @@
         {
             "name": "官服",
             "path": [
-                "{PROJECT_DIR}/resource/base"
+                "./resource/base"
             ]
         },
         {
             "name": "B 服",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/bilibili"
+                "./resource/base",
+                "./resource/bilibili"
             ]
         },
         {
             "name": "OPPO 服",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/oppo"
+                "./resource/base",
+                "./resource/oppo"
             ]
         },
         {
             "name": "小米服",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/mi"
+                "./resource/base",
+                "./resource/mi"
             ]
         },
         {
             "name": "华为服",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/huawei"
+                "./resource/base",
+                "./resource/huawei"
             ]
         },
         {
             "name": "国际服（EN）",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/global_jp",
-                "{PROJECT_DIR}/resource/global_en"
+                "./resource/base",
+                "./resource/global_jp",
+                "./resource/global_en"
             ]
         },
         {
             "name": "国际服（JP）",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/global_jp"
+                "./resource/base",
+                "./resource/global_jp"
             ]
         },
         {
             "name": "港澳台服",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/global_jp",
-                "{PROJECT_DIR}/resource/tw"
+                "./resource/base",
+                "./resource/global_jp",
+                "./resource/tw"
             ]
         }
     ],
@@ -75,7 +75,7 @@
         "child_exec": "python",
         "child_args": [
             "-u",
-            "{PROJECT_DIR}/../agent/main.py"
+            "./../agent/main.py"
         ]
     },
     "task": [

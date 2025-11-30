@@ -86,13 +86,13 @@ def install_agent():
         interface = json.load(f)
 
     if sys.platform.startswith("win"):
-        interface["agent"]["child_exec"] = r"{PROJECT_DIR}/python/python.exe"
+        interface["agent"]["child_exec"] = r"./python/python.exe"
     elif sys.platform.startswith("darwin"):
-        interface["agent"]["child_exec"] = r"{PROJECT_DIR}/python/bin/python3"
+        interface["agent"]["child_exec"] = r"./python/bin/python3"
     elif sys.platform.startswith("linux"):
         interface["agent"]["child_exec"] = r"python3"
 
-    interface["agent"]["child_args"] = ["-u", r"{PROJECT_DIR}/agent/main.py"]
+    interface["agent"]["child_args"] = ["-u", r"./agent/main.py"]
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         json.dump(interface, f, ensure_ascii=False, indent=4)

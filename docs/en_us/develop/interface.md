@@ -22,7 +22,7 @@ For M9A, the adb method is fixed and generally does not require modification.
 "agent": {
     "child_exec": "python",
     "child_args": [
-        "{PROJECT_DIR}/agent/main.py",
+        "./agent/main.py",
         "-u"
     ]
 }
@@ -42,15 +42,15 @@ For example, for bilibili Server, the resource configuration is as follows:
         {
             "name": "bilibili Server",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/bilibili"
+                "./resource/base",
+                "./resource/bilibili"
             ]
         }
     ]
 }
 ```
 
-Here, `{PROJECT_DIR}` is the root directory of the M9A project. The `base` folder contains official server resources, and the `bilibili` folder contains resources for Server B that overwrite the official server resources.
+Here, `.` is the root directory of the M9A project. The `base` folder contains official server resources, and the `bilibili` folder contains resources for Server B that overwrite the official server resources.
 
 ## task
 

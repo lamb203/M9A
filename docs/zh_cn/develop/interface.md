@@ -22,7 +22,7 @@ icon: tdesign:system-interface
 "agent": {
     "child_exec": "python",
     "child_args": [
-        "{PROJECT_DIR}/agent/main.py",
+        "./agent/main.py",
         "-u"
     ]
 }
@@ -42,15 +42,15 @@ icon: tdesign:system-interface
         {
             "name": "B 服",
             "path": [
-                "{PROJECT_DIR}/resource/base",
-                "{PROJECT_DIR}/resource/bilibili"
+                "./resource/base",
+                "./resource/bilibili"
             ]
         }
     ]
 }
 ```
 
-这里，`{PROJECT_DIR}` 是 M9A 项目根目录，`base` 文件夹是官服资源，`bilibili` 文件夹是 B 服覆盖官服的资源。
+这里，`.` 是 M9A 项目根目录，`base` 文件夹是官服资源，`bilibili` 文件夹是 B 服覆盖官服的资源。
 
 ## task
 
