@@ -204,5 +204,71 @@
                 "end_time": 1765090799000
             }
         }
+    },
+    "3.1": {
+        "version_name": "The Midnight Whistle",
+        "start_time": 1765465200000,
+        "end_time": 1769075999000,
+        "activity": {
+            "combat": {
+                "event_type": "SideStory",
+                "start_time": 1765465200000,
+                "end_time": 1768816799000,
+                "override": {
+                    "FlagInActivityMain": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    1010,
+                                    30,
+                                    46,
+                                    25
+                                ],
+                                "only_rec": true
+                            }
+                        }
+                    },
+                    "ActivityMainChapter": {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "expected": [
+                                    "欢迎",
+                                    "乘车"
+                                ]
+                            }
+                        }
+                    },
+                    "ActivityCombatStageNum": {
+                        "recognition": {
+                            "param": {
+                                "expected": "[01][0-9]"
+                            }
+                        }
+                    }
+                }
+            },
+            "re-release": {
+                "name": "地球上最后的夜晚",
+                "alias": "地球上最后的夜晚",
+                "start_time": 1767952800000,
+                "end_time": 1768816799000,
+                "override": {
+                    "FlagInActivityMain": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    1010,
+                                    30,
+                                    46,
+                                    25
+                                ],
+                                "only_rec": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

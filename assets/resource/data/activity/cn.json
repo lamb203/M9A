@@ -439,5 +439,17 @@
                 }
             }
         }
+    },
+    "3.3": {
+        "version_name": "远征记",
+        "start_time": 1765418400000,
+        "end_time": 1769029199000,
+        "activity": {
+            "combat": {
+                "event_type": "MainStory",
+                "start_time": 1765418400000,
+                "end_time": 1768769999000
+            }
+        }
     }
 }
