@@ -30,7 +30,7 @@ jobs:
         shell: powershell
         run: |
           python -m pip install --upgrade pip
-          # 在 requirements.txt 中查找以 maafw 开头的行（例如: maafw==4.5.6 或 maafw>=4.5）
+          # 在 requirements.txt 中查找以 maafw 开头的行（例如: maafw==5.1.0 或 maafw>=4.5）
           $line = Get-Content requirements.txt | Where-Object { $_ -match '^\s*maafw' } | Select-Object -First 1
           if ($line) {
             $pkg = $line.Trim()

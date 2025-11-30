@@ -13,7 +13,7 @@
             "[JumpBack]ClickBlank",
             "[JumpBack]ArtificialSleepwalking",
             "[JumpBack]ReturnMain"
-        ],
+        ]
     },
     "ArtificialSleepwalking": {
         "doc": "入场后，进入人工梦游",
@@ -264,7 +264,7 @@
             "LimboStarsMainNoAwards",
             "[JumpBack]LimboStarsMainAwards",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "LimboStarsMainFlag_AfterFailed": {
         "doc": "判断当前位于深眠试验酬劳界面(After Failed)",
@@ -285,7 +285,7 @@
             "LimboStarsMainNoAwards_AfterFailed",
             "[JumpBack]LimboStarsMainAwards",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "LimboStarsMainNoAwards": {
         "doc": "深眠试验酬劳界面，没有奖励未领取",
@@ -369,7 +369,7 @@
             "LimboStarsMainNoAwardsFlag",
             "LimboStarsMainAwards",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "LimboStarsMainNoAwardsFlag": {
         "doc": "判断当前位于深眠试验酬劳界面,奖励已领取完毕",
@@ -780,7 +780,7 @@
             "LimboEnd",
             "LimboStageRightest",
             "[JumpBack]BackButtonForLimbo"
-        ],
+        ]
     },
     "BackButtonForLimbo": {
         "recognition": {
@@ -855,7 +855,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["LimboObtainedAwards_2", "[JumpBack]ObtainedAwards"],
+        "next": [
+            "LimboObtainedAwards_2",
+            "[JumpBack]ObtainedAwards"
+        ]
     },
     "LimboObtainedAwards_2": {
         "recognition": {
@@ -887,7 +890,7 @@
             "LimboObtainedAwards_2",
             "[JumpBack]ObtainedAwards",
             "[JumpBack]BackButtonForLimbo"
-        ],
+        ]
     },
     "LimboEnd": {
         "doc": "深眠片段·Ⅵ进度100%，领取ⅠⅡⅢⅣ的奖励",
@@ -910,7 +913,7 @@
             "[JumpBack]LimboObtainedAwards_3",
             "[JumpBack]ObtainedAwards",
             "[JumpBack]SwipeLeftForLimboAwards"
-        ],
+        ]
     },
     "SwipeLeftForLimboAwards": {
         "action": {
@@ -970,7 +973,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["LimboObtainedAwards_4", "[JumpBack]ObtainedAwards"],
+        "next": [
+            "LimboObtainedAwards_4",
+            "[JumpBack]ObtainedAwards"
+        ]
     },
     "LimboObtainedAwards_4": {
         "recognition": {
@@ -1015,6 +1021,6 @@
             "HomeFlag",
             "[JumpBack]HomeButton",
             "[JumpBack]BackButton"
-        ],
+        ]
     }
 }

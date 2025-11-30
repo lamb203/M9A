@@ -11,7 +11,7 @@
             "[JumpBack]ClickBlank",
             "[JumpBack]ArtificialSleepwalking",
             "[JumpBack]ReturnMain"
-        ],
+        ]
     },
     "LucidscapeEntryEnd": {
         "recognition": {
@@ -66,7 +66,7 @@
             "LucidscapeFlagInTotalAwards",
             "HomeFlag",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "LucidscapeFlagInTotalAwards": {
         "recognition": {
@@ -86,7 +86,7 @@
             "LucidscapeTotalAwardsCompleted",
             "[JumpBack]LucidscapeAwardsClick",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "LucidscapeTotalAwardsCompleted": {
         "recognition": {
@@ -116,7 +116,10 @@
                 ]
             }
         },
-        "next": ["HomeFlag", "[JumpBack]HomeButton"],
+        "next": [
+            "HomeFlag",
+            "[JumpBack]HomeButton"
+        ]
     },
     "LucidscapeStageSelect": {
         "doc": "醒梦片段选择",
@@ -237,7 +240,7 @@
             "LucidscapeVictory",
             "[JumpBack]Combating",
             "[JumpBack]LucidscapeSkipWarning"
-        ],
+        ]
     },
     "LucidscapeSkipWarning": {
         "recognition": {
@@ -296,7 +299,9 @@
             "LucidscapeFailed",
             "[JumpBack]HomeButton"
         ],
-        "focus": "[color:red]战斗失败，任务结束[/color]"
+        "focus": {
+            "Node.Action.Starting": "err:战斗失败，任务结束"
+        }
     },
     "LucidscapeVictory": {
         "recognition": {
@@ -331,7 +336,7 @@
             "[JumpBack]HomeLoading",
             "[JumpBack]LucidscapeSkip",
             "[JumpBack]LucidscapeClickBlank"
-        ],
+        ]
     },
     "LucidscapeSkip": {
         "recognition": {
@@ -466,7 +471,7 @@
             "LucidscapeNoAwards",
             "[JumpBack]LucidscapeAwardsClick",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "LucidscapeNoAwards": {
         "recognition": {
@@ -496,7 +501,10 @@
                 ]
             }
         },
-        "next": ["FlagInLucidscape", "[JumpBack]BackButton"],
+        "next": [
+            "FlagInLucidscape",
+            "[JumpBack]BackButton"
+        ]
     },
     "LucidscapeAwardsClick": {
         "recognition": {

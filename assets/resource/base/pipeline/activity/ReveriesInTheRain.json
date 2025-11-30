@@ -20,7 +20,7 @@
             "[JumpBack]ReveriesInTheRainMainEntry",
             "[JumpBack]EnterTheShow",
             "[JumpBack]ReturnMain"
-        ],
+        ]
     },
     "ReveriesInTheRainMainEntry": {
         "doc": "进入雨中悬想主页面",
@@ -60,7 +60,7 @@
             "DepthsOfMythMainFlag",
             "[JumpBack]DepthsOfMythEntry",
             "[JumpBack]DepthsOfMythLoading"
-        ],
+        ]
     },
     "DepthsOfMythLoading": {
         "doc": "等待进入迷思海",
@@ -138,7 +138,7 @@
             "TranceEnd",
             "TranceMainFlag",
             "[JumpBack]TranceButtonClick"
-        ],
+        ]
     },
     "TranceButtonClick": {
         "doc": "点击“寻思”按钮",
@@ -196,7 +196,7 @@
             "[JumpBack]Trancele2",
             "[JumpBack]Trancele3",
             "[JumpBack]Trancele4"
-        ],
+        ]
     },
     "TrancePlay": {
         "doc": "寻思寻思",
@@ -237,7 +237,7 @@
             "TrancePlayTimesX1",
             "[JumpBack]TranceSetPlayTimesX1",
             "[JumpBack]TranceOpenSetPlayTimes"
-        ],
+        ]
     },
     "Trancele2": {
         "doc": "“寻思”x2",
@@ -259,7 +259,7 @@
             "TrancePlayTimesX2",
             "[JumpBack]TranceSetPlayTimesX2",
             "[JumpBack]TranceOpenSetPlayTimes"
-        ],
+        ]
     },
     "Trancele3": {
         "doc": "“寻思”x3",
@@ -281,7 +281,7 @@
             "TrancePlayTimesX3",
             "[JumpBack]TranceSetPlayTimesX3",
             "[JumpBack]TranceOpenSetPlayTimes"
-        ],
+        ]
     },
     "Trancele4": {
         "doc": "“寻思”x4-8",
@@ -303,7 +303,7 @@
             "TrancePlayTimesX4",
             "[JumpBack]TranceSetPlayTimesX4",
             "[JumpBack]TranceOpenSetPlayTimes"
-        ],
+        ]
     },
     "TranceSetPlayTimesX1": {
         "doc": "设置寻思次数X1",
@@ -495,7 +495,10 @@
             }
         },
         "post_wait_freezes": 300,
-        "next": ["TranceClose", "[JumpBack]ObtainedAwards"],
+        "next": [
+            "TranceClose",
+            "[JumpBack]ObtainedAwards"
+        ]
     },
     "TranceClose": {
         "doc": "关闭迷思海“寻思”页面",

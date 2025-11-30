@@ -7,7 +7,7 @@
             "EnterTrade",
             "EnterAncientHall",
             "[JumpBack]ReturnMain"
-        ],
+        ]
     },
     "EnterWilderness": {
         "recognition": {
@@ -33,7 +33,7 @@
             "FlagInWilderness",
             "EnterWilderness",
             "[JumpBack]HomeLoading"
-        ],
+        ]
     },
     "FlagInWilderness": {
         "recognition": {
@@ -88,7 +88,7 @@
             "[JumpBack]Cloud",
             "[JumpBack]SkipButton",
             "[JumpBack]ClickBlank"
-        ],
+        ]
     },
     "FlagInGoodDreamWell": {
         "recognition": {
@@ -109,7 +109,7 @@
             "[JumpBack]PositionGoodDreamWellCenter",
             "[JumpBack]SkipButton",
             "[JumpBack]ClickBlank"
-        ],
+        ]
     },
     "PositionGoodDreamWellCenter": {
         "recognition": {
@@ -159,7 +159,7 @@
             "FlagInGoodDreamWellCenter",
             "[JumpBack]SkipButton",
             "[JumpBack]ClickBlank"
-        ],
+        ]
     },
     "FlagInGoodDreamWellFinish": {
         "recognition": {
@@ -183,7 +183,7 @@
             "EnterAncientHall",
             "[JumpBack]Cloud",
             "[JumpBack]BackButtonWithDelay"
-        ],
+        ]
     },
     "FlagInGoodDreamWellFishing": {
         "recognition": {
@@ -209,7 +209,7 @@
             "EnterTrade",
             "EnterAncientHall",
             "[JumpBack]Cloud"
-        ],
+        ]
     },
     "Cloud": {
         "recognition": {
@@ -323,7 +323,10 @@
                 "expected": "批发交易"
             }
         },
-        "next": ["EnterAncientHall", "[JumpBack]BackButtonWithDelay"],
+        "next": [
+            "EnterAncientHall",
+            "[JumpBack]BackButtonWithDelay"
+        ]
     },
     "EnterAncientHall": {
         "recognition": {
@@ -342,7 +345,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["AncientHallFlag", "[JumpBack]ClickAncientHall"],
+        "next": [
+            "AncientHallFlag",
+            "[JumpBack]ClickAncientHall"
+        ]
     },
     "AncientHallFlag": {
         "recognition": {
@@ -358,7 +364,10 @@
                 "expected": "古厅"
             }
         },
-        "next": ["NoExpMoney", "[JumpBack]CollectExpMoney"],
+        "next": [
+            "NoExpMoney",
+            "[JumpBack]CollectExpMoney"
+        ]
     },
     "NoExpMoney": {
         "recognition": {
@@ -381,7 +390,7 @@
             "TrustDialogueInteraction",
             "HomeFlag",
             "[JumpBack]BackButtonWithDelay"
-        ],
+        ]
     },
     "CollectExpMoney": {
         "recognition": {
@@ -465,7 +474,7 @@
             "[JumpBack]ObtainedAwards",
             "[JumpBack]BackButtonWithDelay",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "CollectTrust": {
         "recognition": {
@@ -492,7 +501,7 @@
             "[JumpBack]TestCritterTraining",
             "[JumpBack]BackButtonWithDelay",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "TestCritterTraining": {
         "recognition": {
@@ -541,7 +550,7 @@
             "HomeFlag",
             "[JumpBack]BackButtonWithDelay",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "TrustDialogueInteraction": {
         "recognition": {
@@ -565,7 +574,7 @@
             "HomeFlag",
             "[JumpBack]BackButtonWithDelay",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "TrustMax": {
         "recognition": {
@@ -589,7 +598,7 @@
             "HomeFlag",
             "[JumpBack]BackButtonWithDelay",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "EnterProduct": {
         "enabled": true,
@@ -634,7 +643,7 @@
             "AutoAssignCritters",
             "EnterProduct",
             "[JumpBack]interrupt_SummonlngSuccessBack"
-        ],
+        ]
     },
     "CollectProduct": {
         "recognition": {
@@ -750,7 +759,7 @@
             "EnterTrade",
             "EnterAncientHall",
             "[JumpBack]BackButtonWithDelay"
-        ],
+        ]
     },
     "AutoAssignCritters": {
         "recognition": {
@@ -811,7 +820,7 @@
             "EnterTrade",
             "EnterAncientHall",
             "[JumpBack]BackButtonWithDelay"
-        ],
+        ]
     },
     "SummonlngSuccess": {
         "recognition": {
@@ -898,7 +907,7 @@
             "EnterTrade",
             "EnterAncientHall",
             "[JumpBack]BackButtonWithDelay"
-        ],
+        ]
     },
     "interrupt_SummonlngSuccessBack": {
         "recognition": {

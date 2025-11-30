@@ -11,7 +11,7 @@
             "[JumpBack]StagePromotionFlagInStoryStage",
             "[JumpBack]StagePromotionStartAction",
             "[JumpBack]StagePromotionClickCurStage"
-        ],
+        ]
     },
     "StagePromotionFlagInStoryStage_HasNext": {
         "recognition": {

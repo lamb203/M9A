@@ -8,7 +8,7 @@
             "[JumpBack]ReturnMain",
             "[JumpBack]EnterTheActivityMain",
             "[JumpBack]EnterSOSMenu"
-        ],
+        ]
     },
     // 到 SOS Main Menu
     "FlagInSOSMenu": {
@@ -83,7 +83,7 @@
             "SOSSelectNoise",
             "[JumpBack]SOSConfirm",
             "[JumpBack]SOSStart"
-        ],
+        ]
     },
     "SOSWordlessWorkshop": {
         // 沉默者沙龙，好旅伴
@@ -91,7 +91,7 @@
             "SOSWordlessWorkshopEmpty",
             "SOSWordlessWorkshopEnterGame",
             "[JumpBack]SOSWordlessWorkshopEntry"
-        ],
+        ]
     },
     "SOSWordlessWorkshopEmpty": {
         "recognition": {
@@ -144,7 +144,7 @@
             "SOSKeepsakeDetailsAdd",
             "SOSLackOfMaterials",
             "[JumpBack]SOSSpider"
-        ],
+        ]
     },
     "SOSLackOfMaterials": {
         "recognition": {
@@ -165,7 +165,7 @@
             "[JumpBack]SOSConfirm",
             "[JumpBack]SOSStart",
             "[JumpBack]BackButtonWithDelay"
-        ],
+        ]
     },
     "SOSKeepsakeDetailsAdd": {
         "recognition": {
@@ -428,7 +428,7 @@
             "[JumpBack]SOSStart",
             "[JumpBack]SOS_Skip",
             "[JumpBack]SOSConfirm"
-        ],
+        ]
     },
     "SOSSummary": {
         "recognition": {
@@ -578,7 +578,10 @@
                 }
             }
         },
-        "next": ["SOSSelectInstrument", "[JumpBack]SOSNextStep"],
+        "next": [
+            "SOSSelectInstrument",
+            "[JumpBack]SOSNextStep"
+        ]
     },
     "SOSSelectInstrument": {
         "recognition": {
@@ -612,7 +615,7 @@
             "[JumpBack]SOSResonatorObtained",
             "[JumpBack]SOSHarmonicObtained",
             "[JumpBack]SOS_Skip"
-        ],
+        ]
     },
     "SOSInstrumentSelect": {
         "recognition": {
@@ -695,7 +698,7 @@
             "[JumpBack]SOS_Skip",
             "[JumpBack]SOSConfirm",
             "[JumpBack]CloseTip"
-        ],
+        ]
     },
     // 演绎主体逻辑
     "SOSSelectNode": {
@@ -1121,7 +1124,7 @@
             "SOSFailed",
             "[JumpBack]SOSCombatDialog",
             "[JumpBack]CloseTip"
-        ],
+        ]
     },
     "SOSCombatDialog": {
         "recognition": {
@@ -1526,7 +1529,7 @@
             "SOSGoToNextScene",
             "SOSSetOff",
             "[JumpBack]CloseTip"
-        ],
+        ]
     },
     "SOSGoToNextScene": {
         "recognition": {
@@ -1556,7 +1559,7 @@
             "[JumpBack]SOSSelectHarmonic",
             "[JumpBack]SOSResonatorObtained",
             "[JumpBack]SOSSelectResonator"
-        ],
+        ]
     },
     "SOSDice": {
         "recognition": {
@@ -1983,7 +1986,10 @@
         "inverse": true
     },
     "SOSNoiseSelect": {
-        "next": ["SOSNoiseSelected", "[JumpBack]SOSNoiseUnselected"],
+        "next": [
+            "SOSNoiseSelected",
+            "[JumpBack]SOSNoiseUnselected"
+        ]
     },
     "SOSNoiseSelected": {
         "recognition": {

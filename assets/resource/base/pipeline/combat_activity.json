@@ -30,7 +30,7 @@
             "FlagInActivityMain",
             "[JumpBack]EnterTheActivityMain",
             "[JumpBack]ReturnMain"
-        ],
+        ]
     },
     "FlagInActivityMain": {
         "recognition": {
@@ -114,7 +114,7 @@
             "FlagInActivityStage",
             "ActivityMainChapter",
             "[JumpBack]ActivityClickCurStage"
-        ],
+        ]
     },
     "FlagInActivityStage": {
         "recognition": {
@@ -130,7 +130,10 @@
                 "expected": "开始行动"
             }
         },
-        "next": ["FlagInActivityCombatStage", "[JumpBack]ActivityClickPreStage"],
+        "next": [
+            "FlagInActivityCombatStage",
+            "[JumpBack]ActivityClickPreStage"
+        ]
     },
     "FlagInActivityCombatStage": {
         "recognition": {

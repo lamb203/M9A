@@ -28,7 +28,9 @@
         "next": [
             "ResetCountOfODRSkipText"
         ],
-        "focus": "[color:tomato]开启本轮速刷[/color]"
+        "focus": {
+            "Node.Action.Starting": "开启本轮速刷"
+        }
     },
     "ResetCountOfODRSkipText": {
         "action": {
@@ -47,7 +49,7 @@
             "[JumpBack]ODR_Start_Difficulty_Confirm",
             "[JumpBack]ODR_Start_Gift",
             "[JumpBack]SOD_SwipeLeft"
-        ],
+        ]
     },
     "ODR_FlagInDifficultySelect": {
         "recognition": {
@@ -257,7 +259,7 @@
             "ODR_Start_TeamBuild",
             "ODR_Start_MediaSelect",
             "[JumpBack]ODR_Start_MediaSelect_Confirm"
-        ],
+        ]
     },
     "ODR_Start_MediaSelect_Confirm": {
         "doc": "触媒确认",
@@ -410,7 +412,7 @@
             "ODR_SelectCombat",
             "ODR_Start_Teambuild_Confirm",
             "[JumpBack]SOD_Acquire_NoNext"
-        ],
+        ]
     },
     "ODR_SelectCombat": {
         "recognition": {
@@ -444,7 +446,7 @@
             "ODR_ItemSelect",
             "[JumpBack]ODR_Move",
             "[JumpBack]ODR_SelectCombat_NoNext"
-        ],
+        ]
     },
     "ODR_SelectCombat_NoNext": {
         "recognition": {
@@ -511,7 +513,7 @@
             "ODR_Event_Select_SkipText_Second2Last",
             "[JumpBack]ODR_Move",
             "[JumpBack]ODR_SelectDiscovery_NoNext"
-        ],
+        ]
     },
     "ODR_SelectDiscovery_NoNext": {
         "recognition": {
@@ -567,7 +569,7 @@
             "ODR_Event_Select_SkipText",
             "[JumpBack]ODR_Move",
             "[JumpBack]ODR_SelectTreasure_NoNext"
-        ],
+        ]
     },
     "ODR_SelectTreasure_NoNext": {
         "recognition": {
@@ -623,7 +625,7 @@
             "ODR_Event_Select_SkipText",
             "[JumpBack]ODR_Move",
             "[JumpBack]ODR_SelectRestSite_NoNext"
-        ],
+        ]
     },
     "ODR_SelectRestSite_NoNext": {
         "recognition": {
@@ -683,7 +685,7 @@
             "[JumpBack]ODR_ShopEnter_2-1",
             "[JumpBack]ODR_Move",
             "[JumpBack]ODR_SelectShop_NoNext"
-        ],
+        ]
     },
     "ODR_ShopCompleted_2-1": {
         "doc": "第二排第一列买完",
@@ -708,7 +710,7 @@
             "[JumpBack]ODR_ShopSingleCompleted",
             "[JumpBack]ODR_ShopBuy",
             "[JumpBack]ODR_ShopEnter_2-2"
-        ],
+        ]
     },
     "ODR_ShopCompleted_2-2": {
         "doc": "第二排第二列买完",
@@ -733,7 +735,7 @@
             "[JumpBack]ODR_ShopSingleCompleted",
             "[JumpBack]ODR_ShopBuy",
             "[JumpBack]ODR_ShopEnter_2-4"
-        ],
+        ]
     },
     "ODR_ShopCompleted_2-4": {
         "doc": "第二排软驱买完(小概率不是软驱)",
@@ -757,7 +759,7 @@
             "ODR_QuitShop",
             "[JumpBack]ODR_ShopSingleCompleted",
             "[JumpBack]ODR_ShopBuy"
-        ],
+        ]
     },
     "ODR_ShopCompleted": {
         "doc": "钱不够",
@@ -966,7 +968,7 @@
             "ODR_ItemSelect",
             "[JumpBack]ODR_Move",
             "[JumpBack]ODR_SelectImminent_NoNext"
-        ],
+        ]
     },
     "ODR_SelectImminent_NoNext": {
         "recognition": {
@@ -1093,7 +1095,7 @@
             "ODR_SkipAddChar",
             "ODR_Levelup",
             "[JumpBack]SOD_Acquire_NoNext"
-        ],
+        ]
     },
     "ODR_ItemSelect": {
         "recognition": {
@@ -1111,7 +1113,10 @@
                 ]
             }
         },
-        "next": ["ODR_ItemSelect_Confirm", "[JumpBack]ODR_ItemSelect_2"],
+        "next": [
+            "ODR_ItemSelect_Confirm",
+            "[JumpBack]ODR_ItemSelect_2"
+        ]
     },
     "ODR_ItemSelect_NoNext": {
         "recognition": {
@@ -1129,7 +1134,10 @@
                 ]
             }
         },
-        "next": ["ODR_ItemSelect_Confirm_NoNext", "[JumpBack]ODR_ItemSelect_2"],
+        "next": [
+            "ODR_ItemSelect_Confirm_NoNext",
+            "[JumpBack]ODR_ItemSelect_2"
+        ]
     },
     "ODR_ItemSelect_1": {
         "action": {
@@ -1159,7 +1167,10 @@
                 ]
             }
         },
-        "next": ["ODR_ItemSelect_ConfirmFlag", "[JumpBack]ODR_ItemSelect_3"],
+        "next": [
+            "ODR_ItemSelect_ConfirmFlag",
+            "[JumpBack]ODR_ItemSelect_3"
+        ]
     },
     "ODR_ItemSelect_3": {
         "action": {
@@ -1173,7 +1184,10 @@
                 ]
             }
         },
-        "next": ["ODR_ItemSelect_ConfirmFlag", "[JumpBack]ODR_ItemSelect_4"],
+        "next": [
+            "ODR_ItemSelect_ConfirmFlag",
+            "[JumpBack]ODR_ItemSelect_4"
+        ]
     },
     "ODR_ItemSelect_4": {
         "action": {
@@ -1188,7 +1202,10 @@
             }
         },
         "timeout": 10000,
-        "next": ["ODR_ItemSelect_ConfirmFlag", "[JumpBack]ODR_ItemSelect_1"],
+        "next": [
+            "ODR_ItemSelect_ConfirmFlag",
+            "[JumpBack]ODR_ItemSelect_1"
+        ]
     },
     "ODR_ItemSelect_Confirm": {
         "recognition": {
@@ -1224,7 +1241,7 @@
             "[JumpBack]ODR_Levelup",
             "[JumpBack]ODR_SkipAddChar",
             "[JumpBack]SOD_Acquire_NoNext"
-        ],
+        ]
     },
     "ODR_ItemSelect_Confirm_NoNext": {
         "recognition": {
@@ -1466,7 +1483,7 @@
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]SOD_Acquire_NoNext",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Event_Select_SkipText_First": {
         "doc": "事件——选择第一个选项",
@@ -1507,7 +1524,7 @@
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]SOD_Acquire_NoNext",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Event_Select_SkipText_Second": {
         "doc": "事件——选择第二个选项",
@@ -1542,7 +1559,7 @@
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]SOD_Acquire_NoNext",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Event_Select_SkipText_Second2Last": {
         "doc": "事件——选择倒数第二个选项",
@@ -1573,7 +1590,7 @@
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]SOD_Acquire_NoNext",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Event_Select_SkipText_Windows&Doors": {
         "doc": "选中事件——窗与扉",
@@ -1603,7 +1620,7 @@
             "[JumpBack]SOD_Acquire_NoNext",
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Windows&Doors_Exchange": {
         "doc": "失声天平",
@@ -1631,7 +1648,10 @@
                 ]
             }
         },
-        "next": ["ODR_ItemLose", "[JumpBack]ODR_Event_Confirm"],
+        "next": [
+            "ODR_ItemLose",
+            "[JumpBack]ODR_Event_Confirm"
+        ]
     },
     "ODR_Event_Select": {
         "doc": "选择选项（最后）",
@@ -1658,7 +1678,7 @@
             "ODR_MainFlag",
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Event_Select_First": {
         "doc": "选择选项（第一）",
@@ -1685,7 +1705,7 @@
             "ODR_MainFlag",
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Event_Select_Second2Last": {
         "doc": "选择选项（倒数第二）",
@@ -1712,7 +1732,7 @@
             "ODR_MainFlag",
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Event_Select_Second": {
         "doc": "选择选项（第二）",
@@ -1739,7 +1759,7 @@
             "ODR_MainFlag",
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_Windows&Doors_CreationContract": {
         "doc": "造物典契",
@@ -1769,7 +1789,7 @@
             "[JumpBack]SOD_Acquire_NoNext",
             "[JumpBack]ODR_Windows&Doors_Merge",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "ODR_Event_Windows&Doors_Completed": {
         "recognition": {
@@ -1802,7 +1822,10 @@
                 ]
             }
         },
-        "next": ["ODR_Event_Windows&Doors_Completed", "[JumpBack]BackButton"],
+        "next": [
+            "ODR_Event_Windows&Doors_Completed",
+            "[JumpBack]BackButton"
+        ]
     },
     "ODR_Windows&Doors_CreationContract_Refresh": {
         "doc": "换一批",
@@ -1955,7 +1978,7 @@
             "[JumpBack]ODR_Event_Select_SkipText_Windows&Doors",
             "[JumpBack]HomeLoading",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "ODR_MainLoop": {
         "recognition": {
@@ -1979,7 +2002,7 @@
             "[JumpBack]ODR_ItemLose",
             "[JumpBack]SOD_Acquire_NoNext",
             "[JumpBack]ODR_SkipText"
-        ],
+        ]
     },
     "ODR_MainFlag": {
         "recognition": {

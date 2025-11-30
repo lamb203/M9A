@@ -32,7 +32,7 @@ icon: ri:guide-fill
 
 >[!NOTE]
 >
-> Windows users can skip this section and run the dependency library installation script after downloading and unzipping in step 3.
+> Users can skip this section and proceed to step 3, after downloading and extracting the file, to run the dependency installation script. If the script fails to install automatically, then refer to this section.
 
 <div align="center">
 
@@ -60,11 +60,11 @@ icon: ri:guide-fill
             <td colspan="4"><div align="center">No</div></td>
         </tr>
         <tr>
-            <td><div align="center">Install<br>.NET 8 Required</div></td>
+            <td><div align="center">Install<br>.NET 10 Required</div></td>
             <td><div align="center">No</div></td>
-            <td><div align="center">Go to <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">.NET official download page</a> to download the corresponding version or<br>install via winget (see below)</div></td>
+            <td><div align="center">Go to <a href="https://dotnet.microsoft.com/download/dotnet/10.0" target="_blank">.NET official download page</a> to download the corresponding version or<br>install via winget (see below)</div></td>
             <td><div align="center">No</div></td>
-            <td><div align="center"><a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">.NET official download page</a></div></td>
+            <td><div align="center"><a href="https://dotnet.microsoft.com/download/dotnet/10.0" target="_blank">.NET official download page</a></div></td>
             <td><div align="center">No</div></td>
             <td><div align="center">Same as Mac</div></td>
         </tr>
@@ -100,9 +100,9 @@ Windows users **must install VCRedist x64**: This is the basic requirement for r
   </blockquote>
 </details>
 
-#### 2. .NET 8
+#### 2. .NET 10
 
-All users using MFAAvalonia need to download and install .NET 8 suitable for your system.
+All users using GUI need to download and install .NET 10 suitable for your system.
 
 <details>
   <summary>Detailed Installation Methods</summary>
@@ -111,7 +111,7 @@ All users using MFAAvalonia need to download and install .NET 8 suitable for you
     <ul>
       <li>
         Self-download: Click
-        <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">.NET official download page</a>
+        <a href="https://dotnet.microsoft.com/download/dotnet/10.0" target="_blank">.NET official download page</a>
         , select the version suitable for your system to download and install.
         <div align="center">
           <table>
@@ -142,7 +142,7 @@ All users using MFAAvalonia need to download and install .NET 8 suitable for you
       </li>
       <li>
         (Windows users only) <code>winget</code> installation: Right-click the Windows Start button, select "Command Prompt" or "PowerShell (Administrator)", then paste the following command in the terminal and press Enter:
-        <pre><code>winget install Microsoft.DotNet.DesktopRuntime.8</code></pre>
+        <pre><code>winget install Microsoft.DotNet.DesktopRuntime.10</code></pre>
       </li>
     </ul>
   </blockquote>
@@ -339,7 +339,7 @@ The following demonstrations are for reference only, please refer to the actual 
   <summary>MFA Main Interface Display</summary>
   <p></p>
   <blockquote>
-    <img src="https://github.com/user-attachments/assets/540d961e-47ce-490d-a801-89d802f2bbab" alt="Main Interface">
+    <img src="/images/en-us/newbie-main-interface.png" alt="Main Interface">
   </blockquote>
 </details>
 
@@ -391,7 +391,7 @@ Users using MFA update-related functions should configure `Update Settings`. Use
     <p></p>
     <blockquote>
       <ul>
-        <img src="https://github.com/user-attachments/assets/69192c43-f257-40ba-b5d0-918e6b508f80" alt="rate limit exceeded">
+        <img src="/images/en-us/newbie-rate-limit.png" alt="rate limit exceeded">
       </ul>
     </blockquote>
   </details>
@@ -466,7 +466,7 @@ Users using MFA update-related functions should configure `Update Settings`. Use
             <li>Click the icon to the right of the <code>Software Path</code> input box to enter the file selection interface, select the 1999 shortcut on the desktop, and the path will be automatically filled in.</li>
           </ol>
           <ul>
-            <img src="https://github.com/user-attachments/assets/2289453c-dbbf-41a7-8d28-efac0f24d6e3" alt="image_439">
+            <img src="/images/en-us/newbie-emulator-path-example.png" alt="image_439">
           </ul>
       </details>
     </ul>
@@ -503,7 +503,7 @@ At least configure **`Resource Type`** and **`Connection`**. When configured inc
     <p></p>
     <blockquote>
       <ul>
-        <img src="https://github.com/user-attachments/assets/8e3f0f90-4e0d-46e2-b718-837a6e9ae152" alt="image_440">
+        <img src="/images/en-us/newbie-main-interface-connection.png" alt="image_440">
       </ul>
     </blockquote>
   </details>
@@ -540,7 +540,7 @@ At least configure **`Resource Type`** and **`Connection`**. When configured inc
     <p></p>
     <blockquote>
       <ul>
-        <img src="https://github.com/user-attachments/assets/56b031b4-db6c-40a4-85a6-557fe5f4ad80" alt="image_441">
+        <img src="/images/en-us/newbie-main-interface-task-lists.png" alt="image_441">
       </ul>
     </blockquote>
   </details>
@@ -565,7 +565,9 @@ At least configure **`Resource Type`** and **`Connection`**. When configured inc
 
 ***
 
-#### Pip Settings
+#### Settings
+
+##### pip Settings
 
   M9A supports configuring pip installation related settings through the `config/pip_config.json` file. Generally, you don't need to modify this file unless you have special requirements.
 
@@ -573,16 +575,34 @@ At least configure **`Resource Type`** and **`Connection`**. When configured inc
     <summary>config/pip_config.json Example</summary>
     <p></p>
     <blockquote>
-  
+
   ```jsonc
   {
-      "enable_pip_install": true,  // Whether to enable pip installation, default true
-      "mirror": "https://pypi.tuna.tsinghua.edu.cn/simple",  // Mirror source
-      "backup_mirror": "https://mirrors.ustc.edu.cn/pypi/simple"  // Backup mirror sources
+    "enable_pip_install": true,  // Whether to enable pip installation, default true
+    "mirror": "https://pypi.tuna.tsinghua.edu.cn/simple",  // Mirror source
+    "backup_mirror": "https://mirrors.ustc.edu.cn/pypi/simple"  // Backup mirror sources
   }
   ```
-  
+
   </blockquote>
-</details>
+  </details>
+
+##### Resource Hot Update Configuration
+
+  M9A supports configuring hot update settings for certain resources (such as activity opening times) via the `config/hot_update.json` file.
+
+  <details>
+    <summary>config/hot_update.json Example</summary>
+    <p></p>
+    <blockquote>
+
+  ```jsonc
+  {
+    "enable_hot_update": true  // Whether to enable hot update for certain resources, default is true
+  }
+  ```
+
+  </blockquote>
+  </details>
 
 ***

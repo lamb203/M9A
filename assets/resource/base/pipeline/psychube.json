@@ -6,7 +6,7 @@
             "[JumpBack]EnterTheShow",
             "[JumpBack]ResourceChapterLabel",
             "[JumpBack]ReturnMain"
-        ],
+        ]
     },
     "FreePsychube": {
         "recognition": {
@@ -29,7 +29,7 @@
             "PsychubeReadyForAction",
             "FreePsychube",
             "[JumpBack]PsychubeStage07"
-        ],
+        ]
     },
     "PsychubeStage07": {
         "recognition": {
@@ -71,7 +71,7 @@
             "PsychubeFlagInReplayReady",
             "[JumpBack]PsychubeSwitchToReplay",
             "[JumpBack]CombatEntering"
-        ],
+        ]
     },
     "PsychubeFlagInReplayReady": {
         "recognition": {
@@ -87,7 +87,10 @@
                 "expected": "复现"
             }
         },
-        "next": ["PsychubeFlagInReplayTwoTimes", "[JumpBack]SwitchCombatTimes"],
+        "next": [
+            "PsychubeFlagInReplayTwoTimes",
+            "[JumpBack]SwitchCombatTimes"
+        ]
     },
     "PsychubeFlagInReplayTwoTimes": {
         "recognition": {
@@ -112,7 +115,7 @@
             "PsychubeFlagInReplayTwoTimes",
             "[JumpBack]PsychubeEatCandyPage",
             "[JumpBack]ReplayingNoNext"
-        ],
+        ]
     },
     "PsychubeEatCandyPage": {
         "recognition": {
@@ -176,7 +179,7 @@
             "PsychubeVictory",
             "[JumpBack]BackButton",
             "[JumpBack]HomeLoading"
-        ],
+        ]
     },
     "PsychubeFlagInReadyForAction": {
         "recognition": {
@@ -197,7 +200,7 @@
             "PsychubeDouble",
             "HomeFlag",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "PsychubeDouble": {
         "doc": "识别加成次数，根据结果覆盖 PsychubeVictoryOverrideTask 中参数",

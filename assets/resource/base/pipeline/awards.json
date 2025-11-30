@@ -1,6 +1,9 @@
 {
     "Awards": {
-        "next": ["AwardsMainFlag", "[JumpBack]ReturnMain"],
+        "next": [
+            "AwardsMainFlag",
+            "[JumpBack]ReturnMain"
+        ]
     },
     "AwardsMainFlag": {
         "recognition": {
@@ -34,11 +37,11 @@
             "[JumpBack]Sub_MailBadge",
             "[JumpBack]Sub_DailyBadge",
             "[JumpBack]Sub_JukeboxBadge",
-            "Sub_JukeboxBadge_3.2",
+            "[JumpBack]Sub_JukeboxBadge_3.2",
             "HomeFlag",
             "[JumpBack]HomeButton",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "Sub_MailBadge": {
         "recognition": {
@@ -61,7 +64,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["CollectMailAwards", "[JumpBack]MailBadge"],
+        "next": [
+            "CollectMailAwards",
+            "[JumpBack]MailBadge"
+        ]
     },
     "MailBadge": {
         "recognition": {
@@ -105,7 +111,7 @@
             "NoMailAwards",
             "CollectMailAwards",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "ObtainedAwards": {
         "recognition": {
@@ -142,7 +148,7 @@
             "EquipmentOverflows",
             "HomeFlag",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "EquipmentOverflows": {
         "doc": "心相仓库已满",
@@ -162,7 +168,7 @@
             "WareHouseFlag",
             "[JumpBack]EnterWareHouse",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "WareHouseFlag": {
         "recognition": {
@@ -216,7 +222,7 @@
             "Dissociation4StarFlag",
             "[JumpBack]Dissociation4StarSelect",
             "[JumpBack]Dissociation3StarSelect"
-        ],
+        ]
     },
     "Dissociation4StarFlag": {
         "recognition": {
@@ -232,7 +238,10 @@
                 "expected": "4"
             }
         },
-        "next": ["DissociationFastInsertCompleted", "[JumpBack]DissociationFastInsert"],
+        "next": [
+            "DissociationFastInsertCompleted",
+            "[JumpBack]DissociationFastInsert"
+        ]
     },
     "DissociationFastInsertCompleted": {
         "recognition": {
@@ -265,7 +274,7 @@
             "DissociationCompleted",
             "DissociationFastInsertCompleted",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "DissociationCompleted": {
         "recognition": {
@@ -294,7 +303,7 @@
             "HomeFlag",
             "[JumpBack]HomeButton",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "DissociationFastInsert": {
         "recognition": {
@@ -413,7 +422,7 @@
             "HomeFlag",
             "[JumpBack]ObtainedAwards",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "Sub_CollectDailyAwards": {
         "recognition": {
@@ -459,7 +468,7 @@
             "HomeFlag",
             "[JumpBack]ObtainedAwards",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "WeeklyAwardsCompleted": {
         "doc": "周任务完成，开始尝试获取显影罐",
@@ -480,7 +489,7 @@
             "ShowFlag",
             "[JumpBack]EnterTheShow",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "ShowFlag": {
         "recognition": {
@@ -578,7 +587,7 @@
             "[JumpBack]ObtainedAwards",
             "[JumpBack]JukeboxExitPurchase",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "JukeboxExitPurchase": {
         "recognition": {
@@ -622,7 +631,7 @@
             "[JumpBack]ObtainedAwards",
             "[JumpBack]ExitEdition",
             "[JumpBack]JukeboxExitPurchase"
-        ],
+        ]
     },
     "ExitEdition": {
         "recognition": {
@@ -696,7 +705,7 @@
             "[JumpBack]JukeboxBadge_3.2_OneClick",
             "[JumpBack]ObtainedAwards",
             "[JumpBack]HomeButton"
-        ],
+        ]
     },
     "JukeboxBadge_3.2_OneClick": {
         "recognition": {

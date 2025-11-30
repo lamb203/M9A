@@ -4,7 +4,7 @@
         "timeout": 3000,
         "on_error": [],
         "focus": {
-            "failed": "请到复刻活动左边标有故事/探索模式的页面开始该任务"
+            "Node.PipelineNode.Failed": "请到复刻活动左边标有故事/探索模式的页面开始该任务"
         },
         "next": [
             "FlagInSS"
@@ -47,7 +47,7 @@
             "[JumpBack]SSReopenLevelSelect",
             "[JumpBack]SSTaskEntry",
             "[JumpBack]ObtainedAwards"
-        ],
+        ]
     },
     "SSTaskAwardsObtained": {
         "recognition": {
@@ -93,7 +93,7 @@
             "SSReopenReplay",
             "SSReadyForAction",
             "[JumpBack]CombatEntering"
-        ],
+        ]
     },
     "SSReopenReplay": {
         "recognition": {
@@ -120,7 +120,7 @@
             "SSCannotReplay",
             "SSIsReplay",
             "[JumpBack]SSSwitchToReplay"
-        ],
+        ]
     },
     "SSSwitchToReplay": {
         "recognition": {
@@ -197,7 +197,7 @@
             "Victory_NoReplay",
             "SSNoReplay",
             "[JumpBack]EatCandyPage"
-        ],
+        ]
     },
     "Victory_NoReplay": {
         "recognition": {
@@ -225,7 +225,7 @@
             "[JumpBack]SSReopenBackToMain_ClickBlank",
             "[JumpBack]SSReopenBackToMain_BackButton",
             "[JumpBack]HomeLoading"
-        ],
+        ]
     },
     "SSReopenBackToMain": {
         "next": [
@@ -233,7 +233,7 @@
             "[JumpBack]SSReopenBackToMain_ClickBlank",
             "[JumpBack]SSReopenBackToMain_BackButton",
             "[JumpBack]HomeLoading"
-        ],
+        ]
     },
     "SSReopenBackToMain_ClickBlank": {
         "recognition": {

@@ -4,7 +4,7 @@
             "MainMenuFlag",
             "[JumpBack]MainMenuEntry",
             "[JumpBack]StartUp"
-        ],
+        ]
     },
     "MainMenuFlag": {
         "recognition": {
@@ -19,7 +19,10 @@
                 "template": "./SwitchAccount/Detail.png"
             }
         },
-        "next": ["SettingEntry", "[JumpBack]MenuRight"],
+        "next": [
+            "SettingEntry",
+            "[JumpBack]MenuRight"
+        ]
     },
     "SettingEntry": {
         "recognition": {
@@ -52,7 +55,7 @@
             "[JumpBack]AccountExitConfirm",
             "[JumpBack]AccountExit",
             "[JumpBack]AccountSettingEnter"
-        ],
+        ]
     },
     "StartGameFlag": {
         "recognition": {
@@ -72,7 +75,7 @@
             "SwitchAccountMainFlag",
             "[JumpBack]AccountExitButtonConfirm",
             "[JumpBack]AccountExitButton"
-        ],
+        ]
     },
     "SwitchAccountMainFlag": {
         "recognition": {
@@ -92,7 +95,7 @@
             "SwitchAccountMainExpandFlag_1440p",
             "[JumpBack]SwitchAccountMainExpand",
             "[JumpBack]SwitchAccountMainExpand_1440p"
-        ],
+        ]
     },
     "SwitchAccountMainExpandFlag": {
         "recognition": {
@@ -109,7 +112,10 @@
                 ]
             }
         },
-        "next": ["SwitchLastAccountComplete", "[JumpBack]SwitchLastAccount"],
+        "next": [
+            "SwitchLastAccountComplete",
+            "[JumpBack]SwitchLastAccount"
+        ]
     },
     "SwitchAccountMainExpandFlag_1440p": {
         "recognition": {
@@ -124,7 +130,10 @@
                 "expected": "[×xX✕✖]"
             }
         },
-        "next": ["SwitchLastAccountComplete", "[JumpBack]SwitchLastAccount_1440p"],
+        "next": [
+            "SwitchLastAccountComplete",
+            "[JumpBack]SwitchLastAccount_1440p"
+        ]
     },
     "SwitchLastAccountComplete": {
         "recognition": {
@@ -141,7 +150,10 @@
                 "order_by": "Horizontal"
             }
         },
-        "next": ["StartGame", "[JumpBack]LogIn"],
+        "next": [
+            "StartGame",
+            "[JumpBack]LogIn"
+        ]
     },
     "LogIn": {
         "recognition": {

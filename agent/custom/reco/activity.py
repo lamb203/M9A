@@ -29,14 +29,14 @@ class ActivityRe_releaseChapter(CustomRecognition):
         expected = json.loads(argv.custom_recognition_param)["Re_release_name"]
         reco_detail = context.run_recognition("ActivityLeftList", argv.image)
 
-        if reco_detail is None:
-            return CustomRecognition.AnalyzeResult(box=None, detail="无文字")
+        if reco_detail is None or not reco_detail.hit:
+            return CustomRecognition.AnalyzeResult(box=None, detail={})
 
         for result in reco_detail.all_results:
             if expected in result.text:
-                return CustomRecognition.AnalyzeResult(box=result.box, detail=expected)
+                return CustomRecognition.AnalyzeResult(box=result.box, detail={})
 
-        return CustomRecognition.AnalyzeResult(box=None, detail="无目标")
+        return CustomRecognition.AnalyzeResult(box=None, detail={})
 
 
 @AgentServer.custom_recognition("FindFirstUnplayedStageByCheckmark")
@@ -140,7 +140,7 @@ class FindFirstUnplayedStageByCheckmark(CustomRecognition):
                 pipeline_override={checkmark_node_name: {"roi": roi}},
             )
 
-            if result is not None:
+            if result and result.hit:
                 # 找到“√”，说明已通关
                 logger.info(f"[Checkmark] '{sid}' 已通关。")
                 if mode == "Quickly":
@@ -152,7 +152,7 @@ class FindFirstUnplayedStageByCheckmark(CustomRecognition):
                 logger.info(f"[Checkmark] '{sid}' 未通关，返回点击区域 {click}。")
                 return CustomRecognition.AnalyzeResult(
                     box=click,
-                    detail=f"Unplayed stage '{sid}' (Diff: {difficulty}, Mode: {mode})",
+                    detail={},
                 )
 
         logger.info(f"[Checkmark] 所有关卡已通关。")
@@ -183,7 +183,7 @@ class SailingRecordSelectTarget(CustomRecognition):
             reco_detail = context.run_recognition(
                 "SailingRecordFindDifficult", argv.image
             )
-            if reco_detail is not None and reco_detail.box:
+            if reco_detail and reco_detail.hit:
                 # 扩展 roi 到 click_target
                 box = [
                     reco_detail.box[0] - 317,
@@ -204,8 +204,8 @@ class SailingRecordSelectTarget(CustomRecognition):
                     num1, num2 = int(match.group(1)), int(match.group(2))
                 SailingRecordSelectTarget.min = num1
                 SailingRecordSelectTarget.max = num2
-                return CustomRecognition.AnalyzeResult(box=box, detail="困难")
-            return CustomRecognition.AnalyzeResult(box=None, detail="无目标")
+                return CustomRecognition.AnalyzeResult(box=box, detail={})
+            return CustomRecognition.AnalyzeResult(box=None, detail={})
 
         # level 0
         if level == 0:
@@ -216,8 +216,8 @@ class SailingRecordSelectTarget(CustomRecognition):
                     argv.image,
                     {"SailingRecordFindNormal": {"roi": roi}},
                 )
-                if reco_detail is None or not reco_detail.box:
-                    return CustomRecognition.AnalyzeResult(box=None, detail="无目标")
+                if reco_detail is None or not reco_detail.hit:
+                    return CustomRecognition.AnalyzeResult(box=None, detail={})
                 reco_details.append(reco_detail)
 
             diffs, nums = [], []
@@ -240,9 +240,9 @@ class SailingRecordSelectTarget(CustomRecognition):
                 reco_details[index].box[2] + 226,
                 reco_details[index].box[3] + 50,
             ]
-            return CustomRecognition.AnalyzeResult(box=box, detail="普通")
+            return CustomRecognition.AnalyzeResult(box=box, detail={})
 
-        return CustomRecognition.AnalyzeResult(box=None, detail="无目标")
+        return CustomRecognition.AnalyzeResult(box=None, detail={})
 
 
 @AgentServer.custom_recognition("SailingRecordBoatRecord")
@@ -265,8 +265,8 @@ class SailingRecordBoatRecord(CustomRecognition):
                     argv.image,
                     {"SailingRecordBoatPointRecord": {"roi": roi}},
                 )
-                if reco_detail is None or not reco_detail.box:
-                    return CustomRecognition.AnalyzeResult(box=None, detail="无目标")
+                if reco_detail is None or not reco_detail.hit:
+                    return CustomRecognition.AnalyzeResult(box=None, detail={})
                 point = reco_detail.best_result.text
                 point = 0 if point in ["?", "？"] else point
                 points.append(int(point))
@@ -274,4 +274,4 @@ class SailingRecordBoatRecord(CustomRecognition):
             dices.append(points)
             roi = [roi[0] + 100, roi[1], roi[2], roi[3]]
         SailingRecordBoatRecord.dices = dices
-        return CustomRecognition.AnalyzeResult(box=[0, 0, 0, 0], detail=str(dices))
+        return CustomRecognition.AnalyzeResult(box=[0, 0, 0, 0], detail={})

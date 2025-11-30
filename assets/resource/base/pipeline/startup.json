@@ -25,7 +25,7 @@
             "[JumpBack]BackButton",
             "[JumpBack]HomeButton",
             "[JumpBack]ClickHomeCount"
-        ],
+        ]
     },
     "ReturnMain": {
         "doc": "返回主界面（专供任务开始前使用）",
@@ -58,7 +58,7 @@
             "[JumpBack]ClickBlank",
             "[JumpBack]SkipButton",
             "[JumpBack]ClickHomeCount"
-        ],
+        ]
     },
     "StartGame": {
         "recognition": {
@@ -94,7 +94,7 @@
             "[JumpBack]HomeButton",
             "[JumpBack]SkipButton",
             "[JumpBack]ClickHomeCount"
-        ],
+        ]
     },
     "HomeLoading": {
         "recognition": {
@@ -218,7 +218,7 @@
             "[JumpBack]ClosePageFirst",
             "[JumpBack]CandyCancel",
             "[JumpBack]ClickHomeCount"
-        ],
+        ]
     },
     "Start1999": {
         "action": {
@@ -473,7 +473,7 @@
             "[JumpBack]SkipButton",
             "[JumpBack]CandyCancel",
             "[JumpBack]ClickHomeCount"
-        ],
+        ]
     },
     "HomeFlagCloseReturnMain": {
         "recognition": {

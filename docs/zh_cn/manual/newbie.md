@@ -32,7 +32,7 @@ icon: ri:guide-fill
 
 >[!NOTE]
 >
-> Windows用户可以跳过这节，在第3步下载解压后运行依赖库安装脚本
+> 用户可跳过这节，在第3步下载解压后运行依赖库安装脚本，脚本自动安装失败后再看这节
 
 <div align="center">
 
@@ -60,11 +60,11 @@ icon: ri:guide-fill
             <td colspan="4"><div align="center">否</div></td>
         </tr>
         <tr>
-            <td><div align="center">需安装<br>.NET 8</div></td>
+            <td><div align="center">需安装<br>.NET 10</div></td>
             <td><div align="center">否</div></td>
-            <td><div align="center">前往 <a href="https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0" target="_blank">.NET 官方下载页面</a> 下载对应版本或<br>通过 winget 安装（详见下方）</div></td>
+            <td><div align="center">前往 <a href="https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0" target="_blank">.NET 官方下载页面</a> 下载对应版本或<br>通过 winget 安装（详见下方）</div></td>
             <td><div align="center">否</div></td>
-            <td><div align="center"> <a href="https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0" target="_blank">.NET 官方下载页面</a> </div></td>
+            <td><div align="center"> <a href="https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0" target="_blank">.NET 官方下载页面</a> </div></td>
             <td><div align="center">否</div></td>
             <td><div align="center">同 Mac</div></td>
         </tr>
@@ -100,9 +100,9 @@ Windows 用户**必须安装 VCRedist x64**：这是运行 M9A (无论是命令�
   </blockquote>
 </details>
 
-#### 2. .NET 8
+#### 2. .NET 10
 
-所有使用 MFAAvalonia 的用户都需要自行下载并安装适用于您系统的 .NET 8 。
+所有使用图形界面的用户都需要自行下载并安装适用于您系统的 .NET 10 。
 
 <details>
   <summary>详细安装方式</summary>
@@ -111,7 +111,7 @@ Windows 用户**必须安装 VCRedist x64**：这是运行 M9A (无论是命令�
     <ul>
       <li>
         自行下载：点击
-        <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">.NET 官方下载页面</a>
+        <a href="https://dotnet.microsoft.com/download/dotnet/10.0" target="_blank">.NET 官方下载页面</a>
         ，选择适合您系统的版本下载并安装。
         <div align="center">
           <table>
@@ -127,7 +127,8 @@ Windows 用户**必须安装 VCRedist x64**：这是运行 M9A (无论是命令�
               <tr>
                 <td>您需要下载</td>
                 <td colspan="1">.NET 桌面运行时</td>
-                <td colspan="2">.NET 运行时</td>         </tr>
+                <td colspan="2">.NET 运行时</td>
+              </tr>
               <tr>
                 <td>安装程序</td>
                 <td>x64</td>
@@ -141,7 +142,7 @@ Windows 用户**必须安装 VCRedist x64**：这是运行 M9A (无论是命令�
       </li>
       <li>
         （仅 Windows 用户）<code>winget</code> 安装：右键 Windows 开始按钮，选择“命令提示符”或“PowerShell (管理员)”，然后在终端内粘贴以下命令并回车：
-        <pre><code>winget install Microsoft.DotNet.DesktopRuntime.8</code></pre>
+        <pre><code>winget install Microsoft.DotNet.DesktopRuntime.10</code></pre>
       </li>
     </ul>
   </blockquote>
@@ -338,7 +339,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
   <summary>MFA主页面展示</summary>
   <p></p>
   <blockquote>
-    <img src="https://github.com/user-attachments/assets/540d961e-47ce-490d-a801-89d802f2bbab" alt="主界面">
+    <img src="/images/zh-cn/newbie-main-interface.png" alt="主界面">
   </blockquote>
 </details>
 
@@ -390,7 +391,7 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
     <p></p>
     <blockquote>
       <ul>
-        <img src="https://github.com/user-attachments/assets/69192c43-f257-40ba-b5d0-918e6b508f80" alt="rate limit exceeded">
+        <img src="/images/zh-cn/newbie-rate-limit.png" alt="rate limit exceeded">
       </ul>
     </blockquote>
   </details>
@@ -465,7 +466,7 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
             <li>点击 <code>软件路径</code> 输入框右侧图标进入文件选择界面，选择桌面上的 1999 快捷方式，路径将自动填入。</li>
           </ol>
           <ul>
-            <img src="https://github.com/user-attachments/assets/2289453c-dbbf-41a7-8d28-efac0f24d6e3" alt="image_439">
+            <img src="/images/zh-cn/newbie-emulator-path-example.png" alt="image_439">
           </ul>
       </details>
     </ul>
@@ -502,7 +503,7 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
     <p></p>
     <blockquote>
       <ul>
-        <img src="https://github.com/user-attachments/assets/8e3f0f90-4e0d-46e2-b718-837a6e9ae152" alt="image_440">
+        <img src="/images/zh-cn/newbie-main-interface-connection.png" alt="image_440">
       </ul>
     </blockquote>
   </details>
@@ -539,7 +540,7 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
     <p></p>
     <blockquote>
       <ul>
-        <img src="https://github.com/user-attachments/assets/56b031b4-db6c-40a4-85a6-557fe5f4ad80" alt="image_441">
+        <img src="/images/zh-cn/newbie-main-interface-task-lists.png" alt="image_441">
       </ul>
     </blockquote>
   </details>
@@ -564,7 +565,9 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
 
 ***
 
-#### pip 设置
+#### 配置文件
+
+##### pip 配置
 
   M9A 支持通过 `config/pip_config.json` 文件配置 pip 安装相关设置。一般情况下，您无需修改此文件，除非您有特殊需求。
 
@@ -572,7 +575,7 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
     <summary>config/pip_config.json 示例</summary>
     <p></p>
     <blockquote>
-  
+
   ```jsonc
   {
       "enable_pip_install": true,  // 是否启用 pip 安装，默认 true
@@ -580,8 +583,26 @@ M9A 运行任务时，无法修改主界面的部分设置，如 `连接` 板块
       "backup_mirror": "https://mirrors.ustc.edu.cn/pypi/simple"  // 备用镜像源
   }
   ```
-  
+
   </blockquote>
-</details>
+  </details>
+
+##### 资源热更配置
+
+  M9A 支持通过 `config/hot_update.json` 文件配置部分资源（例如活动开放时间）热更相关设置。
+
+  <details>
+    <summary>config/hot_update.json 示例</summary>
+    <p></p>
+    <blockquote>
+
+  ```jsonc
+  {
+      "enable_hot_update": true  // 是否启用部分资源热更，默认 true
+  }
+  ```
+
+  </blockquote>
+  </details>
 
 ***

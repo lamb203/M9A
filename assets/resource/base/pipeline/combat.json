@@ -17,10 +17,13 @@
             "[JumpBack]EnterTheShow",
             "[JumpBack]ShowClickStory",
             "[JumpBack]ReturnMain"
-        ],
+        ]
     },
     "ReturnMainStoryChapter": {
-        "next": ["ReturnMainStoryChapterTrue", "[JumpBack]ReturnMainStoryChapterFalse"],
+        "next": [
+            "ReturnMainStoryChapterTrue",
+            "[JumpBack]ReturnMainStoryChapterFalse"
+        ]
     },
     "ReturnMainStoryChapterTrue": {
         "recognition": {
@@ -187,7 +190,10 @@
                 "custom_action": "SelectChapter"
             }
         },
-        "next": ["MainChapter_XEnter", "[JumpBack]SwipeLeftForChapter"],
+        "next": [
+            "MainChapter_XEnter",
+            "[JumpBack]SwipeLeftForChapter"
+        ]
     },
     "MainChapter_XEnter": {
         "recognition": {
@@ -235,7 +241,10 @@
     },
     "ResourceChapter_LP": {
         "doc": "尘埃运动",
-        "next": ["ResourceChapter_LPEnter", "[JumpBack]ResourceChapterLabel"],
+        "next": [
+            "ResourceChapter_LPEnter",
+            "[JumpBack]ResourceChapterLabel"
+        ]
     },
     "ResourceChapter_LPEnter": {
         "recognition": {
@@ -258,7 +267,10 @@
     },
     "ResourceChapter_MA": {
         "doc": "铸币美学",
-        "next": ["ResourceChapter_MAEnter", "[JumpBack]ResourceChapterLabel"],
+        "next": [
+            "ResourceChapter_MAEnter",
+            "[JumpBack]ResourceChapterLabel"
+        ]
     },
     "ResourceChapter_MAEnter": {
         "recognition": {
@@ -284,7 +296,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["SwipeLeftAndFindStage", "[JumpBack]SwipeRightForChapter"],
+        "next": [
+            "SwipeLeftAndFindStage",
+            "[JumpBack]SwipeRightForChapter"
+        ]
     },
     "ResourceChapter_Psychube": {
         "doc": "意志解析",
@@ -293,7 +308,7 @@
             "ResourceChapter_NoFreePsychube07",
             "[JumpBack]ResourceChapterLabel",
             "[JumpBack]SwipeRightForChapter"
-        ],
+        ]
     },
     "ResourceChapter_Psychube07FreeEnter": {
         "recognition": {
@@ -683,7 +698,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["IsReplay", "[JumpBack]SwitchToReplay"],
+        "next": [
+            "IsReplay",
+            "[JumpBack]SwitchToReplay"
+        ]
     },
     "IsReplay": {
         "recognition": {

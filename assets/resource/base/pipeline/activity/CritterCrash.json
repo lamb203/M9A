@@ -27,16 +27,13 @@
             }
         },
         "next": [
-            "CCStop",
-            "CCStart"
-        ],
-        "interrupt": [
-            "CCConfirm",
-            "CCClickBlank"
+            "[JumpBack]CCStop",
+            "CCStart",
+            "[JumpBack]CCConfirm",
+            "[JumpBack]CCClickBlank"
         ]
     },
     "CCStop": {
-        "is_sub": true,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -134,10 +131,8 @@
             }
         },
         "next": [
-            "CCFlagInMakePlan"
-        ],
-        "interrupt": [
-            "CCToDo"
+            "CCFlagInMakePlan",
+            "[JumpBack]CCToDo"
         ]
     },
     "CCToDo": {
@@ -178,11 +173,9 @@
             }
         },
         "next": [
-            "CCFlagInSelectPeople"
-        ],
-        "interrupt": [
-            "CCToDo",
-            "CCSelectPlan"
+            "CCFlagInSelectPeople",
+            "[JumpBack]CCToDo",
+            "[JumpBack]CCSelectPlan"
         ]
     },
     "CCSelectPlan": {
@@ -222,15 +215,13 @@
         },
         "next": [
             "CritterCrash",
-            "CCFlagInCombatMain"
-        ],
-        "interrupt": [
-            "CCToDo",
-            "CCSelectPeople1",
-            "CCSelectPeople2",
-            "CCSelectPeople3",
-            "CCRefreshPeople",
-            "BackButton"
+            "CCFlagInCombatMain",
+            "[JumpBack]CCToDo",
+            "[JumpBack]CCSelectPeople1",
+            "[JumpBack]CCSelectPeople2",
+            "[JumpBack]CCSelectPeople3",
+            "[JumpBack]CCRefreshPeople",
+            "[JumpBack]BackButton"
         ]
     },
     "CCRefreshPeople": {
@@ -334,20 +325,18 @@
             }
         },
         "next": [
-            "CritterCrash"
-        ],
-        "interrupt": [
-            "CCSkipCombat",
-            "CCClickBlank",
-            "ObtainedAwards",
-            "CCCombatEnd",
-            "CCSpirit",
-            "CCConfirm",
-            "CCBuyCard",
-            "CCRefreshCard_pre",
-            "CCRefreshCard_post",
-            "CCSelectAwardCard",
-            "CCStartCombat"
+            "CritterCrash",
+            "[JumpBack]CCSkipCombat",
+            "[JumpBack]CCClickBlank",
+            "[JumpBack]ObtainedAwards",
+            "[JumpBack]CCCombatEnd",
+            "[JumpBack]CCSpirit",
+            "[JumpBack]CCConfirm",
+            "[JumpBack]CCBuyCard",
+            "[JumpBack]CCRefreshCard_pre",
+            "[JumpBack]CCRefreshCard_post",
+            "[JumpBack]CCSelectAwardCard",
+            "[JumpBack]CCStartCombat"
         ]
     },
     "CCCombatEnd": {
@@ -452,11 +441,9 @@
             }
         },
         "next": [
-            "CCFlagInCombatMain"
-        ],
-        "interrupt": [
-            "CCSelectAwardCard_Template",
-            "CCSelectAwardCard_NoMore"
+            "CCFlagInCombatMain",
+            "[JumpBack]CCSelectAwardCard_Template",
+            "[JumpBack]CCSelectAwardCard_NoMore"
         ]
     },
     "CCSelectAwardCard_Template": {

@@ -38,7 +38,7 @@
             "[JumpBack]PreStormProtocolReport",
             "[JumpBack]Confirm",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "PreStormProtocolReport": {
         "recognition": {
@@ -88,7 +88,7 @@
             "[JumpBack]PreStormProtocolReport",
             "[JumpBack]Confirm",
             "[JumpBack]BackButton"
-        ],
+        ]
     },
     "PreStormProtocol1": {
         // 已打败教程中boss的任务链
@@ -128,7 +128,7 @@
             "[JumpBack]PreStormProtocolFailed",
             "[JumpBack]BackButton",
             "[JumpBack]HomeLoading"
-        ],
+        ]
     },
     "PreStormProtocol1NextStep": {
         "recognition": {

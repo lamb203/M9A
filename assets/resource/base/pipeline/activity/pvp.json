@@ -70,7 +70,7 @@
             "[JumpBack]1-3战斗",
             "[JumpBack]1-5结算",
             "[JumpBack]获得奖励"
-        ],
+        ]
     },
     "进入2-1": {
         "recognition": {
@@ -136,7 +136,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["购买偶人", "[JumpBack]进入事件"],
+        "next": [
+            "购买偶人",
+            "[JumpBack]进入事件"
+        ]
     },
     "购买偶人": {
         "recognition": {
@@ -214,8 +217,10 @@
                 ]
             }
         },
-        "next": ["1-1选择1", "[JumpBack]进入事件"],
-        "interrupt": "进入事件"
+        "next": [
+            "1-1选择1",
+            "[JumpBack]进入事件"
+        ]
     },
     "1-1选择1": {
         "recognition": {
@@ -234,8 +239,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["1-1选择3", "[JumpBack]1-1选择2"],
-        "interrupt": "1-1选择2"
+        "next": [
+            "1-1选择3",
+            "[JumpBack]1-1选择2"
+        ]
     },
     "1-1选择2": {
         "recognition": {
@@ -294,8 +301,10 @@
         "action": {
             "type": "Click"
         },
-        "next": ["缪斯赠予1", "[JumpBack]进入事件"],
-        "interrupt": "进入事件"
+        "next": [
+            "缪斯赠予1",
+            "[JumpBack]进入事件"
+        ]
     },
     "缪斯赠予1": {
         "recognition": {
@@ -370,7 +379,10 @@
                 ]
             }
         },
-        "next": ["配对页面", "[JumpBack]进入事件"],
+        "next": [
+            "配对页面",
+            "[JumpBack]进入事件"
+        ]
     },
     "配对页面": {
         "recognition": {
@@ -543,7 +555,10 @@
                 ]
             }
         },
-        "next": ["开始战斗", "[JumpBack]进入事件"],
+        "next": [
+            "开始战斗",
+            "[JumpBack]进入事件"
+        ]
     },
     "离场": {
         "recognition": {
