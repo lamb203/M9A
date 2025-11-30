@@ -12,8 +12,6 @@ def analyzeContent(resource: str, content):
 
     if resource == "cn":
         combat_complete_flag = False
-        anecdote_find_flag = False
-        anecdote_compelete_flag = False
         re_release_find_flag = False
         re_release_compelete_flag = False
 
@@ -42,16 +40,6 @@ def analyzeContent(resource: str, content):
                 raw = line
 
             text = re.sub(r"\r|<b>|</b>", "", raw)
-            if anecdote_find_flag and not anecdote_compelete_flag:
-                if "开放时间" in text:
-                    anecdote_compelete_flag = True
-                    activity["anecdote"] = {}
-                    anecdote_duration = process_combat_duration_cn(text)
-                    (
-                        activity["anecdote"]["start_time"],
-                        activity["anecdote"]["end_time"],
-                    ) = convert_to_timestamps(anecdote_duration)
-                    continue
             if re_release_find_flag and not re_release_compelete_flag:
                 if "活动关卡开放时间" in text:
                     re_release_compelete_flag = True
@@ -71,9 +59,6 @@ def analyzeContent(resource: str, content):
                     convert_to_timestamps(combat_duration)
                 )
                 continue
-            if "「轶事」活动介绍" in text:
-                anecdote_find_flag = True
-                continue
             if "限时重映" in text:
                 re_release_find_flag = True
                 continue
@@ -84,8 +69,6 @@ def analyzeContent(resource: str, content):
         p_tags = soup.find_all("p")
 
         main_compelete_flag = False
-        anecdote_find_flag = False
-        anecdote_compelete_flag = False
 
         for i, p in enumerate(p_tags):
             html_content = str(p)
@@ -111,19 +94,6 @@ def analyzeContent(resource: str, content):
                     activity["combat"]["start_time"], activity["combat"]["end_time"] = (
                         convert_to_timestamps(combat_duration)
                     )
-            if anecdote_find_flag and not anecdote_compelete_flag:
-                if "[Duration]" in text:
-                    anecdote_compelete_flag = True
-                    p1 = p
-                    while "UTC" not in p1.find_next("p").get_text().strip():
-                        p1 = p1.find_next("p")
-                    anecdote_duration = p1.find_next("p").get_text().strip()
-                    activity["anecdote"] = {}
-                    (
-                        activity["anecdote"]["start_time"],
-                        activity["anecdote"]["end_time"],
-                    ) = convert_to_timestamps(anecdote_duration)
-                    continue
             if "Story Mode" in text:
                 if "UTC" not in text:
                     text = p.find_next("p").get_text().strip()
@@ -131,10 +101,6 @@ def analyzeContent(resource: str, content):
                 activity["combat"]["start_time"], activity["combat"]["end_time"] = (
                     convert_to_timestamps(combat_duration)
                 )
-            if "New Anecdote" in html_content:
-                anecdote_find_flag = True
-                continue
-            # re-release
             if "[Event Stages]" in text:
                 activity["re-release"] = {}
                 if "UTC" not in text:
@@ -152,8 +118,6 @@ def analyzeContent(resource: str, content):
         p_tags = soup.find_all("p")
 
         main_compelete_flag = False
-        anecdote_find_flag = False
-        anecdote_compelete_flag = False
 
         for i, p in enumerate(p_tags):
             html_content = str(p)
@@ -179,30 +143,12 @@ def analyzeContent(resource: str, content):
                     activity["combat"]["start_time"], activity["combat"]["end_time"] = (
                         convert_to_timestamps(combat_duration)
                     )
-            if anecdote_find_flag and not anecdote_compelete_flag:
-                if "開放期間" in text:
-                    anecdote_compelete_flag = True
-                    anecdote_duration = process_combat_duration_jp(
-                        re.sub(r"【[^】]*】開放期間：", "", text)
-                    )
-                    activity["anecdote"] = {}
-                    (
-                        activity["anecdote"]["start_time"],
-                        activity["anecdote"]["end_time"],
-                    ) = convert_to_timestamps(anecdote_duration)
-                    continue
             # Story Mode
             if "ストーリーモード" in text:
                 combat_duration = process_combat_duration_jp(text)
                 activity["combat"]["start_time"], activity["combat"]["end_time"] = (
                     convert_to_timestamps(combat_duration)
                 )
-                continue
-            if (
-                "新しいエピソード" in html_content
-                or "新しい「エピソード」" in html_content
-            ):
-                anecdote_find_flag = True
                 continue
             # re-release
             if "【イベントステージ】開放期間：" in text or "ステージ開放期間" in text:
@@ -244,11 +190,6 @@ def analyzeContent(resource: str, content):
                 current_section = "combat"
                 continue
 
-            if "軼事" in text:
-                activity.setdefault("anecdote", {})
-                current_section = "anecdote"
-                continue
-
             if "限時重映" in text and "活動" in text:
                 activity.setdefault("re-release", {})
                 current_section = "re-release"
@@ -266,8 +207,6 @@ def analyzeContent(resource: str, content):
                             activity[current_section]["end_time"],
                         ) = convert_to_timestamps(formatted)
                         if current_section == "combat":
-                            current_section = None
-                        elif current_section == "anecdote":
                             current_section = None
                         elif current_section == "re-release":
                             current_section = None
