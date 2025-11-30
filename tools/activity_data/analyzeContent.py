@@ -23,9 +23,25 @@ def analyzeContent(resource: str, content):
         elif "【故事模式】" in content:
             activity["combat"] = {}
             activity["combat"]["event_type"] = "SideStory"
-        content = json.loads(content)
+        try:
+            content = json.loads(content)
+        except Exception:
+            # If content isn't valid JSON, treat it as raw HTML/text
+            content = [content]
+
         for line in content:
-            text = re.sub(r"\r|<b>|</b>", "", line["content"])
+            # line may be a dict with 'content', or a plain string
+            if isinstance(line, dict):
+                if "content" in line:
+                    raw = line["content"]
+                else:
+                    # unexpected dict structure: skip with a warning
+                    print("Warning: skipping line without 'content' key:", line)
+                    continue
+            else:
+                raw = line
+
+            text = re.sub(r"\r|<b>|</b>", "", raw)
             if anecdote_find_flag and not anecdote_compelete_flag:
                 if "开放时间" in text:
                     anecdote_compelete_flag = True
@@ -207,7 +223,9 @@ def analyzeContent(resource: str, content):
 
         news_time_tag = soup.find("div", class_="news-time")
         if news_time_tag:
-            news_time_match = re.search(r"(\d{4})/(\d{2})/(\d{2})", news_time_tag.get_text())
+            news_time_match = re.search(
+                r"(\d{4})/(\d{2})/(\d{2})", news_time_tag.get_text()
+            )
             if news_time_match:
                 base_year = int(news_time_match.group(1))
                 base_month = int(news_time_match.group(2))
@@ -404,8 +422,9 @@ def process_combat_duration_jp(duration: str):
         duration = re.sub(update_pattern, replacement, original_duration)
 
     # 处理标准格式的时间范围
+    # 支持结束日期包含年份的格式，如: 2025年12月11日 10:00～2026年1月19日（月） 4:59
     start_pattern = r"(\d{4})年(\d{1,2})月(\d{1,2})日(?:（[月火水木金土日]）)?\s*(\d{1,2}):(\d{1,2})"
-    end_pattern = r"[～〜]\s*(\d{1,2})月(\d{1,2})日(?:（[月火水木金土日]）)?\s*(\d{1,2}):(\d{1,2})"
+    end_pattern = r"[～〜]\s*(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日(?:（[月火水木金土日]）)?\s*(\d{1,2}):(\d{1,2})"
 
     start_match = re.search(start_pattern, duration)
     end_match = re.search(end_pattern, duration)
@@ -421,9 +440,23 @@ def process_combat_duration_jp(duration: str):
     naive_start = datetime(start_year, start_month, start_day, start_hour, start_minute)
     start_date = jst.localize(naive_start)  # 本地化到JST时区
 
-    # 解析结束时间
-    end_month, end_day, end_hour, end_minute = map(int, end_match.groups())
-    naive_end = datetime(start_year, end_month, end_day, end_hour, end_minute)
+    # 解析结束时间（允许结束年可选）
+    end_groups = end_match.groups()
+    # end_groups = (end_year_or_None, end_month, end_day, end_hour, end_minute)
+    if end_groups[0]:
+        end_year = int(end_groups[0])
+    else:
+        end_year = start_year
+    end_month = int(end_groups[1])
+    end_day = int(end_groups[2])
+    end_hour = int(end_groups[3])
+    end_minute = int(end_groups[4])
+
+    # 若结束月小于开始月，则推断为下一年
+    if end_year == start_year and end_month < start_month:
+        end_year = start_year + 1
+
+    naive_end = datetime(end_year, end_month, end_day, end_hour, end_minute)
     end_date = jst.localize(naive_end)  # 本地化到JST时区
 
     # 如果结束分钟是59，添加59秒
@@ -499,7 +532,9 @@ def process_combat_duration_tw(
         start_hour,
         start_minute,
     ):
-        if end_month < start_month or (end_month == start_month and end_day < start_day):
+        if end_month < start_month or (
+            end_month == start_month and end_day < start_day
+        ):
             end_year = start_year + 1
         else:
             end_year = start_year
