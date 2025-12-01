@@ -373,11 +373,11 @@ class SOSNodeProcess(CustomAction):
                     if not check_reco or not check_reco.hit:
                         return False
 
-                    pp_override = {"SOSSelectOption": {"interrupt": []}}
+                    pp_override = {"SOSSelectOption": {}}
 
                     # 为每个 expected 创建独立节点
                     for i, expected in enumerate(expected_list):
-                        node_name = f"SOSSelectOption_OCR_{i}"
+                        node_name = f"[JumpBack]SOSSelectOption_OCR_{i}"
                         # 基于 origin_node 创建新节点（使用深拷贝）
                         new_node = copy.deepcopy(origin_node)
                         if "recognition" not in new_node:
@@ -392,7 +392,7 @@ class SOSNodeProcess(CustomAction):
 
                         # 添加到 pipeline_override
                         pp_override[node_name] = new_node
-                        pp_override["SOSSelectOption"]["interrupt"].append(node_name)
+                        pp_override["SOSSelectOption"]["next"].append(node_name)
 
                     context.run_task("SOSSelectOption", pipeline_override=pp_override)
                 elif method == "HSV":
@@ -405,8 +405,19 @@ class SOSNodeProcess(CustomAction):
                     if not check_reco or not check_reco.hit:
                         return False
 
+                    origin_node = context.get_node_data("SOSSelectOption")
+                    if not origin_node:
+                        logger.error("未找到原始节点 SOSSelectOption")
+                        return False
+
+                    override_next = (
+                        origin_node.get("next", []).append(
+                            "[JumpBack]SOSSelectOption_HSV"
+                        ),
+                    )
+
                     pp_override = {
-                        "SOSSelectOption": {"interrupt": ["SOSSelectOption_HSV"]},
+                        "SOSSelectOption": {"next": override_next},
                         "SOSSelectOption_HSV": {
                             "recognition": {
                                 "param": {

@@ -244,12 +244,10 @@
                     "PsychubeVictory": {
                         "next": [
                             "HomeFlag",
-                            "PsychubeVictory"
-                        ],
-                        "interrupt": [
-                            "HomeButton",
-                            "CombatEntering",
-                            "HomeLoading"
+                            "PsychubeVictory",
+                            "[JumpBack]HomeButton",
+                            "[JumpBack]CombatEntering",
+                            "[JumpBack]HomeLoading"
                         ]
                     },
                     "PsychubeDouble": {

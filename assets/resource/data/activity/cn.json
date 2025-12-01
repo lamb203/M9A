@@ -154,8 +154,7 @@
                     "FlagInActivityStage": {
                         "next": [
                             "ReadyForAction"
-                        ],
-                        "interrupt": []
+                        ]
                     }
                 }
             },
@@ -314,8 +313,7 @@
                     "JudgeDuringAnecdote": {
                         "next": [
                             "focus"
-                        ],
-                        "interrupt": []
+                        ]=
                     },
                     "focus": {
                         "focus": {

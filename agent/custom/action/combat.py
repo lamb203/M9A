@@ -83,12 +83,13 @@ class PsychubeDoubleTimes(CustomAction):
                                 "custom_action_param": {"times": times}
                             },
                             "PsychubeVictory": {
-                                "next": ["HomeFlag", "PsychubeVictory"],
-                                "interrupt": [
-                                    "HomeButton",
-                                    "CombatEntering",
-                                    "HomeLoading",
-                                ],
+                                "next": [
+                                    "HomeFlag",
+                                    "PsychubeVictory",
+                                    "[JumpBack]HomeButton",
+                                    "[JumpBack]CombatEntering",
+                                    "[JumpBack]HomeLoading",
+                                ]
                             },
                             "PsychubeDouble": {"enabled": False},
                         }

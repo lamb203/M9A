@@ -109,8 +109,7 @@ class LucidscapeStatusDetect(CustomAction):
         context.override_pipeline(
             {
                 "LucidscapeStatusDetect": {
-                    "next": ["LucidscapeCombatStartFlag"],
-                    "interrupt": ["CombatEntering"],
+                    "next": ["LucidscapeCombatStartFlag", "[JumpBack]CombatEntering"],
                     "custom_action_param": {"stage": stage},
                 }
             }

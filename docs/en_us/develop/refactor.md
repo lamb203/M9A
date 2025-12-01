@@ -14,52 +14,6 @@ When modifying, ensure that no nodes using the Image/Model are overlooked.
 
 ## Pipeline
 
-### Sub Node
-
-Here, nodes with the deprecated `is_sub` value set to `true` are referred to as `sub nodes`.
-
-Refactoring `sub nodes` involves the following steps:
-
-1. Determine whether the `sub node` is of the lowest priority in the `next` list of the current node (i.e., directly moving it to the `interrupt` list of the current node has no impact on the actual effect).
-2. If the `sub node` is not of the lowest priority, the refactoring method is to add the `next` and `interrupt` of the current node to the `sub node` (if the original `next` and `interrupt` are empty, this can be done directly; otherwise, consider potential conflicts). If the `sub node` is of the lowest priority, the refactoring method is to directly move it to the `interrupt` of the current node.
-3. If the `sub node` is not of the lowest priority and the changes in step 2 cause conflicts, reconsider the task logic.
-4. Remove the `is_sub` attribute from the `sub node`.
-
-> [!WARNING]
->
-> All the above changes must consider all nodes using the `sub node`. Do not overlook any!
-
-Here is an example, assuming that the current node before reconstruction is as follows:
-
-```jsonc
-"Start": {
-    "next": [ "Sub_A", "B", "Sub_C", "D" ]
-    // Here we assume that Sub_A can be judged last, and Sub_C must be after B and before D.
-}
-```
-
-It can be changed to the following form:
-
-```jsonc
-"Start": {
-    "next": [ "B", "C", "D" ],
-    "interrupt": [ "A" ]
-},
-"A": {
-    "next": A.nextlist // The original next list of node A
-},
-"B": {
-    "next": B.nextlist
-},
-"C": {
-    "next": [ "B", "C", "D" ] + C.nextlist, // The next list of the Start node is merged with the original list of the C node, paying attention to the order and other issues
-    "interrupt": [ "A" ]
-},
-"D": {
-    "next": D.nextlist
-}
-```
-
 ### Other Nodes
 
 Next, refactor other nodes based on their specific purposes.

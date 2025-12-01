@@ -14,52 +14,6 @@ icon: carbon:ibm-watsonx-code-assistant-for-z-refactor
 
 ## Pipeline
 
-### Sub Node
-
-这里将 `is_sub` (已废弃) 值为 `true` 的 node 称为 `sub node` 。
-
-重构 `sub node` ，有以下几个步骤：
-
-1. 判断该 `sub node` 在 当前node `next` 列表中是否处于最低优先级（即直接放到 当前node `interrupt` 列表中对实际效果有无影响）
-2. 若该 `sub node` 不处于最低优先级，重构方法是将 当前node 的 `next` 和 `interrupt` 加入  `sub node` (原 `next` 和 `interrupt` 为空可直接进行，不为空则需考虑是否冲突)；若该 `sub node` 处于最低优先级，重构方法为直接放到 当前node 的 `interrupt` 中
-3. 若该 `sub node` 不处于最低优先级，且步骤2的改动会引起冲突，则需要重新考虑任务逻辑
-4. 将 `sub node` 的 `is_sub` 属性删除
-
-> [!WARNING]
->
-> 以上全部改动均需考虑所有使用该 `sub node` 的 node，不要落下！
-
-这里举一个例子，假设当前为重构前节点如下：
-
-```jsonc
-"Start": {
-    "next": [ "Sub_A", "B", "Sub_C", "D" ]
-    // 这里假设 Sub_A 可以放到最后判断，Sub_C 需在 B 之后、D 之前
-}
-```
-
-这时可以改成下面的形式：
-
-```jsonc
-"Start": {
-    "next": [ "B", "C", "D" ],
-    "interrupt": [ "A" ]
-},
-"A": {
-    "next": A.nextlist // A 节点原本的 next 列表
-},
-"B": {
-    "next": B.nextlist
-},
-"C": {
-    "next": [ "B", "C", "D" ] + C.nextlist, // Start 节点的 next 列表和 C 节点原本的列表合并，注意顺序等问题
-    "interrupt": [ "A" ]
-},
-"D": {
-    "next": D.nextlist
-}
-```
-
 ### 其它 node
 
 接下来按照其它 node 的重构目的来分别说明如何重构。

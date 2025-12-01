@@ -227,9 +227,7 @@ class DuringRe_release(CustomAction):
                     continue
                 break
 
-        context.override_pipeline(
-            {"JudgeDuringRe_release": {"next": [], "interrupt": []}}
-        )
+        context.override_pipeline({"JudgeDuringRe_release": {"next": []}})
         logger.info("当前不在复刻作战开放时间，跳过当前任务")
         return CustomAction.RunResult(success=True)
 
