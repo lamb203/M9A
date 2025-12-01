@@ -716,7 +716,13 @@
         "action": {
             "type": "Swipe",
             "param": {
-                "duration": 500
+                "duration": 500,
+                "end_offset": [
+                    -5,
+                    -10,
+                    -10,
+                    -20
+                ]
             }
         },
         "timeout": 10000,
