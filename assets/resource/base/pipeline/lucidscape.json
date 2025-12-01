@@ -65,7 +65,9 @@
         "next": [
             "LucidscapeFlagInTotalAwards",
             "HomeFlag",
-            "[JumpBack]HomeButton"
+            "[JumpBack]HomeButton",
+            "[JumpBack]BackButton",
+            "[JumpBack]ObtainedAwards"
         ]
     },
     "LucidscapeFlagInTotalAwards": {
@@ -503,7 +505,7 @@
         },
         "next": [
             "FlagInLucidscape",
-            "[JumpBack]BackButton"
+            "[JumpBack]BackButtonWithDelay"
         ]
     },
     "LucidscapeAwardsClick": {
