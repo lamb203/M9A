@@ -98,7 +98,13 @@ def ensure_venv_and_relaunch_if_needed():
     logger.info(f"正在使用虚拟环境Python重新启动")
 
     try:
-        cmd = [str(python_in_venv)] + sys.argv
+        # Use absolute path to this script when relaunching inside the venv.
+        # sys.argv[0] may be a relative path (e.g. './../agent/main.py') which
+        # resolves differently when cwd changes. Use the absolute path of
+        # the currently running file (`current_file_path`) to avoid that.
+        script_abs = current_file_path
+        args = sys.argv[1:]
+        cmd = [str(python_in_venv), str(script_abs)] + args
         logger.info(f"执行命令: {' '.join(cmd)}")
 
         result = subprocess.run(
