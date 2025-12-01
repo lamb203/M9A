@@ -373,7 +373,7 @@ class SOSNodeProcess(CustomAction):
                     if not check_reco or not check_reco.hit:
                         return False
 
-                    pp_override = {"SOSSelectOption": {}}
+                    pp_override = {"SOSSelectOption": {"next": []}}
 
                     # 为每个 expected 创建独立节点
                     for i, expected in enumerate(expected_list):
