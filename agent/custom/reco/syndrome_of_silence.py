@@ -166,9 +166,9 @@ class SOSSelectNode(CustomRecognition):
                 if x < fx + fw and x + w > fx and y < fy + fh and y + h > fy:
                     # 在禁止区域内，返回滑动指令
                     context.run_task(
-                        "Click",
+                        "Swipe",
                         {
-                            "Click": {
+                            "Swipe": {
                                 "action": {
                                     "type": "Swipe",
                                     "param": {
@@ -202,4 +202,20 @@ class SOSSelectNode(CustomRecognition):
                 return CustomRecognition.AnalyzeResult(
                     box=node_box, detail=reco_detail.raw_detail
                 )
+            # 如果未识别到节点，则向右滑动一次
+            context.run_task(
+                "Swipe",
+                {
+                    "Swipe": {
+                        "action": {
+                            "type": "Swipe",
+                            "param": {
+                                "begin": [402, 564, 34, 36],
+                                "end": [552, 569, 34, 36],
+                                "duration": 500,
+                            },
+                        }
+                    }
+                },
+            )
             return CustomRecognition.AnalyzeResult(box=None, detail={})
