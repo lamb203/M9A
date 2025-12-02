@@ -25,7 +25,13 @@
                 "ActivityTargetLevel",
                 "SelectChapter",
                 "SelectCombatStage",
-                "TargetCount",
+                "TargetCountInit",
+                "TargetCountDetermine",
+                "TargetCountSelectTimes",
+                "TargetCountEatCandy",
+                "TargetCountProgress",
+                "TargetCountFinish",
+                "TargetCountAbort",
                 "JudgeDepthsOfMythWeekly"
             ]
         }
@@ -95,7 +101,25 @@
             "$ref": "#/$defs/SelectCombatStage"
         },
         {
-            "$ref": "#/$defs/TargetCount"
+            "$ref": "#/$defs/TargetCountInit"
+        },
+        {
+            "$ref": "#/$defs/TargetCountDetermine"
+        },
+        {
+            "$ref": "#/$defs/TargetCountSelectTimes"
+        },
+        {
+            "$ref": "#/$defs/TargetCountEatCandy"
+        },
+        {
+            "$ref": "#/$defs/TargetCountProgress"
+        },
+        {
+            "$ref": "#/$defs/TargetCountFinish"
+        },
+        {
+            "$ref": "#/$defs/TargetCountAbort"
         },
         {
             "$ref": "#/$defs/JudgeDepthsOfMythWeekly"
@@ -617,7 +641,7 @@
                 }
             }
         },
-        "TargetCount": {
+        "TargetCountInit": {
             "allOf": [
                 {
                     "$ref": "#/$defs/RequiredParam"
@@ -625,8 +649,8 @@
             ],
             "properties": {
                 "custom_action": {
-                    "const": "TargetCount",
-                    "description": "根据设定的目标次数和吃糖方式刷图。"
+                    "const": "TargetCountInit",
+                    "description": "初始化刷图目标次数。"
                 },
                 "custom_action_param": {
                     "type": "object",
@@ -638,6 +662,54 @@
                         }
                     },
                     "unevaluatedProperties": false
+                }
+            }
+        },
+        "TargetCountDetermine": {
+            "properties": {
+                "custom_action": {
+                    "const": "TargetCountDetermine",
+                    "description": "决定下一步动作：复现 / 吃糖 / 结束。"
+                }
+            }
+        },
+        "TargetCountSelectTimes": {
+            "properties": {
+                "custom_action": {
+                    "const": "TargetCountSelectTimes",
+                    "description": "根据状态选择复现次数。"
+                }
+            }
+        },
+        "TargetCountEatCandy": {
+            "properties": {
+                "custom_action": {
+                    "const": "TargetCountEatCandy",
+                    "description": "通过 EatCandy 流水线补体力。"
+                }
+            }
+        },
+        "TargetCountProgress": {
+            "properties": {
+                "custom_action": {
+                    "const": "TargetCountProgress",
+                    "description": "统计复现次数并决定是否继续。"
+                }
+            }
+        },
+        "TargetCountFinish": {
+            "properties": {
+                "custom_action": {
+                    "const": "TargetCountFinish",
+                    "description": "结束刷图，返回主界面。"
+                }
+            }
+        },
+        "TargetCountAbort": {
+            "properties": {
+                "custom_action": {
+                    "const": "TargetCountAbort",
+                    "description": "识别失败等异常情况下终止刷图任务。"
                 }
             }
         },

@@ -684,51 +684,56 @@ class SelectCombatStage(CustomAction):
         return CustomAction.RunResult(success=True)
 
 
-@AgentServer.custom_action("TargetCount")
-class TargetCount(CustomAction):
+class _TargetCountState:
+    target_count: int = 0
+    already_count: int = 0
+    current_times: int = 0
+    candy_attempts: int = 0
+
+
+def _tc_safe_int(text: str) -> int:
+    try:
+        return int(text)
+    except Exception:
+        return 0
+
+
+def _tc_get_text_safe(context: Context, img, rec_name: str) -> str:
+    rec = context.run_recognition(rec_name, img)
+    if rec is None or getattr(rec, "best_result", None) is None:
+        logger.debug(f"{rec_name} 识别失败，返回None")
+        return "0"
+    return getattr(rec.best_result, "text", "0") or "0"
+
+
+def _tc_get_available_count(context: Context) -> int:
+    img = context.tasker.controller.post_screencap().wait().get()
+    remaining_ap = _tc_safe_int(_tc_get_text_safe(context, img, "RecognizeRemainingAp"))
+    stage_ap = _tc_safe_int(_tc_get_text_safe(context, img, "RecognizeStageAp"))
+    combat_times = _tc_safe_int(_tc_get_text_safe(context, img, "RecognizeCombatTimes"))
+    if stage_ap == 0:
+        logger.debug("stage_ap 为0")
+        return 999
+    if combat_times == 0:
+        logger.debug("识别失败，combat_times 为0")
+        return -1
+    stage_ap = stage_ap // combat_times
+    logger.debug(f"剩余体力: {remaining_ap}, 关卡体力: {stage_ap}")
+    return remaining_ap // stage_ap if stage_ap else 0
+
+
+def _tc_pick_times(available_count: int, target_count: int, already_count: int) -> int:
+    if target_count > 0:
+        left_count = max(target_count - already_count, 0)
+        return min(4, available_count, left_count)
+    return min(4, available_count)
+
+
+@AgentServer.custom_action("TargetCountInit")
+class TargetCountInit(CustomAction):
     """
-    清空体力或按次数刷图。
-
-    参数格式:
-    {
-        "target_count": "目标次数"  # 可选，不填或为0则清空体力
-    }
+    初始化刷图计数。
     """
-
-    @classmethod
-    def _safe_int(cls, text):
-        try:
-            return int(text)
-        except Exception:
-            return 0
-
-    @classmethod
-    def get_text_safe(cls, context, img, rec_name):
-        rec = context.run_recognition(rec_name, img)
-        if rec is None or getattr(rec, "best_result", None) is None:
-            logger.debug(f"{rec_name} 识别失败，返回None")
-            return "0"
-        return getattr(rec.best_result, "text", "0") or "0"
-
-    @classmethod
-    def _get_available_count(cls, context):
-        img = context.tasker.controller.post_screencap().wait().get()
-        remaining_ap = cls._safe_int(
-            cls.get_text_safe(context, img, "RecognizeRemainingAp")
-        )
-        stage_ap = cls._safe_int(cls.get_text_safe(context, img, "RecognizeStageAp"))
-        combat_times = cls._safe_int(
-            cls.get_text_safe(context, img, "RecognizeCombatTimes")
-        )
-        if stage_ap == 0:
-            logger.debug("stage_ap 为0")
-            return 999
-        if combat_times == 0:
-            logger.debug("识别失败，combat_times 为0")
-            return -1
-        stage_ap = stage_ap // combat_times
-        logger.debug(f"剩余体力: {remaining_ap}, 关卡体力: {stage_ap}")
-        return remaining_ap // stage_ap if stage_ap else 0
 
     def run(
         self,
@@ -736,65 +741,185 @@ class TargetCount(CustomAction):
         argv: CustomAction.RunArg,
     ) -> CustomAction.RunResult:
 
-        target_count = int(json.loads(argv.custom_action_param)["target_count"])
+        param = json.loads(argv.custom_action_param or "{}")
+        target_count = int(param.get("target_count", 0))
 
-        already_count = 0
+        _TargetCountState.target_count = target_count
+        _TargetCountState.already_count = 0
+        _TargetCountState.current_times = 0
+        _TargetCountState.candy_attempts = 0
 
-        while True:
-            available_count = TargetCount._get_available_count(context)
-            if available_count == -1:
-                logger.debug("识别失败，任务结束")
-                return CustomAction.RunResult(success=False)
-            # 判断本轮最大可刷次数
-            if target_count > 0:
-                left_count = target_count - already_count
-                times = min(4, available_count, left_count)
-            else:
-                times = min(4, available_count)
-            if times <= 0:
-                logger.debug("没体力咯，吃个糖")
-                for _ in range(2):  # 最多吃两次糖，防止吃mini糖体力不够
-                    context.run_task("EatCandy")
+        if target_count > 0:
+            logger.info(f"目标刷图次数：{target_count}")
+        else:
+            logger.info("清空体力模式，未设置目标次数")
 
-                    available_count = TargetCount._get_available_count(context)
-                    if available_count == -1:
-                        logger.debug("识别失败，任务结束")
-                        return CustomAction.RunResult(success=False)
-                    if target_count:
-                        left_count = target_count - already_count
-                        times = min(4, available_count, left_count)
-                    else:
-                        times = min(4, available_count)
-                    if times > 0:
-                        break
-                if times <= 0:
-                    logger.debug(
-                        f"尝试吃糖后体力不够，任务结束。总共刷了 {already_count} 次"
-                    )
-                    break
-            # 刷图流程
-            logger.info(f"本次刷 {times} 次，累计已刷 {already_count} 次")
-            context.override_pipeline(
-                {
-                    "StartReplay": {"action": "Click", "next": ["Replaying"]},
-                    "SetReplaysTimes": {
-                        "template": [
-                            f"Combat/SetReplaysTimesX{times}.png",
-                            f"Combat/SetReplaysTimesX{times}_selected.png",
-                        ]
-                    },
-                }
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("TargetCountDetermine")
+class TargetCountDetermine(CustomAction):
+    """
+    决定下一步动作：复现 / 吃糖 / 结束。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        if (
+            _TargetCountState.target_count > 0
+            and _TargetCountState.already_count >= _TargetCountState.target_count
+        ):
+            context.override_next("TargetCountDetermine", ["TargetCountFinish"])
+            return CustomAction.RunResult(success=True)
+
+        available_count = _tc_get_available_count(context)
+        if available_count == -1:
+            context.override_next("TargetCountDetermine", ["TargetCountAbort"])
+            return CustomAction.RunResult(success=True)
+
+        times = _tc_pick_times(
+            available_count,
+            _TargetCountState.target_count,
+            _TargetCountState.already_count,
+        )
+        if times > 0:
+            _TargetCountState.current_times = times
+            logger.info(
+                f"准备复现 {times} 次，累计已刷 {_TargetCountState.already_count} 次"
             )
-            context.run_task("OpenReplaysTimes")
+            context.override_next("TargetCountDetermine", ["TargetCountOpenPanel"])
+            return CustomAction.RunResult(success=True)
 
-            already_count += times
-            if target_count > 0 and already_count >= target_count:
-                logger.debug(f"达到目标次数，任务结束。总共刷了 {already_count} 次")
-                break
+        if _TargetCountState.candy_attempts >= 2:
+            logger.debug("尝试补体两次后仍不足，结束任务")
+            context.override_next("TargetCountDetermine", ["TargetCountFinish"])
+            return CustomAction.RunResult(success=True)
 
-        logger.info(f"任务结束，总共刷了 {already_count} 次")
+        _TargetCountState.candy_attempts += 1
+        logger.debug(f"无可复现次数，尝试第 {_TargetCountState.candy_attempts} 次补体")
+        context.override_next("TargetCountDetermine", ["TargetCountEatCandy"])
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("TargetCountSelectTimes")
+class TargetCountSelectTimes(CustomAction):
+    """
+    根据状态选择复现次数。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        times = _TargetCountState.current_times
+        if times <= 0:
+            logger.error("当前复现次数无效，终止任务")
+            context.override_next("TargetCountSelectTimes", ["TargetCountAbort"])
+            return CustomAction.RunResult(success=True)
+
+        logger.info(f"选择复现 {times} 次")
+        context.run_task(
+            "SetReplaysTimes",
+            {
+                "SetReplaysTimes": {
+                    "template": [
+                        f"Combat/SetReplaysTimesX{times}.png",
+                        f"Combat/SetReplaysTimesX{times}_selected.png",
+                    ],
+                    "next": [],
+                }
+            },
+        )
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("TargetCountEatCandy")
+class TargetCountEatCandy(CustomAction):
+    """
+    通过 EatCandy 流水线补体力。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        context.run_task("EatCandy")
+        context.override_next("TargetCountEatCandy", ["TargetCountDetermine"])
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("TargetCountProgress")
+class TargetCountProgress(CustomAction):
+    """
+    统计复现次数并决定是否继续。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        _TargetCountState.already_count += _TargetCountState.current_times
+        _TargetCountState.current_times = 0
+        _TargetCountState.candy_attempts = 0
+
+        logger.info(f"累计已刷 {_TargetCountState.already_count} 次")
+
+        if (
+            _TargetCountState.target_count > 0
+            and _TargetCountState.already_count >= _TargetCountState.target_count
+        ):
+            logger.info("达到目标次数，准备结束任务")
+            context.override_next("TargetCountProgress", ["TargetCountFinish"])
+        else:
+            context.override_next("TargetCountProgress", ["TargetCountDetermine"])
+
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("TargetCountFinish")
+class TargetCountFinish(CustomAction):
+    """
+    结束刷图，返回主界面。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        logger.info(f"任务结束，总共刷了 {_TargetCountState.already_count} 次")
         context.run_task("HomeButton")
         return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("TargetCountAbort")
+class TargetCountAbort(CustomAction):
+    """
+    识别失败等异常情况下终止刷图任务，返回主界面。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        logger.error(
+            f"无法获取可复现次数，终止刷图任务，已刷 {_TargetCountState.already_count} 次"
+        )
+        context.run_task("HomeButton")
+        return CustomAction.RunResult(success=False)
 
 
 @AgentServer.custom_action("SSReopenReplay")
@@ -813,7 +938,7 @@ class SSReopenReplay(CustomAction):
         context.run_task("SSToReplayIfCan")
 
         # 看看要不要吃不吃糖
-        available_count = TargetCount._get_available_count(context)
+        available_count = _tc_get_available_count(context)
         if available_count == -1:
             logger.debug("识别战斗次数失败")
             available_count = 1
@@ -822,7 +947,7 @@ class SSReopenReplay(CustomAction):
             for _ in range(2):  # 最多吃两次糖，防止吃mini糖体力不够
                 context.run_task("EatCandy")
 
-                available_count = TargetCount._get_available_count(context)
+                available_count = _tc_get_available_count(context)
                 if available_count == -1:
                     logger.debug("识别战斗次数失败")
                     available_count = 1

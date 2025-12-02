@@ -3,10 +3,207 @@
         "action": {
             "type": "Custom",
             "param": {
-                "custom_action": "TargetCount",
+                "custom_action": "TargetCountInit",
                 "custom_action_param": {
                     "target_count": 0
                 }
+            }
+        },
+        "next": [
+            "TargetCountDetermine"
+        ]
+    },
+    "TargetCountDetermine": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "TargetCountDetermine"
+            }
+        },
+        "next": [
+            "TargetCountOpenPanel"
+        ]
+    },
+    "TargetCountOpenPanel": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    737,
+                    586,
+                    174,
+                    134
+                ],
+                "template": "Combat/OpenReplaysTimes.png"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "next": [
+            "TargetCountSelectTimes",
+            "TargetCountOpenPanel"
+        ]
+    },
+    "TargetCountSelectTimes": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "TargetCountSelectTimes"
+            }
+        },
+        "next": [
+            "TargetCountStartReplay"
+        ]
+    },
+    "TargetCountStartReplay": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    1030,
+                    634,
+                    139,
+                    33
+                ],
+                "expected": [
+                    "复现"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "TargetCountReplaying",
+            "TargetCountStartReplay"
+        ]
+    },
+    "TargetCountReplaying": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1078,
+                    77,
+                    202,
+                    143
+                ],
+                "expected": [
+                    "行为",
+                    "复现"
+                ]
+            }
+        },
+        "post_delay": 5000,
+        "timeout": 240000,
+        "next": [
+            "TargetCountReplaying",
+            "TargetCountVictory"
+        ]
+    },
+    "TargetCountVictory": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    678,
+                    10,
+                    473,
+                    240
+                ],
+                "expected": [
+                    "战斗",
+                    "胜利"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "pre_wait_freezes": {
+            "time": 500,
+            "target": [
+                614,
+                457,
+                666,
+                263
+            ]
+        },
+        "post_wait_freezes": {
+            "time": 500,
+            "target": [
+                614,
+                457,
+                666,
+                263
+            ]
+        },
+        "next": [
+            "TargetCountVictory",
+            "TargetCountWaitReplay",
+            "[JumpBack]CombatEntering"
+        ]
+    },
+    "TargetCountWaitReplay": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "only_rec": true,
+                "roi": [
+                    1097,
+                    630,
+                    68,
+                    41
+                ],
+                "expected": [
+                    "复现"
+                ]
+            }
+        },
+        "next": [
+            "TargetCountProgress",
+            "TargetCountWaitReplay"
+        ]
+    },
+    "TargetCountProgress": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "TargetCountProgress"
+            }
+        },
+        "next": [
+            "TargetCountDetermine"
+        ]
+    },
+    "TargetCountEatCandy": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "TargetCountEatCandy"
+            }
+        },
+        "next": [
+            "TargetCountDetermine"
+        ]
+    },
+    "TargetCountFinish": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "TargetCountFinish"
+            }
+        },
+        "next": []
+    },
+    "TargetCountAbort": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "TargetCountAbort"
             }
         },
         "next": []
