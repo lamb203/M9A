@@ -402,6 +402,9 @@ class SOSNodeProcess(CustomAction):
                             "[JumpBack]" + node_name
                         )
 
+                    logger.debug(
+                        f"执行选项选择: SelectOption (OCR), expected={expected_list}"
+                    )
                     context.run_task("SOSSelectOption", pipeline_override=pp_override)
                 elif method == "HSV":
                     order_by = action.get("order_by", "Vertical")
@@ -431,6 +434,9 @@ class SOSNodeProcess(CustomAction):
                             }
                         },
                     }
+                    logger.debug(
+                        f"执行选项选择: SelectOption (HSV), order_by={order_by}, index={index}"
+                    )
                     context.run_task("SOSSelectOption", pipeline_override=pp_override)
                 else:
                     logger.error(f"未知的选项选择方法: {method}")
@@ -452,6 +458,9 @@ class SOSNodeProcess(CustomAction):
                         logger.debug("未识别到途中偶遇选项界面，跳过")
                         return False
 
+                    logger.debug(
+                        f"执行途中偶遇选项选择: SelectEncounterOption (OCR), expected={expected}"
+                    )
                     context.run_task(
                         "SOSSelectEncounterOption_OCR",
                         pipeline_override={
@@ -477,6 +486,9 @@ class SOSNodeProcess(CustomAction):
                         logger.debug("未识别到途中偶遇选项界面，跳过")
                         return False
 
+                    logger.debug(
+                        f"执行途中偶遇选项选择: SelectEncounterOption (HSV), order_by={order_by}, index={index}"
+                    )
                     context.run_task(
                         "SOSSelectEncounterOption_HSV",
                         pipeline_override={
