@@ -7,8 +7,21 @@
     "mirrorchyan_multiplatform": true,
     "controller": [
         {
-            "name": "ADB 默认方式",
+            "name": "ADB",
+            "label": "模拟器",
             "type": "Adb"
+        },
+        {
+            "name": "PC",
+            "label": "PC",
+            "type": "Win32",
+            "win32": {
+                "class_regex": "UnityWndClass",
+                "window_regex": "重返未来.*1999",
+                "screencap": "PrintWindow",
+                "mouse": "SendMessageWithCursorPos",
+                "keyboard": "SendMessageWithCursorPos"
+            }
         }
     ],
     "resource": [
