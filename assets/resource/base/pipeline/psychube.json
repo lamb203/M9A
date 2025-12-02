@@ -119,29 +119,21 @@
     },
     "PsychubeEatCandyPage": {
         "recognition": {
-            "type": "Custom",
+            "type": "OCR",
             "param": {
-                "custom_recognition": "Count",
-                "custom_recognition_param": {
-                    "target": 20, // 考虑到小小糖回 5 体力，4 次体力作战共需 100 体力，设定吃糖上限 20 
-                    "recognition": {
-                        "type": "OCR",
-                        "param": {
-                            "roi": [
-                                465,
-                                571,
-                                277,
-                                149
-                            ],
-                            "expected": [
-                                "活性",
-                                "恢复"
-                            ]
-                        }
-                    }
-                }
+                "roi": [
+                    465,
+                    571,
+                    277,
+                    149
+                ],
+                "expected": [
+                    "活性",
+                    "恢复"
+                ]
             }
         },
+        "max_hit": 20,
         "next": [
             "EatCandyPage"
         ]

@@ -348,32 +348,7 @@
         "action": {
             "type": "Click"
         },
-        "next": [
-            "CountDownload",
-            "DisableDownload"
-        ]
-    },
-    "CountDownload": {
-        "recognition": {
-            "type": "Custom",
-            "param": {
-                "custom_recognition": "Count",
-                "custom_recognition_param": {
-                    "target": 5
-                }
-            }
-        }
-    },
-    "DisableDownload": {
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "DisableNode",
-                "custom_action_param": {
-                    "node_name": "Download"
-                }
-            }
-        }
+        "max_hit": 5
     },
     "SkipButton": {
         "recognition": {
@@ -572,15 +547,7 @@
         }
     },
     "ClickHomeCount": {
-        "recognition": {
-            "type": "Custom",
-            "param": {
-                "custom_recognition": "Count",
-                "custom_recognition_param": {
-                    "target": 20
-                }
-            }
-        },
+        "max_hit": 20,
         "action": {
             "type": "Click",
             "param": {
