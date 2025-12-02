@@ -231,10 +231,10 @@ class SOSNodeProcess(CustomAction):
 
         # 无 event 的处理
         if node_type in ["购物契机", "遭遇", "途中余兴", "冲突", "恶战", "巧匠之手"]:
-            actions: list = nodes[node_type]["actions"] + [
+            actions = nodes[node_type]["actions"] + [
                 {"type": "RunNode", "name": "FlagInSOSMain"}
             ]
-            interrupts: list = self._resolve_interrupts(
+            interrupts = self._resolve_interrupts(
                 nodes[node_type].get("interrupts", []), nodes
             )
         else:
@@ -247,9 +247,9 @@ class SOSNodeProcess(CustomAction):
             info: dict = nodes[node_type]["events"][event_name]
             # 如果是最终难题，不添加 FlagInSOSMain
             if event_name == "最终难题":
-                actions: list = info["actions"]
+                actions = info["actions"]
             else:
-                actions: list = info["actions"] + [
+                actions = info["actions"] + [
                     {"type": "RunNode", "name": "FlagInSOSMain"}
                 ]
             interrupts: list = self._resolve_interrupts(
@@ -373,11 +373,17 @@ class SOSNodeProcess(CustomAction):
                     if not check_reco or not check_reco.hit:
                         return False
 
-                    pp_override = {"SOSSelectOption": {"next": []}}
+                    origin_node1 = context.get_node_data("SOSSelectOption")
+
+                    pp_override = {
+                        "SOSSelectOption": {
+                            "next": origin_node1.get("next", []) if origin_node1 else []
+                        }
+                    }
 
                     # 为每个 expected 创建独立节点
                     for i, expected in enumerate(expected_list):
-                        node_name = f"[JumpBack]SOSSelectOption_OCR_{i}"
+                        node_name = f"SOSSelectOption_OCR_{i}"
                         # 基于 origin_node 创建新节点（使用深拷贝）
                         new_node = copy.deepcopy(origin_node)
                         if "recognition" not in new_node:
@@ -392,12 +398,14 @@ class SOSNodeProcess(CustomAction):
 
                         # 添加到 pipeline_override
                         pp_override[node_name] = new_node
-                        pp_override["SOSSelectOption"]["next"].append(node_name)
+                        pp_override["SOSSelectOption"]["next"].append(
+                            "[JumpBack]" + node_name
+                        )
 
                     context.run_task("SOSSelectOption", pipeline_override=pp_override)
                 elif method == "HSV":
-                    order_by: str = action.get("order_by", "Vertical")
-                    index: int = action.get("index", 0)
+                    order_by = action.get("order_by", "Vertical")
+                    index = action.get("index", 0)
 
                     # 先识别一下是否有选项界面
                     img = context.tasker.controller.post_screencap().wait().get()
@@ -406,15 +414,11 @@ class SOSNodeProcess(CustomAction):
                         return False
 
                     origin_node = context.get_node_data("SOSSelectOption")
-                    if not origin_node:
-                        logger.error("未找到原始节点 SOSSelectOption")
-                        return False
 
                     override_next = (
-                        origin_node.get("next", []).append(
-                            "[JumpBack]SOSSelectOption_HSV"
-                        ),
-                    )
+                        origin_node.get("next", []) if origin_node else []
+                    ).copy()
+                    override_next.append("[JumpBack]SOSSelectOption_HSV")
 
                     pp_override = {
                         "SOSSelectOption": {"next": override_next},
@@ -436,7 +440,7 @@ class SOSNodeProcess(CustomAction):
                 method = action.get("method")
                 if method == "OCR":
                     expected: str = action.get("expected", "")
-                    order_by: str = action.get("order_by", "Vertical")
+                    order_by = action.get("order_by", "Vertical")
 
                     # 先识别一下是否有途中偶遇选项界面
                     time.sleep(1)
@@ -460,8 +464,8 @@ class SOSNodeProcess(CustomAction):
                         },
                     )
                 elif method == "HSV":
-                    order_by: str = action.get("order_by", "Vertical")
-                    index: int = action.get("index", 0)
+                    order_by = action.get("order_by", "Vertical")
+                    index = action.get("index", 0)
 
                     # 先识别一下是否有途中偶遇选项界面
                     time.sleep(1)
