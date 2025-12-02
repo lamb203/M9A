@@ -24,6 +24,9 @@ class DuringAct(CustomAction):
     }
     """
 
+    # 标记当前是否为主线版本
+    is_main_story = False
+
     def run(
         self,
         context: Context,
@@ -50,18 +53,19 @@ class DuringAct(CustomAction):
                             }
                         }
                     )
-                    # 若为主线版本，将 next 设为不可用
+                    # 若为主线版本，标记状态，但不直接跳过（让 CombatActivityOverride 根据 mode 决定）
                     if item["activity"]["combat"]["event_type"] == "MainStory":
-                        context.override_pipeline(
-                            {"CombatActivityOverride": {"enabled": False}}
-                        )
+                        DuringAct.is_main_story = True
                         logger.info(f"当前为主线版本：{key} {item['version_name']}")
                         logger.info(
                             f"距离版本结束还剩 {ms_timestamp_diff_to_dhm(now, item['end_time'])}"
                         )
                         logger.info("如果您需要刷取主线关卡，请改用常规作战功能")
-                        context.override_next("JudgeDuringAct", [])
-                        return CustomAction.RunResult(success=True)
+                        # 不复刻模式时，禁用 CombatActivityOverride 并跳过
+                        # 复刻模式时，继续执行让复刻判断来处理
+                        # 这里不直接跳过，让 CombatActivityOverride 来处理
+                    else:
+                        DuringAct.is_main_story = False
                     logger.info(f"当前版本：{key} {item['version_name']}")
                     logger.info(
                         f"距离作战结束还剩 {ms_timestamp_diff_to_dhm(now, item['activity']['combat']['end_time'])}"
@@ -70,6 +74,7 @@ class DuringAct(CustomAction):
                 continue
             break
 
+        DuringAct.is_main_story = False
         context.override_next("JudgeDuringAct", [])
         logger.info("当前不在活动时间内，跳过当前任务")
         return CustomAction.RunResult(success=True)
@@ -92,6 +97,15 @@ class CombatActivityOverride(CustomAction):
     ) -> CustomAction.RunResult:
 
         mode = json.loads(argv.custom_action_param)["mode"]
+
+        # 如果主线版本且非复刻模式（mode=0），跳过任务
+        if DuringAct.is_main_story and mode == 0:
+            context.override_pipeline(
+                {"CombatActivityOverride": {"enabled": False}}
+            )
+            context.override_next("CombatActivityOverride", [])
+            logger.info("主线版本且未开启复刻模式，跳过当前任务")
+            return CustomAction.RunResult(success=True)
 
         with open(
             f"resource/data/activity/{DuringAct.resource}.json", encoding="utf-8"
