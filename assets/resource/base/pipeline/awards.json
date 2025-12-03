@@ -586,7 +586,8 @@
             "HomeFlag",
             "[JumpBack]ObtainedAwards",
             "[JumpBack]JukeboxExitPurchase",
-            "[JumpBack]BackButton"
+            "[JumpBack]BackButton",
+            "[JumpBack]ClickBlank"
         ]
     },
     "JukeboxExitPurchase": {
@@ -704,7 +705,9 @@
             "HomeFlag",
             "[JumpBack]JukeboxBadge_3.2_OneClick",
             "[JumpBack]ObtainedAwards",
-            "[JumpBack]HomeButton"
+            "[JumpBack]HomeButton",
+            "[JumpBack]BackButton",
+            "[JumpBack]ClickBlank"
         ]
     },
     "JukeboxBadge_3.2_OneClick": {
