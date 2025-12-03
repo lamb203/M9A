@@ -115,7 +115,8 @@
         "child_args": [
             "-u",
             "./../agent/main.py"
-        ]
+        ],
+        "timeout": -1
     },
     "task": [
         {
