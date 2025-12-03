@@ -121,7 +121,8 @@
     "task": [
         {
             "name": "启动游戏",
-            "entry": "StartUp"
+            "entry": "StartUp",
+            "description": "暂不支持国际服PC端运行该任务"
         },
         {
             "name": "收取荒原",
@@ -215,7 +216,8 @@
         },
         {
             "name": "关闭游戏",
-            "entry": "Close1999"
+            "entry": "Close1999",
+            "description": "暂不支持国际服PC端运行该任务"
         },
         {
             "name": "局外演绎：黄昏的音序",
