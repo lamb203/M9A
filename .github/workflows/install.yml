@@ -131,7 +131,7 @@ jobs:
           else
             echo "MFA directory not found, skipping copy."
           fi
-          cp -rpvn tools/registry/游戏PC端注册表修改_ModifyPCRegistry.ps1 install/
+          cp -rpvn tools/registry/. install/
 
       - uses: actions/upload-artifact@v4
         with:
