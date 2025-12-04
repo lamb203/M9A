@@ -1123,6 +1123,7 @@
             "SOSCombat",
             "SOSFailed",
             "[JumpBack]SOSCombatDialog",
+            "SOS_Skip",
             "[JumpBack]CloseTip"
         ]
     },
