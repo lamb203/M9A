@@ -17,6 +17,25 @@ from .exceptions import (
 )
 
 
+def _infer_channel_from_version(version: str) -> str:
+    """
+    从版本号推断更新通道
+
+    Args:
+        version: 版本号，如 "v3.17.0-beta.7", "v3.16.5-alpha.1", "v3.16.5"
+
+    Returns:
+        str: 推断的通道 "alpha", "beta" 或 "stable"
+    """
+    version_lower = version.lower()
+    if "-alpha" in version_lower:
+        return "alpha"
+    elif "-beta" in version_lower:
+        return "beta"
+    else:
+        return "stable"
+
+
 def check_resource_version(interface_file_path: str = "./interface.json") -> dict:
     """
     检查资源版本是否为最新
@@ -67,7 +86,7 @@ def check_resource_version(interface_file_path: str = "./interface.json") -> dic
 
         # 读取更新通道配置
         channel_map = {0: "alpha", 1: "beta", 2: "stable"}
-        channel = "stable"  # 默认值
+        config_channel = "stable"  # 默认值
 
         config_path = Path("./config/config.json")
         if config_path.exists():
@@ -75,9 +94,29 @@ def check_resource_version(interface_file_path: str = "./interface.json") -> dic
                 with open(config_path, "r", encoding="utf-8") as f:
                     config_data = json.load(f)
                     channel_index = config_data.get("ResourceUpdateChannelIndex", 2)
-                    channel = channel_map.get(channel_index, "stable")
+                    config_channel = channel_map.get(channel_index, "stable")
             except Exception as e:
                 logger.debug(f"读取config.json失败，使用默认通道stable: {e}")
+
+        # 从当前版本号推断实际使用的通道
+        inferred_channel = _infer_channel_from_version(current_version)
+
+        # 通道优先级：alpha > beta > stable（数字越小越激进）
+        # 选择两者中更激进的通道，这样：
+        # 1. 当前是beta，配置是stable → 用beta（避免降级误报）
+        # 2. 当前是stable，配置是beta → 用beta（允许用户升级到beta）
+        channel_priority = {"alpha": 0, "beta": 1, "stable": 2}
+
+        if channel_priority[inferred_channel] <= channel_priority[config_channel]:
+            channel = inferred_channel
+        else:
+            channel = config_channel
+
+        if inferred_channel != config_channel:
+            logger.debug(
+                f"检测到通道不一致: 配置通道={config_channel}, "
+                f"当前版本推断通道={inferred_channel}, 将使用 {channel} 通道进行版本检查"
+            )
 
         # 检测运行环境和架构，转换为小写
         os_type = platform.system().lower()
