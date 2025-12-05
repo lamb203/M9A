@@ -5,7 +5,7 @@
             "param": {
                 "custom_action": "TargetCountInit",
                 "custom_action_param": {
-                    "target_count": 0
+                    "target_count": 114514
                 }
             }
         },

@@ -723,10 +723,8 @@ def _tc_get_available_count(context: Context) -> int:
 
 
 def _tc_pick_times(available_count: int, target_count: int, already_count: int) -> int:
-    if target_count > 0:
-        left_count = max(target_count - already_count, 0)
-        return min(4, available_count, left_count)
-    return min(4, available_count)
+    left_count = max(target_count - already_count, 0)
+    return min(4, available_count, left_count)
 
 
 @AgentServer.custom_action("TargetCountInit")
@@ -742,17 +740,14 @@ class TargetCountInit(CustomAction):
     ) -> CustomAction.RunResult:
 
         param = json.loads(argv.custom_action_param or "{}")
-        target_count = int(param.get("target_count", 0))
+        target_count = int(param.get("target_count", 114514))
 
         _TargetCountState.target_count = target_count
         _TargetCountState.already_count = 0
         _TargetCountState.current_times = 0
         _TargetCountState.candy_attempts = 0
 
-        if target_count > 0:
-            logger.info(f"目标刷图次数：{target_count}")
-        else:
-            logger.info("清空体力模式，未设置目标次数")
+        logger.info(f"目标刷图次数：{target_count}")
 
         return CustomAction.RunResult(success=True)
 
@@ -769,10 +764,8 @@ class TargetCountDetermine(CustomAction):
         argv: CustomAction.RunArg,
     ) -> CustomAction.RunResult:
 
-        if (
-            _TargetCountState.target_count > 0
-            and _TargetCountState.already_count >= _TargetCountState.target_count
-        ):
+        # 已达到目标次数，结束任务
+        if _TargetCountState.already_count >= _TargetCountState.target_count:
             context.override_next("TargetCountDetermine", ["TargetCountFinish"])
             return CustomAction.RunResult(success=True)
 
@@ -874,10 +867,7 @@ class TargetCountProgress(CustomAction):
 
         logger.info(f"累计已刷 {_TargetCountState.already_count} 次")
 
-        if (
-            _TargetCountState.target_count > 0
-            and _TargetCountState.already_count >= _TargetCountState.target_count
-        ):
+        if _TargetCountState.already_count >= _TargetCountState.target_count:
             logger.info("达到目标次数，准备结束任务")
             context.override_next("TargetCountProgress", ["TargetCountFinish"])
         else:
