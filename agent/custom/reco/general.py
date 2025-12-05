@@ -658,3 +658,23 @@ class Count(CustomRecognition):
         except Exception as e:
             logger.error(f"Count识别失败: {e}")
             return None
+
+
+@AgentServer.custom_recognition("CheckStopping")
+class CheckStopping(CustomRecognition):
+    """
+    检查任务是否即将停止。
+    """
+
+    def analyze(
+        self,
+        context: Context,
+        argv: CustomRecognition.AnalyzeArg,
+    ) -> Union[CustomRecognition.AnalyzeResult, Optional[RectType]]:
+        if context.tasker.stopping:
+            return CustomRecognition.AnalyzeResult(
+                box=[0, 0, 0, 0],
+                detail={"node": "CheckStopping", "stopping": True},
+            )
+        else:
+            return None

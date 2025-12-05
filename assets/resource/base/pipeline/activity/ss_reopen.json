@@ -194,6 +194,7 @@
             "type": "Click"
         },
         "next": [
+            "CheckStopping",
             "Victory_NoReplay",
             "SSNoReplay",
             "[JumpBack]EatCandyPage"

@@ -3,5 +3,13 @@
         "focus": {
             "Node.Action.Starting": "err:任务超时，可能未按预期进行。"
         }
+    },
+    "CheckStopping": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "CheckStopping"
+            }
+        }
     }
 }

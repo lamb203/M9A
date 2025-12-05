@@ -259,7 +259,13 @@ class SOSNodeProcess(CustomAction):
                 info.get("interrupts", []), nodes
             )
 
+        if context.tasker.stopping:
+            logger.debug("任务即将停止，跳过节点处理")
+            return CustomAction.RunResult(success=True)
         for action in actions:
+            if context.tasker.stopping:
+                logger.debug("任务即将停止，跳过节点处理")
+                return CustomAction.RunResult(success=True)
             if not self.exec_main(context, action, interrupts):
                 return CustomAction.RunResult(success=False)
         return CustomAction.RunResult(success=True)
@@ -301,12 +307,18 @@ class SOSNodeProcess(CustomAction):
     def exec_main(self, context: Context, action: dict | list, interrupts: list):
         retry_times = 0
         while retry_times < 20:
+            if context.tasker.stopping:
+                logger.debug("任务即将停止，跳过节点处理")
+                return False
             # 先尝试执行主动作
             if self.exec_action(context.clone(), action):
                 return True
 
             # 尝试所有 interrupts
             for interrupt in interrupts:
+                if context.tasker.stopping:
+                    logger.debug("任务即将停止，跳过节点处理")
+                    return False
                 img = context.tasker.controller.post_screencap().wait().get()
                 if self.exec_action(context.clone(), interrupt, img):
                     retry_times = 0
@@ -333,6 +345,9 @@ class SOSNodeProcess(CustomAction):
         elif isinstance(action, list):
             # 对于列表，依次执行，任意一个成功即返回成功
             for act in action:
+                if context.tasker.stopping:
+                    logger.debug("任务即将停止，跳过节点处理")
+                    return False
                 if self.exec_action(context, act):
                     return True
         elif isinstance(action, dict):
@@ -340,6 +355,9 @@ class SOSNodeProcess(CustomAction):
             action_type = action.get("type")
             if action_type == "RunNode":
                 name = action.get("name", "")
+                if context.tasker.stopping:
+                    logger.debug("任务即将停止，跳过节点处理")
+                    return False
                 # 如果是 SOSTeamSelect 且已经运行过，直接跳过
                 if (
                     name == "SOSTeamSelect"
@@ -419,12 +437,18 @@ class SOSNodeProcess(CustomAction):
                     logger.debug(
                         f"执行选项选择: SelectOption (OCR), expected={expected_list}"
                     )
+                    if context.tasker.stopping:
+                        logger.debug("任务即将停止，跳过节点处理")
+                        return False
                     context.run_task("SOSSelectOption", pipeline_override=pp_override)
                 elif method == "HSV":
                     order_by = action.get("order_by", "Vertical")
                     index = action.get("index", 0)
 
                     # 先识别一下是否有选项界面
+                    if context.tasker.stopping:
+                        logger.debug("任务即将停止，跳过节点处理")
+                        return False
                     img = context.tasker.controller.post_screencap().wait().get()
                     check_reco = context.run_recognition("SOSSelectOption", img)
                     if not check_reco or not check_reco.hit:
@@ -451,6 +475,9 @@ class SOSNodeProcess(CustomAction):
                     logger.debug(
                         f"执行选项选择: SelectOption (HSV), order_by={order_by}, index={index}"
                     )
+                    if context.tasker.stopping:
+                        logger.debug("任务即将停止，跳过节点处理")
+                        return False
                     context.run_task("SOSSelectOption", pipeline_override=pp_override)
                 else:
                     logger.error(f"未知的选项选择方法: {method}")
@@ -475,6 +502,9 @@ class SOSNodeProcess(CustomAction):
                     logger.debug(
                         f"执行途中偶遇选项选择: SelectEncounterOption (OCR), expected={expected}"
                     )
+                    if context.tasker.stopping:
+                        logger.debug("任务即将停止，跳过节点处理")
+                        return False
                     context.run_task(
                         "SOSSelectEncounterOption_OCR",
                         pipeline_override={
@@ -491,6 +521,9 @@ class SOSNodeProcess(CustomAction):
                     index = action.get("index", 0)
 
                     # 先识别一下是否有途中偶遇选项界面
+                    if context.tasker.stopping:
+                        logger.debug("任务即将停止，跳过节点处理")
+                        return False
                     time.sleep(1)
                     img = context.tasker.controller.post_screencap().wait().get()
                     check_reco = context.run_recognition(
@@ -503,6 +536,9 @@ class SOSNodeProcess(CustomAction):
                     logger.debug(
                         f"执行途中偶遇选项选择: SelectEncounterOption (HSV), order_by={order_by}, index={index}"
                     )
+                    if context.tasker.stopping:
+                        logger.debug("任务即将停止，跳过节点处理")
+                        return False
                     context.run_task(
                         "SOSSelectEncounterOption_HSV",
                         pipeline_override={
