@@ -197,8 +197,20 @@ class SOSSelectNode(CustomAction):
                         time.sleep(1)
                         retry_times += 1
             else:
-                SOSSelectNode.event_name = ""
-                return CustomAction.RunResult(success=False)
+                # 事件名识别失败，检查是否是购物契机被误识别为其他节点
+                img = context.tasker.controller.post_screencap().wait().get()
+                shopping_rec = context.run_recognition("SOSShopping", img)
+                if shopping_rec and shopping_rec.hit:
+                    logger.warning(
+                        f"节点类型 {node_type} 事件名识别失败，"
+                        f"但检测到购物契机界面，修正节点类型"
+                    )
+                    node_type = "购物契机"
+                    SOSSelectNode.node_type = node_type
+                    SOSSelectNode.event_name = ""
+                else:
+                    SOSSelectNode.event_name = ""
+                    return CustomAction.RunResult(success=False)
         else:
             # 没有事件名
             SOSSelectNode.event_name = ""
