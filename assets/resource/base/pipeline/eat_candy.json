@@ -1,10 +1,10 @@
 {
     "EatCandy": {
         "next": [
-            "EatCandyNext"
+            "EatCandyEnter"
         ]
     },
-    "EatCandyNext": {
+    "EatCandyEnter": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -52,167 +52,106 @@
             }
         },
         "next": [
-            "MiniCandy",
-            "SmallCandy",
-            "OverflowCandy",
-            "BigCandy",
+            "[JumpBack]EatMiniCandy",
+            "[JumpBack]EatCandyStart",
+            "[JumpBack]EatCandyCloseTip",
+            "[JumpBack]EatCandyConfirm",
             "QuitEatCandyPage"
         ]
     },
-    "MiniCandy": {
+    "EatCandyCloseTip": {
+        "enabled": false,
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    989,
-                    212,
-                    165,
-                    200
+                    531,
+                    319,
+                    36,
+                    35
                 ],
-                "expected_code": "Set in code."
+                "template": "EatCandy/Tip.png",
+                "threshold": 0.95
             }
         },
-        "next": [
-            "EatMiniCandy"
-        ]
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000
     },
-    "SmallCandy": {
+    "EatCandyStart": {
         "recognition": {
-            "type": "OCR",
+            "type": "Custom",
             "param": {
-                "roi": [
-                    829,
-                    65,
-                    145,
-                    295
-                ],
-                "expected_code": "Set in code."
+                "custom_recognition": "CandyPageRecord"
             }
         },
-        "next": [
-            "EatSmallCandy"
-        ]
+        "action": {
+            "type": "Click"
+        },
+        "post_wait_freezes": {
+            "time": 1000,
+            "target_offset": [
+                -50,
+                -50,
+                100,
+                100
+            ]
+        },
+        "attach": {}
     },
-    "OverflowCandy": {
+    "EatCandyPageCountRecord": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    "^\\d+$"
+                ],
+                "only_rec": true
+            }
+        }
+    },
+    "EatCandyPageValidPeriodRecord": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": [
+                    ".*"
+                ]
+            }
+        }
+    },
+    "CandyRecognizeRemainingAp": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    402,
+                    545,
+                    553,
+                    136,
+                    51
+                ],
+                "expected": [
+                    "^\\d+$"
+                ]
+            }
+        }
+    },
+    "CandyRecognizeMaxAp": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    695,
+                    580,
                     34,
-                    139,
-                    178
+                    24
                 ],
-                "expected_code": "Set in code."
+                "expected": [
+                    "^\\d+$"
+                ]
             }
-        },
-        "next": [
-            "EatOverflowCandy"
-        ]
-    },
-    "BigCandy": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    856,
-                    373,
-                    196,
-                    344
-                ],
-                "expected_code": "Set in code."
-            }
-        },
-        "next": [
-            "EatBigCandy"
-        ]
-    },
-    "EatMiniCandy": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    989,
-                    212,
-                    165,
-                    200
-                ],
-                "template": "EatCandy/MiniCandy.png"
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 5000,
-        "next": [
-            "SelectMiniCandyMax"
-        ]
-    },
-    "EatSmallCandy": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    829,
-                    65,
-                    145,
-                    295
-                ],
-                "template": "EatCandy/SmallCandy.png"
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 5000,
-        "next": [
-            "EatCandyConfirm",
-            "EatSmallCandy"
-        ]
-    },
-    "EatOverflowCandy": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    403,
-                    35,
-                    137,
-                    123
-                ],
-                "template": "EatCandy/OverflowCandy.png"
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 5000,
-        "next": [
-            "EatCandyConfirm",
-            "EatOverflowCandy"
-        ]
-    },
-    "EatBigCandy": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    856,
-                    373,
-                    196,
-                    344
-                ],
-                "template": "EatCandy/BigCandy.png"
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 5000,
-        "next": [
-            "EatCandyConfirm",
-            "EatBigCandy"
-        ]
+        }
     },
     "EatCandyConfirm": {
         "recognition": {
@@ -229,12 +168,7 @@
         },
         "action": {
             "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "EatCandyConfirm",
-            "QuitEatCandyPage"
-        ]
+        }
     },
     "QuitEatCandyPage": {
         "recognition": {
@@ -269,44 +203,29 @@
             "QuitEatCandyPage"
         ]
     },
-    "SelectMiniCandyMax": {
+    "EatMiniCandy": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    782,
-                    414,
-                    52,
-                    40
+                    1016,
+                    235,
+                    104,
+                    100
                 ],
-                "template": "EatCandy/SelectMiniCandyMax.png"
+                "template": "EatCandy/MiniCandy.png"
             }
         },
         "action": {
             "type": "Click"
-        },
-        "next": [
-            "ConvertCandyConfirm"
-        ]
+        }
     },
-    "ConvertCandyConfirm": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    594,
-                    491,
-                    88,
-                    48
-                ],
-                "template": "EatCandy/ConvertCandyConfirm.png"
-            }
-        },
+    "ResetEatCandyFlag": {
         "action": {
-            "type": "Click"
-        },
-        "next": [
-            "QuitEatCandyPage"
-        ]
+            "type": "Custom",
+            "param": {
+                "custom_action": "ResetEatCandyFlag"
+            }
+        }
     }
 }

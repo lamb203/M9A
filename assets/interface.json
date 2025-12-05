@@ -921,140 +921,149 @@
             ]
         },
         "吃糖": {
-            "type": "select",
+            "type": "switch",
             "cases": [
                 {
-                    "name": "吃24小时内过期的糖",
-                    "pipeline_override": {
-                        "MiniCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": "小时"
-                                }
-                            }
-                        },
-                        "SmallCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": "小时"
-                                }
-                            }
-                        },
-                        "OverflowCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": "小时"
-                                }
-                            }
-                        },
-                        "BigCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": "小时"
-                                }
-                            }
-                        }
-                    }
+                    "name": "Yes",
+                    "option": [
+                        "糖果有效期",
+                        "吃糖次数",
+                        "快吃!",
+                        "关闭吃糖提示"
+                    ]
                 },
                 {
-                    "name": "吃7天内过期的糖",
+                    "name": "No",
                     "pipeline_override": {
-                        "MiniCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "[1-6]天",
-                                        "小时"
-                                    ]
-                                }
-                            }
+                        "EatMiniCandy": {
+                            "enabled": false
                         },
-                        "SmallCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "[1-6]天",
-                                        "小时"
-                                    ]
-                                }
-                            }
+                        "EatCandyStart": {
+                            "enabled": false
                         },
-                        "OverflowCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "[1-6]天",
-                                        "小时"
-                                    ]
-                                }
-                            }
-                        },
-                        "BigCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "[1-6]天",
-                                        "小时"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "吃14天内过期的糖",
-                    "pipeline_override": {
-                        "MiniCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "天",
-                                        "小时"
-                                    ]
-                                }
-                            }
-                        },
-                        "SmallCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "天",
-                                        "小时"
-                                    ]
-                                }
-                            }
-                        },
-                        "OverflowCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "天",
-                                        "小时"
-                                    ]
-                                }
-                            }
-                        },
-                        "BigCandy": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "天",
-                                        "小时"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "不吃糖",
-                    "pipeline_override": {
-                        "EatCandy": {
-                            "next": []
+                        "EatCandyPage": {
+                            "enabled": false
                         }
                     }
                 }
-            ]
+            ],
+            "description": "是否吃糖"
+        },
+        "糖果有效期": {
+            "label": "有效期",
+            "type": "select",
+            "cases": [
+                {
+                    "name": "24h",
+                    "description": "24小时内过期的糖",
+                    "pipeline_override": {
+                        "EatCandyStart": {
+                            "attach": {
+                                "valid_period": "24h"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "7d",
+                    "description": "7天内过期的糖",
+                    "pipeline_override": {
+                        "EatCandyStart": {
+                            "attach": {
+                                "valid_period": "7d"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "14d",
+                    "description": "14天内过期的糖",
+                    "pipeline_override": {
+                        "EatCandyStart": {
+                            "attach": {
+                                "valid_period": "14d"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "无限期",
+                    "description": "不会过期的糖",
+                    "pipeline_override": {
+                        "EatCandyStart": {
+                            "attach": {
+                                "valid_period": "infinite"
+                            }
+                        }
+                    }
+                }
+            ],
+            "description": "可以吃的糖果的有效期"
+        },
+        "吃糖次数": {
+            "type": "input",
+            "label": "次数",
+            "inputs": [
+                {
+                    "name": "次数",
+                    "pipeline_type": "int",
+                    "default": "114514",
+                    "verify": "^(0|[1-9]\\d*)$"
+                }
+            ],
+            "pipeline_override": {
+                "EatCandyStart": {
+                    "max_hit": "{次数}"
+                }
+            }
+        },
+        "快吃!": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "EatCandyStart": {
+                            "attach": {
+                                "fast": 1
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "EatCandyStart": {
+                            "attach": {
+                                "fast": 0
+                            }
+                        }
+                    }
+                }
+            ],
+            "description": "死鬼，快吃！每次尽量吃糖，但不超过体力上限"
+        },
+        "关闭吃糖提示": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "EatCandyCloseTip": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "EatCandyCloseTip": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ],
+            "description": "关闭吃糖时弹出的本日登录不再提醒的提示，请慎重选择！"
         },
         "好梦井": {
             "type": "switch",

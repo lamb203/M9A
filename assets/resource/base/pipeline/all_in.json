@@ -424,6 +424,9 @@
                     "复现"
                 ]
             }
-        }
+        },
+        "next": [
+            "ResetEatCandyFlag"
+        ]
     }
 }

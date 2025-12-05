@@ -42,4 +42,5 @@ __all__ = [
     "SOSNodeProcess",
     "SOSSelectEncounterOption_OCR",
     "SOSSelectEncounterOption_HSV",
+    "ResetEatCandyFlag",
 ]

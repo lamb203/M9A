@@ -979,3 +979,44 @@ class SSReopenReplay(CustomAction):
             context.run_task("SSReopenBackToMain")
 
         return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("EatCandyStart")
+class EatCandyStart(CustomAction):
+    """
+    开始吃糖。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+
+        params: dict | None = context.get_node_data("EatCandyStart")
+        if not params:
+            logger.error("EatCandyStart 节点不存在")
+            return CustomAction.RunResult(success=False)
+        # 有效期：24h, 7d, 14d, infinite
+        valid_period = params.get("valid_period", "24h")
+        # 最大吃糖次数：0表示无限吃
+        max_times = params.get("max_times", 0)
+
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("ResetEatCandyFlag")
+class ResetEatCandyFlag(CustomAction):
+    """
+    重置吃糖标记，用于 QuitEatCandyPage 后清除非快速模式的限制。
+    """
+
+    def run(
+        self,
+        context: Context,
+        argv: CustomAction.RunArg,
+    ) -> CustomAction.RunResult:
+        from custom.reco.combat import CandyPageRecord
+
+        CandyPageRecord.reset_eaten_flag()
+        return CustomAction.RunResult(success=True)
