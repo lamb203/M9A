@@ -582,19 +582,17 @@
             }
         }
     },
-    "CCBuyCardAwardTypeRec_OCR": {
+    "CCBuyCardAwardTypeRec_Template": {
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    140,
-                    678,
-                    32,
-                    28
+                    125,
+                    663,
+                    68,
+                    57
                 ],
-                "expected": [
-                    "\\d"
-                ]
+                "template": "CritterCrash/Unknown2.png"
             }
         }
     },

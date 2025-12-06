@@ -61,10 +61,10 @@ class CCBuyCardRec(CustomRecognition):
             # 无法识别奖励框内的卡牌，默认卖掉
             # 分辨卡牌类型
             reco_detail = context.run_recognition(
-                "CCBuyCardAwardTypeRec_OCR", context.tasker.controller.cached_image
+                "CCBuyCardAwardTypeRec_Template", context.tasker.controller.cached_image
             )
             if reco_detail and reco_detail.hit:
-                # 识别到文字，判断不是藏品
+                # 识别到模板，判断不是藏品
                 name = "unknown_2"
             else:
                 # 藏品
