@@ -415,10 +415,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "5-19",
-                                        "level": "Hard"
+                                        "stage": "5-19"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -430,10 +432,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "7-26",
-                                        "level": "Hard"
+                                        "stage": "7-26"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -445,10 +449,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "3-13",
-                                        "level": "Hard"
+                                        "stage": "3-13"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -460,10 +466,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "10-13",
-                                        "level": "Hard"
+                                        "stage": "10-13"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -475,10 +483,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "4-20",
-                                        "level": "Hard"
+                                        "stage": "4-20"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -490,10 +500,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "10-9",
-                                        "level": "Hard"
+                                        "stage": "10-9"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -505,10 +517,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "6-14",
-                                        "level": "Hard"
+                                        "stage": "6-14"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -520,10 +534,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "2-6",
-                                        "level": "Hard"
+                                        "stage": "2-6"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -535,10 +551,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "9-8",
-                                        "level": "Hard"
+                                        "stage": "9-8"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -550,10 +568,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "9-15",
-                                        "level": "Hard"
+                                        "stage": "9-15"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -565,10 +585,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "5-4",
-                                        "level": "Hard"
+                                        "stage": "5-4"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -580,10 +602,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "10-22",
-                                        "level": "Hard"
+                                        "stage": "10-22"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -595,10 +619,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "4-4",
-                                        "level": "Story"
+                                        "stage": "4-4"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Story"
                             }
                         }
                     }
@@ -610,10 +636,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "8-18",
-                                        "level": "Hard"
+                                        "stage": "8-18"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -625,10 +653,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "9-1",
-                                        "level": "Hard"
+                                        "stage": "9-1"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -640,10 +670,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "5-14",
-                                        "level": "Hard"
+                                        "stage": "5-14"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -655,10 +687,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "7-20",
-                                        "level": "Hard"
+                                        "stage": "7-20"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -670,10 +704,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "10-2",
-                                        "level": "Hard"
+                                        "stage": "10-2"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -685,10 +721,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "3-15",
-                                        "level": "Story"
+                                        "stage": "3-15"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Story"
                             }
                         }
                     }
@@ -700,10 +738,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "10-17",
-                                        "level": "Hard"
+                                        "stage": "10-17"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -715,10 +755,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "9-3",
-                                        "level": "Hard"
+                                        "stage": "9-3"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -730,10 +772,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "5-8",
-                                        "level": "Hard"
+                                        "stage": "5-8"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -745,10 +789,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "9-16",
-                                        "level": "Hard"
+                                        "stage": "9-16"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -760,10 +806,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "5-7",
-                                        "level": "Hard"
+                                        "stage": "5-7"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -775,10 +823,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "5-3",
-                                        "level": "Hard"
+                                        "stage": "5-3"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -790,10 +840,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "9-6",
-                                        "level": "Hard"
+                                        "stage": "9-6"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -805,10 +857,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "7-19",
-                                        "level": "Hard"
+                                        "stage": "7-19"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -820,10 +874,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "4-20",
-                                        "level": "Hard"
+                                        "stage": "4-20"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -835,10 +891,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "10-4",
-                                        "level": "Hard"
+                                        "stage": "10-4"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -850,10 +908,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "7-16",
-                                        "level": "Hard"
+                                        "stage": "7-16"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -865,10 +925,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "8-18",
-                                        "level": "Hard"
+                                        "stage": "8-18"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -880,10 +942,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "9-1",
-                                        "level": "Hard"
+                                        "stage": "9-1"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -895,10 +959,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "LP-06",
-                                        "level": null
+                                        "stage": "LP-06"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": null
                             }
                         }
                     }
@@ -910,10 +976,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "MA-06",
-                                        "level": null
+                                        "stage": "MA-06"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": null
                             }
                         }
                     }
@@ -925,10 +993,12 @@
                             "action": {
                                 "param": {
                                     "custom_action_param": {
-                                        "stage": "Psychube-07",
-                                        "level": null
+                                        "stage": "Psychube-07"
                                     }
                                 }
+                            },
+                            "attach": {
+                                "level": null
                             }
                         }
                     }
