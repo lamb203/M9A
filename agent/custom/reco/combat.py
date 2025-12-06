@@ -30,7 +30,9 @@ def parse_valid_period_to_hours(text: str) -> float:
     elif "小时" in text or "时" in text:
         return float(num)
     elif "天" in text:
-        return num * 24.0
+        # 游戏内显示"X天"实际上表示剩余时间超过 X*24 小时
+        # 例如"1天"可能是25小时、30小时等，为了正确判断需要略大于 X*24
+        return num * 24.0 + 0.1
     else:
         # 无法识别，可能是无限期
         return -1
