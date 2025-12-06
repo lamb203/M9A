@@ -60,7 +60,25 @@ try:
 except ImportError:
     import logging
 
-    logging.basicConfig(
-        format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO
-    )
+    class ShortLevelFormatter(logging.Formatter):
+        """自定义 Formatter，使用简短的日志级别名称"""
+
+        level_map = {
+            "INFO": "info",
+            "ERROR": "err",
+            "WARNING": "warn",
+            "DEBUG": "debug",
+            "CRITICAL": "critical",
+        }
+
+        def format(self, record):
+            record.level_short = self.level_map.get(
+                record.levelname, record.levelname.lower()
+            )
+            return super().format(record)
+
+    handler = logging.StreamHandler(sys.stderr)
+    handler.setFormatter(ShortLevelFormatter("%(level_short)s:%(message)s"))
+    logging.root.addHandler(handler)
+    logging.root.setLevel(logging.INFO)
     logger = logging
