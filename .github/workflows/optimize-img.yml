@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     paths:
-      - "resource/**/*.png"
+      - "assets/resource/**/*.png"
   workflow_dispatch:
     inputs:
       commit_message:
@@ -16,7 +16,7 @@ on:
     types:
       - closed  
     paths:
-      - "resource/**/*.png"
+      - "assets/resource/**/*.png"
     branches:
       - "main"
 
