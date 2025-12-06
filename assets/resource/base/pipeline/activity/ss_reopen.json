@@ -377,7 +377,7 @@
             "type": "TemplateMatch",
             "param": {
                 "template": [
-                    "../../../tmp/ss_task_entry.png"
+                    "ss_task_entry"
                 ],
                 "roi": [
                     1120,

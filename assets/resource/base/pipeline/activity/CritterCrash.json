@@ -736,7 +736,7 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "../../../tmp/ccdeploy.png"
+                "template": "ccdeploy"
             }
         },
         "inverse": true,
@@ -782,7 +782,7 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": "../../../tmp/ccupdate.png"
+                "template": "ccupdate"
             }
         },
         "inverse": true,

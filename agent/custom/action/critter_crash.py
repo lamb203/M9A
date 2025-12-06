@@ -1,8 +1,5 @@
-import os
 import time
 import json
-import ast
-from PIL import Image
 import numpy as np
 
 from maa.agent.agent_server import AgentServer
@@ -251,16 +248,8 @@ class CCBuyCard(CustomAction):
             roi_array = img[
                 target_roi[1] : target_roi[1] + target_roi[3],
                 target_roi[0] : target_roi[0] + target_roi[2],
-            ]
-            # BGR2RGB
-            rgb_array = roi_array[:, :, ::-1]
-            # 转换为 PIL Image
-            img = Image.fromarray(rgb_array)
-            # 保存图片
-            save_path = "tmp/ccdeploy.png"
-            os.makedirs(os.path.dirname(save_path), exist_ok=True)
-            img.save(save_path)
-            logger.debug(f"已保存 CCDeploy 任务目标区域截图: {save_path}")
+            ].copy()
+            context.override_image("ccdeploy", roi_array)
             context.run_task(
                 "CCDeploy",
                 {
@@ -299,16 +288,8 @@ class CCBuyCard(CustomAction):
                     roi_array = img[
                         box[1] : box[1] + box[3],
                         box[0] : box[0] + box[2],
-                    ]
-                    # BGR2RGB
-                    rgb_array = roi_array[:, :, ::-1]
-                    # 转换为 PIL Image
-                    img = Image.fromarray(rgb_array)
-                    # 保存图片
-                    save_path = "tmp/ccupdate.png"
-                    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-                    img.save(save_path)
-                    logger.debug(f"已保存 CCUpdate 任务目标区域截图: {save_path}")
+                    ].copy()
+                    context.override_image("ccupdate", roi_array)
                     context.run_task(
                         "CCUpdate",
                         {
@@ -342,16 +323,8 @@ class CCBuyCard(CustomAction):
             roi_array = img[
                 target_roi[1] : target_roi[1] + target_roi[3],
                 target_roi[0] : target_roi[0] + target_roi[2],
-            ]
-            # BGR2RGB
-            rgb_array = roi_array[:, :, ::-1]
-            # 转换为 PIL Image
-            img = Image.fromarray(rgb_array)
-            # 保存图片
-            save_path = "tmp/ccdeploy.png"
-            os.makedirs(os.path.dirname(save_path), exist_ok=True)
-            img.save(save_path)
-            logger.debug(f"已保存 CCDeploy 任务目标区域截图: {save_path}")
+            ].copy()
+            context.override_image("ccdeploy", roi_array)
             context.run_task(
                 "CCDeploy",
                 {
@@ -381,9 +354,6 @@ class CCBuyCard(CustomAction):
     def _parse_detail(self, detail) -> dict | None:
         """从detail中解析type和action"""
         try:
-            # 如果是字符串，先用ast.literal_eval解析
-            if isinstance(detail, str):
-                detail = ast.literal_eval(detail)
             # 如果是dict，直接使用
             if isinstance(detail, dict):
                 return detail

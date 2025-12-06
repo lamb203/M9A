@@ -1,11 +1,9 @@
-import os
 import time
 import json
 
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
-from PIL import Image
 
 from utils import logger
 from utils import ms_timestamp_diff_to_dhm
@@ -100,9 +98,7 @@ class CombatActivityOverride(CustomAction):
 
         # 如果主线版本且非复刻模式（mode=0），跳过任务
         if DuringAct.is_main_story and mode == 0:
-            context.override_pipeline(
-                {"CombatActivityOverride": {"enabled": False}}
-            )
+            context.override_pipeline({"CombatActivityOverride": {"enabled": False}})
             context.override_next("CombatActivityOverride", [])
             logger.info("主线版本且未开启复刻模式，跳过当前任务")
             return CustomAction.RunResult(success=True)
@@ -262,19 +258,9 @@ class SSTaskEntryGet(CustomAction):
 
         # 截取图片中 [1170,141,47,53] 区域
         x, y, w, h = 1170, 141, 47, 53
-        roi_array = screen_array[y : y + h, x : x + w]
+        roi_array = screen_array[y : y + h, x : x + w].copy()
 
-        # BGR2RGB
-        rgb_array = roi_array[:, :, ::-1]
-
-        # 转换为 PIL Image
-        img = Image.fromarray(rgb_array)
-
-        # 保存图片
-        save_path = "tmp/ss_task_entry.png"
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        img.save(save_path)
-        logger.info(f"已保存 SS 任务入口截图: {save_path}")
+        context.override_image("ss_task_entry", roi_array)
 
         return CustomAction.RunResult(success=True)
 
