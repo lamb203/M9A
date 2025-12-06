@@ -248,7 +248,7 @@ class CCBuyCard(CustomAction):
             roi_array = img[
                 target_roi[1] : target_roi[1] + target_roi[3],
                 target_roi[0] : target_roi[0] + target_roi[2],
-            ].copy()
+            ]
             context.override_image("ccdeploy", roi_array)
             context.run_task(
                 "CCDeploy",
@@ -288,7 +288,7 @@ class CCBuyCard(CustomAction):
                     roi_array = img[
                         box[1] : box[1] + box[3],
                         box[0] : box[0] + box[2],
-                    ].copy()
+                    ]
                     context.override_image("ccupdate", roi_array)
                     context.run_task(
                         "CCUpdate",
@@ -323,7 +323,7 @@ class CCBuyCard(CustomAction):
             roi_array = img[
                 target_roi[1] : target_roi[1] + target_roi[3],
                 target_roi[0] : target_roi[0] + target_roi[2],
-            ].copy()
+            ]
             context.override_image("ccdeploy", roi_array)
             context.run_task(
                 "CCDeploy",

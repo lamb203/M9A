@@ -89,7 +89,7 @@ jobs:
         with:
           repository: MaaXYZ/MaaFramework
           fileName: "MAA-win-${{ matrix.arch }}*"
-          tag: "v5.1.4"
+          tag: "v5.2.0-beta.2"
           out-file-path: "deps"
           extract: true
 
@@ -156,7 +156,7 @@ jobs:
         with:
           repository: MaaXYZ/MaaFramework
           fileName: "MAA-linux-${{ matrix.arch }}*"
-          tag: "v5.1.4"
+          tag: "v5.2.0-beta.2"
           out-file-path: "deps"
           extract: true
 
@@ -222,7 +222,7 @@ jobs:
         with:
           repository: MaaXYZ/MaaFramework
           fileName: "MAA-macos-${{ matrix.arch }}*"
-          tag: "v5.1.4"
+          tag: "v5.2.0-beta.2"
           out-file-path: "deps"
           extract: true
 

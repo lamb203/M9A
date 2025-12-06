@@ -258,7 +258,7 @@ class SSTaskEntryGet(CustomAction):
 
         # 截取图片中 [1170,141,47,53] 区域
         x, y, w, h = 1170, 141, 47, 53
-        roi_array = screen_array[y : y + h, x : x + w].copy()
+        roi_array = screen_array[y : y + h, x : x + w]
 
         context.override_image("ss_task_entry", roi_array)
 
