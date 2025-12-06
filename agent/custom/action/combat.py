@@ -630,8 +630,12 @@ class SelectCombatStage(CustomAction):
         # 获取关卡信息
         param = json.loads(argv.custom_action_param)
         stage = param["stage"]
-        # stageName = param["stageName"]
-        level = param["level"]
+
+        node_obj = context.get_node_object("SelectCombatStage")
+        if node_obj is None:
+            logger.error("SelectCombatStage 节点不存在")
+            return CustomAction.RunResult(success=False)
+        level = node_obj.attach.get("level", "Hard")
         logger.info(f"当前关卡: {stage}, 难度: {level}")
 
         # 拆分关卡编号，如 "5-19" 拆为 ["5", "19"]

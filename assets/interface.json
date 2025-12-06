@@ -145,8 +145,8 @@
             "name": "常规作战",
             "entry": "Combat",
             "option": [
-                "吃糖",
                 "自定义作战关卡",
+                "吃糖",
                 "作战次数(自定义)"
             ],
             "description": "点击放大图片，仅限刷材料关卡\n![bydjl](resource/announcement/images/mojing_tjb.png)"
@@ -317,7 +317,8 @@
                     "name": "Yes",
                     "pipeline_override": {},
                     "option": [
-                        "作战关卡(自定义)"
+                        "作战关卡(自定义)",
+                        "主线关卡难度"
                     ]
                 }
             ]
@@ -364,14 +365,6 @@
                     "pattern_msg": "请输入关卡号，如6",
                     "verify": "^(\\d+)$",
                     "description": "请输入关卡号，如6"
-                },
-                {
-                    "name": "难度",
-                    "pipeline_type": "string",
-                    "default": "Hard",
-                    "pattern_msg": "请输入难度，如Hard或Story",
-                    "verify": "^(Hard|Story)$",
-                    "description": "请输入难度，如Hard或Story"
                 }
             ],
             "pipeline_override": {
@@ -379,13 +372,38 @@
                     "action": {
                         "param": {
                             "custom_action_param": {
-                                "stage": "{章节号}-{关卡号}",
-                                "level": "{难度}"
+                                "stage": "{章节号}-{关卡号}"
                             }
                         }
                     }
                 }
             }
+        },
+        "主线关卡难度": {
+            "type": "select",
+            "label": "关卡难度",
+            "cases": [
+                {
+                    "name": "厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "故事",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "attach": {
+                                "level": "Story"
+                            }
+                        }
+                    }
+                }
+            ]
         },
         "作战关卡": {
             "type": "select",
