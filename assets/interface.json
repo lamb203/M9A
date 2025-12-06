@@ -1560,7 +1560,8 @@
                         }
                     }
                 }
-            ]
+            ],
+            "description": "每周免费礼包"
         },
         "低阶柜台": {
             "type": "switch",
@@ -1593,7 +1594,8 @@
         },
         "金兔子(低阶柜台)": {
             "type": "switch",
-            "label": "金兔子",
+            "label": "独一律",
+            "icon": "./resource/announcement/images/Item-140001.png",
             "cases": [
                 {
                     "name": "Yes",
@@ -1611,7 +1613,8 @@
         },
         "紫地球仪(低阶柜台)": {
             "type": "switch",
-            "label": "紫地球仪",
+            "label": "低频偏振",
+            "icon": "./resource/announcement/images/Item-180002.png",
             "cases": [
                 {
                     "name": "No",
@@ -1629,7 +1632,8 @@
         },
         "蓝地球仪(低阶柜台)": {
             "type": "switch",
-            "label": "蓝地球仪",
+            "label": "微频偏振",
+            "icon": "./resource/announcement/images/Item-180001.png",
             "cases": [
                 {
                     "name": "No",
@@ -1673,6 +1677,7 @@
         "饕餮": {
             "type": "switch",
             "label": "饕餮",
+            "icon": "./resource/announcement/images/Equipment_suit-1000.png",
             "cases": [
                 {
                     "name": "No",
@@ -1690,7 +1695,8 @@
         },
         "蓝地球仪(心相观测)": {
             "type": "switch",
-            "label": "蓝地球仪",
+            "label": "微频偏振",
+            "icon": "./resource/announcement/images/Item-180001.png",
             "cases": [
                 {
                     "name": "Yes",
@@ -1742,6 +1748,7 @@
         "共鸣晶匣": {
             "type": "switch",
             "label": "共鸣晶匣",
+            "icon": "./resource/announcement/images/Item-481005.png",
             "cases": [
                 {
                     "name": "Yes",
@@ -1759,7 +1766,8 @@
         },
         "金瓜子(梦境记述)": {
             "type": "switch",
-            "label": "金瓜子",
+            "label": "一瞬的躁动",
+            "icon": "./resource/announcement/images/Item-120011.png",
             "cases": [
                 {
                     "name": "No",
@@ -1777,7 +1785,8 @@
         },
         "原味鸡(梦境记述)": {
             "type": "switch",
-            "label": "原味鸡",
+            "label": "片刻的喧嚣",
+            "icon": "./resource/announcement/images/Item-120012.png",
             "cases": [
                 {
                     "name": "No",
@@ -1795,7 +1804,8 @@
         },
         "大薯(梦境记述)": {
             "type": "switch",
-            "label": "大薯",
+            "label": "悠远的振响",
+            "icon": "./resource/announcement/images/Item-120013.png",
             "cases": [
                 {
                     "name": "No",
