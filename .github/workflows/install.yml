@@ -99,7 +99,7 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-win-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
-          tag: "v2.1.5-beta.1"
+          tag: "v2.1.5"
           out-file-path: "MFA"
           extract: true
 
@@ -166,7 +166,7 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-linux-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
-          tag: "v2.1.5-beta.1"
+          tag: "v2.1.5"
           out-file-path: "MFA"
           extract: true
 
@@ -232,7 +232,7 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-osx-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
-          tag: "v2.1.5-beta.1"
+          tag: "v2.1.5"
           out-file-path: "MFA"
           extract: true
 
