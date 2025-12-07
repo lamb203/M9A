@@ -147,7 +147,7 @@
             "option": [
                 "自定义作战关卡",
                 "吃糖",
-                "作战次数(自定义)"
+                "自定义作战次数"
             ],
             "description": "点击放大图片，仅限刷材料关卡\n![bydjl](resource/announcement/images/mojing_tjb.png)"
         },
@@ -158,7 +158,7 @@
                 "复刻模式",
                 "活动难度",
                 "吃糖",
-                "作战次数(自定义)"
+                "自定义作战次数"
             ],
             "description": "主线版本时关闭复刻模式会直接跳过当前任务，如有刷取主线关卡需求请使用常规作战功能"
         },
@@ -340,6 +340,32 @@
                     ]
                 }
             ]
+        },
+        "自定义作战次数": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "AllIn": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "target_count": 114514
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Yes",
+                    "option": [
+                        "作战次数(自定义)"
+                    ]
+                }
+            ],
+            "description": "关闭时会清空体力"
         },
         "作战次数(自定义)": {
             "type": "input",
