@@ -1107,7 +1107,7 @@
                     }
                 }
             ],
-            "description": "是否统计主线关卡掉落并将掉落结果上报到[必要的记录](https://www.kdocs.cn/l/cd5MWeCl5bKw)（仅主线关卡生效）"
+            "description": "是否统计主线关卡掉落并将掉落结果上报到[必要的记录](https://www.kdocs.cn/l/cd5MWeCl5bKw)（仅主线关卡生效），非国服该选项无效"
         },
         "糖果有效期": {
             "label": "有效期",

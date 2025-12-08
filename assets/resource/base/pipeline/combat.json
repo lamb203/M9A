@@ -1,6 +1,14 @@
 {
     "Combat": {
         "next": [
+            "DisableUpload"
+        ]
+    },
+    "DisableUpload": {
+        "action": {
+            "type": "DoNothing"
+        },
+        "next": [
             "SelectCombatStage"
         ]
     },
