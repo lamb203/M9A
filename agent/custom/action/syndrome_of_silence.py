@@ -169,9 +169,17 @@ class SOSSelectNode(CustomAction):
                 else:
                     # 检查并处理可能的弹窗节点
                     interrupts = [
+                        "SOSWarning",
+                        "SOSStatsUpButton",
+                        "SOSStatsUp",
+                        "SOSArtefactsObtained",
+                        "SOSSelectArtefact",
                         "SOSLoseArtefact",
                         "SOSStrengthenArtefact",
                         "SOSHarmonicObtained",
+                        "SOSSelectHarmonic",
+                        "SOSResonatorObtained",
+                        "SOSSelectResonator",
                         "CloseTip",
                     ]
                     popup_handled = False
