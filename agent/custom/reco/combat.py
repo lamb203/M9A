@@ -359,6 +359,14 @@ class CandyPageRecord(CustomRecognition):
         current_candy_info = recorded_candies[current_candy_name]
         current_idx = current_candy_info["index"]
 
+        # 检查要吃的糖的恢复体力是否超过可恢复空间
+        total_restore = current_candy_info["total_restore"]
+        if total_restore > ap_space:
+            logger.debug(
+                f"糖果 {current_candy_name} 恢复体力 {total_restore} 超过可恢复空间 {ap_space}，跳过吃糖"
+            )
+            return None
+
         # 非快速模式：标记已吃过一次糖，并记录当前数量
         if fast_mode == 0:
             CandyPageRecord._has_eaten_once = True
