@@ -458,8 +458,7 @@
             "param": {
                 "expected": [
                     "\\d+"
-                ],
-                "only_rec": true
+                ]
             }
         }
     },

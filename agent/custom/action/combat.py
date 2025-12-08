@@ -5,6 +5,7 @@ import uuid
 import hashlib
 import warnings
 import requests
+import numpy as np
 
 # 禁用 SSL 警告
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
@@ -1286,6 +1287,34 @@ class DropRecognitionState:
         result.sort(key=lambda x: x[1][0])
         return result
 
+    @staticmethod
+    def filter_digit_colors(img: np.ndarray) -> np.ndarray:
+        """过滤图像，只保留数字颜色（灰白色调）
+
+        目标颜色: #D1CBCB, #CBC7C7, #938F8F, #ABA7A7 及相近颜色
+        这些都是 R≈G≈B 的灰色，范围大约在 130-220
+        """
+        # 计算每个像素 R, G, B 的最大差值
+        max_channel = np.max(img, axis=2)
+        min_channel = np.min(img, axis=2)
+        channel_diff = max_channel - min_channel
+
+        # 灰色条件: R, G, B 差值小（接近灰色）
+        gray_mask = channel_diff < 50
+
+        # 亮度条件: 在目标范围内 (100-240)
+        brightness = np.mean(img, axis=2)
+        brightness_mask = (brightness >= 100) & (brightness <= 240)
+
+        # 组合条件
+        mask = gray_mask & brightness_mask
+
+        # 创建过滤后的图像（匹配的变黑，不匹配的变白）
+        result = np.ones_like(img) * 255  # 默认白色
+        result[mask] = 0  # 匹配的像素变黑
+
+        return result
+
     @classmethod
     def report_drops(cls) -> bool:
         """上报当前战斗掉落数据"""
@@ -1419,12 +1448,15 @@ class DropRecognition(CustomAction):
             matched_items = DropRecognitionState.filter_overlapping_matches(raw_matches)
 
             # 4. 识别数量
+            # 过滤图像颜色，只保留数字颜色（灰白色调）
+            filtered_img = DropRecognitionState.filter_digit_colors(img)
+
             for item_id, box, _ in matched_items:
                 # 数量在物品右下角，调整 ROI
-                count_roi = [box[0], box[1] + 58, box[2], box[3] - 38]
+                count_roi = [box[0] + 12, box[1] + 58, box[2] - 24, box[3] - 38]
                 rec = context.run_recognition(
                     "DropCountRec",
-                    img,
+                    filtered_img,
                     {"DropCountRec": {"roi": count_roi}},
                 )
                 item_name = DropRecognitionState.id_to_name.get(item_id, str(item_id))
