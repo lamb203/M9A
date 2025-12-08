@@ -227,9 +227,26 @@
                 "package": "com.shenlan.m.reverse1999/com.ssgame.mobile.gamesdk.frame.AppStartUpActivity"
             }
         },
+        "on_error": [
+            "Start1999Error"
+        ],
         "next": [
             "DisableStart1999"
         ]
+    },
+    "Start1999Error": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "DisableNode",
+                "custom_action_param": {
+                    "node_name": "Start1999"
+                }
+            }
+        },
+        "focus": {
+            "Node.Action.Starting": "err:启动游戏失败，请检查是否正确选择游戏资源"
+        }
     },
     "DisableStart1999": {
         "action": {
