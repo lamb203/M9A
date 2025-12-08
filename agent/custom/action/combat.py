@@ -6,6 +6,8 @@ import hashlib
 import warnings
 import requests
 import numpy as np
+from PIL import Image
+import os
 
 # 禁用 SSL 警告
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
@@ -1396,6 +1398,8 @@ class DropRecognition(CustomAction):
         # 识别掉落物品
         recognized_ids = set()  # 已识别的物品ID，避免重复
         max_swipe = 5  # 最大滑动次数
+        rare_drop_counts = {"gold": 0, "purple": 0}  # 高价值物品计数
+        screenshot_saved = False  # 是否已保存截图
 
         for swipe_count in range(max_swipe + 1):
             # 1. 截图
@@ -1483,6 +1487,38 @@ class DropRecognition(CustomAction):
                     return CustomAction.RunResult(success=True)
 
                 logger.debug(f"掉落: {item_name} x{count}")
+
+                # 累积高价值物品数量并检查是否需要保存截图
+                rarity = DropRecognitionState.id_to_rarity.get(item_id, "")
+                if rarity in ("gold", "purple"):
+                    rare_drop_counts[rarity] += count
+
+                    # 检查是否满足保存截图的条件（金≥2 或 紫≥4）
+                    should_save = (
+                        rare_drop_counts["gold"] >= 2 or rare_drop_counts["purple"] >= 4
+                    )
+
+                    if should_save and not screenshot_saved:
+                        try:
+                            # 保存当前截图
+                            user_id = DropRecognitionState.get_user_id()
+                            timestamp = time.strftime("%Y%m%d_%H%M%S", time.localtime())
+                            dir_path = "debug/rare_drops"
+                            filename = f"{dir_path}/{user_id}_{timestamp}.png"
+
+                            # 确保目录存在
+                            os.makedirs(dir_path, exist_ok=True)
+
+                            # 将numpy数组转换为PIL Image
+                            pil_image = Image.fromarray(img)
+                            pil_image.save(filename, "PNG")
+                            screenshot_saved = True
+                            logger.info(
+                                f"检测到高价值掉落 (金{rare_drop_counts['gold']} 紫{rare_drop_counts['purple']})，已保存截图: {filename}"
+                            )
+                        except Exception as e:
+                            logger.error(f"保存高价值掉落截图失败: {e}")
+
                 DropRecognitionState.add_drop(item_id, count)
                 recognized_ids.add(item_id)
 
@@ -1494,7 +1530,37 @@ class DropRecognition(CustomAction):
             context.tasker.controller.post_swipe(1155, 572, 921, 571, 500).wait()
             time.sleep(0.3)  # 等待滑动动画
 
-        # 5. 输出结果并上报
+        # 5. 验证掉落数据合理性
+        if DropRecognitionState.current_drops:
+            # 统计各稀有度的掉落数量
+            rarity_counts = {"gold": 0, "purple": 0, "blue": 0, "green": 0}
+            for item_id, count in DropRecognitionState.current_drops.items():
+                rarity = DropRecognitionState.id_to_rarity.get(item_id, "")
+                if rarity in rarity_counts:
+                    rarity_counts[rarity] += count
+
+            # 验证合理范围
+            valid_ranges = {
+                "gold": (0, 4),  # 金材料 0-4 个
+                "purple": (0, 8),  # 紫材料 0-8 个
+                "blue": (0, 16),  # 蓝材料 0-16 个
+                "green": (0, 28),  # 绿材料 0-28 个
+            }
+
+            is_valid = True
+            for rarity, (min_count, max_count) in valid_ranges.items():
+                if not (min_count <= rarity_counts[rarity] <= max_count):
+                    logger.warning(
+                        f"掉落数据异常: {rarity} 材料数量 {rarity_counts[rarity]} 超出合理范围 [{min_count}, {max_count}]"
+                    )
+                    is_valid = False
+
+            if not is_valid:
+                logger.warning("掉落数据超出合理范围，已丢弃本次数据")
+                DropRecognitionState.reset_current()
+                return CustomAction.RunResult(success=True)
+
+        # 6. 输出结果并上报
         if DropRecognitionState.current_drops:
             logger.info("掉落统计:")
             for item_id, count in DropRecognitionState.current_drops.items():
