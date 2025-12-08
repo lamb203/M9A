@@ -125,13 +125,6 @@ class SOSSelectNode(CustomAction):
         SOSSelectNode.node_type = node_type
         logger.info(f"当前进入节点类型: {node_type}")
 
-        node_type = nodes["types"][cls_index]
-        if not node_type:
-            logger.error(f"空的 node_type for cls_index: {cls_index}")
-            return CustomAction.RunResult(success=False)
-        SOSSelectNode.node_type = node_type
-        logger.info(f"当前进入节点类型: {node_type}")
-
         times = 0
         while times < 3:
             context.run_task(
