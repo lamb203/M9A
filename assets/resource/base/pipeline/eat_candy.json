@@ -52,6 +52,7 @@
             }
         },
         "next": [
+            "CheckStopping",
             "[JumpBack]EatMiniCandy",
             "[JumpBack]EatCandyStart",
             "[JumpBack]EatCandyCloseTip",
