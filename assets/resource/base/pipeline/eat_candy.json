@@ -168,7 +168,8 @@
         },
         "action": {
             "type": "Click"
-        }
+        },
+        "post_delay": 3000
     },
     "QuitEatCandyPage": {
         "recognition": {
