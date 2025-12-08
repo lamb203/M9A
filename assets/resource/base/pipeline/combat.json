@@ -694,8 +694,31 @@
         },
         "next": [
             "IsReplay",
-            "[JumpBack]SwitchToReplay"
+            "[JumpBack]SwitchToReplay",
+            "[JumpBack]ReadyForActionAgain"
         ]
+    },
+    "ReadyForActionAgain": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "MultiRecognition",
+                "custom_recognition_param": {
+                    "nodes": [
+                        "ReadyForAction",
+                        "SSReopenReplay"
+                    ],
+                    "logic": {
+                        "type": "CUSTOM",
+                        "expression": "$0 AND NOT $1"
+                    },
+                    "return": "$0"
+                }
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
     },
     "IsReplay": {
         "recognition": {
