@@ -101,7 +101,6 @@ class MultiRecognition(CustomRecognition):
             # ROI计算
             final_roi = self._process_return_value(return_value, node_results)
             if final_roi:
-                logger.debug(f"MultiRecognition识别成功，返回ROI: {final_roi}")
                 return CustomRecognition.AnalyzeResult(box=final_roi, detail={})
             else:
                 return None
