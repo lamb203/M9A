@@ -1077,6 +1077,12 @@ class DropRecognitionState:
     API_URL = "https://mojing.org/api/insertItem"
     _version: str = ""  # M9A 版本号
 
+    # 辅助识别物品列表（仅用于识别，不上报）
+    HELPER_ITEMS: set = {203, 1002}  # 经验、金币等
+
+    # 辅助物品ID -> 名称映射（这些物品不在items.json中）
+    HELPER_ITEM_NAMES: dict = {203: "利齿子儿", 1002: "启寤Ⅰ"}
+
     # 稀有度 -> 颜色匹配节点名映射
     RARITY_TO_COLOR_NODE = {
         "gold": "DropRarityGold",
@@ -1178,10 +1184,17 @@ class DropRecognitionState:
         cls.current_drops = {}
 
     @classmethod
-    def add_drop(cls, item_id: int, count: int = 1):
-        """记录掉落"""
-        cls.current_drops[item_id] = cls.current_drops.get(item_id, 0) + count
-        cls.total_drops[item_id] = cls.total_drops.get(item_id, 0) + count
+    def add_drop(cls, item_id: int, count: int = 1, is_helper: bool = False):
+        """记录掉落
+
+        Args:
+            item_id: 物品ID
+            count: 数量
+            is_helper: 是否为辅助识别物品（辅助物品不会被记录）
+        """
+        if not is_helper:
+            cls.current_drops[item_id] = cls.current_drops.get(item_id, 0) + count
+            cls.total_drops[item_id] = cls.total_drops.get(item_id, 0) + count
 
     @classmethod
     def get_level_key(cls) -> str:
@@ -1198,6 +1211,29 @@ class DropRecognitionState:
         level = SelectCombatStage.level  # "Hard" 或 "Story"
         difficulty = "厄险" if level == "Hard" else "故事"
         return f"{stage}{difficulty}"
+
+    @classmethod
+    def get_item_name(cls, item_id: int) -> str:
+        """获取物品名称，优先从items.json查找，如果找不到再从辅助物品映射查找
+
+        Args:
+            item_id: 物品ID
+
+        Returns:
+            物品名称，如果都找不到则返回ID字符串
+        """
+        # 先从 items.json 加载的数据中查找
+        name = cls.id_to_name.get(item_id)
+        if name:
+            return name
+
+        # 再从辅助物品映射中查找
+        name = cls.HELPER_ITEM_NAMES.get(item_id)
+        if name:
+            return name
+
+        # 都找不到，返回ID字符串
+        return str(item_id)
 
     @classmethod
     def verify_rarity_color(cls, context, img, box, item_id: int) -> bool:
@@ -1330,13 +1366,9 @@ class DropRecognitionState:
         for item_id, count in cls.current_drops.items():
             if count <= 0:
                 continue
-            item_name = cls.id_to_name.get(item_id, str(item_id))
+            item_name = cls.get_item_name(item_id)
             items.append({"name": item_name, "num": count, "id": item_id})
             total += count
-
-        if not items:
-            logger.info("无有效掉落数据，跳过上报")
-            return True
 
         # 构造请求体
         payload = {
@@ -1389,14 +1421,19 @@ class DropRecognition(CustomAction):
 
         # 获取当前关卡的候选物品
         level_key = DropRecognitionState.get_level_key()
-        possible_items = DropRecognitionState.drop_index.get(level_key, [])
+        reportable_items = DropRecognitionState.drop_index.get(level_key, [])
 
-        if not possible_items:
+        if not reportable_items:
             logger.warning(f"关卡 {level_key} 没有掉落验证数据，跳过掉落识别")
             return CustomAction.RunResult(success=True)
 
+        # 合并待上报物品和辅助识别物品
+        possible_items = list(set(reportable_items) | DropRecognitionState.HELPER_ITEMS)
+        helper_items = DropRecognitionState.HELPER_ITEMS
+
         # 识别掉落物品
         recognized_ids = set()  # 已识别的物品ID，避免重复
+        recognized_reportable = False  # 是否识别到待上报物品
         max_swipe = 5  # 最大滑动次数
         rare_drop_counts = {"gold": 0, "purple": 0}  # 高价值物品计数
         screenshot_saved = False  # 是否已保存截图
@@ -1431,18 +1468,14 @@ class DropRecognition(CustomAction):
                     if not DropRecognitionState.verify_rarity_color(
                         context, img, box, item_id
                     ):
-                        item_name = DropRecognitionState.id_to_name.get(
-                            item_id, str(item_id)
-                        )
+                        item_name = DropRecognitionState.get_item_name(item_id)
                         rarity = DropRecognitionState.id_to_rarity.get(item_id, "?")
                         logger.debug(
                             f"颜色验证失败: {item_name} ({item_id}, {rarity}) at {box}"
                         )
                         continue
 
-                    item_name = DropRecognitionState.id_to_name.get(
-                        item_id, str(item_id)
-                    )
+                    item_name = DropRecognitionState.get_item_name(item_id)
                     logger.debug(
                         f"模板匹配: {item_name} ({item_id}) at {box}, score={score:.3f}"
                     )
@@ -1463,7 +1496,7 @@ class DropRecognition(CustomAction):
                     filtered_img,
                     {"DropCountRec": {"roi": count_roi}},
                 )
-                item_name = DropRecognitionState.id_to_name.get(item_id, str(item_id))
+                item_name = DropRecognitionState.get_item_name(item_id)
 
                 if (
                     rec is None
@@ -1486,40 +1519,51 @@ class DropRecognition(CustomAction):
                     logger.warning(f"掉落识别中止: {item_name} 数量解析失败 ({e})")
                     return CustomAction.RunResult(success=True)
 
-                logger.debug(f"掉落: {item_name} x{count}")
+                # 判断是否为辅助识别物品
+                is_helper = item_id in helper_items
 
-                # 累积高价值物品数量并检查是否需要保存截图
-                rarity = DropRecognitionState.id_to_rarity.get(item_id, "")
-                if rarity in ("gold", "purple"):
-                    rare_drop_counts[rarity] += count
+                if is_helper:
+                    logger.debug(f"掉落(辅助): {item_name} x{count}")
+                else:
+                    logger.debug(f"掉落: {item_name} x{count}")
+                    recognized_reportable = True
 
-                    # 检查是否满足保存截图的条件（金≥2 或 紫≥4）
-                    should_save = (
-                        rare_drop_counts["gold"] >= 2 or rare_drop_counts["purple"] >= 4
-                    )
+                # 累积高价值物品数量并检查是否需要保存截图（仅针对非辅助物品）
+                if not is_helper:
+                    rarity = DropRecognitionState.id_to_rarity.get(item_id, "")
+                    if rarity in ("gold", "purple"):
+                        rare_drop_counts[rarity] += count
 
-                    if should_save and not screenshot_saved:
-                        try:
-                            # 保存当前截图
-                            user_id = DropRecognitionState.get_user_id()
-                            timestamp = time.strftime("%Y%m%d_%H%M%S", time.localtime())
-                            dir_path = "debug/rare_drops"
-                            filename = f"{dir_path}/{user_id}_{timestamp}.png"
+                        # 检查是否满足保存截图的条件（金≥2 或 紫≥4）
+                        should_save = (
+                            rare_drop_counts["gold"] >= 2
+                            or rare_drop_counts["purple"] >= 4
+                        )
 
-                            # 确保目录存在
-                            os.makedirs(dir_path, exist_ok=True)
+                        if should_save and not screenshot_saved:
+                            try:
+                                # 保存当前截图
+                                user_id = DropRecognitionState.get_user_id()
+                                timestamp = time.strftime(
+                                    "%Y%m%d_%H%M%S", time.localtime()
+                                )
+                                dir_path = "debug/rare_drops"
+                                filename = f"{dir_path}/{user_id}_{timestamp}.png"
 
-                            # 将numpy数组转换为PIL Image
-                            pil_image = Image.fromarray(img)
-                            pil_image.save(filename, "PNG")
-                            screenshot_saved = True
-                            logger.info(
-                                f"检测到高价值掉落 (金{rare_drop_counts['gold']} 紫{rare_drop_counts['purple']})，已保存截图: {filename}"
-                            )
-                        except Exception as e:
-                            logger.error(f"保存高价值掉落截图失败: {e}")
+                                # 确保目录存在
+                                os.makedirs(dir_path, exist_ok=True)
 
-                DropRecognitionState.add_drop(item_id, count)
+                                # 将numpy数组转换为PIL Image
+                                pil_image = Image.fromarray(img)
+                                pil_image.save(filename, "PNG")
+                                screenshot_saved = True
+                                logger.info(
+                                    f"检测到高价值掉落 (金{rare_drop_counts['gold']} 紫{rare_drop_counts['purple']})，已保存截图: {filename}"
+                                )
+                            except Exception as e:
+                                logger.error(f"保存高价值掉落截图失败: {e}")
+
+                DropRecognitionState.add_drop(item_id, count, is_helper=is_helper)
                 recognized_ids.add(item_id)
 
             # 4. 检查是否需要滑动
@@ -1561,16 +1605,22 @@ class DropRecognition(CustomAction):
                 return CustomAction.RunResult(success=True)
 
         # 6. 输出结果并上报
-        if DropRecognitionState.current_drops:
-            logger.info("掉落统计:")
-            for item_id, count in DropRecognitionState.current_drops.items():
-                item_name = DropRecognitionState.id_to_name.get(item_id, str(item_id))
-                rarity = DropRecognitionState.id_to_rarity.get(item_id, "")
-                color = DropRecognitionState.RARITY_ANSI_COLORS.get(rarity, "")
-                reset = DropRecognitionState.ANSI_RESET if color else ""
-                logger.info(f"  {color}{item_name}{reset} x{count}")
+        # 只要识别到任何物品（包括仅辅助物品），就算正常并上报
+        if recognized_ids:
+            if DropRecognitionState.current_drops:
+                logger.info("掉落统计:")
+                for item_id, count in DropRecognitionState.current_drops.items():
+                    item_name = DropRecognitionState.get_item_name(item_id)
+                    rarity = DropRecognitionState.id_to_rarity.get(item_id, "")
+                    color = DropRecognitionState.RARITY_ANSI_COLORS.get(rarity, "")
+                    reset = DropRecognitionState.ANSI_RESET if color else ""
+                    logger.info(f"  {color}{item_name}{reset} x{count}")
+            else:
+                logger.info("本次掉落上报空材料列表")
 
-        # 上报掉落数据
-        DropRecognitionState.report_drops()
+            # 上报掉落数据（无论item列表是否为空）
+            DropRecognitionState.report_drops()
+        else:
+            logger.info("未识别到任何掉落物品")
 
         return CustomAction.RunResult(success=True)
