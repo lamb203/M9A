@@ -1078,10 +1078,10 @@ class DropRecognitionState:
     _version: str = ""  # M9A 版本号
 
     # 辅助识别物品列表（仅用于识别，不上报）
-    HELPER_ITEMS: set = {203, 1002}  # 经验、金币等
+    HELPER_ITEMS: set = {203, 205, 1002}  # 经验、金币等
 
     # 辅助物品ID -> 名称映射（这些物品不在items.json中）
-    HELPER_ITEM_NAMES: dict = {203: "利齿子儿", 1002: "启寤Ⅰ"}
+    HELPER_ITEM_NAMES: dict = {203: "利齿子儿", 205: "微尘", 1002: "启寤Ⅰ"}
 
     # 稀有度 -> 颜色匹配节点名映射
     RARITY_TO_COLOR_NODE = {
