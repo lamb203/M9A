@@ -406,5 +406,13 @@
     "resource/announcement/images/Item-180002": "cc033b42ab52b1d0fe3e5e0b22fee41b656a65707fe24833c7389cf2cd56edeb",
     "resource/base/image/Combat/MainChapter_12Enter": "0bf1319cdd80a39cdee61c5042c4c6ec97cae3f06dbffbb5aa7f5c237d89ed8a",
     "resource/base/image/CritterCrash/Unknown2": "afe937c9627a74717e765c3df4ef0d8894a3265f7bba5fca4e108170e3b65f7d",
-    "resource/base/image/EatCandy/Tip": "565a0d900d2beb393d54dc8cc710fa4a0b8224e87740b6f55f423b7be66e2591"
+    "resource/base/image/EatCandy/Tip": "565a0d900d2beb393d54dc8cc710fa4a0b8224e87740b6f55f423b7be66e2591",
+    "resource/base/image/Items_processed/Item-203": "98c02b3ed6dbaa391ba63f39931ea70f0fe56c55c057af2f1c203fe961925e45",
+    "resource/base/image/Items_processed/Item-1002": "74f18fba7dfb29039d76b9e504270158b05eee7bb35c000e07ff0ee8d70bef9a",
+    "resource/base/image/Items_processed/Item-111103": "9a53a1f2901dc1f292bc78ba31c254dc2671d4e49a558b9efbf1459358facf4d",
+    "resource/base/image/Items_processed/Item-111102": "3d9ae83de34d7920379e076bb0359ad50a418ca17182bb6dbed85d70b8de5503",
+    "resource/base/image/Items/Item-111103": "5091d14eef3946a564061bb5ae937f86cc6a5b685d84a161d0a094810c1f017a",
+    "resource/base/image/Items/Item-111009": "b04d4c384edb8b93579cc8799f4cec98efcaa85f28b5ccb946dd08626e4061c5",
+    "resource/base/image/Items/Item-111104": "f61699b10c65dbe472799ce16753918c105ec39a341af4d1b5e819c3360cb121",
+    "resource/base/image/Items/Item-111102": "2fe089dbec531dfc4e64b1ec4eb58727b2d4c55584b0e705683be1fa83123251"
 }
