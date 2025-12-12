@@ -83,7 +83,7 @@
     "resource/base/image/Items_processed/Item-110304": "e5e27fcf17a5dc1d95818ec7b55f5446d9e4d0b5509387ac8896b1c41e35b1d6",
     "resource/base/image/Items_processed/Item-110302": "ff51e066ecf1037475a574d4dfd6995ef6b81bbb9dc52ebba6f567fff5a7ab12",
     "resource/base/image/Items_processed/Item-111007": "7936c7ad66fa27a47f2fcc8665e71773f5917150e37a6682a06f45b519674b02",
-    "resource/base/image/Items_processed/Item-110504": "da11aaaa72df0cee78426c9a2a9979864ea4426e78efbb34ade58c2fd10e6706",
+    "resource/base/image/Items_processed/Item-110504": "9a4cc002ae10254658e74ffe7d8b4067dee51c9a89a480870a941a0578628d6a",
     "resource/base/image/Items_processed/Item-111013": "3d1144ca1a9250887e2ca24d621dd47c4b864d512aeca93353a1a42c5c6c1877",
     "resource/base/image/Items_processed/Item-110103": "7bc15c309ca167b73d4452c94749cd1a51e26a48b406298c5f2162ce07896e80",
     "resource/base/image/Items_processed/Item-110402": "dece10e65a41cd23fcfd48914d11696474da5340e0866d0e99028e1f6dd53866",
@@ -394,5 +394,17 @@
     "resource/global_jp/image/Combat/MainChapter_1Enter": "7ed02fe632256f2df8b86a0dbd8ee6dd90700ce2253e23efd93fc0721f5096dd",
     "resource/global_jp/image/Combat/MainChapter_2Enter": "997d07376df5a332b8a2f9c0c2985f9719398dd154851a2fd24c8a9e59fb491f",
     "resource/global_jp/image/StartUp/Disclaimer": "6d2c39303da635e60b490fe069b8aa52ce82373b54912b4ccdfb48410fcd233c",
-    "resource/global_jp/image/StartUp/BluePochLogo": "fa4d64aed3aff86940bacfac5ac00ff457d1a075a446a9e4b2c7b92b2369c312"
+    "resource/global_jp/image/StartUp/BluePochLogo": "fa4d64aed3aff86940bacfac5ac00ff457d1a075a446a9e4b2c7b92b2369c312",
+    "resource/announcement/images/Item-180001": "f46df91af2056a6429e522763578331d6594a7ed289f8029e6960bb7ea205b8e",
+    "resource/announcement/images/Item-120013": "d73d5c4e76de373b579c4b14ac90259bcd64118b1851119fa0386d5059d62153",
+    "resource/announcement/images/Item-481005": "0e253881c4e7871e434d50beb8f0fa91e966df84665ff88bddf9dbb741ca4933",
+    "resource/announcement/images/Equipment_suit-1000": "e84ec6e9b31fc394bee2b9c21540a400cf56e450c1cdb5d38a8c87c87c59cda8",
+    "resource/announcement/images/mojing_tjb": "d7d553db69456aa7681c9d4ae1fcd58749245438284f2f8830835510eec915d6",
+    "resource/announcement/images/Item-120011": "88d72b7f953e790f7b4cd6886021e8681bd0f182df35af0941e499608a3be3b8",
+    "resource/announcement/images/Item-140001": "541c7fbc52ff55c283c78bd4f2e2579880b11614677efb125e6da959e2c32ab7",
+    "resource/announcement/images/Item-120012": "b481a91f072b5d74e0b8c5da0a5e202d68015e98576c8213e11409e57fc8aad2",
+    "resource/announcement/images/Item-180002": "cc033b42ab52b1d0fe3e5e0b22fee41b656a65707fe24833c7389cf2cd56edeb",
+    "resource/base/image/Combat/MainChapter_12Enter": "0bf1319cdd80a39cdee61c5042c4c6ec97cae3f06dbffbb5aa7f5c237d89ed8a",
+    "resource/base/image/CritterCrash/Unknown2": "afe937c9627a74717e765c3df4ef0d8894a3265f7bba5fca4e108170e3b65f7d",
+    "resource/base/image/EatCandy/Tip": "565a0d900d2beb393d54dc8cc710fa4a0b8224e87740b6f55f423b7be66e2591"
 }
