@@ -124,6 +124,17 @@ jobs:
         shell: bash
         run: |
           ./install/python/python.exe ./tools/ci/install.py ${{ needs.meta.outputs.tag }}
+          cp -rpvn tools/registry/. install/
+
+      - name: Create CLI version
+        shell: bash
+        run: |
+          ./install/python/python.exe ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
+          cp -rpvn tools/registry/. install-cli/
+
+      - name: Copy MFA files to main version
+        shell: bash
+        run: |
           if [ -d "MFA" ]; then
             echo "Copying MFA files to install directory..."
             mkdir -p install
@@ -131,12 +142,16 @@ jobs:
           else
             echo "MFA directory not found, skipping copy."
           fi
-          cp -rpvn tools/registry/. install/
 
       - uses: actions/upload-artifact@v4
         with:
           name: M9A-win-${{ matrix.arch }}
           path: "install"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: M9A-CLI-win-${{ matrix.arch }}
+          path: "install-cli"
 
   linux:
     needs: meta
@@ -188,6 +203,17 @@ jobs:
           PYTHON_EXECUTABLE="python"
           echo "Using Python executable: $PYTHON_EXECUTABLE for Linux"
           $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }}
+          cp -rpvn tools/registry/. install/
+
+      - name: Create CLI version
+        shell: bash
+        run: |
+          python ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
+          cp -rpvn tools/registry/. install-cli/
+
+      - name: Copy MFA files to main version
+        shell: bash
+        run: |
           if [ -d "MFA" ]; then
             echo "Copying MFA files to install directory on Linux..."
             mkdir -p install
@@ -200,6 +226,11 @@ jobs:
         with:
           name: M9A-linux-${{ matrix.arch }}
           path: "install"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: M9A-CLI-linux-${{ matrix.arch }}
+          path: "install-cli"
 
   macos:
     needs: meta
@@ -266,7 +297,17 @@ jobs:
           PYTHON_EXECUTABLE="./install/python/bin/python3"
           echo "Using Python executable: $PYTHON_EXECUTABLE for macOS"
           $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }}
+          cp -rpvn tools/registry/. install/
 
+      - name: Create CLI version
+        shell: bash
+        run: |
+          ./install/python/bin/python3 ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
+          cp -rpvn tools/registry/. install-cli/
+
+      - name: Copy MFA files to main version
+        shell: bash
+        run: |
           if [ -d "MFA" ]; then
             echo "Copying MFA files to install directory on macOS..."
             mkdir -p install
@@ -279,6 +320,11 @@ jobs:
         with:
           name: M9A-macos-${{ matrix.arch }}
           path: "install"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: M9A-CLI-macos-${{ matrix.arch }}
+          path: "install-cli"
 
   changelog:
     name: Generate changelog
