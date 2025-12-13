@@ -859,6 +859,20 @@
         ]
     },
     "StageDifficulty_None": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    900,
+                    500,
+                    380,
+                    220
+                ],
+                "expected": [
+                    "开始行动"
+                ]
+            }
+        },
         "next": [
             "ReadyForAction"
         ]
