@@ -797,6 +797,9 @@ class TargetCountInit(CustomAction):
         _TargetCountState.current_times = 0
         _TargetCountState.candy_attempts = 0
 
+        # 清空之前的掉落统计
+        DropRecognitionState.reset_total()
+
         logger.info(f"目标刷图次数：{target_count}")
 
         return CustomAction.RunResult(success=True)
@@ -939,6 +942,11 @@ class TargetCountFinish(CustomAction):
     ) -> CustomAction.RunResult:
 
         logger.info(f"任务结束，总共刷了 {_TargetCountState.already_count} 次")
+
+        # 输出掉落总结
+        DropRecognitionState.print_total_summary()
+        DropRecognitionState.reset_total()
+
         context.run_task("HomeButton")
         return CustomAction.RunResult(success=True)
 
@@ -1073,6 +1081,7 @@ class DropRecognitionState:
     total_drops: dict = {}  # 累计掉落 {item_id: count}
     _loaded: bool = False  # 是否已加载
     _user_id: str = ""  # 设备唯一标识
+    _recognition_enabled: bool = False  # 是否已启用掉落识别
 
     API_URL = "https://mojing.org/api/insertItem"
     _version: str = ""  # M9A 版本号
@@ -1182,6 +1191,7 @@ class DropRecognitionState:
     def reset_current(cls):
         """重置当前战斗掉落"""
         cls.current_drops = {}
+        cls._recognition_enabled = True  # 标记掉落识别已启用
 
     @classmethod
     def add_drop(cls, item_id: int, count: int = 1, is_helper: bool = False):
@@ -1352,6 +1362,59 @@ class DropRecognitionState:
         result[mask] = 0  # 匹配的像素变黑
 
         return result
+
+    @classmethod
+    def print_total_summary(cls):
+        """输出累计掉落总结"""
+        if not cls._recognition_enabled:
+            # 未启用掉落识别，不显示任何提示
+            return
+
+        if not cls.total_drops:
+            logger.info("本次任务无材料掉落")
+            return
+
+        logger.info("材料掉落总结:")
+
+        # 按稀有度分组统计
+        rarity_groups = {"gold": [], "purple": [], "blue": [], "green": [], "other": []}
+
+        for item_id, count in cls.total_drops.items():
+            rarity = cls.id_to_rarity.get(item_id, "other")
+            if rarity not in rarity_groups:
+                rarity = "other"
+            rarity_groups[rarity].append((item_id, count))
+
+        # 按稀有度顺序输出
+        rarity_order = ["gold", "purple", "blue", "green", "other"]
+        rarity_names = {
+            "gold": "金色",
+            "purple": "紫色",
+            "blue": "蓝色",
+            "green": "绿色",
+            "other": "其他",
+        }
+
+        for rarity in rarity_order:
+            items = rarity_groups[rarity]
+            if not items:
+                continue
+
+            # 按数量降序排列
+            items.sort(key=lambda x: x[1], reverse=True)
+
+            logger.info(f"[{rarity_names[rarity]}]")
+            for item_id, count in items:
+                item_name = cls.get_item_name(item_id)
+                color = cls.RARITY_ANSI_COLORS.get(rarity, "")
+                reset = cls.ANSI_RESET if color else ""
+                logger.info(f"  {color}{item_name}{reset} x{count}")
+
+    @classmethod
+    def reset_total(cls):
+        """清空累计掉落数据"""
+        cls.total_drops = {}
+        cls._recognition_enabled = False  # 重置识别标记
 
     @classmethod
     def report_drops(cls) -> bool:
