@@ -43,7 +43,6 @@ jobs:
           
           # 下载四个JSON schema文件
           curl -s -o deps/tools/interface.schema.json https://raw.githubusercontent.com/MaaXYZ/MaaFramework/main/tools/interface.schema.json || echo "Failed to download interface.schema.json"
-          curl -s -o deps/tools/interface_v2.schema.json https://raw.githubusercontent.com/MaaXYZ/MaaFramework/main/tools/interface_v2.schema.json || echo "Failed to download interface_v2.schema.json"
           curl -s -o deps/tools/interface_config.schema.json https://raw.githubusercontent.com/MaaXYZ/MaaFramework/main/tools/interface_config.schema.json || echo "Failed to download interface_config.schema.json"
           curl -s -o deps/tools/pipeline.schema.json https://raw.githubusercontent.com/MaaXYZ/MaaFramework/main/tools/pipeline.schema.json || echo "Failed to download pipeline.schema.json"
           
@@ -69,11 +68,6 @@ jobs:
             else
               echo "interface_changed=false" >> $GITHUB_OUTPUT
             fi
-              if [[ -n "$(git status --porcelain deps/tools/interface_v2.schema.json)" ]]; then
-                echo "interface_v2_changed=true" >> $GITHUB_OUTPUT
-              else
-                echo "interface_v2_changed=false" >> $GITHUB_OUTPUT
-              fi
             if [[ -n "$(git status --porcelain deps/tools/interface_config.schema.json)" ]]; then
               echo "interface_config_changed=true" >> $GITHUB_OUTPUT
             else
@@ -105,9 +99,6 @@ jobs:
           changed_files=""
           if [[ "${{ steps.check_status.outputs.interface_changed }}" == "true" ]]; then
             changed_files+="interface "
-          fi
-          if [[ "${{ steps.check_status.outputs.interface_v2_changed }}" == "true" ]]; then
-            changed_files+="interface_v2 "
           fi
           if [[ "${{ steps.check_status.outputs.interface_config_changed }}" == "true" ]]; then
             changed_files+="interface_config "
