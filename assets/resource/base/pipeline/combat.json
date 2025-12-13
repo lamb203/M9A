@@ -412,6 +412,187 @@
             "SwipeRightForPsychube"
         ]
     },
+    "ResourceChapter_ME": {
+        "doc": "群山之声",
+        "next": [
+            "ResourceChapter_MEEnter",
+            "[JumpBack]InsightChapterLabel"
+        ]
+    },
+    "ResourceChapter_MEEnter": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    149,
+                    158,
+                    199,
+                    103
+                ],
+                "template": [
+                    "Combat/Insight/MEEnter.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "ResourceChapter_MEEnter",
+            "SwipeLeftAndFindStage"
+        ]
+    },
+    "ResourceChapter_SL": {
+        "doc": "星陨之所",
+        "next": [
+            "ResourceChapter_SLEnter",
+            "[JumpBack]InsightChapterLabel"
+        ]
+    },
+    "ResourceChapter_SLEnter": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    697,
+                    156,
+                    199,
+                    103
+                ],
+                "template": [
+                    "Combat/Insight/SLEnter.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "ResourceChapter_SLEnter",
+            "SwipeLeftAndFindStage"
+        ]
+    },
+    "ResourceChapter_SS": {
+        "doc": "深林之形",
+        "next": [
+            "ResourceChapter_SSEnterPre",
+            "[JumpBack]InsightChapterLabel"
+        ]
+    },
+    "ResourceChapter_SSEnterPre": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    104,
+                    160,
+                    887,
+                    101
+                ],
+                "template": [
+                    "Combat/Insight/MEEnter.png",
+                    "Combat/Insight/SLEnter.png",
+                    "Combat/Insight/SSEnter.png"
+                ]
+            }
+        },
+        "next": [
+            "ResourceChapter_SSEnter",
+            "[JumpBack]SwipeRightForChapter"
+        ]
+    },
+    "ResourceChapter_SSEnter": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    104,
+                    160,
+                    887,
+                    101
+                ],
+                "template": [
+                    "Combat/Insight/SSEnter.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "ResourceChapter_SSEnter",
+            "SwipeLeftAndFindStage"
+        ]
+    },
+    "ResourceChapter_BW": {
+        "doc": "荒兽之野",
+        "next": [
+            "ResourceChapter_BWEnterPre",
+            "[JumpBack]InsightChapterLabel"
+        ]
+    },
+    "ResourceChapter_BWEnterPre": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    104,
+                    160,
+                    887,
+                    101
+                ],
+                "template": [
+                    "Combat/Insight/MEEnter.png",
+                    "Combat/Insight/SLEnter.png",
+                    "Combat/Insight/SSEnter.png"
+                ]
+            }
+        },
+        "next": [
+            "ResourceChapter_BWEnter",
+            "[JumpBack]SwipeRightForChapter"
+        ]
+    },
+    "ResourceChapter_BWEnter": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    104,
+                    160,
+                    887,
+                    101
+                ],
+                "template": [
+                    "Combat/Insight/BWEnter.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "ResourceChapter_BWEnter",
+            "SwipeLeftAndFindStage"
+        ]
+    },
+    "InsightChapterLabel": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    342,
+                    611,
+                    391,
+                    90
+                ],
+                "template": "Combat/Insight/Label.png"
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    },
     "SwipeRightForChapter": {
         "action": {
             "type": "Swipe",

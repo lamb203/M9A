@@ -350,6 +350,12 @@
                     "option": [
                         "作战关卡(资源)"
                     ]
+                },
+                {
+                    "name": "洞悉",
+                    "option": [
+                        "作战关卡(洞悉)"
+                    ]
                 }
             ]
         },
@@ -1062,6 +1068,372 @@
                             },
                             "attach": {
                                 "level": null
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "作战关卡(洞悉)": {
+            "type": "select",
+            "label": "灵感",
+            "cases": [
+                {
+                    "name": "岩",
+                    "option": [
+                        "作战关卡(岩)"
+                    ]
+                },
+                {
+                    "name": "星",
+                    "option": [
+                        "作战关卡(星)"
+                    ]
+                },
+                {
+                    "name": "木",
+                    "option": [
+                        "作战关卡(木)"
+                    ]
+                },
+                {
+                    "name": "兽",
+                    "option": [
+                        "作战关卡(兽)"
+                    ]
+                }
+            ]
+        },
+        "作战关卡(岩)": {
+            "type": "select",
+            "label": "作战关卡",
+            "cases": [
+                {
+                    "name": "群山之声 02",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "ME-02"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "02"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "群山之声 04",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "ME-04"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "04"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "群山之声 06",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "ME-06"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "06"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "作战关卡(星)": {
+            "type": "select",
+            "label": "作战关卡",
+            "cases": [
+                {
+                    "name": "星陨之所 02",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "SL-02"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "02"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "星陨之所 04",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "SL-04"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "04"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "星陨之所 06",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "SL-06"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "06"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "作战关卡(木)": {
+            "type": "select",
+            "label": "作战关卡",
+            "cases": [
+                {
+                    "name": "深林之形 02",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "SS-02"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "02"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "深林之形 04",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "SS-04"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "04"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "深林之形 06",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "SS-06"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "06"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "作战关卡(兽)": {
+            "type": "select",
+            "label": "作战关卡",
+            "cases": [
+                {
+                    "name": "荒兽之野 02",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "BW-02"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "02"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "荒兽之野 04",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "BW-04"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "04"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "荒兽之野 06",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "BW-06"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": null
+                            }
+                        },
+                        "TargetStageName": {
+                            "recognition": {
+                                "param": {
+                                    "expected": [
+                                        "06"
+                                    ]
+                                }
                             }
                         }
                     }
