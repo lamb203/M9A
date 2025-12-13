@@ -427,8 +427,29 @@
             "[JumpBack]SOSGiveup",
             "[JumpBack]SOSStart",
             "[JumpBack]SOS_Skip",
-            "[JumpBack]SOSConfirm"
+            "[JumpBack]SOSConfirm",
+            "[JumpBack]SOSInformation"
         ]
+    },
+    "SOSInformation": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    581,
+                    53,
+                    118,
+                    32
+                ],
+                "expected": [
+                    "评分结算"
+                ],
+                "only_rec": true
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
     },
     "SOSSummary": {
         "recognition": {
@@ -697,6 +718,7 @@
             "[JumpBack]SOSStart",
             "[JumpBack]SOS_Skip",
             "[JumpBack]SOSConfirm",
+            "[JumpBack]SOSInformation",
             "[JumpBack]CloseTip"
         ]
     },
