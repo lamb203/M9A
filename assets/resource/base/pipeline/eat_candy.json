@@ -32,7 +32,8 @@
             }
         },
         "next": [
-            "EatCandyPage"
+            "EatCandyPage",
+            "EatCandyEnter"
         ]
     },
     "EatCandyPage": {
