@@ -1151,7 +1151,7 @@ class DropRecognitionState:
             return cls._version
 
         try:
-            with open("resource/interface.json", "r", encoding="utf-8") as f:
+            with open("./interface.json", "r", encoding="utf-8") as f:
                 interface_data = json.load(f)
                 cls._version = interface_data.get("version", "debug")
         except Exception:
