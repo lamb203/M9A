@@ -1552,6 +1552,17 @@ class DropRecognition(CustomAction):
             filtered_img = DropRecognitionState.filter_digit_colors(img)
 
             for item_id, box, _ in matched_items:
+                # 判断是否为辅助识别物品
+                is_helper = item_id in helper_items
+                item_name = DropRecognitionState.get_item_name(item_id)
+
+                if is_helper:
+                    # 辅助物品不需要识别数量，直接记录
+                    logger.debug(f"掉落(辅助): {item_name}")
+                    DropRecognitionState.add_drop(item_id, 1, is_helper=True)
+                    recognized_ids.add(item_id)
+                    continue
+
                 # 数量在物品右下角，调整 ROI
                 count_roi = [box[0] + 12, box[1] + 58, box[2] - 24, box[3] - 38]
                 rec = context.run_recognition(
@@ -1559,7 +1570,6 @@ class DropRecognition(CustomAction):
                     filtered_img,
                     {"DropCountRec": {"roi": count_roi}},
                 )
-                item_name = DropRecognitionState.get_item_name(item_id)
 
                 if (
                     rec is None
@@ -1582,14 +1592,8 @@ class DropRecognition(CustomAction):
                     logger.warning(f"掉落识别中止: {item_name} 数量解析失败 ({e})")
                     return CustomAction.RunResult(success=True)
 
-                # 判断是否为辅助识别物品
-                is_helper = item_id in helper_items
-
-                if is_helper:
-                    logger.debug(f"掉落(辅助): {item_name} x{count}")
-                else:
-                    logger.debug(f"掉落: {item_name} x{count}")
-                    recognized_reportable = True
+                logger.debug(f"掉落: {item_name} x{count}")
+                recognized_reportable = True
 
                 # 累积高价值物品数量并检查是否需要保存截图（仅针对非辅助物品）
                 if not is_helper:
