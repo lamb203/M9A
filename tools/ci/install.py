@@ -14,12 +14,21 @@ from generate_manifest_cache import generate_manifest_cache
 working_dir = Path(__file__).parent.parent.parent
 install_path = working_dir / Path("install")
 version = len(sys.argv) > 1 and sys.argv[1] or "v0.0.1"
+platform_tag = len(sys.argv) > 2 and sys.argv[2] or ""
 
 
-def install_deps():
+def install_deps(platform_tag: str):
+    """安装 MaaFramework 依赖到对应架构路径
+    
+    Args:
+        platform_tag: 平台标签，如 win-x64, linux-arm64, osx-arm64
+    """
+    if not platform_tag:
+        raise ValueError("platform_tag is required")
+    
     shutil.copytree(
         working_dir / "deps" / "bin",
-        install_path,
+        install_path / "runtimes" / platform_tag / "native",
         ignore=shutil.ignore_patterns(
             "*MaaDbgControlUnit*",
             "*MaaThriftControlUnit*",
@@ -110,7 +119,7 @@ def install_manifest_cache():
 
 
 if __name__ == "__main__":
-    # install_deps()
+    install_deps(platform_tag)
     install_resource()
     install_chores()
     install_agent()

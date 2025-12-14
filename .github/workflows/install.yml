@@ -123,7 +123,8 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          ./install/python/python.exe ./tools/ci/install.py ${{ needs.meta.outputs.tag }}
+          PLATFORM_TAG="win-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}"
+          ./install/python/python.exe ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
           cp -rpvn tools/registry/. install/
 
       - name: Create CLI version
@@ -203,8 +204,9 @@ jobs:
         shell: bash
         run: |
           PYTHON_EXECUTABLE="python"
+          PLATFORM_TAG="linux-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}"
           echo "Using Python executable: $PYTHON_EXECUTABLE for Linux"
-          $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }}
+          $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
           cp -rpvn tools/registry/. install/
 
       - name: Create CLI version
@@ -301,8 +303,9 @@ jobs:
         shell: bash
         run: |
           PYTHON_EXECUTABLE="./install/python/bin/python3"
+          PLATFORM_TAG="osx-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}"
           echo "Using Python executable: $PYTHON_EXECUTABLE for macOS"
-          $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }}
+          $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
           cp -rpvn tools/registry/. install/
 
       - name: Create CLI version
