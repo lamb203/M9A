@@ -1477,7 +1477,7 @@
                     "name": "Yes",
                     "pipeline_override": {
                         "DropRecognition": {
-                            "enabled": false
+                            "enabled": true
                         }
                     }
                 },
