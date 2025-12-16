@@ -57,52 +57,11 @@
         },
         "next": [
             "DepthsOfMythEnd",
-            "DepthsOfMythMainFlag",
-            "[JumpBack]DepthsOfMythEntry",
-            "[JumpBack]DepthsOfMythLoading"
+            "DepthsOfMythEndNew",
+            "TranceMainFlag",
+            "[JumpBack]TranceButtonClick",
+            "[JumpBack]TranceButtonClickNew"
         ]
-    },
-    "DepthsOfMythLoading": {
-        "doc": "等待进入迷思海",
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "only_rec": true,
-                "roi": [
-                    534,
-                    294,
-                    213,
-                    70
-                ],
-                "expected": [
-                    "透光层",
-                    "朦胧层",
-                    "微光层",
-                    "晦暗层",
-                    "无光层"
-                ]
-            }
-        },
-        "post_wait_freezes": 300
-    },
-    "DepthsOfMythEntry": {
-        "doc": "进入迷思海",
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    921,
-                    484,
-                    248,
-                    161
-                ],
-                "template": "ReveriesInTheRain/DepthsOfMythEntry.png"
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_wait_freezes": 300
     },
     "DepthsOfMythEnd": {
         "doc": "迷思海“寻思”耗尽（雨中悬想主页面）",
@@ -120,25 +79,21 @@
             }
         }
     },
-    "DepthsOfMythMainFlag": {
-        "doc": "判断位于迷思海主页面",
+    "DepthsOfMythEndNew": {
+        "doc": "迷思海“寻思”耗尽（雨中悬想主页面）",
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
+                "only_rec": true,
                 "roi": [
-                    914,
-                    0,
-                    156,
-                    102
+                    1138,
+                    23,
+                    51,
+                    25
                 ],
-                "template": "ReveriesInTheRain/TranceButton.png"
+                "expected": "0/8"
             }
-        },
-        "next": [
-            "TranceEnd",
-            "TranceMainFlag",
-            "[JumpBack]TranceButtonClick"
-        ]
+        }
     },
     "TranceButtonClick": {
         "doc": "点击“寻思”按钮",
@@ -156,23 +111,28 @@
         },
         "action": {
             "type": "Click"
-        }
+        },
+        "post_delay": 1500
     },
-    "TranceEnd": {
-        "doc": "迷思海“寻思”耗尽（迷思海主页面）",
+    "TranceButtonClickNew": {
+        "doc": "点击展示按钮",
         "recognition": {
             "type": "OCR",
             "param": {
                 "only_rec": true,
                 "roi": [
-                    1132,
-                    24,
-                    39,
-                    21
+                    1101,
+                    443,
+                    51,
+                    25
                 ],
-                "expected": "0/"
+                "expected": "0/8"
             }
-        }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500
     },
     "TranceMainFlag": {
         "doc": "判断位于迷思海“寻思”页面",
@@ -190,7 +150,7 @@
             }
         },
         "next": [
-            "TranceEnd_1",
+            "TranceEnd",
             "[JumpBack]ObtainedAwards",
             "[JumpBack]Trancele1",
             "[JumpBack]Trancele2",
@@ -479,7 +439,7 @@
             "TrancePlay"
         ]
     },
-    "TranceEnd_1": {
+    "TranceEnd": {
         "doc": "迷思海“寻思”耗尽（迷思海“寻思”页面）",
         "recognition": {
             "type": "OCR",
@@ -496,7 +456,9 @@
         },
         "post_wait_freezes": 300,
         "next": [
-            "TranceClose",
+            "HomeFlag",
+            "HomeButton",
+            "[JumpBack]TranceClose",
             "[JumpBack]ObtainedAwards"
         ]
     },
