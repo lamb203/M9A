@@ -420,5 +420,6 @@
     "resource/base/image/Combat/Insight/SSEnter": "68f426832e4529529bedad3cf1c1503f604af461ebacd21a78a3e861a0291be1",
     "resource/base/image/Combat/Insight/SLEnter": "a1e40928f5548d695fa70e7e3f5f0b607b56e2d762cc5d1b47baaf994ce873ed",
     "resource/base/image/Combat/Insight/BWEnter": "2c4027238f983158abf2dfc31caab5b4bcd1ec79c2b95cd4ccaff489c20b6f27",
-    "resource/base/image/Combat/Insight/Label": "e86cba100f8934204d70f69b327e7185b428081547361e7ce5a3de612868d761"
+    "resource/base/image/Combat/Insight/Label": "e86cba100f8934204d70f69b327e7185b428081547361e7ce5a3de612868d761",
+    "resource/base/image/Wilderness/CollectProductAwards": "06bd4af85fad8e75f10ffcc15e5db236ef35bda84e367485bca01c2e27d042da"
 }
