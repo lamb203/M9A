@@ -473,7 +473,7 @@
             "label": "作战关卡",
             "cases": [
                 {
-                    "name": "啮咬盒(银光子弹)：5-19 厄险",
+                    "name": "盒子(银光子弹)：5-19 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -490,7 +490,7 @@
                     }
                 },
                 {
-                    "name": "啮咬盒(床下怪物)：7-26 厄险",
+                    "name": "盒子(床下怪物)：7-26 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -507,7 +507,7 @@
                     }
                 },
                 {
-                    "name": "啮咬盒：12-17 厄险",
+                    "name": "盒子：12-17 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -524,7 +524,7 @@
                     }
                 },
                 {
-                    "name": "盐封曼德拉(狂人絮语)：3-13 厄险",
+                    "name": "曼德拉(狂人絮语)：3-13 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -541,7 +541,7 @@
                     }
                 },
                 {
-                    "name": "盐封曼德拉：12-16 厄险",
+                    "name": "曼德拉：12-16 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -558,7 +558,7 @@
                     }
                 },
                 {
-                    "name": "双头形骨架：10-13 厄险",
+                    "name": "骨架：10-13 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -575,7 +575,7 @@
                     }
                 },
                 {
-                    "name": "双头形骨架：4-20 厄险",
+                    "name": "骨架：4-20 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -592,7 +592,7 @@
                     }
                 },
                 {
-                    "name": "祝圣秘银：10-09 厄险",
+                    "name": "秘银：10-09 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -609,7 +609,7 @@
                     }
                 },
                 {
-                    "name": "祝圣秘银(幼龙骨标本)：6-14 厄险",
+                    "name": "秘银(幼龙骨标本)：6-14 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -626,7 +626,7 @@
                     }
                 },
                 {
-                    "name": "祝圣秘银：12-5 厄险",
+                    "name": "秘银：12-5 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -643,7 +643,7 @@
                     }
                 },
                 {
-                    "name": "百灵百验鸟：2-6 厄险",
+                    "name": "百灵鸟：2-6 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -660,7 +660,7 @@
                     }
                 },
                 {
-                    "name": "百灵百验鸟：9-8 厄险",
+                    "name": "百灵鸟：9-8 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -677,7 +677,7 @@
                     }
                 },
                 {
-                    "name": "百灵百验鸟：12-7 厄险",
+                    "name": "百灵鸟：12-7 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -694,7 +694,7 @@
                     }
                 },
                 {
-                    "name": "翼造门匙(微光蛾翼灯)：9-15 厄险",
+                    "name": "钥匙(微光蛾翼灯)：9-15 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -711,7 +711,7 @@
                     }
                 },
                 {
-                    "name": "翼造门匙：12-18 厄险",
+                    "name": "钥匙：12-18 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -728,7 +728,7 @@
                     }
                 },
                 {
-                    "name": "弯曲鹅颈：5-4 厄险",
+                    "name": "鹅颈：5-4 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -745,7 +745,7 @@
                     }
                 },
                 {
-                    "name": "弯曲鹅颈(轮与轴之芯)：10-22 厄险",
+                    "name": "鹅颈(轮与轴之芯)：10-22 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -762,7 +762,7 @@
                     }
                 },
                 {
-                    "name": "金草焚香：4-4 故事",
+                    "name": "焚香：4-4 故事",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -779,7 +779,7 @@
                     }
                 },
                 {
-                    "name": "金草焚香：8-18 厄险",
+                    "name": "焚香：8-18 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -796,7 +796,7 @@
                     }
                 },
                 {
-                    "name": "红漆泥板：9-1 厄险",
+                    "name": "泥板：9-1 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -813,7 +813,7 @@
                     }
                 },
                 {
-                    "name": "红漆泥板(翡翠石板)：12-21 厄险",
+                    "name": "泥板(翡翠石板)：12-21 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -830,7 +830,7 @@
                     }
                 },
                 {
-                    "name": "金爪灵摆：5-14 厄险",
+                    "name": "灵摆：5-14 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -847,7 +847,7 @@
                     }
                 },
                 {
-                    "name": "金爪灵摆：7-20 厄险",
+                    "name": "灵摆：7-20 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -864,7 +864,7 @@
                     }
                 },
                 {
-                    "name": "砂金甲虫：10-2 厄险",
+                    "name": "甲虫：10-2 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -881,7 +881,7 @@
                     }
                 },
                 {
-                    "name": "砂金甲虫：3-15 故事",
+                    "name": "甲虫：3-15 故事",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -898,7 +898,7 @@
                     }
                 },
                 {
-                    "name": "砂金甲虫：12-11 厄险",
+                    "name": "甲虫：12-11 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -915,7 +915,41 @@
                     }
                 },
                 {
-                    "name": "液化战栗：10-17 厄险",
+                    "name": "彩蛋：2-14 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "2-14"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "彩蛋：12-3 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-3"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "战栗：10-17 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -932,7 +966,7 @@
                     }
                 },
                 {
-                    "name": "液化战栗：9-3 厄险",
+                    "name": "战栗：9-3 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -949,7 +983,7 @@
                     }
                 },
                 {
-                    "name": "精磨苦盐：5-8 厄险",
+                    "name": "蓝盐：5-8 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -966,7 +1000,7 @@
                     }
                 },
                 {
-                    "name": "精磨苦盐：9-16 厄险",
+                    "name": "蓝盐：9-16 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -983,7 +1017,7 @@
                     }
                 },
                 {
-                    "name": "未知种根骨：5-7 厄险",
+                    "name": "蓝骨：5-7 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -1000,7 +1034,7 @@
                     }
                 },
                 {
-                    "name": "未知种根骨：5-3 厄险",
+                    "name": "蓝骨：5-3 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -1017,7 +1051,7 @@
                     }
                 },
                 {
-                    "name": "粗糙银锭：9-6 厄险",
+                    "name": "蓝银：9-6 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -1034,7 +1068,7 @@
                     }
                 },
                 {
-                    "name": "粗糙银锭：7-19 厄险",
+                    "name": "蓝银：7-19 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -1051,7 +1085,7 @@
                     }
                 },
                 {
-                    "name": "幸运咒语：4-20 厄险",
+                    "name": "蓝咒：4-20 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -1068,7 +1102,7 @@
                     }
                 },
                 {
-                    "name": "干蝉翼：10-4 厄险",
+                    "name": "蝉翼：10-4 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -1085,7 +1119,7 @@
                     }
                 },
                 {
-                    "name": "不休轮：7-16 厄险",
+                    "name": "轮子：7-16 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
@@ -1119,47 +1153,13 @@
                     }
                 },
                 {
-                    "name": "辉石原矿：9-1 厄险",
+                    "name": "辉石：9-1 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
                             "action": {
                                 "param": {
                                     "custom_action_param": {
                                         "stage": "9-1"
-                                    }
-                                }
-                            },
-                            "attach": {
-                                "level": "Hard"
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "真心彩蛋：2-14 厄险",
-                    "pipeline_override": {
-                        "SelectCombatStage": {
-                            "action": {
-                                "param": {
-                                    "custom_action_param": {
-                                        "stage": "2-14"
-                                    }
-                                }
-                            },
-                            "attach": {
-                                "level": "Hard"
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "真心彩蛋：12-3 厄险",
-                    "pipeline_override": {
-                        "SelectCombatStage": {
-                            "action": {
-                                "param": {
-                                    "custom_action_param": {
-                                        "stage": "12-3"
                                     }
                                 }
                             },
