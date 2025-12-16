@@ -507,6 +507,23 @@
                     }
                 },
                 {
+                    "name": "啮咬盒：12-17 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-17"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "盐封曼德拉(狂人絮语)：3-13 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
@@ -514,6 +531,23 @@
                                 "param": {
                                     "custom_action_param": {
                                         "stage": "3-13"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "盐封曼德拉：12-16 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-16"
                                     }
                                 }
                             },
@@ -592,6 +626,23 @@
                     }
                 },
                 {
+                    "name": "祝圣秘银：12-5 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-5"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "百灵百验鸟：2-6 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
@@ -626,6 +677,23 @@
                     }
                 },
                 {
+                    "name": "百灵百验鸟：12-7 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-7"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "翼造门匙(微光蛾翼灯)：9-15 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
@@ -633,6 +701,23 @@
                                 "param": {
                                     "custom_action_param": {
                                         "stage": "9-15"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "翼造门匙：12-18 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-18"
                                     }
                                 }
                             },
@@ -728,6 +813,23 @@
                     }
                 },
                 {
+                    "name": "红漆泥板(翡翠石板)：12-21 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-21"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
                     "name": "金爪灵摆：5-14 厄险",
                     "pipeline_override": {
                         "SelectCombatStage": {
@@ -791,6 +893,23 @@
                             },
                             "attach": {
                                 "level": "Story"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "砂金甲虫：12-11 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-11"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
                             }
                         }
                     }
@@ -1007,6 +1126,40 @@
                                 "param": {
                                     "custom_action_param": {
                                         "stage": "9-1"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "真心彩蛋：2-14 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "2-14"
+                                    }
+                                }
+                            },
+                            "attach": {
+                                "level": "Hard"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "真心彩蛋：12-3 厄险",
+                    "pipeline_override": {
+                        "SelectCombatStage": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "stage": "12-3"
                                     }
                                 }
                             },
