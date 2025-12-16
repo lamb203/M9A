@@ -61,7 +61,7 @@ body = """
 
 # 尾部
 footer = """
-**绝大部分用户请下载 M9A-win-x86_64-vx.x.x-Full.zip**
+**绝大部分用户请下载 M9A-win-x86_64-vx.x.x-Full.zip，没找到的请点 show all x assets**
 
 > Full = 图形界面版 | Lite = 命令行版
 
