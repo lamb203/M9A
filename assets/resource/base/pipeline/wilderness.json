@@ -665,8 +665,35 @@
         },
         "post_delay": 3000,
         "next": [
-            "CollectProductNext"
+            "CollectProductNext",
+            "[JumpBack]ExitCollectProductAwards"
         ]
+    },
+    "ExitCollectProductAwards": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    169,
+                    139,
+                    167,
+                    67
+                ],
+                "template": "Wilderness/CollectProductAwards.png"
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    589,
+                    94,
+                    92,
+                    30
+                ]
+            }
+        },
+        "post_wait_freezes": 500
     },
     "CollectProductNext": {
         "recognition": {
@@ -685,7 +712,9 @@
             "type": "Click"
         },
         "next": [
-            "AutoSelectProducts"
+            "AutoSelectProducts",
+            "CollectProductNext",
+            "[JumpBack]ExitCollectProductAwards"
         ]
     },
     "AutoSelectProducts": {
