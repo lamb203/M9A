@@ -255,7 +255,43 @@
                         "type": "SelectEncounterOption",
                         "method": "OCR",
                         "expected": "打开酒桶"
-                    }
+                    },
+                    [
+                        {
+                            "type": "SelectEncounterOption",
+                            "method": "HSV",
+                            "order_by": "Horizontal",
+                            "index": -1
+                        },
+                        {
+                            "type": "RunNode",
+                            "name": "FlagInSOSMain"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "SelectEncounterOption",
+                            "method": "HSV",
+                            "order_by": "Horizontal",
+                            "index": -1
+                        },
+                        {
+                            "type": "RunNode",
+                            "name": "FlagInSOSMain"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "SelectEncounterOption",
+                            "method": "HSV",
+                            "order_by": "Horizontal",
+                            "index": -1
+                        },
+                        {
+                            "type": "RunNode",
+                            "name": "FlagInSOSMain"
+                        }
+                    ]
                 ],
                 "interrupts": "@EncounterAlongTheWay"
             },

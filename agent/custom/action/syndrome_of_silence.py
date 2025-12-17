@@ -592,12 +592,13 @@ class SOSSelectEncounterOption_OCR(CustomAction):
 
         for option in options:
             if expected in option["content"]:
+                x, y, w, h = option["roi"]
                 context.run_task(
                     "Click",
                     {
                         "Click": {
                             "action": "Click",
-                            "target": option["roi"],
+                            "target": [x + 20, y + 10, w - 40, h - 20],
                             "pre_delay": 0,
                             "post_delay": 1500,
                         }
