@@ -280,6 +280,9 @@ M9A 支持主流模拟器与PC端，但您需要设置模拟器与PC端分辨率
           <img src="/images/zh-cn/newbie-init-script-step2.png" alt="步骤2">
       </details>
     </li>
+    </ul>
+  </blockquote>
+</details>
 
 >[!WARNING]
 >

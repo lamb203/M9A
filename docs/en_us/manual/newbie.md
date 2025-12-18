@@ -279,6 +279,9 @@ Can't change to `16:9` ratio when using the International Version PC client? Use
           <img src="/images/en-us/newbie-init-script-step2.png" alt="Step 2">
       </details>
     </li>
+    </ul>
+  </blockquote>
+</details>
 
 >[!WARNING]
 >
