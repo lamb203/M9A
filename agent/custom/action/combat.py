@@ -1601,10 +1601,10 @@ class DropRecognition(CustomAction):
                     if rarity in ("gold", "purple"):
                         rare_drop_counts[rarity] += count
 
-                        # 检查是否满足保存截图的条件（金≥2 或 紫≥4）
+                        # 检查是否满足保存截图的条件（金≥2 或 紫≥5）
                         should_save = (
                             rare_drop_counts["gold"] >= 2
-                            or rare_drop_counts["purple"] >= 4
+                            or rare_drop_counts["purple"] >= 5
                         )
 
                         if should_save and not screenshot_saved:
