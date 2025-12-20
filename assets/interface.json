@@ -1609,6 +1609,9 @@
                 {
                     "name": "No",
                     "pipeline_override": {
+                        "EatCandy": {
+                            "enabled": false
+                        },
                         "EatMiniCandy": {
                             "enabled": false
                         },
