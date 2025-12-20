@@ -61,6 +61,10 @@ body = """
 
 # 尾部
 footer = """
+{%- macro remote_url() -%}
+  https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
+{%- endmacro -%}
+
 {% if version -%}
 **绝大部分用户请下载 [M9A-win-x86_64-{{ version }}-Full.zip]({{ self::remote_url() }}/releases/download/{{ version }}/M9A-win-x86_64-{{ version }}-Full.zip)**
 {%- else -%}
