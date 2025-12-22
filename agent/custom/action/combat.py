@@ -1425,13 +1425,18 @@ class DropRecognitionState:
 
         # 构造 item 列表，过滤掉落数为 0 的物品
         items = []
-        total = 0
         for item_id, count in cls.current_drops.items():
             if count <= 0:
                 continue
             item_name = cls.get_item_name(item_id)
             items.append({"name": item_name, "num": count, "id": item_id})
-            total += count
+
+        # 获取刷取次数（复现次数）
+        total = (
+            _TargetCountState.current_times
+            if _TargetCountState.current_times > 0
+            else 1
+        )
 
         # 构造请求体
         payload = {
