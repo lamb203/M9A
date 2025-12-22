@@ -1569,7 +1569,7 @@ class DropRecognition(CustomAction):
                     continue
 
                 # 数量在物品右下角，调整 ROI
-                count_roi = [box[0] + 12, 613, box[2] - 24, 17]
+                count_roi = [box[0] + 22, 613, box[2] - 44, 17]
                 rec = context.run_recognition(
                     "DropCountRec",
                     filtered_img,
