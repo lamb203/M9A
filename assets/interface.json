@@ -109,6 +109,18 @@
                 "ADB",
                 "PC"
             ]
+        },
+        {
+            "name": "国际服（KR）",
+            "path": [
+                "./resource/base",
+                "./resource/global_jp",
+                "./resource/global_kr"
+            ],
+            "controller": [
+                "ADB",
+                "PC"
+            ]
         }
     ],
     "agent": {
