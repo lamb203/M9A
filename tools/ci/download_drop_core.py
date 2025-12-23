@@ -59,9 +59,9 @@ def get_python_version():
 
 
 def download_file(url, dest_path, token=None):
-    """下载文件"""
-    print(f"下载: {url}")
-    print(f"到: {dest_path}")
+    """Download file"""
+    print(f"Downloading: {url}")
+    print(f"To: {dest_path}")
 
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
 
@@ -74,13 +74,13 @@ def download_file(url, dest_path, token=None):
         with urllib.request.urlopen(request) as response:
             with open(dest_path, "wb") as f:
                 shutil.copyfileobj(response, f)
-        print("下载完成")
+        print("Download complete")
         return True
     except urllib.error.HTTPError as e:
-        print(f"HTTP 错误 {e.code}: {e.reason}")
+        print(f"HTTP error {e.code}: {e.reason}")
         return False
     except Exception as e:
-        print(f"下载失败: {e}")
+        print(f"Download failed: {e}")
         return False
 
 
@@ -88,13 +88,15 @@ def main():
     # 获取 token（从环境变量）
     token = os.environ.get("PRIVATE_REPO_TOKEN")
     if not token:
-        print("警告: PRIVATE_REPO_TOKEN 未设置，可能无法访问私有仓库")
+        print(
+            "Warning: PRIVATE_REPO_TOKEN not set, may not be able to access private repo"
+        )
 
     # 获取平台信息
     os_type, arch, platform_tag = get_platform_info()
     py_version = get_python_version()
 
-    print(f"平台: {os_type}, 架构: {arch}, Python: {py_version}")
+    print(f"Platform: {os_type}, Arch: {arch}, Python: {py_version}")
 
     # 构造下载列表
     # macOS 不带 Python 版本
@@ -118,24 +120,24 @@ def main():
         zip_path = os.path.join(DEST_DIR, f"{artifact_name}.zip")
 
         if download_file(download_url, zip_path, token):
-            # 解压
-            print(f"解压: {artifact_name}")
+            # Extract
+            print(f"Extracting: {artifact_name}")
             try:
                 with zipfile.ZipFile(zip_path, "r") as zf:
                     zf.extractall(DEST_DIR)
                 os.remove(zip_path)
                 success_count += 1
             except Exception as e:
-                print(f"解压失败: {e}")
+                print(f"Extract failed: {e}")
         else:
-            print(f"下载失败: {artifact_name}")
+            print(f"Download failed: {artifact_name}")
 
     if success_count == 0:
-        print("没有成功下载任何文件，跳过 drop_core 模块")
+        print("No files downloaded successfully, skipping drop_core module")
         return False
 
-    # 列出文件
-    print("已安装的文件:")
+    # List installed files
+    print("Installed files:")
     for f in os.listdir(DEST_DIR):
         if f.endswith((".pyd", ".so")):
             print(f"  {f}")
