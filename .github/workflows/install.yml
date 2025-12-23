@@ -125,7 +125,7 @@ jobs:
         env:
           PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
-          ./install/python/python.exe tools/ci/download_drop_core.py || echo "drop_core download skipped"
+          ./install/python/python.exe tools/ci/download_drop_core.py --os windows --arch ${{ matrix.arch }} || echo "drop_core download skipped"
 
       - name: Install
         shell: bash
@@ -212,7 +212,7 @@ jobs:
         env:
           PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
-          python tools/ci/download_drop_core.py || echo "drop_core download skipped"
+          python tools/ci/download_drop_core.py --os linux --arch ${{ matrix.arch }} || echo "drop_core download skipped"
 
       - name: Install on Linux
         shell: bash
@@ -316,7 +316,7 @@ jobs:
         env:
           PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
-          ./install/python/bin/python3 tools/ci/download_drop_core.py || echo "drop_core download skipped"
+          ./install/python/bin/python3 tools/ci/download_drop_core.py --os darwin --arch ${{ matrix.arch }} || echo "drop_core download skipped"
 
       - name: Install on macOS
         shell: bash

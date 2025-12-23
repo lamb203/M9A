@@ -10,6 +10,7 @@ import platform
 import urllib.request
 import zipfile
 import shutil
+import argparse
 
 # 私有仓库信息
 PRIVATE_REPO = "MAA1999/drop-upload-sign"  # 修改为你的私有仓库
@@ -112,6 +113,13 @@ def download_file(url, dest_path, token=None):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Download drop_core module")
+    parser.add_argument("--os", help="Target OS (windows, linux, darwin)")
+    parser.add_argument(
+        "--arch", help="Target architecture (x64, arm64, aarch64, x86_64)"
+    )
+    args = parser.parse_args()
+
     # 获取 token（从环境变量）
     token = os.environ.get("PRIVATE_REPO_TOKEN")
     if not token:
@@ -120,7 +128,31 @@ def main():
         )
 
     # 获取平台信息
-    os_type, arch, platform_tag = get_platform_info()
+    if args.os and args.arch:
+        # Use provided OS and arch from command line
+        os_type = args.os.lower()
+        arch_input = args.arch.lower()
+        # Normalize architecture
+        arch_mapping = {
+            "amd64": "x64",
+            "x86_64": "x64",
+            "arm64": "arm64",
+            "aarch64": "arm64",
+        }
+        arch = arch_mapping.get(arch_input, arch_input)
+        # Build platform tag
+        if os_type == "windows":
+            platform_tag = f"win-{arch}"
+        elif os_type == "darwin":
+            platform_tag = f"macos-{'x86_64' if arch == 'x64' else 'aarch64'}"
+        elif os_type == "linux":
+            platform_tag = f"linux-{arch}"
+        else:
+            platform_tag = f"{os_type}-{arch}"
+    else:
+        # Fallback to auto-detection
+        os_type, arch, platform_tag = get_platform_info()
+
     py_version = get_python_version()
 
     print(f"Platform: {os_type}, Arch: {arch}, Python: {py_version}")
