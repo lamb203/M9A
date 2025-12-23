@@ -58,6 +58,33 @@ def get_python_version():
     return f"{sys.version_info.major}.{sys.version_info.minor}"
 
 
+def get_asset_download_url(repo, tag, asset_name, token=None):
+    """Get asset download URL from GitHub API"""
+    api_url = f"https://api.github.com/repos/{repo}/releases/tags/{tag}"
+
+    request = urllib.request.Request(api_url)
+    if token:
+        request.add_header("Authorization", f"token {token}")
+    request.add_header("Accept", "application/vnd.github.v3+json")
+
+    try:
+        with urllib.request.urlopen(request) as response:
+            import json
+
+            data = json.loads(response.read().decode())
+
+            # Find the asset by name
+            for asset in data.get("assets", []):
+                if asset["name"] == asset_name:
+                    return asset["url"]  # API URL, not browser_download_url
+
+            print(f"Asset not found: {asset_name}")
+            return None
+    except Exception as e:
+        print(f"Failed to get asset info: {e}")
+        return None
+
+
 def download_file(url, dest_path, token=None):
     """Download file"""
     print(f"Downloading: {url}")
@@ -116,8 +143,16 @@ def main():
     # 下载所有需要的文件
     success_count = 0
     for artifact_name in artifacts:
-        download_url = f"https://github.com/{PRIVATE_REPO}/releases/download/{RELEASE_TAG}/{artifact_name}.zip"
-        zip_path = os.path.join(DEST_DIR, f"{artifact_name}.zip")
+        asset_name = f"{artifact_name}.zip"
+        download_url = get_asset_download_url(
+            PRIVATE_REPO, RELEASE_TAG, asset_name, token
+        )
+
+        if not download_url:
+            print(f"Cannot get download URL for: {artifact_name}")
+            continue
+
+        zip_path = os.path.join(DEST_DIR, asset_name)
 
         if download_file(download_url, zip_path, token):
             # Extract
