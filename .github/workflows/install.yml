@@ -125,6 +125,7 @@ jobs:
           echo "Archive cleanup command executed for MFAAvalonia on Windows."
 
       - name: Convert PNG to ICO
+        if: matrix.arch == 'x86_64'
         shell: bash
         run: |
           # 安装 ImageMagick
