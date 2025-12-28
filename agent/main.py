@@ -28,7 +28,9 @@ from utils import logger
 VENV_NAME = ".venv"  # 虚拟环境目录的名称
 VENV_DIR = Path(project_root_dir) / VENV_NAME
 
-### 虚拟环境相关 ###
+# -----
+# region 虚拟环境
+# -----
 
 
 def _is_running_in_our_venv():
@@ -121,7 +123,9 @@ def ensure_venv_and_relaunch_if_needed():
         sys.exit(1)
 
 
-### 配置相关 ###
+# -----
+# region 配置相关
+# -----
 
 
 def read_config(config_name: str, default_config: dict) -> dict:
@@ -195,7 +199,9 @@ def read_hot_update_config() -> dict:
     return read_config("hot_update", default_config)
 
 
-### 依赖安装相关 ###
+# -----
+# region 依赖安装
+# -----
 
 
 def find_local_wheels_dir():
@@ -236,7 +242,6 @@ def _run_pip_command(cmd_args: list, operation_name: str) -> bool:
         for line in iter(process.stdout.readline, ""):
             line = line.rstrip("\n\r")
             if line.strip():  # 只显示非空行
-                # print(line)  # 实时显示到终端
                 all_output.append(line)  # 收集到列表中
 
         # 等待进程结束
@@ -360,7 +365,9 @@ def check_and_install_dependencies():
         logger.info("Pip 依赖安装已禁用，跳过依赖安装")
 
 
-### 核心业务 ###
+# -----
+# region 核心业务
+# -----
 
 
 def agent(is_dev_mode=False):
@@ -478,7 +485,9 @@ def agent(is_dev_mode=False):
         raise
 
 
-### 程序入口 ###
+# -----
+# region 程序入口
+# -----
 
 
 def main():
