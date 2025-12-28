@@ -124,6 +124,27 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia on Windows."
 
+      - name: Convert PNG to ICO
+        shell: bash
+        run: |
+          # 安装 ImageMagick
+          choco install imagemagick -y
+
+          # 转换 PNG 到 ICO
+          magick convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 m9a.ico
+
+      - name: Modify MFAAvalonia exe icon
+        if: matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          # 下载 rcedit
+          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+
+          # 修改 exe 图标
+          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "m9a.ico"
+
+          echo "MFAAvalonia icon modified successfully"
+
       - name: Setup Embed Python on Windows
         shell: bash
         run: |
@@ -165,6 +186,24 @@ jobs:
             cp -rpvn MFA/. install/
           else
             echo "MFA directory not found, skipping copy."
+          fi
+
+      - name: Replace Assets with custom assets folder
+        shell: bash
+        run: |
+          # 删除大写的 Assets 文件夹
+          if [ -d "install/Assets" ]; then
+            rm -rf install/Assets
+            echo "Removed original Assets folder"
+          fi
+
+          # 创建小写的 assets 文件夹
+          mkdir -p install/assets
+
+          # 如果有自定义图标，复制并重命名为 logo.ico
+          if [ -f "m9a.ico" ]; then
+            cp m9a.ico install/assets/logo.ico
+            echo "Copied custom icon to assets/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
@@ -226,6 +265,15 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia on Linux."
 
+      - name: Convert PNG to ICO
+        shell: bash
+        run: |
+          # 安装 ImageMagick（如果未安装）
+          sudo apt-get update && sudo apt-get install -y imagemagick
+
+          # 转换 PNG 到 ICO
+          convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 m9a.ico
+
       - name: Download Python dependencies
         shell: bash
         run: |
@@ -264,6 +312,24 @@ jobs:
             rsync -av --ignore-existing MFA/ install/
           else
             echo "MFA directory not found on Linux, skipping copy."
+          fi
+
+      - name: Replace Assets with custom assets folder
+        shell: bash
+        run: |
+          # 删除大写的 Assets 文件夹
+          if [ -d "install/Assets" ]; then
+            rm -rf install/Assets
+            echo "Removed original Assets folder"
+          fi
+
+          # 创建小写的 assets 文件夹
+          mkdir -p install/assets
+
+          # 如果有自定义图标，复制并重命名为 logo.ico
+          if [ -f "m9a.ico" ]; then
+            cp m9a.ico install/assets/logo.ico
+            echo "Copied custom icon to assets/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
@@ -328,6 +394,15 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia on macOS."
 
+      - name: Convert PNG to ICO
+        shell: bash
+        run: |
+          # 安装 ImageMagick（如果未安装）
+          brew install imagemagick
+
+          # 转换 PNG 到 ICO
+          magick convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 m9a.ico
+
       - name: Setup Embed Python on macOS
         shell: bash
         run: |
@@ -376,6 +451,24 @@ jobs:
             rsync -av --ignore-existing MFA/ install/ # Using rsync like on Linux
           else
             echo "MFA directory not found on macOS, skipping copy."
+          fi
+
+      - name: Replace Assets with custom assets folder
+        shell: bash
+        run: |
+          # 删除大写的 Assets 文件夹
+          if [ -d "install/Assets" ]; then
+            rm -rf install/Assets
+            echo "Removed original Assets folder"
+          fi
+
+          # 创建小写的 assets 文件夹
+          mkdir -p install/assets
+
+          # 如果有自定义图标，复制并重命名为 logo.ico
+          if [ -f "m9a.ico" ]; then
+            cp m9a.ico install/assets/logo.ico
+            echo "Copied custom icon to assets/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
