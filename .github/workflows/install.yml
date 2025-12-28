@@ -88,6 +88,16 @@ jobs:
         with:
           submodules: true
 
+      - name: Set platform variables
+        id: platform
+        shell: bash
+        run: |
+          if [ "${{ matrix.arch }}" = "x86_64" ]; then
+            echo "tag=x64" >> $GITHUB_OUTPUT
+          else
+            echo "tag=arm64" >> $GITHUB_OUTPUT
+          fi
+
       - name: Download MaaFramework
         uses: robinraju/release-downloader@v1
         with:
@@ -102,7 +112,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-win-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
+          fileName: "MFAAvalonia-*-win-${{ steps.platform.outputs.tag }}*"
           tag: ${{ env.MFAA_VERSION }}
           out-file-path: "MFA"
           extract: true
@@ -134,7 +144,7 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          PLATFORM_TAG="win-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}"
+          PLATFORM_TAG="win-${{ steps.platform.outputs.tag }}"
           ./install/python/python.exe ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
           cp -rpvn tools/registry/. install/
 
@@ -180,6 +190,16 @@ jobs:
         with:
           submodules: true
 
+      - name: Set platform variables
+        id: platform
+        shell: bash
+        run: |
+          if [ "${{ matrix.arch }}" = "x86_64" ]; then
+            echo "tag=x64" >> $GITHUB_OUTPUT
+          else
+            echo "tag=arm64" >> $GITHUB_OUTPUT
+          fi
+
       - name: Download MaaFramework for Linux
         uses: robinraju/release-downloader@v1
         with:
@@ -194,7 +214,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-linux-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
+          fileName: "MFAAvalonia-*-linux-${{ steps.platform.outputs.tag }}*"
           tag: ${{ env.MFAA_VERSION }}
           out-file-path: "MFA"
           extract: true
@@ -222,7 +242,7 @@ jobs:
         shell: bash
         run: |
           PYTHON_EXECUTABLE="python"
-          PLATFORM_TAG="linux-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}"
+          PLATFORM_TAG="linux-${{ steps.platform.outputs.tag }}"
           echo "Using Python executable: $PYTHON_EXECUTABLE for Linux"
           $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
 
@@ -272,6 +292,16 @@ jobs:
         with:
           submodules: true
 
+      - name: Set platform variables
+        id: platform
+        shell: bash
+        run: |
+          if [ "${{ matrix.arch }}" = "x86_64" ]; then
+            echo "tag=x64" >> $GITHUB_OUTPUT
+          else
+            echo "tag=arm64" >> $GITHUB_OUTPUT
+          fi
+
       - name: Download MaaFramework for macOS
         uses: robinraju/release-downloader@v1
         with:
@@ -286,7 +316,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-osx-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}*"
+          fileName: "MFAAvalonia-*-osx-${{ steps.platform.outputs.tag }}*"
           tag: ${{ env.MFAA_VERSION }}
           out-file-path: "MFA"
           extract: true
@@ -326,7 +356,7 @@ jobs:
         shell: bash
         run: |
           PYTHON_EXECUTABLE="./install/python/bin/python3"
-          PLATFORM_TAG="osx-${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}"
+          PLATFORM_TAG="osx-${{ steps.platform.outputs.tag }}"
           echo "Using Python executable: $PYTHON_EXECUTABLE for macOS"
           $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
 
