@@ -673,7 +673,7 @@ class SelectCombatStage(CustomAction):
                 "MainChapter_XEnter": {
                     "template": [f"Combat/MainChapter_{mainChapter}Enter.png"]
                 },
-                "TargetStageName": {"expected": [f"{targetStageName}"]},
+                "TargetStageName_OCR": {"expected": [f"{targetStageName}"]},
                 "StageDifficulty": {
                     "next": [f"StageDifficulty_{level}", "TargetStageName"]
                 },
@@ -719,7 +719,7 @@ class SelectCombatStage(CustomAction):
             # 资源关卡流程
             pipeline = {
                 "EnterTheShowFlag": {"next": [f"ResourceChapter_{mainChapter}"]},
-                "TargetStageName": {"expected": [f"{targetStageName}"]},
+                "TargetStageName_OCR": {"expected": [f"{targetStageName}"]},
                 "StageDifficulty": {
                     "next": [f"StageDifficulty_{level}", "TargetStageName"]
                 },
