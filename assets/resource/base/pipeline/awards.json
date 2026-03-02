@@ -759,7 +759,7 @@
                     18
                 ],
                 "template": "Awards/WarRoom/AwardWarRoom.png",
-                "threshold": 0.90
+                "threshold": 0.9
             }
         },
         "action": {
@@ -791,7 +791,7 @@
                     29
                 ],
                 "template": "Awards/WarRoom/AwardWarRoomTelegram.png",
-                "threshold": 0.90
+                "threshold": 0.9
             }
         },
         "action": {
@@ -822,7 +822,7 @@
                     17
                 ],
                 "template": "Awards/WarRoom/AwardWarRoomTelegramScroll.png",
-                "threshold": 0.90
+                "threshold": 0.9
             }
         },
         "action": {
