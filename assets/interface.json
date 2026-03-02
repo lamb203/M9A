@@ -3427,5 +3427,11 @@
                 }
             ]
         }
-    }
+    },
+    "import": [
+        "resource/tasks/preset/Daily.json",
+        "resource/tasks/preset/DailyActivity.json",
+        "resource/tasks/preset/DailyReRelease.json",
+        "resource/tasks/preset/StandAlone.json"
+    ]
 }
