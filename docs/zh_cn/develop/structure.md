@@ -31,7 +31,7 @@ icon: hugeicons:structure-01
 |   |-- activity_data/            # 活动数据处理工具
 |   |-- ci/                       # 持续集成相关脚本
 |   |-- image/                    # 掉落物品图片处理工具
-|   |-- OptimizeTemplates/        # 模板图片优化工具
+|   |-- optimize_templates/        # 模板图片优化工具
 |   |-- registry/                 # PC端注册表相关工具
 |   |-- migrate_pipeline_v5.py    # Pipeline v5 迁移脚本
 |   |-- minify_json.py            # JSON 压缩工具

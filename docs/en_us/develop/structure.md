@@ -31,7 +31,7 @@ icon: hugeicons:structure-01
 |   |-- activity_data/            # Activity data processing tools
 |   |-- ci/                       # Continuous integration scripts
 |   |-- image/                    # Drop item image processing tools
-|   |-- OptimizeTemplates/        # Template image optimization tools
+|   |-- optimize_templates/        # Template image optimization tools
 |   |-- registry/                 # PC registry related tools
 |   |-- migrate_pipeline_v5.py    # Pipeline v5 migration script
 |   |-- minify_json.py            # JSON minification tool
