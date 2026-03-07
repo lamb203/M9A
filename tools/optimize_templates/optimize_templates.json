@@ -478,5 +478,8 @@
     "resource/base/image/Awards/WarRoom/Claim": "b085913a62532c69c151ab5f0bf3c3bab0876a3c40ff24fa7c495163a3e9c45e",
     "resource/base/image/Awards/WarRoom/AwardWarRoomTelegramScroll": "64e3513f2a843edced491fb727bfd75c4adce1204d4eda6d76f347aa059adbf2",
     "resource/base/image/Awards/WarRoom/ClaimAll": "68869c4c104e132dc5380fd85e97a0d1f6a2a38cf0ce14ebc0bfb56a79a73026",
-    "resource/base/image/CritterCrash/History": "32c96c78df413cbc3dac66854b9c3927ea33b771ab8a6abf022ebf1adc233b9d"
+    "resource/base/image/CritterCrash/History": "32c96c78df413cbc3dac66854b9c3927ea33b771ab8a6abf022ebf1adc233b9d",
+    "resource/base/image/Awards/Box": "b4d3908706da37e956315ed61589e03bb225820801e1256b3d885a9093335518",
+    "resource/base/image/Awards/OtherAwards": "1ff19354e0fbffb8045d952e2c9614e86ee15d65df22e96a82996e8ebd929fa4",
+    "resource/base/image/Awards/Other/AwardMoonlightAward": "93d0cc9497a6461baaa03898188cdb874d3741be557cc63302ca6f2f5b6104ac"
 }
