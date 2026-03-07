@@ -503,5 +503,6 @@
     "resource/base/image/CritterCrash/Cards/Man": "c7d740418889713880c37a89dc5a8a8c931083154f194fea9fc0ec8977b56b8c",
     "resource/base/image/CritterCrash/Award/Shiva": "9106cd8f0afe527cc661b6bcb7656481fa41a40c7e4a5945dbf386c4477a1c4e",
     "resource/base/image/CritterCrash/Award/Deer": "346cdf98f5c53756f03ea922cce0c3f662544d5cbcc5bf1661fb302790448934",
-    "resource/base/image/CritterCrash/Award/Man": "a8a43d18efc32d436d14db46d09e39801ff7b82288ea94a273066fa118a932a3"
+    "resource/base/image/CritterCrash/Award/Man": "a8a43d18efc32d436d14db46d09e39801ff7b82288ea94a273066fa118a932a3",
+    "resource/base/image/CritterCrash/Lv3": "8d8a09a7ffe98f6188e08feca4c4f6181abfb597d5a98da73a8ad19693156f50"
 }
