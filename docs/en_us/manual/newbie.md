@@ -307,7 +307,7 @@ For general users, it is recommended to use M9A via **MFAAvalonia** or **MXU**.
 
 Confirm complete extraction and ensure M9A is extracted to an independent folder. Recommended extraction path like: `D:\M9A`. Except for closing the built-in administrator-approved Administrator account, please do not extract M9A to paths requiring UAC permissions such as `C:\`, `C:\Program Files\`, etc.
 
-- After extraction, run `MaaPiCli.exe`, `MFAAvalonia.exe`, or `M9A.exe`.
+- After extraction, run `M9A.exe`.
 
 #### macOS
 
@@ -336,10 +336,10 @@ Confirm complete extraction and ensure M9A is extracted to an independent folder
 
     ```shell
     cd /usr/local/bin/M9A
-    ./MaaPiCli
+    ./M9A
     ```
 
-If you want to use the **graphical interface**, follow step 2 and run the `MFAAvalonia` or `M9A` program instead of `MaaPiCli`.
+If you want to use the **graphical interface**, follow step 2 and run the `M9A` program.
 
 ⚠️Gatekeeper security prompt handling:
 
@@ -347,13 +347,13 @@ In macOS 10.15 (Catalina) and later, Gatekeeper may prevent unsigned application
 If you encounter errors such as "Cannot open because the developer cannot be verified", please choose one of the following solutions:
 
 ```shell
-# Solution 1: Take MaaPiCli as an example to remove the quarantine attribute (recommended, subject to the actual path)
-sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/MaaPiCli
-# Or user directory version: xattr -rd com.apple.quarantine ~/M9A/MaaPiCli
+# Solution 1: Take M9A as an example to remove the quarantine attribute (recommended, subject to the actual path)
+sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/M9A
+# Or user directory version: xattr -rd com.apple.quarantine ~/M9A/M9A
 
 # Solution 2: Add to Gatekeeper whitelist
-sudo spctl --add /usr/local/bin/M9A/MaaPiCli
-# Or user directory version: spctl --add ~/M9A/MaaPiCli
+sudo spctl --add /usr/local/bin/M9A/M9A
+# Or user directory version: spctl --add ~/M9A/M9A
 
 # Solution 3: Process the entire directory at once
 sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
@@ -365,7 +365,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 
 #### Linux
 
-Same as macOS, download the corresponding version of the archive, extract it, and then run `MaaPiCli`, `MFAAvalonia`, or `M9A`.
+Same as macOS, download the corresponding version of the archive, extract it, and then run `M9A`.
 
 ***
 
