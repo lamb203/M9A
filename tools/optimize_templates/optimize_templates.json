@@ -481,5 +481,15 @@
     "resource/base/image/CritterCrash/History": "32c96c78df413cbc3dac66854b9c3927ea33b771ab8a6abf022ebf1adc233b9d",
     "resource/base/image/Awards/Box": "b4d3908706da37e956315ed61589e03bb225820801e1256b3d885a9093335518",
     "resource/base/image/Awards/OtherAwards": "1ff19354e0fbffb8045d952e2c9614e86ee15d65df22e96a82996e8ebd929fa4",
-    "resource/base/image/Awards/Other/AwardMoonlightAward": "93d0cc9497a6461baaa03898188cdb874d3741be557cc63302ca6f2f5b6104ac"
+    "resource/base/image/Awards/Other/AwardMoonlightAward": "93d0cc9497a6461baaa03898188cdb874d3741be557cc63302ca6f2f5b6104ac",
+    "resource/base/image/SwitchMenu/menu": "59dbf49d755c1eb2cdfd530abe593a7a52949e9ab86eb11ebe8f7cd1ae33c730",
+    "resource/base/image/SwitchMenu/switch_menu_buttom1": "c2847f53282e04bf0553586170f9bf2ef0ece3ae1aa61020a9f4df57f16cd1f4",
+    "resource/base/image/SwitchMenu/frame/frame1open": "e120ff9d95cba43b4c34d950f4ac19812b9d25c686d975f524009fa9d1c6cb35",
+    "resource/base/image/SwitchMenu/frame/frame2close": "06da9ab5f8b511bba00a89d286fb8b5e5b027e4bb7fc6b90eb4842621258c326",
+    "resource/base/image/SwitchMenu/frame/frame3close": "5d309307aa31d62c698dabe11238f50ba6ef881dcb28973d7b4783d61cbd322b",
+    "resource/base/image/SwitchMenu/frame/frame4close": "275d23b8ab04401eaacdbdddc2b5e654d2b3e08dd25652f11f97b199832678b4",
+    "resource/base/image/SwitchMenu/frame/frame3open": "b2c35d636667b6c6fe401575c24591b79e44b00290efe5c244b961127c7c06eb",
+    "resource/base/image/SwitchMenu/frame/frame4open": "c8fcfdad567cf7f61b1ae8a2dbbe451a08860eea34836e6ddd458ed71cbc5ac7",
+    "resource/base/image/SwitchMenu/frame/frame1close": "f340963d6d3d5766d8e8391634c5ac573216449d5748b7fc54bf14b32e3891b9",
+    "resource/base/image/SwitchMenu/frame/frame2open": "c3e1b51cead9d4cade05955269fcfc8de71eb04f945ead8819d1840c882fcae9"
 }
