@@ -339,6 +339,29 @@ class CCBuyCard(CustomAction):
                         box[1] : box[1] + box[3],
                         box[0] : box[0] + box[2],
                     ]
+                    offset = [-52, -58, 45, 15]
+                    roi_max = [
+                        target_roi[0] + offset[0],
+                        target_roi[1] + offset[1],
+                        target_roi[2] + offset[2],
+                        target_roi[3] + offset[3],
+                    ]
+                    level_max_reco = context.run_recognition(
+                        "CCLevelMax",
+                        img,
+                        pipeline_override={"CCLevelMax": {"roi": roi_max}},
+                    )
+                    if level_max_reco and level_max_reco.hit:
+                        max_level = CCChessboard.get_chess_info(card_name).get(
+                            "max_level", 1
+                        )
+                        chess["level"] = max_level
+                        if CCChessboard.board[row][col] is not None:
+                            CCChessboard.board[row][col]["level"] = max_level
+                        logger.debug(
+                            f"{card_name} 在位置 ({row}, {col}) 已满级，跳过升级"
+                        )
+                        return CustomAction.RunResult(success=True)
                     context.override_image("ccupdate", roi_array)
                     context.run_task(
                         "CCUpdate",

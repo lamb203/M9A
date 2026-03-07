@@ -991,5 +991,15 @@
                 ]
             }
         }
+    },
+    "CCLevelMax": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "CritterCrash/Lv3.png"
+                ]
+            }
+        }
     }
 }
