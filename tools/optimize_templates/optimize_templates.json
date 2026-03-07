@@ -491,5 +491,17 @@
     "resource/base/image/SwitchMenu/frame/frame3open": "b2c35d636667b6c6fe401575c24591b79e44b00290efe5c244b961127c7c06eb",
     "resource/base/image/SwitchMenu/frame/frame4open": "c8fcfdad567cf7f61b1ae8a2dbbe451a08860eea34836e6ddd458ed71cbc5ac7",
     "resource/base/image/SwitchMenu/frame/frame1close": "f340963d6d3d5766d8e8391634c5ac573216449d5748b7fc54bf14b32e3891b9",
-    "resource/base/image/SwitchMenu/frame/frame2open": "c3e1b51cead9d4cade05955269fcfc8de71eb04f945ead8819d1840c882fcae9"
+    "resource/base/image/SwitchMenu/frame/frame2open": "c3e1b51cead9d4cade05955269fcfc8de71eb04f945ead8819d1840c882fcae9",
+    "resource/base/image/CritterCrash/JiuNiangzi": "bfe730136c957eb329c9f6d93ae7a0329b14414edea3d4a3b3af645dfc61da30",
+    "resource/base/image/CritterCrash/Peoples/People8": "84fed6679cbcc791e3ca5b2f4dee18025ca3d99f5ebbf778c3736794010722f6",
+    "resource/base/image/CritterCrash/Peoples/People7": "e8f8b915299509691c7deeaeb395667549ddaedd1ec181fddd5225115ac0454b",
+    "resource/base/image/CritterCrash/Cards/Woman": "4e05656fcc461e1e936379fb05333837813cf318b34fe7705cc8b3e22396dfdd",
+    "resource/base/image/CritterCrash/Cards/People2": "9bf5357899fb9a122d9432c73deea3bab7fa4e89602424a613313965e7a42c9a",
+    "resource/base/image/CritterCrash/Cards/Shiva": "54f21c79f8334ed900e2f699ec99ebc966871aaa6b090da8f79db100b7cf85eb",
+    "resource/base/image/CritterCrash/Cards/Deer": "447cee46aa3e84c4e9b52350a57d607183c8407c750af8c145f2817b19618e5f",
+    "resource/base/image/CritterCrash/Cards/People1": "bfbb1ebe3b8cecb29a4efcd24311b5596af2912b5187adbfd7e7e10f7b3b35f5",
+    "resource/base/image/CritterCrash/Cards/Man": "c7d740418889713880c37a89dc5a8a8c931083154f194fea9fc0ec8977b56b8c",
+    "resource/base/image/CritterCrash/Award/Shiva": "9106cd8f0afe527cc661b6bcb7656481fa41a40c7e4a5945dbf386c4477a1c4e",
+    "resource/base/image/CritterCrash/Award/Deer": "346cdf98f5c53756f03ea922cce0c3f662544d5cbcc5bf1661fb302790448934",
+    "resource/base/image/CritterCrash/Award/Man": "a8a43d18efc32d436d14db46d09e39801ff7b82288ea94a273066fa118a932a3"
 }
