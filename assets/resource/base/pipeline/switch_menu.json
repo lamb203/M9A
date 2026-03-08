@@ -139,26 +139,60 @@
                 "all_of": [
                     {
                         "recognition": {
-                            "type": "ColorMatch",
+                            "type": "Or",
                             "param": {
-                                "roi": [
-                                    69,
-                                    238,
-                                    11,
-                                    11
-                                ],
-                                "upper": [
-                                    201,
-                                    199,
-                                    195
-                                ],
-                                "lower": [
-                                    201,
-                                    199,
-                                    195
-                                ],
-                                "count": 15,
-                                "connected": true
+                                "any_of": [
+                                    {
+                                        "recognition": {
+                                            "type": "ColorMatch",
+                                            "param": {
+                                                "roi": [
+                                                    69,
+                                                    238,
+                                                    11,
+                                                    11
+                                                ],
+                                                "upper": [
+                                                    211,
+                                                    211,
+                                                    205
+                                                ],
+                                                "lower": [
+                                                    191,
+                                                    191,
+                                                    185
+                                                ],
+                                                "count": 15,
+                                                "connected": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "recognition": {
+                                            "type": "ColorMatch",
+                                            "param": {
+                                                "roi": [
+                                                    69,
+                                                    238,
+                                                    11,
+                                                    11
+                                                ],
+                                                "upper": [
+                                                    201,
+                                                    199,
+                                                    195
+                                                ],
+                                                "lower": [
+                                                    201,
+                                                    199,
+                                                    195
+                                                ],
+                                                "count": 15,
+                                                "connected": true
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     },
