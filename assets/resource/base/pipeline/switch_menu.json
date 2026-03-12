@@ -172,20 +172,20 @@
                                             "type": "ColorMatch",
                                             "param": {
                                                 "roi": [
-                                                    69,
-                                                    238,
-                                                    11,
-                                                    11
+                                                    46,
+                                                    258,
+                                                    10,
+                                                    9
                                                 ],
                                                 "upper": [
-                                                    201,
-                                                    199,
-                                                    195
+                                                    211,
+                                                    211,
+                                                    205
                                                 ],
                                                 "lower": [
-                                                    201,
-                                                    199,
-                                                    195
+                                                    191,
+                                                    191,
+                                                    185
                                                 ],
                                                 "count": 15,
                                                 "connected": true
@@ -235,27 +235,58 @@
     },
     "frame_art_action": {
         "recognition": {
-            "type": "ColorMatch",
+            "type": "Or",
             "param": {
-                "method": 4,
-                "roi": [
-                    71,
-                    241,
-                    6,
-                    5
-                ],
-                "lower": [
-                    211,
-                    95,
-                    39
-                ],
-                "upper": [
-                    231,
-                    115,
-                    59
-                ],
-                "count": 2,
-                "connected": true
+                "any_of": [
+                    {
+                        "type": "ColorMatch",
+                        "param": {
+                            "method": 4,
+                            "roi": [
+                                71,
+                                241,
+                                6,
+                                5
+                            ],
+                            "lower": [
+                                211,
+                                95,
+                                39
+                            ],
+                            "upper": [
+                                231,
+                                115,
+                                59
+                            ],
+                            "count": 2,
+                            "connected": true
+                        }
+                    },
+                    {
+                        "type": "ColorMatch",
+                        "param": {
+                            "method": 4,
+                            "roi": [
+                                46,
+                                258,
+                                10,
+                                9
+                            ],
+                            "lower": [
+                                211,
+                                95,
+                                39
+                            ],
+                            "upper": [
+                                231,
+                                115,
+                                59
+                            ],
+                            "count": 2,
+                            "connected": true
+                        }
+                    }
+                ]
             }
         },
         "next": [
