@@ -974,6 +974,7 @@
         "next": [
             "[JumpBack]ObtainedAwards",
             "[JumpBack]AwardBreakingSignals",
+            "[JumpBack]AwardRoaringRevelry",
             "[JumpBack]AwardMoonlightGardening",
             "BackButton",
             "AwardBox"
@@ -1047,6 +1048,112 @@
                     586,
                     381,
                     67
+                ],
+                "expected": "领取"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500
+    },
+    "AwardRoaringRevelry": {
+        "doc": "活动奖励·吼吼狂欢夜",
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "sub_name": "EventName",
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    36,
+                                    139,
+                                    139,
+                                    413
+                                ],
+                                "expected": "吼吼狂欢夜"
+                            }
+                        }
+                    },
+                    {
+                        "recognition": {
+                            "type": "ColorMatch",
+                            "param": {
+                                "roi": "EventName",
+                                "roi_offset": [
+                                    123,
+                                    -29,
+                                    -71,
+                                    10
+                                ],
+                                "connected": true,
+                                "count": 50,
+                                "upper": [
+                                    199,
+                                    61,
+                                    47
+                                ],
+                                "lower": [
+                                    179,
+                                    41,
+                                    27
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "post_wait_freezes": {
+            "target": [
+                667,
+                206,
+                573,
+                376
+            ],
+            "timeout": 5000
+        },
+        "next": [
+            "AwardRoaringRevelryEnd",
+            "[JumpBack]ObtainedAwards",
+            "[JumpBack]AwardRoaringRevelryClaim"
+        ]
+    },
+    "AwardRoaringRevelryEnd": {
+        "doc": "吼吼狂欢夜-没有奖励可领",
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1174,
+                    227,
+                    67,
+                    56
+                ],
+                "expected": [
+                    "进行中",
+                    "前往"
+                ]
+            }
+        }
+    },
+    "AwardRoaringRevelryClaim": {
+        "doc": "吼吼狂欢夜-领取奖励",
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1174,
+                    227,
+                    67,
+                    56
                 ],
                 "expected": "领取"
             }

@@ -190,6 +190,7 @@
                     },
                     "option": [
                         "活动奖励·崭新的电波",
+                        "活动奖励·吼吼狂欢夜",
                         "活动奖励·播种于月光下"
                     ]
                 },
@@ -219,6 +220,28 @@
                     "name": "No",
                     "pipeline_override": {
                         "AwardBreakingSignals": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "活动奖励·吼吼狂欢夜": {
+            "type": "switch",
+            "label": "吼吼狂欢夜",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "AwardRoaringRevelry": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "AwardRoaringRevelry": {
                             "enabled": false
                         }
                     }
