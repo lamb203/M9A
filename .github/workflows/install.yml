@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
 
 env:
-  MAA_FRAMEWORK_VERSION: "v5.8.1"
+  MAA_FRAMEWORK_VERSION: "v5.9.2"
   MFAA_VERSION: "v2.11.5-beta.1"
   MXU_VERSION: "v1.21.1"
 
