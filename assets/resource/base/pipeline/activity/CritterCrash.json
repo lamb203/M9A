@@ -870,7 +870,7 @@
             "param": {
                 "custom_recognition": "Count",
                 "custom_recognition_param": {
-                    "target": 5
+                    "target": 2
                 }
             }
         },
@@ -880,7 +880,10 @@
                 "duration": 500
             }
         },
-        "timeout": 10000,
+        "timeout": 3000,
+        "on_error": [
+            "Stop"
+        ],
         "next": [
             "CCUpdateFinished",
             "CCUpdate"
