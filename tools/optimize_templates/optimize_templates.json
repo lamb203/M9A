@@ -505,5 +505,6 @@
     "resource/base/image/CritterCrash/Award/Deer": "346cdf98f5c53756f03ea922cce0c3f662544d5cbcc5bf1661fb302790448934",
     "resource/base/image/CritterCrash/Award/Man": "a8a43d18efc32d436d14db46d09e39801ff7b82288ea94a273066fa118a932a3",
     "resource/base/image/CritterCrash/Lv3": "8d8a09a7ffe98f6188e08feca4c4f6181abfb597d5a98da73a8ad19693156f50",
-    "resource/announcement/images/CCMain": "80ad7f2b2dc54e5c32e53007eebaf1be35432e98ac1f9a3e4fecba15983791a5"
+    "resource/announcement/images/CCMain": "80ad7f2b2dc54e5c32e53007eebaf1be35432e98ac1f9a3e4fecba15983791a5",
+    "resource/base/image/SyndromeOfSilence/WordlessWorkshopEntry1": "38534eade2450822b259b944fc5277c3e55fba1e8f364526446c6401c0a168e2"
 }
