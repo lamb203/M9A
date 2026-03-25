@@ -400,13 +400,14 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    1054,
-                    564,
-                    182,
-                    50
+                    1036,
+                    549,
+                    213,
+                    73
                 ],
                 "template": [
-                    "SyndromeOfSilence/WordlessWorkshopEntry.png"
+                    "SyndromeOfSilence/WordlessWorkshopEntry.png",
+                    "SyndromeOfSilence/WordlessWorkshopEntry1.png"
                 ]
             }
         },
