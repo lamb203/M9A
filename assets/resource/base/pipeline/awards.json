@@ -1127,17 +1127,41 @@
     "AwardRoaringRevelryEnd": {
         "desc": "吼吼狂欢夜-没有奖励可领",
         "recognition": {
-            "type": "OCR",
+            "type": "Or",
             "param": {
-                "roi": [
-                    1174,
-                    227,
-                    67,
-                    56
-                ],
-                "expected": [
-                    "进行中",
-                    "前往"
+                "any_of": [
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    1174,
+                                    227,
+                                    67,
+                                    56
+                                ],
+                                "expected": [
+                                    "进行中",
+                                    "前往"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    885,
+                                    382,
+                                    151,
+                                    28
+                                ],
+                                "expected": "已完成",
+                                "only_rec": true
+                            }
+                        }
+                    }
                 ]
             }
         }
