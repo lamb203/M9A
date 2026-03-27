@@ -9,7 +9,7 @@
                     194,
                     166
                 ],
-                "template": "StartUp/HomeFlag.png"
+                "template": "StartUp/HomeFlag/HomeFlag.png"
             }
         }
     },
@@ -23,7 +23,7 @@
                     194,
                     166
                 ],
-                "template": "StartUp/HomeFlag.png"
+                "template": "StartUp/HomeFlag/HomeFlag.png"
             }
         },
         "inverse": true,

@@ -393,10 +393,7 @@
                     166
                 ],
                 "template": [
-                    "StartUp/HomeFlag.png",
-                    "StartUp/HomeFlag_sp01.png",
-                    "StartUp/HomeFlag3.2.png",
-                    "StartUp/HomeFlag3.4.png"
+                    "StartUp/HomeFlag/"
                 ]
             }
         },
@@ -423,10 +420,7 @@
                     166
                 ],
                 "template": [
-                    "StartUp/HomeFlag.png",
-                    "StartUp/HomeFlag_sp01.png",
-                    "StartUp/HomeFlag3.2.png",
-                    "StartUp/HomeFlag3.4.png"
+                    "StartUp/HomeFlag/"
                 ]
             }
         },
@@ -471,10 +465,7 @@
                     166
                 ],
                 "template": [
-                    "StartUp/HomeFlag.png",
-                    "StartUp/HomeFlag_sp01.png",
-                    "StartUp/HomeFlag3.2.png",
-                    "StartUp/HomeFlag3.4.png"
+                    "StartUp/HomeFlag/"
                 ]
             }
         },
