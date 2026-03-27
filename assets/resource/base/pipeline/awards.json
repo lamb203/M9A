@@ -49,6 +49,7 @@
         ]
     },
     "HomeFlagMaxTimesFive": {
+        "max_hit": 5,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -76,8 +77,7 @@
                     64
                 ]
             }
-        },
-        "max_hit": 5
+        }
     },
     "Sub_MailBadge": {
         "recognition": {
@@ -179,7 +179,7 @@
         ]
     },
     "EquipmentOverflows": {
-        "doc": "心相仓库已满",
+        "desc": "心相仓库已满",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -256,14 +256,14 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
                     143,
                     650,
                     35,
                     22
                 ],
-                "expected": "4"
+                "expected": "4",
+                "only_rec": true
             }
         },
         "next": [
@@ -281,17 +281,17 @@
                     215,
                     47
                 ],
-                "count": 20,
+                "lower": [
+                    173,
+                    72,
+                    24
+                ],
                 "upper": [
                     223,
                     122,
                     74
                 ],
-                "lower": [
-                    173,
-                    72,
-                    24
-                ]
+                "count": 20
             }
         },
         "action": {
@@ -314,17 +314,17 @@
                     215,
                     47
                 ],
-                "count": 20,
+                "lower": [
+                    91,
+                    91,
+                    91
+                ],
                 "upper": [
                     141,
                     141,
                     141
                 ],
-                "lower": [
-                    91,
-                    91,
-                    91
-                ]
+                "count": 20
             }
         },
         "next": [
@@ -337,14 +337,14 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
                     380,
                     650,
                     80,
                     24
                 ],
-                "expected": "快(.?)放入"
+                "expected": "快(.?)放入",
+                "only_rec": true
             }
         },
         "action": {
@@ -355,14 +355,14 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
                     160,
                     608,
                     35,
                     22
                 ],
-                "expected": "4"
+                "expected": "4",
+                "only_rec": true
             }
         },
         "action": {
@@ -382,14 +382,14 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
                     143,
                     650,
                     35,
                     22
                 ],
-                "expected": "3"
+                "expected": "3",
+                "only_rec": true
             }
         },
         "action": {
@@ -495,18 +495,18 @@
         ]
     },
     "WeeklyAwardsCompleted": {
-        "doc": "周任务完成，开始尝试获取显影罐",
+        "desc": "周任务完成，开始尝试获取显影罐",
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
                     156,
                     350,
                     211,
                     31
                 ],
-                "expected": "已领取全部奖励"
+                "expected": "已领取全部奖励",
+                "only_rec": true
             }
         },
         "next": [
@@ -519,7 +519,6 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
                     80,
                     665,
@@ -530,7 +529,8 @@
                     "故事",
                     "映像",
                     "轶事"
-                ]
+                ],
+                "only_rec": true
             }
         }
     },
@@ -571,14 +571,14 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "roi": [
                     1135,
                     21,
                     40,
                     22
                 ],
-                "expected": "5/5"
+                "expected": "5/5",
+                "only_rec": true
             }
         }
     },
@@ -717,10 +717,10 @@
                 "threshold": 0.9
             }
         },
-        "post_delay": 1500,
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
             "HomeFlag",
             "[JumpBack]JukeboxBadge_3.2_OneClick",
@@ -740,8 +740,8 @@
                     131,
                     34
                 ],
-                "only_rec": true,
-                "expected": "一键领取"
+                "expected": "一键领取",
+                "only_rec": true
             }
         },
         "action": {
@@ -749,7 +749,7 @@
         }
     },
     "AwardWarRoom": {
-        "doc": "进入前线观察室",
+        "desc": "进入前线观察室",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -781,7 +781,7 @@
         ]
     },
     "AwardWarRoomTelegram": {
-        "doc": "进入函电汇报",
+        "desc": "进入函电汇报",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -812,7 +812,7 @@
         ]
     },
     "AwardWarRoomTelegramScroll": {
-        "doc": "进入寻找卷轴",
+        "desc": "进入寻找卷轴",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -856,21 +856,21 @@
         ]
     },
     "AwardWarRoomTelegramScrollClaim": {
-        "doc": "领取卷轴",
+        "desc": "领取卷轴",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template": [
-                    "Awards/WarRoom/Claim.png",
-                    "Awards/WarRoom/ClaimAll.png"
-                ],
-                "threshold": 0.8,
                 "roi": [
                     1138,
                     129,
                     124,
                     100
-                ]
+                ],
+                "template": [
+                    "Awards/WarRoom/Claim.png",
+                    "Awards/WarRoom/ClaimAll.png"
+                ],
+                "threshold": 0.8
             }
         },
         "action": {
@@ -879,17 +879,17 @@
         "post_delay": 1500
     },
     "AwardWarRoomTelegramAwardClaim": {
-        "doc": "领取下方奖励",
+        "desc": "领取下方奖励",
         "recognition": {
             "type": "OCR",
             "param": {
-                "expected": "领取",
                 "roi": [
                     656,
                     564,
                     595,
                     75
-                ]
+                ],
+                "expected": "领取"
             }
         },
         "action": {
@@ -898,7 +898,7 @@
         "post_delay": 1500
     },
     "AwardWarRoomSelectSection": {
-        "doc": "选择有可领取奖励的部分（解构进程/遗落事项）",
+        "desc": "选择有可领取奖励的部分（解构进程/遗落事项）",
         "recognition": {
             "type": "ColorMatch",
             "param": {
@@ -908,18 +908,18 @@
                     413,
                     34
                 ],
-                "connected": true,
-                "count": 50,
+                "lower": [
+                    181,
+                    42,
+                    27
+                ],
                 "upper": [
                     201,
                     62,
                     47
                 ],
-                "lower": [
-                    181,
-                    42,
-                    27
-                ]
+                "connected": true,
+                "count": 50
             }
         },
         "action": {
@@ -935,7 +935,8 @@
         }
     },
     "AwardBox": {
-        "doc": "进入吼吼点唱机右边的盒子",
+        "desc": "进入吼吼点唱机右边的盒子",
+        "max_hit": 5,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -970,7 +971,6 @@
             ],
             "time": 500
         },
-        "max_hit": 5,
         "next": [
             "[JumpBack]ObtainedAwards",
             "[JumpBack]AwardBreakingSignals",
@@ -981,7 +981,7 @@
         ]
     },
     "AwardBreakingSignals": {
-        "doc": "活动·崭新的电波",
+        "desc": "活动·崭新的电波",
         "recognition": {
             "type": "And",
             "param": {
@@ -1012,18 +1012,18 @@
                                     -71,
                                     10
                                 ],
-                                "connected": true,
-                                "count": 50,
+                                "lower": [
+                                    179,
+                                    41,
+                                    27
+                                ],
                                 "upper": [
                                     199,
                                     61,
                                     47
                                 ],
-                                "lower": [
-                                    179,
-                                    41,
-                                    27
-                                ]
+                                "connected": true,
+                                "count": 50
                             }
                         }
                     }
@@ -1039,7 +1039,7 @@
         ]
     },
     "AwardBreakingSignalsAward": {
-        "doc": "崭新的电波-领取签到奖励",
+        "desc": "崭新的电波-领取签到奖励",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -1058,7 +1058,7 @@
         "post_delay": 1500
     },
     "AwardRoaringRevelry": {
-        "doc": "活动奖励·吼吼狂欢夜",
+        "desc": "活动奖励·吼吼狂欢夜",
         "recognition": {
             "type": "And",
             "param": {
@@ -1089,18 +1089,18 @@
                                     -71,
                                     10
                                 ],
-                                "connected": true,
-                                "count": 50,
+                                "lower": [
+                                    179,
+                                    41,
+                                    27
+                                ],
                                 "upper": [
                                     199,
                                     61,
                                     47
                                 ],
-                                "lower": [
-                                    179,
-                                    41,
-                                    27
-                                ]
+                                "connected": true,
+                                "count": 50
                             }
                         }
                     }
@@ -1110,7 +1110,6 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
         "post_wait_freezes": {
             "target": [
                 667,
@@ -1120,6 +1119,7 @@
             ],
             "timeout": 5000
         },
+        "post_delay": 1500,
         "next": [
             "AwardRoaringRevelryEnd",
             "[JumpBack]ObtainedAwards",
@@ -1127,7 +1127,7 @@
         ]
     },
     "AwardRoaringRevelryEnd": {
-        "doc": "吼吼狂欢夜-没有奖励可领",
+        "desc": "吼吼狂欢夜-没有奖励可领",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -1145,7 +1145,7 @@
         }
     },
     "AwardRoaringRevelryClaim": {
-        "doc": "吼吼狂欢夜-领取奖励",
+        "desc": "吼吼狂欢夜-领取奖励",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -1164,7 +1164,7 @@
         "post_delay": 1500
     },
     "AwardMoonlightGardening": {
-        "doc": "活动·播种于月光下",
+        "desc": "活动·播种于月光下",
         "recognition": {
             "type": "And",
             "param": {
@@ -1195,18 +1195,18 @@
                                     -71,
                                     10
                                 ],
-                                "connected": true,
-                                "count": 50,
+                                "lower": [
+                                    179,
+                                    41,
+                                    27
+                                ],
                                 "upper": [
                                     199,
                                     61,
                                     47
                                 ],
-                                "lower": [
-                                    179,
-                                    41,
-                                    27
-                                ]
+                                "connected": true,
+                                "count": 50
                             }
                         }
                     }
@@ -1224,7 +1224,7 @@
         ]
     },
     "AwardMoonlightGardeningClaim": {
-        "doc": "领取新麦粒儿",
+        "desc": "领取新麦粒儿",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -1243,29 +1243,29 @@
         "post_delay": 1500
     },
     "AwardMoonlightWheat": {
-        "doc": "播种",
+        "desc": "播种",
         "recognition": {
             "type": "And",
             "param": {
                 "all_of": [
                     {
-                        "doc": "判断可播种次数，1-99",
+                        "desc": "判断可播种次数，1-99",
                         "recognition": {
                             "type": "OCR",
                             "param": {
-                                "only_rec": true,
-                                "expected": "[1-9][0-9]?",
                                 "roi": [
                                     707,
                                     87,
                                     32,
                                     22
-                                ]
+                                ],
+                                "expected": "[1-9][0-9]?",
+                                "only_rec": true
                             }
                         }
                     },
                     {
-                        "doc": "进行播种，先随便种",
+                        "desc": "进行播种，先随便种",
                         "recognition": {
                             "type": "TemplateMatch",
                             "param": {
@@ -1294,18 +1294,18 @@
         ]
     },
     "AwardMoonlightNoWheat": {
-        "doc": "判断可播种次数，0",
+        "desc": "判断可播种次数，0",
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
-                "expected": "0",
                 "roi": [
                     707,
                     87,
                     32,
                     22
-                ]
+                ],
+                "expected": "0",
+                "only_rec": true
             }
         }
     }

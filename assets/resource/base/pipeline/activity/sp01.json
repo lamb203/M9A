@@ -56,6 +56,9 @@
                 "threshold": 0.9
             }
         },
+        "action": {
+            "type": "Click"
+        },
         "post_wait_freezes": {
             "time": 300,
             "target": [
@@ -64,9 +67,6 @@
                 72,
                 58
             ]
-        },
-        "action": {
-            "type": "Click"
         },
         "next": [
             "FlagInSp01Daily",
@@ -107,15 +107,15 @@
                     22,
                     20
                 ],
-                "upper": [
-                    250,
-                    110,
-                    90
-                ],
                 "lower": [
                     180,
                     80,
                     60
+                ],
+                "upper": [
+                    250,
+                    110,
+                    90
                 ],
                 "count": 50
             }
@@ -137,15 +137,15 @@
                     271,
                     70
                 ],
-                "upper": [
-                    200,
-                    100,
-                    100
-                ],
                 "lower": [
                     100,
                     50,
                     50
+                ],
+                "upper": [
+                    200,
+                    100,
+                    100
                 ],
                 "count": 1000
             }
@@ -219,10 +219,10 @@
         "recognition": {
             "type": "OCR",
             "param": {
-                "only_rec": true,
                 "expected": [
                     "所需点数-?\\d{1,2}~-?\\d{1,2}"
-                ]
+                ],
+                "only_rec": true
             }
         }
     },
@@ -231,15 +231,15 @@
             "type": "ColorMatch",
             "param": {
                 "roi": "SailingRecordSelectTarget",
-                "upper": [
-                    202,
-                    122,
-                    105
-                ],
                 "lower": [
                     152,
                     72,
                     55
+                ],
+                "upper": [
+                    202,
+                    122,
+                    105
                 ],
                 "count": 2000
             }
@@ -404,8 +404,8 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
         "post_wait_freezes": 300,
+        "post_delay": 1500,
         "next": [
             "FlagInSailingRecordStart",
             "SailingRecordBoatStartNext"
@@ -415,8 +415,8 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
-                "template_code": "",
-                "threshold": 0.9
+                "threshold": 0.9,
+                "template_code": ""
             }
         },
         "action": {
@@ -522,15 +522,15 @@
                     271,
                     70
                 ],
-                "upper": [
-                    200,
-                    100,
-                    100
-                ],
                 "lower": [
                     100,
                     50,
                     50
+                ],
+                "upper": [
+                    200,
+                    100,
+                    100
                 ],
                 "count": 1000
             }
@@ -587,15 +587,15 @@
                     22,
                     20
                 ],
-                "upper": [
-                    250,
-                    110,
-                    90
-                ],
                 "lower": [
                     180,
                     80,
                     60
+                ],
+                "upper": [
+                    250,
+                    110,
+                    90
                 ],
                 "count": 50
             }
@@ -617,15 +617,15 @@
                     271,
                     70
                 ],
-                "upper": [
-                    200,
-                    100,
-                    100
-                ],
                 "lower": [
                     100,
                     50,
                     50
+                ],
+                "upper": [
+                    200,
+                    100,
+                    100
                 ],
                 "count": 1000
             }
@@ -693,15 +693,15 @@
                     235,
                     115
                 ],
-                "upper": [
-                    200,
-                    100,
-                    100
-                ],
                 "lower": [
                     100,
                     50,
                     50
+                ],
+                "upper": [
+                    200,
+                    100,
+                    100
                 ],
                 "count": 1000
             }
@@ -720,15 +720,15 @@
                     271,
                     70
                 ],
-                "upper": [
-                    200,
-                    100,
-                    100
-                ],
                 "lower": [
                     100,
                     50,
                     50
+                ],
+                "upper": [
+                    200,
+                    100,
+                    100
                 ],
                 "count": 1000
             }
@@ -1037,15 +1037,15 @@
                     74,
                     62
                 ],
-                "upper": [
-                    250,
-                    110,
-                    90
-                ],
                 "lower": [
                     180,
                     80,
                     60
+                ],
+                "upper": [
+                    250,
+                    110,
+                    90
                 ],
                 "count": 50
             }
