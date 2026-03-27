@@ -40,39 +40,10 @@
             "[JumpBack]AwardWarRoom",
             "[JumpBack]AwardReveriesInTheRain",
             "[JumpBack]EventLaplace",
-            "[JumpBack]HomeFlagMaxTimesFive",
             "HomeFlag",
             "[JumpBack]HomeButton",
             "[JumpBack]BackButton"
         ]
-    },
-    "HomeFlagMaxTimesFive": {
-        "max_hit": 5,
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    1022,
-                    419,
-                    194,
-                    166
-                ],
-                "template": [
-                    "StartUp/HomeFlag/HomeFlag.png"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    576,
-                    298,
-                    68,
-                    64
-                ]
-            }
-        }
     },
     "Sub_MailBadge": {
         "recognition": {
