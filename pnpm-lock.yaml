@@ -11,6 +11,9 @@ importers:
       '@nekosu/maa-tools':
         specifier: 1.0.22
         version: 1.0.22
+      '@nekosu/prettier-plugin-maafw-sort':
+        specifier: ^1.0.5
+        version: 1.0.5
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -44,6 +47,18 @@ packages:
     resolution: {integrity: sha512-Oqkpdw77jJq2Fx6tyajHcPIk4xqfqDjPlBuDy+2K6eaN8BPQ4gtsL/nZfZ9/wVGHje+eFELWiUaEllGxTVQMFw==}
     engines: {node: '>=22'}
 
+  '@babel/helper-string-parser@7.27.1':
+    resolution: {integrity: sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/helper-validator-identifier@7.28.5':
+    resolution: {integrity: sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.29.0':
+    resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
+    engines: {node: '>=6.9.0'}
+
   '@date-vir/duration@8.2.0':
     resolution: {integrity: sha512-LdGi0s4y+H9XJj87m/sBBy5aIxl8kN9haI3IV9Znnyx5eKoLHkwuCAzrB77GHZp3uEacCiCYDvRTefrItYh1uw==}
     engines: {node: '>=22'}
@@ -71,6 +86,9 @@ packages:
 
   '@nekosu/maa-version-manager@1.0.2':
     resolution: {integrity: sha512-jQ4wTJKNAkjzf7MIFzKMlyRx3PjHyEWMD+M8Yjh8pCLAB+LyZKDHcDojczWQKeYmGL93uxtTDhyKB12UEo7TkQ==}
+
+  '@nekosu/prettier-plugin-maafw-sort@1.0.5':
+    resolution: {integrity: sha512-UdPoJaQOVX0hodoY/Tl2aR2WxXMEZfcZ1H00lzps3gUnuMzTxAqsY17J3JKfTBBWHTvewMM8BUwfxKZ5l9eedg==}
 
   '@nekosu/simple-parser@1.0.0':
     resolution: {integrity: sha512-Jf3tGs3/0D8XJtjRguInFh8ofGdCk6PcDK2V7HEZTXA4RN/9kk527I6pAX4zqPEUU8ISNu8dCR9F+KAn1U6tdg==}
@@ -569,6 +587,15 @@ snapshots:
       json5: 2.2.3
       type-fest: 5.4.4
 
+  '@babel/helper-string-parser@7.27.1': {}
+
+  '@babel/helper-validator-identifier@7.28.5': {}
+
+  '@babel/types@7.29.0':
+    dependencies:
+      '@babel/helper-string-parser': 7.27.1
+      '@babel/helper-validator-identifier': 7.28.5
+
   '@date-vir/duration@8.2.0':
     dependencies:
       '@augment-vir/assert': 31.67.0
@@ -615,6 +642,10 @@ snapshots:
       semver: 7.7.4
     transitivePeerDependencies:
       - supports-color
+
+  '@nekosu/prettier-plugin-maafw-sort@1.0.5':
+    dependencies:
+      '@babel/types': 7.29.0
 
   '@nekosu/simple-parser@1.0.0': {}
 
