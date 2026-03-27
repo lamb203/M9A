@@ -20,11 +20,7 @@
                     132
                 ],
                 "template": [
-                    "Wilderness/EnterWilderness.png",
-                    "Wilderness/EnterWilderness_new.png",
-                    "Wilderness/EnterWilderness_sp01.png",
-                    "Wilderness/EnterWilderness3.2.png",
-                    "Wilderness/EnterWilderness3.4.png"
+                    "Wilderness/EnterWilderness.png"
                 ]
             }
         },
