@@ -16,10 +16,7 @@
                     166
                 ],
                 "template": [
-                    "StartUp/HomeFlag.png",
-                    "StartUp/HomeFlag_sp01.png",
-                    "StartUp/HomeFlag3.2.png",
-                    "StartUp/HomeFlag3.4.png"
+                    "StartUp/HomeFlag.png"
                 ]
             }
         },
@@ -41,6 +38,7 @@
             "[JumpBack]Sub_JukeboxBadge_3.2",
             "[JumpBack]AwardBox",
             "[JumpBack]AwardWarRoom",
+            "[JumpBack]AwardReveriesInTheRain",
             "[JumpBack]EventLaplace",
             "[JumpBack]HomeFlagMaxTimesFive",
             "HomeFlag",

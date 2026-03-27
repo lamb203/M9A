@@ -1,6 +1,21 @@
 {
-    "ReveriesInTheRain": {
+    "AwardReveriesInTheRain": {
         "desc": "常驻活动：雨中悬想",
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1022,
+                    419,
+                    194,
+                    166
+                ],
+                "template": [
+                    "StartUp/HomeFlag.png"
+                ]
+            }
+        },
         "next": [
             "JudgeDepthsOfMythWeekly"
         ]
@@ -18,8 +33,7 @@
         "next": [
             "ReveriesInTheRainMainFlag",
             "[JumpBack]ReveriesInTheRainMainEntry",
-            "[JumpBack]EnterTheShow",
-            "[JumpBack]ReturnMain"
+            "[JumpBack]EnterTheShow"
         ]
     },
     "ReveriesInTheRainMainEntry": {
