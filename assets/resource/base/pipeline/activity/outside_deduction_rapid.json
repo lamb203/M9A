@@ -335,16 +335,40 @@
     "ODR_AddChar_OK": {
         "desc": "角色是否添加成功",
         "recognition": {
-            "type": "OCR",
+            "type": "Or",
             "param": {
-                "roi": [
-                    30,
-                    604,
-                    82,
-                    30
-                ],
-                "expected": "神秘术",
-                "only_rec": true
+                "any_of": [
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    31,
+                                    611,
+                                    83,
+                                    31
+                                ],
+                                "expected": "神秘术",
+                                "only_rec": true
+                            }
+                        }
+                    },
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    349,
+                                    506,
+                                    84,
+                                    31
+                                ],
+                                "expected": "神秘术",
+                                "only_rec": true
+                            }
+                        }
+                    }
+                ]
             }
         },
         "next": [
