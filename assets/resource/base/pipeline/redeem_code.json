@@ -206,7 +206,15 @@
         "action": {
             "type": "Click"
         },
-        "post_wait_freezes": 300
+        "post_wait_freezes": {
+            "time": 300,
+            "target": [
+                472,
+                291,
+                331,
+                177
+            ]
+        }
     },
     "redeem_codeClickInputBox": {
         "desc": "点击兑换码输入框",
