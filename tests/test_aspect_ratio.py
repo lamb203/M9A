@@ -1,35 +1,4 @@
-import importlib
-import sys
-import types
-from unittest.mock import patch
-
-
-class _AgentServerStub:
-    @staticmethod
-    def tasker_sink():
-        return lambda cls: cls
-
-
-class _TaskerEventSinkStub:
-    class TaskerTaskDetail:
-        pass
-
-
-with patch.dict(
-    sys.modules,
-    {
-        "maa.agent.agent_server": types.SimpleNamespace(AgentServer=_AgentServerStub),
-        "maa.event_sink": types.SimpleNamespace(
-            NotificationType=types.SimpleNamespace()
-        ),
-        "maa.tasker": types.SimpleNamespace(
-            Tasker=object,
-            TaskerEventSink=_TaskerEventSinkStub,
-        ),
-        "utils.logger": types.SimpleNamespace(logger=types.SimpleNamespace()),
-    },
-):
-    aspect_ratio = importlib.import_module("agent.custom.sink.aspect_ratio")
+from agent.utils import aspect_ratio
 
 
 def test_accepts_exact_16x9_resolutions_in_both_orientations() -> None:
