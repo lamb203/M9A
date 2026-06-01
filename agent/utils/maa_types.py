@@ -86,9 +86,7 @@ def results_as[ResultT](
     if detail is None or not detail.hit:
         return []
     return [
-        result
-        for result in detail.filtered_results
-        if isinstance(result, result_type)
+        result for result in detail.filtered_results if isinstance(result, result_type)
     ]
 
 
@@ -108,11 +106,7 @@ def all_results_as[ResultT](
     """
     if detail is None or not detail.hit:
         return []
-    return [
-        result
-        for result in detail.all_results
-        if isinstance(result, result_type)
-    ]
+    return [result for result in detail.all_results if isinstance(result, result_type)]
 
 
 def ocr_result(detail: RecognitionDetail | None) -> OCRResult | None:
@@ -189,7 +183,9 @@ def recognition_results(detail: RecognitionDetail | None) -> list[RecognitionRes
 BoxedRecognitionResult = BoxAndScoreResult | BoxAndCountResult | CustomRecognitionResult
 
 
-def has_box_result(result: RecognitionResult | None) -> TypeGuard[BoxedRecognitionResult]:
+def has_box_result(
+    result: RecognitionResult | None,
+) -> TypeGuard[BoxedRecognitionResult]:
     """Check whether a recognition result carries a box.
 
     Args:
@@ -198,7 +194,9 @@ def has_box_result(result: RecognitionResult | None) -> TypeGuard[BoxedRecogniti
     Returns:
         True when ``result`` is one of the result types with a concrete box.
     """
-    return isinstance(result, BoxAndScoreResult | BoxAndCountResult | CustomRecognitionResult)
+    return isinstance(
+        result, BoxAndScoreResult | BoxAndCountResult | CustomRecognitionResult
+    )
 
 
 def boxed_results(detail: RecognitionDetail | None) -> list[BoxedRecognitionResult]:
@@ -211,11 +209,7 @@ def boxed_results(detail: RecognitionDetail | None) -> list[BoxedRecognitionResu
         Box-carrying results from ``filtered_results``. Returns an empty list
         when the detail is absent or missed.
     """
-    return [
-        result
-        for result in recognition_results(detail)
-        if has_box_result(result)
-    ]
+    return [result for result in recognition_results(detail) if has_box_result(result)]
 
 
 def best_box(detail: RecognitionDetail | None) -> Rect | None:

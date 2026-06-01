@@ -222,9 +222,7 @@ class MultiRecognition(CustomRecognition):
 
                     # 替换外部节点引用
                     for node_name in external_node_names:
-                        recognition_success = external_node_cache.get(
-                            node_name, False
-                        )
+                        recognition_success = external_node_cache.get(node_name, False)
                         bool_value = "True" if recognition_success else "False"
                         eval_expression = eval_expression.replace(
                             f"{{{node_name}}}", bool_value

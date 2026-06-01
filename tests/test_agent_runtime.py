@@ -12,7 +12,9 @@ def test_maa_log_dir_matches_pre_refactor_relative_debug_path() -> None:
     fake_logger_module: Any = types.ModuleType("utils.logger")
     fake_logger_module.change_console_level = Mock()
 
-    fake_paths = types.SimpleNamespace(debug_dir=Path("C:/Users/example/新建文件夹/debug"))
+    fake_paths = types.SimpleNamespace(
+        debug_dir=Path("C:/Users/example/新建文件夹/debug")
+    )
     fake_get_runtime_paths = Mock(return_value=fake_paths)
 
     fake_agent_server: Any = types.ModuleType("maa.agent.agent_server")

@@ -253,10 +253,7 @@ class TeamSelect(CustomAction):
                     time.sleep(2)  # 等待界面稳定
                     img = context.tasker.controller.post_screencap().wait().get()
                     reco_result = context.run_recognition("TeamListEditRoi", img)
-                    if (
-                        not is_hit(reco_result)
-                        or not reco_result.filtered_results
-                    ):
+                    if not is_hit(reco_result) or not reco_result.filtered_results:
                         logger.error("未识别到成员队列")
                         return CustomAction.RunResult(success=False)
                     else:
