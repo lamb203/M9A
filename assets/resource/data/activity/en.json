@@ -519,7 +519,22 @@
             "combat": {
                 "event_type": "SideStory",
                 "start_time": 1779976800000,
-                "end_time": 1782723599000
+                "end_time": 1782723599000,
+                "override": {
+                    "ActivityCombatStageNum": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    226,
+                                    29,
+                                    815,
+                                    234
+                                ],
+                                "expected": "[0-1][0-9]"
+                            }
+                        }
+                    }
+                }
             },
             "re-release": {
                 "start_time": 1781859600000,
