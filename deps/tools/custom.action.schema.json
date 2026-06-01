@@ -15,7 +15,6 @@
                 "ModifyBankTaskList",
                 "SwitchCombatTimes",
                 "PsychubeDoubleTimes",
-                "LucidscapeStageSelect",
                 "LucidscapeStatusDetect",
                 "TeamSelect",
                 "CombatTargetLevel",
@@ -101,9 +100,6 @@
         },
         {
             "$ref": "#/$defs/PsychubeDoubleTimes"
-        },
-        {
-            "$ref": "#/$defs/LucidscapeStageSelect"
         },
         {
             "$ref": "#/$defs/LucidscapeStatusDetect"
@@ -599,14 +595,6 @@
                 "custom_action": {
                     "const": "PsychubeDoubleTimes",
                     "description": "识别加成次数，根据结果覆盖 PsychubeVictoryOverrideTask 中参数。"
-                }
-            }
-        },
-        "LucidscapeStageSelect": {
-            "properties": {
-                "custom_action": {
-                    "const": "LucidscapeStageSelect",
-                    "description": "醒梦域界面，选择最新可进入片段。"
                 }
             }
         },

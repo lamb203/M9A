@@ -1,76 +1,11 @@
-import re
 import time
 
 from maa.agent.agent_server import AgentServer
 from maa.context import Context
 from maa.custom_action import CustomAction
 from utils import logger
-from utils.maa_types import is_hit, ocr_text
+from utils.maa_types import is_hit
 from utils.params import parse_params
-
-
-@AgentServer.custom_action("LucidscapeStageSelect")
-class LucidscapeStageSelect(CustomAction):
-    """
-    醒梦域界面，选择最新可进入片段
-    """
-
-    def run(
-        self,
-        context: Context,
-        argv: CustomAction.RunArg,
-    ) -> CustomAction.RunResult:
-
-        img = context.tasker.controller.post_screencap().wait().get()
-
-        # Stage1-Stage4
-        roi_list = [
-            [221, 510, 95, 22],
-            [644, 542, 95, 22],
-            [486, 272, 95, 22],
-            [982, 410, 95, 22],
-        ]
-
-        stage = 1
-        for roi in roi_list:
-            logger.debug(f"stage: {stage}")
-            if stage == 1 or stage == 2:
-                max = 200
-            else:
-                max = 150
-            reco_detail = context.run_recognition(
-                "LucidscapeStageLocked",
-                img,
-                {"LucidscapeStageLocked": {"expected": f"\\d/{max}", "roi": roi}},
-            )
-            if not is_hit(reco_detail):
-                return CustomAction.RunResult(success=False)
-            pattern = f"(\\d{{1,3}})/{max}"
-            text = ocr_text(reco_detail)
-            logger.debug(f"text: {text}")
-            match = re.search(pattern, text)
-            if match:
-                score = match.group(1)
-                score = int(score)
-                logger.debug(f"score: {score}")
-                if score <= max - 80:
-                    break
-            stage += 1
-
-        if stage == 5:
-            stage = 4
-
-        logger.info(f"当前解锁片段{stage}，准备进入")
-
-        context.tasker.controller.post_click(
-            int(roi[0] + roi[2] / 2), int(roi[1] + roi[3] / 2)
-        ).wait()
-        context.override_pipeline(
-            {"LucidscapeStatusDetect": {"custom_action_param": {"stage": stage}}}
-        )
-        time.sleep(3)
-
-        return CustomAction.RunResult(success=True)
 
 
 @AgentServer.custom_action("LucidscapeStatusDetect")

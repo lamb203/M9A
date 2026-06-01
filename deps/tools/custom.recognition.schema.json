@@ -17,6 +17,7 @@
                 "CCBuyCard",
                 "CCRemainMoney",
                 "StagePromotionComplete",
+                "LucidscapeStageSelect",
                 "SOSSelectNode",
                 "SOSSelectEncounterOptionList",
                 "SOSSelectEncounterOptionFindSelected"
@@ -62,6 +63,9 @@
         },
         {
             "$ref": "#/$defs/StagePromotionComplete"
+        },
+        {
+            "$ref": "#/$defs/LucidscapeStageSelect"
         },
         {
             "$ref": "#/$defs/SOSSelectNode"
@@ -427,6 +431,14 @@
                 "custom_recognition": {
                     "const": "StagePromotionComplete",
                     "description": "推图模式完成判断（当前关为满星且无下一关）"
+                }
+            }
+        },
+        "LucidscapeStageSelect": {
+            "properties": {
+                "custom_recognition": {
+                    "const": "LucidscapeStageSelect",
+                    "description": "醒梦域界面，识别最新可进入片段。"
                 }
             }
         },

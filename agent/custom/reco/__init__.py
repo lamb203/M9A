@@ -5,6 +5,7 @@ RECO_MODULES = (
     "bank",
     "activity",
     "combat",
+    "lucidscape",
     "syndrome_of_silence",
     "critter_crash",
 )
