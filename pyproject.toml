@@ -1,5 +1,13 @@
 [tool.black]
-exclude = "\\.venv"
+extend-exclude = '''
+/(
+    \.venv
+  | \.venv-linux
+  | \.uv-cache
+  | node_modules
+  | deps
+)/
+'''
 
 [tool.ruff]
 line-length = 100
