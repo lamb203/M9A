@@ -11,8 +11,8 @@ from utils.logger import logger
 
 # 目标宽高比：16:9
 TARGET_RATIO = 16.0 / 9.0
-# 容差范围（±2%）
-TOLERANCE = 0.02
+# 允许常见分辨率四舍五入带来的 1 像素误差，例如 1366x768。
+MAX_ASPECT_RATIO_PIXEL_ERROR = 1
 SWITCH_ACCOUNT_REQUIRED_RESOLUTION = (1280, 720)
 
 
@@ -24,10 +24,11 @@ def is_aspect_ratio_16x9(width: int, height: int) -> bool:
     if width <= 0 or height <= 0:
         return False
 
-    ratio = calculate_aspect_ratio(width, height)
+    long_side = max(width, height)
+    short_side = min(width, height)
+    error = abs(long_side * 9 - short_side * 16)
 
-    # 检查比例是否在 16:9 的容差范围内
-    return abs(ratio - TARGET_RATIO) <= TARGET_RATIO * TOLERANCE
+    return error <= 16 * MAX_ASPECT_RATIO_PIXEL_ERROR
 
 
 def calculate_aspect_ratio(width: int, height: int) -> float:
