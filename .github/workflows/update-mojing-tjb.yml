@@ -23,7 +23,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          target="assets/resource/announcement/images/mojing_tjb.png"
+          target="assets/resource/announcement/images/mojing_tjb.jpg"
           tmp="$(mktemp)"
 
           curl -fsSL \
@@ -32,8 +32,8 @@ jobs:
             --output "$tmp" \
             "https://mojing.chat/api/tjb"
 
-          if ! file "$tmp" | grep -q "PNG image data"; then
-            echo "Downloaded file is not a PNG image"
+          if ! file "$tmp" | grep -q "JPEG image data"; then
+            echo "Downloaded file is not a JPEG image"
             file "$tmp"
             exit 1
           fi
@@ -45,7 +45,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          if git diff --quiet -- assets/resource/announcement/images/mojing_tjb.png; then
+          if git diff --quiet -- assets/resource/announcement/images/mojing_tjb.jpg; then
             echo "No changes to commit"
             exit 0
           fi
@@ -53,6 +53,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add assets/resource/announcement/images/mojing_tjb.png
+          git add assets/resource/announcement/images/mojing_tjb.jpg
           git commit -m "chore: update mojing tjb image" -m "[skip changelog]"
           git push
