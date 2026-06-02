@@ -45,7 +45,9 @@ jobs:
         run: |
           set -euo pipefail
 
-          if git diff --quiet -- assets/resource/announcement/images/mojing_tjb.jpg; then
+          git add assets/resource/announcement/images/mojing_tjb.jpg
+
+          if git diff --cached --quiet -- assets/resource/announcement/images/mojing_tjb.jpg; then
             echo "No changes to commit"
             exit 0
           fi
@@ -53,6 +55,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add assets/resource/announcement/images/mojing_tjb.jpg
           git commit -m "chore: update mojing tjb image" -m "[skip changelog]"
           git push
