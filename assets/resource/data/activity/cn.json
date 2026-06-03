@@ -832,5 +832,21 @@
                 "end_time": 1781125199000
             }
         }
+    },
+    "3.8": {
+        "version_name": "世纪末尺度",
+        "start_time": 1781143200000,
+        "end_time": 1784753999000,
+        "activity": {
+            "combat": {
+                "event_type": "SideStory",
+                "start_time": 1781143200000,
+                "end_time": 1784494799000
+            },
+            "re-release": {
+                "start_time": 1783630800000,
+                "end_time": 1784494799000
+            }
+        }
     }
 }
