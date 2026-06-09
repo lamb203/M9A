@@ -120,6 +120,13 @@ class EightBitCombatMove(CustomAction):
     _right_boundary: int = 939
     _wall_threshold: int = 10
     _timeout: int = 150
+    _move_input: str = "key"
+    _move_click_positions: dict[int, tuple[int, int] | None] = {
+        KEYCODE_DPAD_UP: (177, 472),
+        KEYCODE_DPAD_DOWN: (174, 625),
+        KEYCODE_DPAD_LEFT: (95, 543),
+        KEYCODE_DPAD_RIGHT: (259, 548),
+    }
 
     _is_wall_stuck: bool = False
     _stuck_pos: tuple[int, int] | None = None
@@ -137,6 +144,8 @@ class EightBitCombatMove(CustomAction):
         context: Context,
         argv: CustomAction.RunArg,
     ) -> CustomAction.RunResult:
+
+        self._apply_params(argv.custom_action_param)
 
         if time.time() - EightBitCombatInit.start_time > self._timeout:
             logger.warning("[8bit] 战斗超时，退出到主界面")
@@ -359,8 +368,36 @@ class EightBitCombatMove(CustomAction):
     def _move(self, context: Context, key: int, times: int = 1):
         """通用移动方法"""
         for _ in range(times):
+            if self._move_input == "click":
+                pos = self._move_click_positions.get(key)
+                if pos is not None:
+                    context.tasker.controller.post_click(pos[0], pos[1]).wait()
+                    continue
+
+                logger.warning(
+                    f"[8bit] 未配置{self._key_name(key)}方向点击坐标，回退为按键移动"
+                )
+
             context.tasker.controller.post_click_key(key).wait()
         EightBitCombatMove._last_move_key = key
+
+    def _apply_params(self, raw_params: str | dict | None):
+        """应用移动输入配置。"""
+        try:
+            params = (
+                raw_params if isinstance(raw_params, dict) else parse_params(raw_params)
+            )
+        except Exception as e:
+            logger.warning(f"[8bit] 解析移动参数失败，使用默认按键移动: {e}")
+            return
+
+        move_input = params.get("move_input", params.get("input", "key"))
+        if move_input not in ("key", "click"):
+            logger.warning(f"[8bit] 未知移动输入方式: {move_input}，使用按键移动")
+            self._move_input = "key"
+            return
+
+        self._move_input = move_input
 
 
 @AgentServer.custom_action("EightBitScoreRecord")

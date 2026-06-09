@@ -5,7 +5,8 @@
             "entry": "8bit",
             "option": [
                 "8-bit关卡难度",
-                "8-bit刷取模式"
+                "8-bit刷取模式",
+                "8-bit移动方式"
             ],
             "group": ["standalone"],
             "desc": "8-bit 街机秀刷代币，请到游戏主界面开始任务"
@@ -93,6 +94,31 @@
                                 "[JumpBack]8bitScoreRecord",
                                 "[JumpBack]8bitCombatMove"
                             ]
+                        }
+                    }
+                }
+            ]
+        },
+        "8-bit移动方式": {
+            "type": "select",
+            "label": "移动方式",
+            "description": "默认使用键盘方向键移动；如果进入移动界面后不动，可以切换为点击游戏界面的方式移动。",
+            "cases": [
+                {
+                    "name": "键盘输入",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "点击输入",
+                    "pipeline_override": {
+                        "8bitCombatMove": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "move_input": "click"
+                                    }
+                                }
+                            }
                         }
                     }
                 }

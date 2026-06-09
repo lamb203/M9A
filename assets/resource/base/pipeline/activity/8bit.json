@@ -143,7 +143,10 @@
         "action": {
             "type": "Custom",
             "param": {
-                "custom_action": "EightBitCombatMove"
+                "custom_action": "EightBitCombatMove",
+                "custom_action_param": {
+                    "move_input": "key"
+                }
             }
         },
         "post_delay": 0

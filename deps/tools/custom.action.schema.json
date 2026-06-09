@@ -1206,6 +1206,21 @@
                 "custom_action": {
                     "const": "EightBitCombatMove",
                     "description": "8-bit 战斗界面移动逻辑"
+                },
+                "custom_action_param": {
+                    "type": "object",
+                    "properties": {
+                        "move_input": {
+                            "type": "string",
+                            "enum": [
+                                "key",
+                                "click"
+                            ],
+                            "description": "移动输入方式。key 使用方向键，click 使用 Python 中预留的四方向点击坐标。",
+                            "default": "key"
+                        }
+                    },
+                    "unevaluatedProperties": false
                 }
             }
         },
