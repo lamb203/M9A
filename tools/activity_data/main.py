@@ -62,6 +62,7 @@ def save_activity_data(resource, data):
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(merged_data, f, ensure_ascii=False, indent=4)
+            f.write("\n")
         print(f"Successfully saved data to {file_path}")
         return True
     except Exception as e:
