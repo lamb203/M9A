@@ -866,14 +866,15 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    298,
+                    281,
                     30,
-                    132,
-                    30
+                    149,
+                    32
                 ],
                 "template": [
-                    "Awards/Box.png"
-                ]
+                    "Awards/AwardBox/"
+                ],
+                "threshold": 0.8
             }
         },
         "action": {
