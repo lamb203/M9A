@@ -64,12 +64,12 @@
                 "expected": "后开启"
             }
         },
-        "focus": {
-            "Node.Action.Starting": "<span style=\"color:orange\">探索模式尚未开放，跳过该阶段</span>"
-        },
         "next": [
             "AP_AllPhasesDone"
-        ]
+        ],
+        "focus": {
+            "Node.Action.Starting": "<span style=\"color:orange\">探索模式尚未开放，跳过该阶段</span>"
+        }
     },
     "AP_SwitchToExplore": {
         "desc": "点击左上角「探索模式」按钮切换（当期为单切换按钮；1987 等历史活动为故事/探索双按钮竖排，点击跟随 OCR 命中位置自适应）",
@@ -102,9 +102,6 @@
     "AP_PromotionLoop": {
         "desc": "推图调度循环：在当前模式地图页自动推进直到无未完成关卡，与具体模式无关",
         "timeout": 60000,
-        "on_error": [
-            "AP_UnknownScreen"
-        ],
         "next": [
             "CheckStopping",
             "AP_MiniGame",
@@ -128,6 +125,9 @@
             "[JumpBack]AP_EnterStage",
             "[JumpBack]AP_SwipeMap",
             "AP_AllDone"
+        ],
+        "on_error": [
+            "AP_UnknownScreen"
         ]
     },
     "APExploreAnchorOCR": {
@@ -230,14 +230,14 @@
                 }
             }
         },
-        "focus": {
-            "Node.Action.Starting": "<span style=\"color:green\">当前地图推图完成，继续后续阶段</span>"
-        },
         "next": [
             "AT_TrailGate",
             "AP_ExploreGate",
             "AP_AllPhasesDone"
-        ]
+        ],
+        "focus": {
+            "Node.Action.Starting": "<span style=\"color:green\">当前地图推图完成，继续后续阶段</span>"
+        }
     },
     "AP_InCombatRT": {
         "desc": "实时卡牌战斗中（左上角轮次/回合计数），等待游戏内自动战斗打完",

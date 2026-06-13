@@ -96,9 +96,7 @@ class BalancedFarmingAnalyze(CustomAction):
             {
                 "SelectCombatStage": {
                     "action": {
-                        "param": {
-                            "custom_action_param": {"stage": target["stage"]}
-                        }
+                        "param": {"custom_action_param": {"stage": target["stage"]}}
                     },
                     "attach": {"level": target["level"]},
                 }

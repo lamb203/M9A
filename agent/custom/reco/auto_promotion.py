@@ -78,7 +78,9 @@ class APPhaseGate(CustomRecognition):
         # 进入新的推图阶段前重置滑动到头计数，避免上一阶段的状态串扰
         APMapAnalyze.reset_swipe_state()
         logger.info(f"[AutoPromotion] 进入阶段: {query}")
-        return CustomRecognition.AnalyzeResult(box=[0, 0, 0, 0], detail={"phase": query})
+        return CustomRecognition.AnalyzeResult(
+            box=[0, 0, 0, 0], detail={"phase": query}
+        )
 
 
 @AgentServer.custom_recognition("APCardFinder")
@@ -726,9 +728,7 @@ class APMapAnalyze(ParamOverrideMixin, CustomRecognition):
         return int(marker.sum()) >= self.MULTI_MARKER_PIXELS
 
     def _has_multi_text_prefix(self, text: str) -> bool:
-        return bool(
-            re.match(r"^[^\dA-Za-z\u4e00-\u9fff]{1,3}\s*\d", text.strip())
-        )
+        return bool(re.match(r"^[^\dA-Za-z\u4e00-\u9fff]{1,3}\s*\d", text.strip()))
 
     def _star_row_crop(self, image, box: list[int]):
         h_img, w_img = image.shape[:2]
@@ -750,7 +750,8 @@ class APMapAnalyze(ParamOverrideMixin, CustomRecognition):
         number_width = min(box[2], self.STAR_NUM_WIDTH_CAP)
         return max(
             min(
-                box[0] + max(number_width - self.STAR_X0_BACKOFF, self.STAR_X0_MIN_OFFSET),
+                box[0]
+                + max(number_width - self.STAR_X0_BACKOFF, self.STAR_X0_MIN_OFFSET),
                 image_width,
             ),
             0,

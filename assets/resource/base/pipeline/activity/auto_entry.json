@@ -63,9 +63,6 @@
     "AP_NavLoop": {
         "desc": "入口导航调度循环：主页「入场」-> 世纪末尺度页「映像」-> 卡片横排回卷到最左后逐屏查找 -> 点目标卡片 -> 详情页「活动正篇/主线正篇」-> 关卡地图页",
         "timeout": 60000,
-        "on_error": [
-            "AP_NavFailed"
-        ],
         "next": [
             "CheckStopping",
             "[JumpBack]AP_NavStoryEnter",
@@ -87,6 +84,9 @@
             "[JumpBack]SkipButton",
             "[JumpBack]AP_NavPVTap",
             "[JumpBack]ReturnMain"
+        ],
+        "on_error": [
+            "AP_NavFailed"
         ]
     },
     "AP_NavPVTap": {

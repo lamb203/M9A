@@ -112,8 +112,8 @@
                     1120,
                     630
                 ],
-                "threshold": 0.9,
-                "template": "Warehouse/Item-110103.png"
+                "template": "Warehouse/Item-110103.png",
+                "threshold": 0.9
             }
         }
     },

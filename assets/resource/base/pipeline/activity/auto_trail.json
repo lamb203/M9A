@@ -17,9 +17,6 @@
     "AutoTrail": {
         "desc": "活动小径自动化调度循环：自动遍历地图左侧小径任务列表直至全部完成",
         "timeout": 60000,
-        "on_error": [
-            "AT_UnknownScreen"
-        ],
         "next": [
             "CheckStopping",
             "[JumpBack]AT_OrangeBox",
@@ -27,6 +24,9 @@
             "[JumpBack]AT_Dialogue",
             "[JumpBack]AT_PickTask",
             "AT_AllDone"
+        ],
+        "on_error": [
+            "AT_UnknownScreen"
         ]
     },
     "ATTrailListOCR": {
@@ -119,13 +119,13 @@
                 }
             }
         },
-        "focus": {
-            "Node.Action.Starting": "<span style=\"color:green\">小径任务全部完成，继续后续阶段</span>"
-        },
         "next": [
             "AP_ExploreGate",
             "AP_AllPhasesDone"
-        ]
+        ],
+        "focus": {
+            "Node.Action.Starting": "<span style=\"color:green\">小径任务全部完成，继续后续阶段</span>"
+        }
     },
     "AT_UnknownScreen": {
         "desc": "调度超时兜底：报错结束（出错截图由框架 SaveOnError 自动保存到 debug/on_error）",
