@@ -1,50 +1,34 @@
 {
     "TheSyndromeOfSilence": {
-        // 3.7 版本无声综合征
+        // 3.8 版本无声综合征，常驻
         "next": [
             "SOSMainMenu",
+            "[JumpBack]ReturnMain",
             "[JumpBack]SOSStop",
-            "[JumpBack]FlagInSOSMenu"
-            // "[JumpBack]ReturnMain",
-            // "[JumpBack]EnterTheActivityMain",
-            // "[JumpBack]EnterSOSMenu",
-            // "[JumpBack]SOSSwipeBottomBar"
+            "[JumpBack]SOSStart",
+            "[JumpBack]FlagInSOSMenu",
+            "[JumpBack]EnterTheShow",
+            "[JumpBack]TheSyndromeOfSilenceSwitchList",
+            "[JumpBack]OutsideDeduction"
         ]
     },
     // 到 SOS Main Menu
-    "SOSSwipeBottomBar": {
-        "max_hit": 5,
+    "TheSyndromeOfSilenceSwitchList": {
+        "desc": "从黄昏的音序切换到无声综合征",
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    918,
-                    8,
-                    355,
-                    75
+                    69,
+                    184,
+                    135,
+                    239
                 ],
-                "expected": [
-                    "预告",
-                    "成就"
-                ]
+                "expected": ["无声综合征"]
             }
         },
         "action": {
-            "type": "Swipe",
-            "param": {
-                "begin": [
-                    701,
-                    630,
-                    79,
-                    32
-                ],
-                "end": [
-                    508,
-                    624,
-                    79,
-                    32
-                ]
-            }
+            "type": "Click"
         }
     },
     "FlagInSOSMenu": {
@@ -67,34 +51,6 @@
         "next": [
             "SOSStart"
         ]
-    },
-    "EnterSOSMenu": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    46,
-                    561,
-                    782,
-                    159
-                ],
-                "expected": [
-                    "无声综合征"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_wait_freezes": {
-            "time": 500,
-            "target": [
-                931,
-                551,
-                353,
-                172
-            ]
-        }
     },
     "SOSMainMenu": {
         // 有科技树的主界面，进入循环

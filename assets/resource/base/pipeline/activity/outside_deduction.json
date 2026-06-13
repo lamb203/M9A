@@ -2,10 +2,28 @@
     "SeriesOfDusks": {
         "next": [
             "SOD_Menu",
+            "[JumpBack]ReturnMain",
+            "[JumpBack]SeriesOfDusksEntry",
             "[JumpBack]OutsideDeduction",
-            "[JumpBack]EnterTheShow",
-            "[JumpBack]ReturnMain"
+            "[JumpBack]EnterTheShow"
         ]
+    },
+    "SeriesOfDusksEntry": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    888,
+                    463,
+                    284,
+                    160
+                ],
+                "template": ["OutsideDeduction/SeriesOfDusksEntry.png"]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
     },
     "OutsideDeduction": {
         "recognition": {
@@ -30,7 +48,8 @@
                 558,
                 286,
                 114
-            ]
+            ],
+            "timeout": 3000
         }
     },
     "SOD_Menu": {
