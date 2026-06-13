@@ -535,5 +535,17 @@
     "resource/base/image/8-bit/TPEntry/1": "c7f17eb68618cbf69d70733bf54fbc95e224fabb4517524a441742562a602223",
     "resource/base/image/8-bit/TPEntry/3": "02c68678ac7e7f88b433895ecb67938fd51165ed008267a694bd67a5bfa08d2b",
     "resource/base/image/8-bit/People/2": "7edb5dc8f9b351522ffda53e171ec3551f4558240e7138c312beec23794db4d6",
-    "resource/base/image/8-bit/People/1": "238e481995ec4912bd82724c741207864e76ab1e7253218062c7e5e349581e2f"
+    "resource/base/image/8-bit/People/1": "238e481995ec4912bd82724c741207864e76ab1e7253218062c7e5e349581e2f",
+    "resource/base/image/Warehouse/Item-110703": "48ef060b24064f4f3303e62df8143e1768c9b15b4a7284bbdd157fffa8a76550",
+    "resource/base/image/Warehouse/Item-110803": "7ce526babc9c25ba90f489161978dcbf54ceccc819132c73a92a352995f09336",
+    "resource/base/image/Warehouse/Item-110503": "ab3bf98023e10002c04eca767af322b632982a1c447d05a1584c425fc12098f8",
+    "resource/base/image/Warehouse/Item-110403": "8f8a3e980d4ed3bbf2433fbd269b9d51b654ce68aa1bbcb891d9f48f1ea93b72",
+    "resource/base/image/Warehouse/Item-110603": "e9f0139d98902640bd756922a459048857a228626d7d3f4b59706eb8c72612b5",
+    "resource/base/image/Warehouse/Item-110103": "a8aefeffea1af835ec0ff12b1416fcb908cce67329963f885c1323dc93092f81",
+    "resource/base/image/Warehouse/Item-110903": "7480e1d110ae69bf2bdf6e2816b84c8e70e61bfd16d0676950f193cda507a49f",
+    "resource/base/image/Warehouse/Item-111012": "e363b412a14e6a87df1cfde570d4ae2e553b6ab11963678135e289c9e7a9c9fa",
+    "resource/base/image/Warehouse/Item-111103": "35caf700e95bad3ed58f62ef161ae642d4300c9bb0371443e05ee1dfc98e5272",
+    "resource/base/image/Warehouse/Item-110303": "d02bc67c608b86c4fdc86f0c89fc6b949d05ec3fb397466bd2a0f775e90fc89a",
+    "resource/base/image/Warehouse/Item-111002": "22e7d543b7338258b98262246e16f14bcb3dde6fac72af60e020031c0586ef1b",
+    "resource/base/image/Warehouse/Item-110203": "e026087168c0c04efce25562f6c5b149bc8966bf4c232f06c62a0b7879d09318"
 }
