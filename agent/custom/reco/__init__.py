@@ -4,6 +4,8 @@ RECO_MODULES = (
     "general",
     "bank",
     "activity",
+    "auto_promotion",
+    "auto_trail",
     "combat",
     "lucidscape",
     "syndrome_of_silence",

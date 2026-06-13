@@ -455,6 +455,8 @@ tools/ImageCropper/**/*.png
 .nicegui/storage-general.json
 
 # M9A
+CLAUDE.md
+tests/test_auto_promotion_pipeline.py
 python/
 .venv/
 .venv-linux/
