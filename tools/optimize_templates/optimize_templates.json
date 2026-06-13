@@ -550,5 +550,7 @@
     "resource/base/image/Warehouse/Item-110203": "e026087168c0c04efce25562f6c5b149bc8966bf4c232f06c62a0b7879d09318",
     "resource/base/image/OutsideDeduction/SeriesOfDusksEntry": "e70348bc37adab20915b0747fb39679195a7722ad05370583919888c701e2df3",
     "resource/base/image/AutoPromotion/AP_MiniGameGoal": "18be4086a4b05bc26d8817bb6fd8a9cee1e79839e7438b3044c3589098613924",
-    "resource/base/image/OutsideDeduction/SOD_Combating_1": "246ff76b65449a86059bc866bdc388d034d83423669e3d1982791f62092ed7d0"
+    "resource/base/image/OutsideDeduction/SOD_Combating_1": "246ff76b65449a86059bc866bdc388d034d83423669e3d1982791f62092ed7d0",
+    "resource/base/image/Awards/AwardBox/1": "b4d3908706da37e956315ed61589e03bb225820801e1256b3d885a9093335518",
+    "resource/base/image/Awards/AwardBox/3.8": "10917865419b92d802b1e072370d4610565abb3fa724b9660d334caed3d83c98"
 }
