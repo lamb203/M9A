@@ -1,6 +1,6 @@
 {
     "AutoPromotion": {
-        "desc": "活动推图入口：先手动进入活动关卡地图页再启动。按选项依次执行 故事模式推图 -> 小径 -> 探索模式推图，三阶段可独立开关",
+        "desc": "活动推图入口：先手动进入活动关卡地图页再启动。由「推图模式」单选决定执行故事/主线（含小径）或探索模式",
         "recognition": {
             "type": "Custom",
             "param": {
@@ -12,11 +12,99 @@
         },
         "next": [
             "AP_Navigate",
-            "AP_StoryGate",
-            "AT_TrailGate",
-            "AP_ExploreGate",
+            "AP_EnsureStoryOrMain",
             "AP_AllPhasesDone"
         ]
+    },
+    "AP_EnsureStoryOrMain": {
+        "desc": "故事/主线模式入口：主线地图或已在故事模式时直接推；单按钮当前为探索时点「故事」，双按钮点「故事模式」后推图",
+        "timeout": 10000,
+        "next": [
+            "AP_MainMapReady",
+            "AP_StoryMapReady",
+            "AP_SwitchToStoryFromExplore",
+            "AP_SwitchToStory"
+        ],
+        "on_error": [
+            "AP_StoryModeUnavailable"
+        ]
+    },
+    "AP_EnsureExplore": {
+        "desc": "探索模式入口：已在探索模式时直接推；单按钮当前为故事时点「探索/探险」，双按钮点「探索/探险模式」后推图；主线地图无探索模式则正常结束",
+        "timeout": 10000,
+        "next": [
+            "AP_ExploreMapReady",
+            "AP_ExploreLocked",
+            "AP_SwitchToExploreFromStory",
+            "AP_SwitchToExplore",
+            "AP_NoExploreMode"
+        ],
+        "on_error": [
+            "AP_ExploreModeUnavailable"
+        ]
+    },
+    "AP_MainMapReady": {
+        "desc": "主线地图无故事/探索模式按钮，命中后直接进入推图循环",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "APModeGate",
+                "custom_recognition_param": {
+                    "query": "main"
+                }
+            }
+        },
+        "next": [
+            "AP_PromotionLoop"
+        ]
+    },
+    "AP_StoryMapReady": {
+        "desc": "活动地图已在故事模式，直接进入推图循环，不重复点击模式标签",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "APModeGate",
+                "custom_recognition_param": {
+                    "query": "story"
+                }
+            }
+        },
+        "next": [
+            "AP_PromotionLoop"
+        ]
+    },
+    "AP_ExploreMapReady": {
+        "desc": "活动地图已在探索模式，直接进入推图循环，不重复点击模式标签",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "APModeGate",
+                "custom_recognition_param": {
+                    "query": "explore"
+                }
+            }
+        },
+        "next": [
+            "AP_PromotionLoop"
+        ]
+    },
+    "AP_NoExploreMode": {
+        "desc": "主线地图没有探索模式，选择探索模式时提示并正常结束",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "APModeGate",
+                "custom_recognition_param": {
+                    "query": "main"
+                }
+            }
+        },
+        "next": [
+            "AP_AllPhasesDone"
+        ],
+        "focus": {
+            "Node.Action.Starting": "<span style=\"color:orange\">当前地图无探索模式，跳过探索推图</span>"
+        }
     },
     "AP_StoryGate": {
         "desc": "故事模式推图阶段闸门：enabled 由任务选项控制，本次任务已执行过则不再进入",
@@ -71,8 +159,33 @@
             "Node.Action.Starting": "<span style=\"color:orange\">探索模式尚未开放，跳过该阶段</span>"
         }
     },
-    "AP_SwitchToExplore": {
-        "desc": "点击左上角「探索模式」按钮切换（当期为单切换按钮；1987 等历史活动为故事/探索双按钮竖排，点击跟随 OCR 命中位置自适应）",
+    "AP_SwitchToStoryFromExplore": {
+        "desc": "单按钮切换布局：按钮文字为「故事」表示当前在探索页，点击切回故事后需重新确认当前模式",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "APModeGate",
+                "custom_recognition_param": {
+                    "query": "explore"
+                }
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    125,
+                    115
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "next": [
+            "AP_EnsureStoryOrMain"
+        ]
+    },
+    "AP_SwitchToStory": {
+        "desc": "双按钮布局：点击左上角「故事模式」按钮后进入故事推图流程",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -82,7 +195,57 @@
                     220,
                     260
                 ],
-                "expected": "探索"
+                "expected": "故事"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "next": [
+            "AP_PromotionLoop"
+        ]
+    },
+    "AP_SwitchToExploreFromStory": {
+        "desc": "单按钮切换布局：按钮文字为「探索/探险」表示当前在故事页，点击切到探索后需重新确认当前模式",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "APModeGate",
+                "custom_recognition_param": {
+                    "query": "story"
+                }
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    125,
+                    115
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "next": [
+            "AP_EnsureExplore"
+        ]
+    },
+    "AP_SwitchToExplore": {
+        "desc": "双按钮布局：点击左上角「探索/探险模式」按钮后进入探索推图流程",
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    20,
+                    60,
+                    220,
+                    260
+                ],
+                "expected": [
+                    "探索",
+                    "探险"
+                ]
             }
         },
         "action": {
@@ -97,6 +260,30 @@
         "desc": "所有已启用的阶段执行完毕，任务正常结束",
         "focus": {
             "Node.Action.Starting": "<span style=\"color:green\">活动推图任务完成（已启用的阶段均已执行）</span>"
+        }
+    },
+    "AP_StoryModeUnavailable": {
+        "desc": "故事/主线模式入口兜底：不在主线地图，也找不到「故事」模式按钮时正常结束并提示",
+        "focus": {
+            "Node.Action.Starting": {
+                "content": "未找到故事/主线地图或故事模式入口。请切到活动故事/主线地图后重新运行。",
+                "display": [
+                    "log",
+                    "toast"
+                ]
+            }
+        }
+    },
+    "AP_ExploreModeUnavailable": {
+        "desc": "探索模式入口兜底：不在探索地图，也找不到「探索」模式按钮时正常结束并提示",
+        "focus": {
+            "Node.Action.Starting": {
+                "content": "未找到探索模式入口。若探索尚未开放，请等待开放后再运行探索模式。",
+                "display": [
+                    "log",
+                    "toast"
+                ]
+            }
         }
     },
     "AP_PromotionLoop": {
@@ -143,6 +330,7 @@
                 ],
                 "expected": [
                     "探索",
+                    "探险",
                     "故事"
                 ]
             }
@@ -232,7 +420,6 @@
         },
         "next": [
             "AT_TrailGate",
-            "AP_ExploreGate",
             "AP_AllPhasesDone"
         ],
         "focus": {
@@ -240,7 +427,7 @@
         }
     },
     "AP_InCombatRT": {
-        "desc": "实时卡牌战斗中（左上角轮次/回合计数），等待游戏内自动战斗打完",
+        "desc": "实时卡牌战斗中（左上角轮次/回合计数），进入战斗等待循环，避免大招遮挡 UI 时回到地图找关",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -256,10 +443,13 @@
                 ]
             }
         },
-        "post_delay": 5000
+        "post_delay": 5000,
+        "next": [
+            "AP_WaitCombat"
+        ]
     },
     "AP_FlagInCombat": {
-        "desc": "战斗加载/演出中标志（右上角快进图标），点击加速并等待",
+        "desc": "战斗加载/演出中标志（右上角快进图标），点击加速并进入战斗等待循环",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -286,7 +476,65 @@
                 ]
             }
         },
-        "post_delay": 8000
+        "post_delay": 8000,
+        "next": [
+            "AP_WaitCombat"
+        ]
+    },
+    "AP_MapReady": {
+        "desc": "关卡地图页已重新出现，战斗等待循环结束，交还推图调度",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "APMapAnalyze",
+                "custom_recognition_param": {
+                    "query": "map"
+                }
+            }
+        }
+    },
+    "AP_WaitCombat": {
+        "desc": "开始行动后的战斗等待循环：只处理胜负、跳过和回到地图，不再执行地图找关/滑动，防止大招遮挡战斗 UI 时误判战斗结束",
+        "action": {
+            "type": "DoNothing"
+        },
+        "post_delay": 5000,
+        "timeout": 600000,
+        "next": [
+            "CheckStopping",
+            "AP_MapReady",
+            "[JumpBack]AP_CombatVictory",
+            "AP_CombatDefeat",
+            "[JumpBack]AP_SkipConfirm",
+            "[JumpBack]AP_Skip",
+            "[JumpBack]ObtainedAwards",
+            "[JumpBack]Confirm",
+            "[JumpBack]ClickBlank",
+            "AP_WaitCombat"
+        ]
+    },
+    "AP_AfterStartAction": {
+        "desc": "点击开始行动后的过渡循环：关卡详情页点完后还要等待编队页第二个开始行动；真正进战斗后再交给 AP_WaitCombat",
+        "action": {
+            "type": "DoNothing"
+        },
+        "post_delay": 1500,
+        "timeout": 600000,
+        "next": [
+            "CheckStopping",
+            "[JumpBack]AP_StartAction",
+            "AP_FlagInCombat",
+            "AP_InCombatRT",
+            "[JumpBack]AP_CombatVictory",
+            "AP_CombatDefeat",
+            "[JumpBack]AP_SkipConfirm",
+            "[JumpBack]AP_Skip",
+            "[JumpBack]ObtainedAwards",
+            "[JumpBack]Confirm",
+            "[JumpBack]ClickBlank",
+            "AP_MapReady",
+            "AP_AfterStartAction"
+        ]
     },
     "AP_CombatVictory": {
         "desc": "战斗胜利结算页，点击翻页",
@@ -449,7 +697,10 @@
         },
         "action": {
             "type": "Click"
-        }
+        },
+        "next": [
+            "AP_AfterStartAction"
+        ]
     },
     "AP_CombatDefeat": {
         "desc": "战斗失败结算页：点击关闭后结束任务，交给用户调整队伍",
