@@ -213,6 +213,7 @@
         ]
     },
     "ResourceChapterLabel": {
+        "max_hit": 10,
         "recognition": {
             "type": "OCR",
             "param": {

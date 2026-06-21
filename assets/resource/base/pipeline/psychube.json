@@ -326,9 +326,9 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    732,
+                    176,
                     210,
-                    233,
+                    789,
                     297
                 ],
                 "template": "Psychube/NoFreePsychubeStagesFlag.png"
