@@ -541,5 +541,17 @@
                 "end_time": 1782723599000
             }
         }
+    },
+    "3.6": {
+        "version_name": "Last and First Principles",
+        "start_time": 1783000800000,
+        "end_time": 1784969999000,
+        "activity": {
+            "combat": {
+                "event_type": "SideStory",
+                "start_time": 1783000800000,
+                "end_time": 1784710799000
+            }
+        }
     }
 }

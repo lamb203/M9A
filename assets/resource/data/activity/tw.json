@@ -358,5 +358,17 @@
                 "end_time": 1782680399000
             }
         }
+    },
+    "3.6": {
+        "version_name": "人們向何處去",
+        "start_time": 1782957600000,
+        "end_time": 1784926799000,
+        "activity": {
+            "combat": {
+                "event_type": "SideStory",
+                "start_time": 1782957600000,
+                "end_time": 1784667599000
+            }
+        }
     }
 }
