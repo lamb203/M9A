@@ -1,10 +1,10 @@
 {
-    "角斗场": {
+    "Colosseum": {
         "next": [
-            "开始角斗"
+            "Colosseum_StartColosseum"
         ]
     },
-    "开始角斗": {
+    "Colosseum_StartColosseum": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -14,7 +14,10 @@
                     266,
                     171
                 ],
-                "expected": "角斗"
+                "expected": [
+                    "角斗",
+                    "步入.中"
+                ]
             }
         },
         "action": {
@@ -22,19 +25,19 @@
         },
         "post_delay": 1500,
         "next": [
-            "选择阵容",
-            "开始角斗"
+            "Colosseum_SelectFormation",
+            "Colosseum_StartColosseum"
         ]
     },
-    "选择阵容": {
+    "Colosseum_SelectFormation": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    200,
-                    603,
-                    78,
-                    35
+                    977,
+                    606,
+                    55,
+                    28
                 ],
                 "expected": "选择",
                 "only_rec": true
@@ -44,35 +47,16 @@
             "type": "Click"
         },
         "next": [
-            "菜单界面",
-            "选择阵容"
+            "Colosseum_Enter2-1",
+            "[JumpBack]Colosseum_Doll",
+            "[JumpBack]Colosseum_MuseGift",
+            "[JumpBack]Colosseum_Select1-1",
+            "[JumpBack]Colosseum_Battle1-3",
+            "[JumpBack]Colosseum_Settlement1-5",
+            "[JumpBack]Colosseum_ClaimRewards"
         ]
     },
-    "菜单界面": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    92,
-                    559,
-                    92,
-                    43
-                ],
-                "expected": "队伍评级",
-                "only_rec": true
-            }
-        },
-        "next": [
-            "进入2-1",
-            "[JumpBack]偶人",
-            "[JumpBack]缪斯赠予",
-            "[JumpBack]1-1选择",
-            "[JumpBack]1-3战斗",
-            "[JumpBack]1-5结算",
-            "[JumpBack]获得奖励"
-        ]
-    },
-    "进入2-1": {
+    "Colosseum_Enter2-1": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -99,11 +83,11 @@
         },
         "post_delay": 1500,
         "next": [
-            "离场",
-            "进入2-1"
+            "Colosseum_Leave",
+            "Colosseum_Enter2-1"
         ]
     },
-    "进入事件": {
+    "Colosseum_EnterEvent": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -113,14 +97,14 @@
                     174,
                     168
                 ],
-                "template": "Combat/Activity/Next_Flag.png"
+                "template": "PVP/Next_Flag.png"
             }
         },
         "action": {
             "type": "Click"
         }
     },
-    "偶人": {
+    "Colosseum_Doll": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -137,11 +121,30 @@
             "type": "Click"
         },
         "next": [
-            "购买偶人",
-            "[JumpBack]进入事件"
+            "Colosseum_DollShopPage",
+            "[JumpBack]Colosseum_EnterEvent"
         ]
     },
-    "购买偶人": {
+    "Colosseum_DollShopPage": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    167,
+                    93,
+                    127,
+                    29
+                ],
+                "expected": ["赛后补给间"],
+                "only_rec": true
+            }
+        },
+        "next": [
+            "Colosseum_BuyDoll",
+            "Colosseum_EnterEvent"
+        ]
+    },
+    "Colosseum_BuyDoll": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -162,11 +165,11 @@
         },
         "post_delay": 1500,
         "next": [
-            "购买偶人1",
-            "购买偶人"
+            "Colosseum_BuyDoll1",
+            "Colosseum_BuyDoll"
         ]
     },
-    "购买偶人1": {
+    "Colosseum_BuyDoll1": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -179,7 +182,8 @@
                 "expected": [
                     "12",
                     "16"
-                ]
+                ],
+                "only_rec": true
             }
         },
         "action": {
@@ -188,11 +192,11 @@
         "post_wait_freezes": 50,
         "post_delay": 1500,
         "next": [
-            "购买偶人1",
-            "进入事件"
+            "Colosseum_BuyDoll1",
+            "Colosseum_EnterEvent"
         ]
     },
-    "1-1选择": {
+    "Colosseum_Select1-1": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -218,11 +222,11 @@
             }
         },
         "next": [
-            "1-1选择1",
-            "[JumpBack]进入事件"
+            "Colosseum_Select1-1Option",
+            "[JumpBack]Colosseum_EnterEvent"
         ]
     },
-    "1-1选择1": {
+    "Colosseum_Select1-1Option": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -238,54 +242,9 @@
         },
         "action": {
             "type": "Click"
-        },
-        "next": [
-            "1-1选择3",
-            "[JumpBack]1-1选择2"
-        ]
-    },
-    "1-1选择2": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    566,
-                    280,
-                    149,
-                    44
-                ],
-                "expected": "获得偶",
-                "only_rec": true
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    559,
-                    496,
-                    160,
-                    52
-                ]
-            }
         }
     },
-    "1-1选择3": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    95,
-                    564,
-                    83,
-                    34
-                ],
-                "expected": "队伍评级",
-                "only_rec": true
-            }
-        }
-    },
-    "缪斯赠予": {
+    "Colosseum_MuseGift": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -302,11 +261,11 @@
             "type": "Click"
         },
         "next": [
-            "缪斯赠予1",
-            "[JumpBack]进入事件"
+            "Colosseum_MuseGift1",
+            "[JumpBack]Colosseum_EnterEvent"
         ]
     },
-    "缪斯赠予1": {
+    "Colosseum_MuseGift1": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -324,11 +283,11 @@
             "type": "Click"
         },
         "next": [
-            "获得奖励",
-            "缪斯赠予1"
+            "Colosseum_ClaimRewards",
+            "Colosseum_MuseGift1"
         ]
     },
-    "获得奖励": {
+    "Colosseum_ClaimRewards": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -354,7 +313,7 @@
             }
         }
     },
-    "1-3战斗": {
+    "Colosseum_Battle1-3": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -380,11 +339,11 @@
             }
         },
         "next": [
-            "配对页面",
-            "[JumpBack]进入事件"
+            "Colosseum_MatchmakingPage",
+            "[JumpBack]Colosseum_EnterEvent"
         ]
     },
-    "配对页面": {
+    "Colosseum_MatchmakingPage": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -398,26 +357,60 @@
                 "only_rec": true
             }
         },
-        "next": ["开始配对1"]
+        "next": [
+            "Colosseum_PVPAddPeopleStart",
+            "[JumpBack]Colosseum_AutoColosseum",
+            "Colosseum_StartBattle"
+        ]
     },
-    "开始配对1": {
-        "action": {
-            "type": "Click",
+    "Colosseum_PVPAddPeopleStart": {
+        "recognition": {
+            "type": "TemplateMatch",
             "param": {
-                "target": [
-                    881,
-                    264,
-                    52,
-                    43
+                "roi": [
+                    1079,
+                    194,
+                    69,
+                    68
+                ],
+                "template": [
+                    "PVP/AddPeople.png"
                 ]
             }
         },
-        "post_delay": 2000,
+        "action": {
+            "type": "Click"
+        },
+        "post_wait_freezes": {
+            "time": 500,
+            "target": [
+                982,
+                172,
+                144,
+                279
+            ],
+            "timeout": 5000
+        },
         "next": [
-            "开始配对2"
+            "Colosseum_PVPAddPeopleStart",
+            "Colosseum_StartMatching2",
+            "Colosseum_StartMatching3"
         ]
     },
-    "开始配对2": {
+    "Colosseum_StartMatching2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    969,
+                    204,
+                    122,
+                    157
+                ],
+                "template": ["PVP/Empty.png"]
+            }
+        },
+        "inverse": true,
         "action": {
             "type": "Click",
             "param": {
@@ -429,32 +422,32 @@
                 ]
             }
         },
-        "next": ["开始配对3"]
+        "next": ["Colosseum_StartMatching3"]
     },
-    "开始配对3": {
+    "Colosseum_StartMatching3": {
         "recognition": {
             "type": "OCR",
             "param": {
-                "expected": "确认"
+                "roi": [
+                    1122,
+                    651,
+                    65,
+                    32
+                ],
+                "expected": "确认",
+                "only_rec": true
             }
         },
         "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    1104,
-                    643,
-                    100,
-                    47
-                ]
-            }
+            "type": "Click"
         },
         "next": [
-            "自动角斗",
-            "开始战斗"
+            "Colosseum_StartMatching3",
+            "[JumpBack]Colosseum_AutoColosseum",
+            "Colosseum_StartBattle"
         ]
     },
-    "自动角斗": {
+    "Colosseum_AutoColosseum": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -464,15 +457,15 @@
                     33,
                     36
                 ],
-                "expected": "口"
+                "expected": "口",
+                "only_rec": true
             }
         },
         "action": {
             "type": "Click"
-        },
-        "next": ["开始战斗"]
+        }
     },
-    "开始战斗": {
+    "Colosseum_StartBattle": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -489,11 +482,11 @@
             "type": "Click"
         },
         "next": [
-            "战斗",
-            "开始战斗"
+            "Colosseum_Battle",
+            "Colosseum_StartBattle"
         ]
     },
-    "战斗": {
+    "Colosseum_Battle": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -509,11 +502,11 @@
         "pre_delay": 5000,
         "timeout": 60000,
         "next": [
-            "战斗",
-            "战斗结束"
+            "Colosseum_Battle",
+            "Colosseum_BattleEnd"
         ]
     },
-    "战斗结束": {
+    "Colosseum_BattleEnd": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -530,7 +523,7 @@
             "type": "Click"
         }
     },
-    "1-5结算": {
+    "Colosseum_Settlement1-5": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -556,11 +549,11 @@
             }
         },
         "next": [
-            "开始战斗",
-            "[JumpBack]进入事件"
+            "Colosseum_StartBattle",
+            "[JumpBack]Colosseum_EnterEvent"
         ]
     },
-    "离场": {
+    "Colosseum_Leave": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -577,11 +570,11 @@
             "type": "Click"
         },
         "next": [
-            "离场确认",
-            "离场"
+            "Colosseum_ConfirmLeave",
+            "Colosseum_Leave"
         ]
     },
-    "离场确认": {
+    "Colosseum_ConfirmLeave": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -598,11 +591,11 @@
             "type": "Click"
         },
         "next": [
-            "比赛回顾",
-            "离场确认"
+            "Colosseum_MatchReview",
+            "Colosseum_ConfirmLeave"
         ]
     },
-    "比赛回顾": {
+    "Colosseum_MatchReview": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -627,11 +620,11 @@
             }
         },
         "next": [
-            "比赛回顾",
-            "获得物品"
+            "Colosseum_MatchReview",
+            "Colosseum_ObtainItems"
         ]
     },
-    "获得物品": {
+    "Colosseum_ObtainItems": {
         "action": {
             "type": "Click",
             "param": {
@@ -644,8 +637,8 @@
             }
         },
         "next": [
-            "开始角斗",
-            "获得物品"
+            "Colosseum_StartColosseum",
+            "Colosseum_ObtainItems"
         ]
     }
 }
