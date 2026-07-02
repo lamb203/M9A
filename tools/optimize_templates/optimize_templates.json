@@ -552,5 +552,8 @@
     "resource/base/image/AutoPromotion/AP_MiniGameGoal": "18be4086a4b05bc26d8817bb6fd8a9cee1e79839e7438b3044c3589098613924",
     "resource/base/image/OutsideDeduction/SOD_Combating_1": "246ff76b65449a86059bc866bdc388d034d83423669e3d1982791f62092ed7d0",
     "resource/base/image/Awards/AwardBox/1": "b4d3908706da37e956315ed61589e03bb225820801e1256b3d885a9093335518",
-    "resource/base/image/Awards/AwardBox/3.8": "10917865419b92d802b1e072370d4610565abb3fa724b9660d334caed3d83c98"
+    "resource/base/image/Awards/AwardBox/3.8": "10917865419b92d802b1e072370d4610565abb3fa724b9660d334caed3d83c98",
+    "resource/base/image/PVP/Empty": "6c8077ecb95429cfbd1e60a29a68dea43acaf4897707250d1a7648ecb17e15da",
+    "resource/base/image/PVP/AddPeople": "ae1326bf68f8294cc5cdf8b730a014c67e76bf7b7d14080357ccff2f7a9cbd3a",
+    "resource/base/image/PVP/Next_Flag": "aa70e19ffb2a9c0143c944c65d5a170ede52ddc60964855c9ef3241b65673148"
 }
