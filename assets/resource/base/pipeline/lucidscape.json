@@ -622,7 +622,7 @@
                     37,
                     28
                 ],
-                "expected": "01",
+                "expected": "0.*1",
                 "only_rec": true
             }
         }
@@ -637,7 +637,7 @@
                     40,
                     29
                 ],
-                "expected": "02",
+                "expected": "0.*2",
                 "only_rec": true
             }
         }
