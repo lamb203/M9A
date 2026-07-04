@@ -380,10 +380,62 @@
             }
         },
         "next": [
+            "[JumpBack]Colosseum_CombatTutorial",
             "Colosseum_PVPAddPeopleStart",
             "[JumpBack]Colosseum_AutoColosseum",
             "Colosseum_StartBattle"
         ]
+    },
+    "Colosseum_CombatTutorial": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    460,
+                    290,
+                    372,
+                    70
+                ],
+                "expected": [
+                    "每位特邀偶人都拥有自己的独特技",
+                    "能，可以在特邀助阵栏位中查看。"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1006,
+                    407,
+                    72,
+                    37
+                ]
+            }
+        },
+        "next": [
+            "Colosseum_CombatTutorialReturn",
+            "Colosseum_CombatTutorial"
+        ]
+    },
+    "Colosseum_CombatTutorialReturn": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    460,
+                    290,
+                    372,
+                    70
+                ],
+                "expected": [
+                    "每位特邀偶人都拥有自己的独特技",
+                    "能，可以在特邀助阵栏位中查看。"
+                ]
+            }
+        },
+        "inverse": true,
+        "next": ["BackButton"]
     },
     "Colosseum_PVPAddPeopleStart": {
         "recognition": {
