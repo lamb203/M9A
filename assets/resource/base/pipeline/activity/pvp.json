@@ -53,7 +53,8 @@
             "[JumpBack]Colosseum_Select1-1",
             "[JumpBack]Colosseum_Battle1-3",
             "[JumpBack]Colosseum_Settlement1-5",
-            "[JumpBack]Colosseum_ClaimRewards"
+            "[JumpBack]Colosseum_ClaimRewards",
+            "Colosseum_SelectFormation"
         ]
     },
     "Colosseum_Enter2-1": {
@@ -242,7 +243,28 @@
         },
         "action": {
             "type": "Click"
-        }
+        },
+        "post_delay": 1000,
+        "next": [
+            "Colosseum_Select1-1OptionCompleted",
+            "Colosseum_Select1-1Option"
+        ]
+    },
+    "Colosseum_Select1-1OptionCompleted": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    405,
+                    599,
+                    68,
+                    40
+                ],
+                "expected": "选择",
+                "only_rec": true
+            }
+        },
+        "inverse": true
     },
     "Colosseum_MuseGift": {
         "recognition": {
