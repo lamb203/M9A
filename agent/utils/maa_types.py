@@ -12,9 +12,7 @@ from maa.define import (
 
 
 class HitRecognitionDetail(RecognitionDetail):
-    """Recognition detail known to be a hit with a concrete box."""
-
-    box: Rect
+    """Recognition detail known to be a hit with a concrete box (box narrowed via TypeGuard)."""
 
 
 def is_hit(detail: RecognitionDetail | None) -> TypeGuard[HitRecognitionDetail]:
@@ -85,9 +83,7 @@ def results_as[ResultT](
     """
     if detail is None or not detail.hit:
         return []
-    return [
-        result for result in detail.filtered_results if isinstance(result, result_type)
-    ]
+    return [result for result in detail.filtered_results if isinstance(result, result_type)]
 
 
 def all_results_as[ResultT](
@@ -194,9 +190,7 @@ def has_box_result(
     Returns:
         True when ``result`` is one of the result types with a concrete box.
     """
-    return isinstance(
-        result, BoxAndScoreResult | BoxAndCountResult | CustomRecognitionResult
-    )
+    return isinstance(result, BoxAndScoreResult | BoxAndCountResult | CustomRecognitionResult)
 
 
 def boxed_results(detail: RecognitionDetail | None) -> list[BoxedRecognitionResult]:

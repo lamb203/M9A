@@ -2,7 +2,12 @@
 order: 4
 icon: material-symbols:terminal
 ---
+
 # MaaPiCli 使用
+
+::: warning
+M9A 仓库不再提供 CLI 安装包。请前往 [M9A CLI Releases](https://github.com/MAA1999/m9a-cli/releases) 下载。
+:::
 
 本节将介绍 MaaPiCli 的使用方法（翻译）
 
@@ -160,7 +165,7 @@ Please input [1-7]:
 ```
 
 展示了 Controller（当前控制器，于选择设备设置）、Resource（当前资源）、Tasks（当前待执行任务列表）。  
-并给出功能菜单（Select action），依次为：  
+并给出功能菜单（Select action），依次为：
 
 1. 更换控制器
 2. 更换资源

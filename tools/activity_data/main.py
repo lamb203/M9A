@@ -1,11 +1,12 @@
-import os
 import json
+import os
+from typing import Any
 
-from getContent import getContent
 from analyzeContent import analyzeContent
+from getContent import getContent
 
 
-def save_activity_data(resource, data):
+def save_activity_data(resource: Any, data: Any):
     """
     将活动数据保存到对应语言的JSON文件中
 
@@ -18,12 +19,12 @@ def save_activity_data(resource, data):
     """
 
     # 构建文件路径
-    file_path = f"assets/resource/data/activity/{resource}.json"
+    file_path = f"data/activity/{resource}.json"
 
     # 提取当前要保存的版本号 (只取第一个，假设每次只处理一个版本)
     version_id = next(iter(data.keys()), None)
     if not version_id:
-        print(f"Error: No version ID found in data")
+        print("Error: No version ID found in data")
         return False
 
     print(f"Processing {resource} data for version: {version_id}")
@@ -32,14 +33,12 @@ def save_activity_data(resource, data):
     if os.path.exists(file_path):
         try:
             # 读取现有文件
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 try:
                     existing_data = json.load(f)
                     print(f"Successfully loaded existing data from {file_path}")
                 except json.JSONDecodeError:
-                    print(
-                        f"Warning: {file_path} exists but contains invalid JSON, treating as empty"
-                    )
+                    print(f"Warning: {file_path} exists but contains invalid JSON, treating as empty")
                     existing_data = {}
 
             # 检查版本号是否已存在
@@ -49,7 +48,7 @@ def save_activity_data(resource, data):
 
             # 合并数据
             merged_data = {**existing_data, **data}
-            print(f"Merging new version data with existing data")
+            print("Merging new version data with existing data")
 
         except Exception as e:
             print(f"Error reading {file_path}: {e}")
@@ -94,10 +93,7 @@ if __name__ == "__main__":
             combat_end_time = combat.get("end_time")
 
             if start_time is None or combat_end_time is None:
-                print(
-                    f"[{resource}] Parsed notice but combat time is incomplete, "
-                    f"skipping version {result[1]}"
-                )
+                print(f"[{resource}] Parsed notice but combat time is incomplete, skipping version {result[1]}")
                 failed_resources.append(resource)
                 continue
 

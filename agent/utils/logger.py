@@ -1,6 +1,8 @@
 import html
+import logging
 import os
 import sys
+from logging.handlers import TimedRotatingFileHandler
 from typing import Any
 
 from . import pienv
@@ -78,36 +80,31 @@ def _format_mxu_html_message(level_name: str, message: str) -> str:
     return "\n".join(wrapped)
 
 
-def _enrich_record(record) -> bool:
+def _enrich_record(record: Any) -> bool:
     level_name = record["level"].name
     level_color = _ansi_level_color(level_name)
 
     record["extra"]["level_short"] = _short_level_name(level_name)
     record["extra"]["level_color"] = level_color
     record["extra"]["color_reset"] = "\033[0m" if level_color else ""
-    record["extra"]["mxu_html_message"] = _format_mxu_html_message(
-        level_name, str(record["message"])
-    )
+    record["extra"]["mxu_html_message"] = _format_mxu_html_message(level_name, str(record["message"]))
     return True
 
 
-_HAS_LOGURU = False
+_has_loguru = False
 _loguru_logger: Any = None
 
 try:
     from loguru import logger as _imported_loguru_logger
 
     _loguru_logger = _imported_loguru_logger
-    _HAS_LOGURU = True
+    _has_loguru = True
 except ImportError:
     pass
 
-import logging
-from logging.handlers import TimedRotatingFileHandler
-
 
 class _ConsoleFormatter(logging.Formatter):
-    def format(self, record):
+    def format(self, record: Any):
         level_name = record.levelname
         message = record.getMessage()
 
@@ -121,19 +118,17 @@ class _ConsoleFormatter(logging.Formatter):
         return f"{level_color}{message}{color_reset}"
 
 
-_FILE_FORMAT = logging.Formatter(
-    "%(asctime)s | %(levelname)-8s | %(name)s:%(funcName)s:%(lineno)d | %(message)s"
-)
+_FILE_FORMAT = logging.Formatter("%(asctime)s | %(levelname)-8s | %(name)s:%(funcName)s:%(lineno)d | %(message)s")
 _std_logger = logging.getLogger("m9a")
 
 
-def _resolve_level(level) -> int:
+def _resolve_level(level: Any) -> int:
     if isinstance(level, int):
         return level
     return getattr(logging, str(level).upper(), logging.INFO)
 
 
-def _setup_loguru_logger(log_dir="debug/custom", console_level="INFO"):
+def _setup_loguru_logger(log_dir: str = "debug/custom", console_level: str = "INFO"):
     os.makedirs(log_dir, exist_ok=True)
     _loguru_logger.remove()
 
@@ -160,7 +155,7 @@ def _setup_loguru_logger(log_dir="debug/custom", console_level="INFO"):
     return _loguru_logger
 
 
-def _setup_std_logger(log_dir="debug/custom", console_level="INFO"):
+def _setup_std_logger(log_dir: str = "debug/custom", console_level: str = "INFO"):
     os.makedirs(log_dir, exist_ok=True)
 
     _std_logger.handlers.clear()
@@ -186,14 +181,14 @@ def _setup_std_logger(log_dir="debug/custom", console_level="INFO"):
     return _std_logger
 
 
-def setup_logger(log_dir="debug/custom", console_level="INFO"):
+def setup_logger(log_dir: str = "debug/custom", console_level: str = "INFO"):
     """设置 logger（优先 loguru，无 loguru 时回退到标准 logging）"""
-    if _HAS_LOGURU:
+    if _has_loguru:
         return _setup_loguru_logger(log_dir=log_dir, console_level=console_level)
     return _setup_std_logger(log_dir=log_dir, console_level=console_level)
 
 
-def change_console_level(level="DEBUG"):
+def change_console_level(level: str = "DEBUG"):
     """动态修改控制台日志等级"""
     setup_logger(console_level=level)
     logger.info(f"控制台日志等级已更改为: {level}")

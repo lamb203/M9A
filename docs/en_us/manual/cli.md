@@ -2,7 +2,12 @@
 order: 4
 icon: material-symbols:terminal
 ---
+
 # MaaPiCli Usage Instructions
+
+::: warning
+M9A no longer provides CLI packages in this repository. Please download from [M9A CLI Releases](https://github.com/MAA1999/m9a-cli/releases).
+:::
 
 ## Select ADB
 
@@ -30,7 +35,7 @@ The following options are listed:
 
 1. Auto detect (recommended, select when the target emulator is running)
 2. Manual input (refer to [ADB Path](./connection.md#adb-path) and [ADB Connection Address](./connection.html#adb-address) to fill in)
-The following Please input [1-2]: translates to Please input [option range], please select as needed.
+   The following Please input [1-2]: translates to Please input [option range], please select as needed.
 
 Here we enter 1 and press Enter to proceed to the next step.
 

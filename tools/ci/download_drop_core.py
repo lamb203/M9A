@@ -4,17 +4,18 @@
 从私有仓库的 release 下载对应平台的 drop_core 模块
 """
 
+import argparse
 import os
-import sys
 import platform
+import shutil
+import sys
 import urllib.request
 import zipfile
-import shutil
-import argparse
+from typing import Any
 
 # 私有仓库信息
 PRIVATE_REPO = "MAA1999/drop-upload-sign"  # 修改为你的私有仓库
-RELEASE_TAG = "v1.2.8"  # 修改为要下载的版本
+RELEASE_TAG = "v1.3.1"  # 修改为要下载的版本
 
 # 目标目录
 DEST_DIR = os.path.join("agent", "libs")
@@ -54,12 +55,7 @@ def get_platform_info():
     return os_type, arch, platform_tag
 
 
-def get_python_version():
-    """获取 Python 版本"""
-    return f"{sys.version_info.major}.{sys.version_info.minor}"
-
-
-def get_asset_download_url(repo, tag, asset_name, token=None):
+def get_asset_download_url(repo: Any, tag: Any, asset_name: Any, token: Any = None):
     """Get asset download URL from GitHub API"""
     api_url = f"https://api.github.com/repos/{repo}/releases/tags/{tag}"
 
@@ -86,7 +82,7 @@ def get_asset_download_url(repo, tag, asset_name, token=None):
         return None
 
 
-def download_file(url, dest_path, token=None):
+def download_file(url: Any, dest_path: Any, token: Any = None):
     """Download file"""
     print(f"Downloading: {url}")
     print(f"To: {dest_path}")
@@ -115,17 +111,13 @@ def download_file(url, dest_path, token=None):
 def main():
     parser = argparse.ArgumentParser(description="Download drop_core module")
     parser.add_argument("--os", help="Target OS (windows, linux, darwin)")
-    parser.add_argument(
-        "--arch", help="Target architecture (x64, arm64, aarch64, x86_64)"
-    )
+    parser.add_argument("--arch", help="Target architecture (x64, arm64, aarch64, x86_64)")
     args = parser.parse_args()
 
     # 获取 token（从环境变量）
     token = os.environ.get("PRIVATE_REPO_TOKEN")
     if not token:
-        print(
-            "Warning: PRIVATE_REPO_TOKEN not set, may not be able to access private repo"
-        )
+        print("Warning: PRIVATE_REPO_TOKEN not set, may not be able to access private repo")
 
     # 获取平台信息
     if args.os and args.arch:
@@ -153,32 +145,16 @@ def main():
         # Fallback to auto-detection
         os_type, arch, platform_tag = get_platform_info()
 
-    py_version = get_python_version()
-
-    print(f"Platform: {os_type}, Arch: {arch}, Python: {py_version}")
+    print(f"Platform: {os_type}, Arch: {arch}")
 
     # 构造下载列表
-    # macOS 不带 Python 版本
-    # Linux 需要下载所有 Python 版本（用户可能用不同版本）
-    # Windows 只下载当前版本
-    if os_type == "darwin":
-        artifacts = [f"drop_core-{platform_tag}-{RELEASE_TAG}"]
-    elif os_type == "linux":
-        # Linux 下载所有支持的 Python 版本
-        linux_py_versions = ["3.11", "3.12", "3.13"]
-        artifacts = [
-            f"drop_core-{platform_tag}-py{v}-{RELEASE_TAG}" for v in linux_py_versions
-        ]
-    else:
-        artifacts = [f"drop_core-{platform_tag}-py{py_version}-{RELEASE_TAG}"]
+    artifacts = [f"drop_core-{platform_tag}-py3.13-{RELEASE_TAG}"]
 
     # 下载所有需要的文件
     success_count = 0
     for artifact_name in artifacts:
         asset_name = f"{artifact_name}.zip"
-        download_url = get_asset_download_url(
-            PRIVATE_REPO, RELEASE_TAG, asset_name, token
-        )
+        download_url = get_asset_download_url(PRIVATE_REPO, RELEASE_TAG, asset_name, token)
 
         if not download_url:
             print(f"Cannot get download URL for: {artifact_name}")

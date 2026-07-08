@@ -1,9 +1,10 @@
 import json
+from typing import Any
 
 from .logger import logger
 
 
-def parse_params(raw: str | None, *required_keys: str) -> dict:
+def parse_params(raw: str | None, *required_keys: str) -> dict[str, Any]:
     """
     解析 custom_action_param / custom_recognition_param JSON 字符串。
 
@@ -34,7 +35,7 @@ def parse_params(raw: str | None, *required_keys: str) -> dict:
     return params
 
 
-def coerce_like(value, default, key: str):
+def coerce_like(value: Any, default: Any, key: str) -> Any:
     """
     将 JSON 反序列化值按默认值的形状转换，用于参数覆盖。
 
@@ -73,9 +74,7 @@ def coerce_like(value, default, key: str):
             raise ValueError(f"{key} 应为字符串，得到 {type(value).__name__}")
         return value
     if type(value) is not type(default):
-        raise ValueError(
-            f"{key} 应为 {type(default).__name__}，得到 {type(value).__name__}"
-        )
+        raise ValueError(f"{key} 应为 {type(default).__name__}，得到 {type(value).__name__}")
     return value
 
 
@@ -92,9 +91,9 @@ class ParamOverrideMixin:
     - 线程安全前提：MaaFramework 单 Tasker 的识别回调串行执行
     """
 
-    OVERRIDABLE: frozenset = frozenset()
+    OVERRIDABLE: frozenset[str] = frozenset()
 
-    def apply_param_overrides(self, params: dict) -> None:
+    def apply_param_overrides(self, params: dict[str, Any]) -> None:
         for const in self.OVERRIDABLE:
             self.__dict__.pop(const, None)
         for key, value in params.items():
@@ -105,10 +104,6 @@ class ParamOverrideMixin:
                 logger.warning(f"[{type(self).__name__}] 未知参数 {key}，已忽略")
                 continue
             try:
-                setattr(
-                    self, const, coerce_like(value, getattr(type(self), const), key)
-                )
+                setattr(self, const, coerce_like(value, getattr(type(self), const), key))
             except ValueError as e:
-                logger.error(
-                    f"[{type(self).__name__}] 参数 {key} 非法（{e}），回落默认值"
-                )
+                logger.error(f"[{type(self).__name__}] 参数 {key} 非法（{e}），回落默认值")

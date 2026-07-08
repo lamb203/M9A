@@ -1,10 +1,10 @@
-import re
 import json
+import re
 from datetime import datetime
-from typing import Optional
+from typing import Any
 
 import pytz
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup  # pyright: ignore[reportMissingImports]
 
 
 def _extract_html_text_lines(content: str):
@@ -17,7 +17,7 @@ def _extract_html_text_lines(content: str):
     return lines
 
 
-def _find_following_line_with(lines, start_idx: int, must_contain, window: int = 8):
+def _find_following_line_with(lines: Any, start_idx: int, must_contain: Any, window: int = 8):
     end_idx = min(len(lines), start_idx + window)
     for i in range(start_idx, end_idx):
         candidate = lines[i]
@@ -26,7 +26,7 @@ def _find_following_line_with(lines, start_idx: int, must_contain, window: int =
     return None
 
 
-def analyzeContent(resource: str, content):
+def analyzeContent(resource: str, content: Any):
     activity = {}
 
     if resource == "cn":
@@ -69,13 +69,11 @@ def analyzeContent(resource: str, content):
                         activity["re-release"]["end_time"],
                     ) = convert_to_timestamps(re_release_duration)
                     continue
-            if not combat_complete_flag and (
-                "【故事模式】" in text or "【活动时间】" in text
-            ):
+            if not combat_complete_flag and ("【故事模式】" in text or "【活动时间】" in text):
                 combat_complete_flag = True
                 combat_duration = process_combat_duration_cn(text)
-                activity["combat"]["start_time"], activity["combat"]["end_time"] = (
-                    convert_to_timestamps(combat_duration)
+                activity["combat"]["start_time"], activity["combat"]["end_time"] = convert_to_timestamps(
+                    combat_duration
                 )
                 continue
             if "限时重映" in text:
@@ -224,9 +222,7 @@ def analyzeContent(resource: str, content):
                     continue
                 continue
 
-            if "イベント本編" in text and "start_time" not in activity.get(
-                "combat", {}
-            ):
+            if "イベント本編" in text and "start_time" not in activity.get("combat", {}):
                 activity.setdefault("combat", {})
                 activity["combat"].setdefault("event_type", "SideStory")
                 duration_text = _find_following_line_with(
@@ -274,7 +270,6 @@ def analyzeContent(resource: str, content):
                         continue
 
     elif resource == "tw":
-
         soup = BeautifulSoup(content, "html.parser")
         tz_tw = pytz.timezone("Asia/Taipei")
         base_year = datetime.now(tz_tw).year
@@ -282,9 +277,7 @@ def analyzeContent(resource: str, content):
 
         news_time_tag = soup.find("div", class_="news-time")
         if news_time_tag:
-            news_time_match = re.search(
-                r"(\d{4})/(\d{2})/(\d{2})", news_time_tag.get_text()
-            )
+            news_time_match = re.search(r"(\d{4})/(\d{2})/(\d{2})", news_time_tag.get_text())
             if news_time_match:
                 base_year = int(news_time_match.group(1))
                 base_month = int(news_time_match.group(2))
@@ -317,9 +310,7 @@ def analyzeContent(resource: str, content):
                 duration_text = extract_tw_duration_segment(text)
                 if duration_text:
                     try:
-                        formatted = process_combat_duration_tw(
-                            duration_text, base_year, base_month
-                        )
+                        formatted = process_combat_duration_tw(duration_text, base_year, base_month)
                         (
                             activity[current_section]["start_time"],
                             activity[current_section]["end_time"],
@@ -334,12 +325,16 @@ def analyzeContent(resource: str, content):
     return activity
 
 
-def convert_to_timestamps(time_range_str):
+def convert_to_timestamps(time_range_str: Any):
     """
     将时间范围字符串转换为毫秒时间戳，正确处理夏令时
     """
     # 提取时间和时区
-    pattern = r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s*-\s*(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s*(?:\d{2}:\d{2})?\s*\(UTC([+-]?\d+)\)"
+    pattern = (
+        r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s*-\s*"
+        r"(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s*"
+        r"(?:\d{2}:\d{2})?\s*\(UTC([+-]?\d+)\)"
+    )
     match = re.search(pattern, time_range_str)
 
     if not match:
@@ -423,16 +418,16 @@ def process_combat_duration_cn(duration: str):
             start_minute,
             tzinfo=beijing_tz,
         )
-        end_datetime = datetime(
-            end_year, end_month, end_day, end_hour, end_minute, tzinfo=beijing_tz
-        )
+        end_datetime = datetime(end_year, end_month, end_day, end_hour, end_minute, tzinfo=beijing_tz)
 
         # 如果结束分钟是59，添加59秒以包含整个分钟
         if end_minute == 59:
             end_datetime = end_datetime.replace(second=59)
 
         # 格式化为目标格式
-        formatted_result = f"{start_datetime.strftime('%Y-%m-%d %H:%M')} - {end_datetime.strftime('%Y-%m-%d %H:%M')} (UTC+8)"
+        formatted_result = (
+            f"{start_datetime.strftime('%Y-%m-%d %H:%M')} - {end_datetime.strftime('%Y-%m-%d %H:%M')} (UTC+8)"
+        )
 
         return formatted_result
 
@@ -471,7 +466,7 @@ def process_combat_duration_jp(duration: str):
     update_match = re.search(update_pattern, original_duration)
 
     if update_match:
-        year, month, day, update_text = update_match.groups()
+        year, month, day, _update_text = update_match.groups()
         year, month, day = map(int, [year, month, day])
 
         # 替换为明确的时间格式
@@ -491,9 +486,7 @@ def process_combat_duration_jp(duration: str):
         return f"无法解析: {original_duration}"
 
     # 解析开始时间
-    start_year, start_month, start_day, start_hour, start_minute = map(
-        int, start_match.groups()
-    )
+    start_year, start_month, start_day, start_hour, start_minute = map(int, start_match.groups())
     naive_start = datetime(start_year, start_month, start_day, start_hour, start_minute)
     start_date = jst.localize(naive_start)  # 本地化到JST时区
 
@@ -533,9 +526,7 @@ def extract_tw_duration_segment(text: str):
     return None
 
 
-def process_combat_duration_tw(
-    duration: str, base_year: int, base_month: Optional[int]
-):
+def process_combat_duration_tw(duration: str, base_year: int, base_month: int | None):
 
     taipei_tz = pytz.timezone("Asia/Taipei")
 
@@ -589,24 +580,15 @@ def process_combat_duration_tw(
         start_hour,
         start_minute,
     ):
-        if end_month < start_month or (
-            end_month == start_month and end_day < start_day
-        ):
+        if end_month < start_month or (end_month == start_month and end_day < start_day):
             end_year = start_year + 1
         else:
             end_year = start_year
 
-    start_datetime = taipei_tz.localize(
-        datetime(start_year, start_month, start_day, start_hour, start_minute)
-    )
-    end_datetime = taipei_tz.localize(
-        datetime(end_year, end_month, end_day, end_hour, end_minute)
-    )
+    start_datetime = taipei_tz.localize(datetime(start_year, start_month, start_day, start_hour, start_minute))
+    end_datetime = taipei_tz.localize(datetime(end_year, end_month, end_day, end_hour, end_minute))
 
     if end_minute == 59:
         end_datetime = end_datetime.replace(second=59)
 
-    return (
-        f"{start_datetime.strftime('%Y-%m-%d %H:%M')} - "
-        f"{end_datetime.strftime('%Y-%m-%d %H:%M')} (UTC+8)"
-    )
+    return f"{start_datetime.strftime('%Y-%m-%d %H:%M')} - {end_datetime.strftime('%Y-%m-%d %H:%M')} (UTC+8)"

@@ -1,6 +1,5 @@
 import sys
 import types
-from pathlib import Path
 from typing import Any
 from unittest.mock import Mock, patch
 
@@ -8,15 +7,6 @@ from agent import agent_runtime
 
 
 def test_maa_log_dir_matches_pre_refactor_relative_debug_path() -> None:
-    fake_utils = types.ModuleType("utils")
-    fake_logger_module: Any = types.ModuleType("utils.logger")
-    fake_logger_module.change_console_level = Mock()
-
-    fake_paths = types.SimpleNamespace(
-        debug_dir=Path("C:/Users/example/新建文件夹/debug")
-    )
-    fake_get_runtime_paths = Mock(return_value=fake_paths)
-
     fake_agent_server: Any = types.ModuleType("maa.agent.agent_server")
     fake_agent_server.AgentServer = types.SimpleNamespace(
         start_up=Mock(),
@@ -31,8 +21,6 @@ def test_maa_log_dir_matches_pre_refactor_relative_debug_path() -> None:
     fake_custom.register_all = Mock()
 
     fake_modules = {
-        "utils": fake_utils,
-        "utils.logger": fake_logger_module,
         "maa": types.ModuleType("maa"),
         "maa.agent": types.ModuleType("maa.agent"),
         "maa.agent.agent_server": fake_agent_server,
@@ -40,13 +28,10 @@ def test_maa_log_dir_matches_pre_refactor_relative_debug_path() -> None:
         "custom": fake_custom,
     }
 
-    with patch.object(
-        agent_runtime,
-        "_reload_utils",
-        return_value=(fake_utils, fake_get_runtime_paths),
-    ):
-        with patch.dict(sys.modules, fake_modules):
-            with patch.object(sys, "argv", ["agent/main.py", "socket-id"]):
-                agent_runtime.run_agent("C:/Users/example/新建文件夹", is_dev_mode=True)
+    with patch.dict(sys.modules, fake_modules):
+        with patch.object(sys, "argv", ["agent/main.py", "socket-id"]):
+            with patch.object(agent_runtime, "_check_resource_version"):
+                with patch.object(agent_runtime, "_hot_update"):
+                    agent_runtime.run_agent("C:/Users/example/新建文件夹")
 
     fake_tasker.Tasker.set_log_dir.assert_called_once_with("./debug")

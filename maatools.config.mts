@@ -11,12 +11,15 @@ declare global {
 const config: FullConfig = {
   cwd: import.meta.dirname,
   maaVersion: 'latest',
-  interfacePath: 'assets/interface.json',
+  interfacePath: 'interface.json',
   parser: {
     customReco: (name, param, utils) => {
       const result: PropSelectorResult[] = []
       if (name === 'MultiRecognition') {
-        for (const [key, obj] of utils.parseObject(param)) {
+        for (const [
+          key,
+          obj,
+        ] of utils.parseObject(param)) {
           if (key === 'nodes') {
             for (const task of utils.parseArray(obj)) {
               if (utils.isString(task)) {
@@ -30,7 +33,10 @@ const config: FullConfig = {
           }
         }
       } else if (name === 'ColorOCR') {
-        for (const [key, obj] of utils.parseObject(param)) {
+        for (const [
+          key,
+          obj,
+        ] of utils.parseObject(param)) {
           if (key === 'TargetStageName_OCR') {
             if (utils.isString(obj)) {
               result.push({
@@ -55,7 +61,10 @@ const config: FullConfig = {
       }
 
       if (name === 'DisableNode') {
-        for (const [key, obj] of utils.parseObject(param)) {
+        for (const [
+          key,
+          obj,
+        ] of utils.parseObject(param)) {
           if (key === 'node_name') {
             if (utils.isString(obj)) {
               pushTaskRef(obj)
@@ -86,7 +95,10 @@ const config: FullConfig = {
           }
         }
       } else if (name === 'ResetCount') {
-        for (const [key, obj] of utils.parseObject(param)) {
+        for (const [
+          key,
+          obj,
+        ] of utils.parseObject(param)) {
           if (key === 'nodes') {
             for (const task of utils.parseArray(obj)) {
               if (utils.isString(task)) {
@@ -96,7 +108,10 @@ const config: FullConfig = {
           }
         }
       } else if (name === 'SubTask') {
-        for (const [key, obj] of utils.parseObject(param)) {
+        for (const [
+          key,
+          obj,
+        ] of utils.parseObject(param)) {
           if (key === 'sub') {
             for (const task of utils.parseArray(obj)) {
               if (utils.isString(task)) {
@@ -113,7 +128,13 @@ const config: FullConfig = {
   check: {
     override: {
       'dynamic-image': 'ignore',
-      "unknown-task": 'warning'
+      'unknown-task': 'warning',
+    },
+  },
+
+  vscode: {
+    agents: {
+      uv: 'Maa Agent: Debug',
     },
   },
 }

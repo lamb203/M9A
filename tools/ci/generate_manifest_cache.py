@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 生成初始 manifest 缓存
 
@@ -10,9 +8,10 @@
 """
 
 import json
-import urllib.request
 import urllib.error
+import urllib.request
 from pathlib import Path
+from typing import Any
 
 API_BASE_URL = "https://api.1999.fan/api"
 MANIFEST_URL = f"{API_BASE_URL}/manifest.json"
@@ -22,13 +21,13 @@ REQUEST_TIMEOUT = 10
 IGNORED_DIRS = {"images"}
 
 
-def _fetch_json(opener, url: str) -> dict:
+def _fetch_json(opener: Any, url: str) -> dict[str, Any]:
     """获取 JSON 数据"""
     with opener.open(url, timeout=REQUEST_TIMEOUT) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
-def _collect_all_manifests(opener, manifest_path: str, collected: dict):
+def _collect_all_manifests(opener: Any, manifest_path: str, collected: dict[str, Any]):
     """
     递归收集所有 manifest 的 updated 时间戳
 
@@ -58,7 +57,7 @@ def generate_manifest_cache(output_dir: Path) -> bool:
     从远程递归获取所有 manifest 并生成缓存文件
 
     Args:
-        output_dir: 输出目录（如 install/resource/data）
+        output_dir: 输出目录（如 install/data）
 
     Returns:
         bool: 是否成功
@@ -123,9 +122,9 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         output_dir = Path(sys.argv[1])
     else:
-        # 默认输出到 install/resource/data
+        # 默认输出到 install/data
         script_dir = Path(__file__).parent
-        output_dir = script_dir.parent.parent / "install" / "resource" / "data"
+        output_dir = script_dir.parent.parent / "install" / "data"
 
     success = generate_manifest_cache(output_dir)
     sys.exit(0 if success else 1)

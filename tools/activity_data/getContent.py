@@ -1,9 +1,10 @@
-import re
 import json
+import re
+from typing import Any
 from urllib.parse import urljoin
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup  # pyright: ignore[reportMissingImports]
 
 CN_CONTENT_URL = "https://notice.sl916.com/noticecp/client/query"
 OTHER_URL = "https://re1999.bluepoch.com/activity/official/websites/information/query"
@@ -29,7 +30,7 @@ REQUEST_HEADERS = {
 GAME_IDS = {"cn": 50001, "en": 60001, "jp": 70001}
 
 
-def _request_json(method: str, url: str, **kwargs):
+def _request_json(method: str, url: str, **kwargs: Any) -> tuple[bool, Any]:
     try:
         response = requests.request(
             method=method,
@@ -106,7 +107,7 @@ def _parse_version_key(version_id: str):
     return int(match.group(1)), int(match.group(2))
 
 
-def _infer_version_from_content(content: str, known_version_name_pairs):
+def _infer_version_from_content(content: str, known_version_name_pairs: Any):
     if not known_version_name_pairs:
         return None, None
 
@@ -153,19 +154,11 @@ def _get_content_for_en_or_jp(resource: str):
                     continue
 
                 if resource == "en":
-                    explicit_version_id, explicit_version_name = (
-                        _extract_en_version_and_name(title)
-                    )
+                    explicit_version_id, explicit_version_name = _extract_en_version_and_name(title)
                 else:
-                    explicit_version_id, explicit_version_name = (
-                        _extract_jp_version_and_name(title)
-                    )
+                    explicit_version_id, explicit_version_name = _extract_jp_version_and_name(title)
 
-                if (
-                    explicit_version_id
-                    and explicit_version_name
-                    and explicit_version_name != explicit_version_id
-                ):
+                if explicit_version_id and explicit_version_name and explicit_version_name != explicit_version_id:
                     pair = (explicit_version_id, explicit_version_name)
                     if pair not in known_version_name_pairs:
                         known_version_name_pairs.append(pair)
@@ -191,16 +184,12 @@ def _get_content_for_en_or_jp(resource: str):
         version_name = item["version_name"]
         if version_id:
             if not version_name or version_name == version_id:
-                inferred_id, inferred_name = _infer_version_from_content(
-                    item["content"], known_version_name_pairs
-                )
+                inferred_id, inferred_name = _infer_version_from_content(item["content"], known_version_name_pairs)
                 if inferred_id:
                     version_id, version_name = inferred_id, inferred_name
             return True, (resource, version_id, version_name, item["content"])
 
-        inferred_id, inferred_name = _infer_version_from_content(
-            item["content"], known_version_name_pairs
-        )
+        inferred_id, inferred_name = _infer_version_from_content(item["content"], known_version_name_pairs)
         if inferred_id:
             return True, (resource, inferred_id, inferred_name, item["content"])
 
@@ -231,9 +220,7 @@ def getContent(resource: str):
                     continue
 
                 try:
-                    title = re.sub(
-                        r"\r|<b>|</b>", "", json.loads(content)[0]["content"]
-                    )
+                    title = re.sub(r"\r|<b>|</b>", "", json.loads(content)[0]["content"])
                 except Exception:
                     continue
 

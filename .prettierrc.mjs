@@ -6,9 +6,12 @@ export default {
         maafwSort.patchPlugin(multilineArrays),
     ],
     multilineArraysWrapThreshold: 1,
+    maafwPipelinePatterns: [
+        "/pipeline/.*\\.jsonc?",
+    ],
     maafwInterfacePatterns: [
-        "/interface.json",
-        "/tasks/.*\.json",
+        "/interface\\.jsonc?",
+        "/tasks/.*\\.jsonc?",
     ],
     tabWidth: 4,
     printWidth: 120,
@@ -30,11 +33,27 @@ export default {
         {
             files: [
                 "*.json",
+                "*.jsonc",
             ],
             options: {
                 parser: "json",
                 useTabs: false,
                 bracketSameLine: false,
+                trailingComma: "none",
+            },
+        },
+        {
+            files: [
+                "*.mts",
+                "**/*.ts",
+            ],
+            options: {
+                tabWidth: 2,
+                semi: false,
+                trailingComma: "all",
+                bracketSpacing: true,
+                singleQuote: true,
+                multilineArraysWrapThreshold: -1,
             },
         },
     ],

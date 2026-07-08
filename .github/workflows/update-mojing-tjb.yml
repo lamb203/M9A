@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           show-progress: false
 
@@ -23,7 +23,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          target="assets/resource/announcement/images/mojing_tjb.jpg"
+          target="resource/announcement/images/mojing_tjb.jpg"
           tmp="$(mktemp)"
 
           curl -fsSL \
@@ -45,9 +45,9 @@ jobs:
         run: |
           set -euo pipefail
 
-          git add assets/resource/announcement/images/mojing_tjb.jpg
+          git add resource/announcement/images/mojing_tjb.jpg
 
-          if git diff --cached --quiet -- assets/resource/announcement/images/mojing_tjb.jpg; then
+          if git diff --cached --quiet -- resource/announcement/images/mojing_tjb.jpg; then
             echo "No changes to commit"
             exit 0
           fi
