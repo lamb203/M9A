@@ -55,7 +55,6 @@ if (packageJson.engines?.node !== ">=24") {
     throw new Error("package.json engines.node must be >=24");
 }
 
-
 for (const [
     name,
     command,
@@ -410,8 +409,6 @@ function isRecord(value) {
 function stripDotSlash(path) {
     return path.startsWith("./") ? path.slice(2) : path;
 }
-
-
 
 function expectedPackageScripts(project) {
     const scripts = {
