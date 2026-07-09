@@ -228,25 +228,20 @@
     },
     "Colosseum_BuyDoll1": {
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    633,
-                    589,
-                    36,
-                    29
+                    560,
+                    575,
+                    130,
+                    60
                 ],
-                "expected": [
-                    "12",
-                    "16"
-                ],
-                "only_rec": true
+                "template": "PVP/Colosseum_Coin.png"
             }
         },
         "action": {
             "type": "Click"
         },
-        "post_wait_freezes": 50,
         "post_delay": 1500,
         "next": [
             "Colosseum_BuyDoll1",
