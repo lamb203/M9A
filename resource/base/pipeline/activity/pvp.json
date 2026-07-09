@@ -275,7 +275,8 @@
         },
         "next": [
             "Colosseum_Select1-1Option",
-            "[JumpBack]Colosseum_EnterEvent"
+            "[JumpBack]Colosseum_EnterEvent",
+            "Colosseum_Select1-1"
         ]
     },
     "Colosseum_Select1-1Option": {
