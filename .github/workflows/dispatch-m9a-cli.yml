@@ -1,0 +1,48 @@
+name: Dispatch to m9a-cli
+
+on:
+  repository_dispatch:
+    types: [create-maa-project-release]
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    if: github.repository == 'MAA1999/M9A'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout M9A source at release tag
+        uses: actions/checkout@v7
+        with:
+          repository: MAA1999/M9A
+          ref: ${{ github.event.client_payload.tag || github.ref || 'main' }}
+          fetch-depth: 1
+
+      - name: Read MaaFramework version from maa-project.json
+        id: maafw
+        run: |
+          channel=$(python3 -c "import json; print(json.load(open('maa-project.json'))['maafw']['channel'])")
+          echo "channel=$channel" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger m9a-cli build
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.DISPATCH_TOKEN }}
+          script: |
+            const tag = context.payload.client_payload?.tag ?? context.ref ?? 'main'
+            const rawVersion = '${{ steps.maafw.outputs.channel }}'
+            const resolvedVersion = rawVersion === 'latest' ? '' : rawVersion
+            await github.rest.repos.createDispatchEvent({
+              owner: 'MAA1999',
+              repo: 'm9a-cli',
+              event_type: 'm9a-release',
+              client_payload: {
+                tag: tag,
+                maa_framework_version: resolvedVersion,
+                source_repo: 'MAA1999/M9A',
+                source_ref: tag,
+                source_sha: context.sha,
+              }
+            });
+            console.log('Dispatched m9a-release to MAA1999/m9a-cli with tag:', tag, 'maafw:', resolvedVersion || '(latest)');
