@@ -261,6 +261,6 @@ jobs:
           gh api --method POST "repos/$GITHUB_REPOSITORY/dispatches" \
             -f event_type=create-maa-project-release \
             -f client_payload[tag]="$GITHUB_REF_NAME"
-          gh api --method POST "repos/$GITHUB_REPOSITORY/actions/workflows/mirrorchyan_release.yml/dispatches" \
-            -f ref="main" \
-            -f inputs[tag]="$GITHUB_REF_NAME"
+          gh api --method POST "repos/$GITHUB_REPOSITORY/dispatches" \
+            -f event_type=mirrorchyan-upload \
+            -f client_payload[tag]="$GITHUB_REF_NAME"

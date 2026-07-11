@@ -6,6 +6,8 @@ on:
       tag:
         default: ""
         required: false
+  repository_dispatch:
+    types: [mirrorchyan-upload]
   release:
     types: [released]
 
@@ -27,7 +29,7 @@ jobs:
           filetype: latest-release
           filename: ${{ format('M9A-{0}-{1}-*-MFAA*', matrix.os, matrix.arch) }}
           mirrorchyan_rid: M9A
-          tag: ${{ inputs.tag }}
+          tag: ${{ inputs.tag || github.event.client_payload.tag }}
 
           os: ${{ matrix.os }}
           arch: ${{ matrix.arch }}
@@ -55,7 +57,7 @@ jobs:
           filetype: latest-release
           filename: ${{ format('M9A-{0}-{1}-*-MXU*', matrix.os, matrix.arch) }}
           mirrorchyan_rid: M9A-MXU
-          tag: ${{ inputs.tag }}
+          tag: ${{ inputs.tag || github.event.client_payload.tag }}
 
           os: ${{ matrix.os }}
           arch: ${{ matrix.arch }}
