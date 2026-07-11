@@ -173,7 +173,7 @@ def smoke_import(os_type: str | None = None, arch: str | None = None) -> None:
 
     python_bin = find_runtime_python(os_type, arch) or sys.executable
     subprocess.run(
-        [python_bin, "-c", "from libs import drop_core; print(drop_core.__file__)"],
+        [python_bin, "-c", f"import sys; sys.path.insert(0, {agent_dir!r}); from libs import drop_core; print(drop_core.__file__)"],
         check=True,
         env=env,
     )
