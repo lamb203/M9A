@@ -1,4 +1,4 @@
-name: mirrorchyan_release_note
+﻿name: mirrorchyan_release_note
 
 on:
   workflow_dispatch:
@@ -6,6 +6,8 @@ on:
       tag:
         default: ""
         required: false
+  repository_dispatch:
+    types: [mirrorchyan-release-note]
   release:
     types: [edited]
 
@@ -22,7 +24,7 @@ jobs:
         uses: MirrorChyan/release-note-action@v1
         with:
           mirrorchyan_rid: M9A
-          version_name: ${{ inputs.tag }}
+          version_name: ${{ inputs.tag || github.event.client_payload.tag }}
 
           owner: MAA1999
           repo: M9A
@@ -41,7 +43,7 @@ jobs:
         uses: MirrorChyan/release-note-action@v1
         with:
           mirrorchyan_rid: M9A-MXU
-          version_name: ${{ inputs.tag }}
+          version_name: ${{ inputs.tag || github.event.client_payload.tag }}
 
           owner: MAA1999
           repo: M9A
