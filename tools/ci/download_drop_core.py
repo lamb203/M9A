@@ -169,11 +169,21 @@ def extract_module(archive_path: Path, dest_dir: Path, module_name: str) -> Path
 def smoke_import(os_type: str | None = None, arch: str | None = None) -> None:
     env = os.environ.copy()
     agent_dir = str(DEST_DIR.parent.resolve())
-    env["PYTHONPATH"] = os.pathsep.join(filter(None, [agent_dir, env.get("PYTHONPATH", "")]))
-
     python_bin = find_runtime_python(os_type, arch) or sys.executable
+
+    paths = [agent_dir]
+    if python_bin == sys.executable and os_type and arch:
+        deps = find_runtime_deps(os_type, arch)
+        if deps:
+            paths.insert(0, deps)
+    env["PYTHONPATH"] = os.pathsep.join(filter(None, paths + [env.get("PYTHONPATH", "")]))
+
     subprocess.run(
-        [python_bin, "-c", f"import sys; sys.path.insert(0, {agent_dir!r}); from libs import drop_core; print(drop_core.__file__)"],
+        [
+            python_bin,
+            "-c",
+            f"import sys; sys.path.insert(0, {agent_dir!r}); from libs import drop_core; print(drop_core.__file__)",
+        ],
         check=True,
         env=env,
     )
@@ -195,6 +205,21 @@ def find_runtime_python(os_type: str | None, arch: str | None) -> str | None:
         exe_path = f".create-maa-project/runtime/python/{platform}/bin/python3"
     if Path(exe_path).exists():
         return str(Path(exe_path).resolve())
+    return None
+
+
+def find_runtime_deps(os_type: str | None, arch: str | None) -> str | None:
+    """Find the runtime Python deps directory (used on Linux where there is no separate Python runtime)."""
+    if not os_type or not arch:
+        return None
+    platform_map = {"windows": "win", "darwin": "osx", "linux": "linux"}
+    runtime_os = platform_map.get(os_type.lower())
+    if not runtime_os:
+        return None
+    normalized_arch = ARCH_MAPPING.get(arch.lower(), arch.lower())
+    deps_path = f".create-maa-project/runtime/python-deps/{runtime_os}-{normalized_arch}"
+    if Path(deps_path).exists():
+        return str(Path(deps_path).resolve())
     return None
 
 
