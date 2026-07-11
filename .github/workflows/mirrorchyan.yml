@@ -7,7 +7,7 @@ on:
         default: ""
         required: false
   release:
-    types: [published]
+    types: [released]
 
 jobs:
   mirrorchyan_mfa:
