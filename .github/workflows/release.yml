@@ -1,4 +1,4 @@
-name: Release
+﻿name: Release
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
             runtime_arch: x64
             drop_os: linux
             drop_core_supported: true
-            drop_core_smoke_import: true
+            drop_core_smoke_import: false
             ext: tar.gz
           - os: ubuntu-latest
             artifact_os: linux
