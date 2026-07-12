@@ -43,7 +43,8 @@
         "next": [
             "AncientHallFlag",
             "[JumpBack]ClickAncientHall"
-        ]
+        ],
+        "on_error": ["BackButton"]
     },
     "AncientHallFlag": {
         "recognition": {
