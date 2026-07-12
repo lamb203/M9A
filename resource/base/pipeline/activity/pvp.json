@@ -177,7 +177,8 @@
         },
         "next": [
             "Colosseum_DollShopPage",
-            "[JumpBack]Colosseum_EnterEvent"
+            "[JumpBack]Colosseum_EnterEvent",
+            "Colosseum_Doll"
         ]
     },
     "Colosseum_DollShopPage": {
