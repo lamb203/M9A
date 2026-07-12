@@ -109,7 +109,8 @@
         "post_delay": 3000,
         "next": [
             "CollectProductNext",
-            "[JumpBack]ExitCollectProductAwards"
+            "[JumpBack]ExitCollectProductAwards",
+            "CollectProduct"
         ]
     },
     "ExitCollectProductAwards": {
