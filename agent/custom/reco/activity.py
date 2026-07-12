@@ -34,7 +34,7 @@ class ActivityRe_releaseChapter(CustomRecognition):
         for result in ocr_results(reco_detail_1):
             if expected in result.text:
                 return CustomRecognition.AnalyzeResult(box=result.box, detail={})
-            
+
         for result in ocr_results(reco_detail_2):
             if expected in result.text:
                 return CustomRecognition.AnalyzeResult(box=result.box, detail={})
