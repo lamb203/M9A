@@ -2,7 +2,7 @@
 #    uv export --format requirements-txt --no-hashes --no-emit-project --no-group dev --output-file requirements.txt
 certifi==2026.6.17
     # via requests
-charset-normalizer==3.4.7
+charset-normalizer==3.4.9
     # via requests
 colorama==0.4.6 ; sys_platform == 'win32'
     # via loguru
@@ -12,9 +12,9 @@ loguru==0.7.3
     # via m9a
 maaagentbinary==1.0.1
     # via maafw
-maafw==5.11.1
+maafw==5.12.1
     # via m9a
-numpy==2.5.0
+numpy==2.5.1
     # via maafw
 pillow==12.3.0
     # via m9a
