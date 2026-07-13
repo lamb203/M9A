@@ -32,7 +32,7 @@ jobs:
           script: |
             const tag = context.payload.client_payload?.tag ?? context.ref ?? 'main'
             const rawVersion = '${{ steps.maafw.outputs.channel }}'
-            const resolvedVersion = rawVersion === 'latest' ? '' : rawVersion
+            const resolvedVersion = rawVersion
             await github.rest.repos.createDispatchEvent({
               owner: 'MAA1999',
               repo: 'm9a-cli',
