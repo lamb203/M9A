@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 PRIVATE_REPO = "MAA1999/drop-upload-sign"
-RELEASE_TAG = "v1.3.1"
+RELEASE_TAG = "v1.3.2"
 DEST_DIR = Path("agent/libs")
 REQUEST_TIMEOUT = 30
 MAX_MODULE_SIZE = 50 * 1024 * 1024
