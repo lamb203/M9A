@@ -11,7 +11,7 @@ icon: ri:game-fill
 
 ## 资源存放位置
 
-`assets/resource/data/sos` 下存放着相关资源
+`data/sos` 下存放着相关资源
 
 ## 字段说明
 

@@ -15,13 +15,13 @@ icon: ri:route-line
 
 ## 功能架构速览
 
-| 文件                                                         | 内容                                                                                            | 层                       |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ------------------------ |
-| `assets/resource/base/pipeline/activity/auto_promotion.json` | 推图模式入口调度 + 推图循环 + 辅助 OCR 节点                                                     | 流程 + 适配面            |
-| `assets/resource/base/pipeline/activity/auto_trail.json`     | 小径调度循环                                                                                    | 流程 + 适配面            |
-| `agent/custom/reco/auto_promotion.py`                        | `APModeGate`（主线地图闸门）、`APPhaseGate`（任务状态重置）、`APMapAnalyze`（找关/星标/滑到头） | 识别算法（默认值事实源） |
-| `agent/custom/reco/auto_trail.py`                            | `ATTrailAnalyze`（小径五态）                                                                    | 识别算法（默认值事实源） |
-| `deps/tools/custom.recognition.schema.json`                  | 全部可覆盖参数的声明（key/type/default）                                                        | 适配面清单               |
+| 文件                                                  | 内容                                                                                            | 层                       |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------ |
+| `resource/base/pipeline/activity/auto_promotion.json` | 推图模式入口调度 + 推图循环 + 辅助 OCR 节点                                                     | 流程 + 适配面            |
+| `resource/base/pipeline/activity/auto_trail.json`     | 小径调度循环                                                                                    | 流程 + 适配面            |
+| `agent/custom/reco/auto_promotion.py`                 | `APModeGate`（主线地图闸门）、`APPhaseGate`（任务状态重置）、`APMapAnalyze`（找关/星标/滑到头） | 识别算法（默认值事实源） |
+| `agent/custom/reco/auto_trail.py`                     | `ATTrailAnalyze`（小径五态）                                                                    | 识别算法（默认值事实源） |
+| `deps/tools/custom.recognition.schema.json`           | 全部可覆盖参数的声明（key/type/default）                                                        | 适配面清单               |
 
 ## 参数覆盖机制（v2 分层核心）
 

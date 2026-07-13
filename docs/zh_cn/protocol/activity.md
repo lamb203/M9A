@@ -11,7 +11,7 @@ icon: ri:calendar-event-line
 
 ## 资源存放位置
 
-活动数据按语言分别存储在 `assets/resource/data/activity/` 目录下：
+活动数据按语言分别存储在 `data/activity/` 目录下：
 
 - `cn.json` - 简体中文（国服）
 - `en.json` - 英文（国际服）

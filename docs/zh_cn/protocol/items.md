@@ -11,8 +11,8 @@ icon: ri:treasure-map-line
 
 ## 资源存放位置
 
-- SOS 肉鸽物品：`assets/resource/data/sos/items.json`
-- 战斗物品：`assets/resource/data/combat/items.json`
+- SOS 肉鸽物品：`data/sos/items.json`
+- 战斗物品：`data/combat/items.json`
 
 ## SOS 肉鸽物品数据
 

@@ -11,7 +11,7 @@ icon: ri:sword-line
 
 ## 资源存放位置
 
-战斗数据存储在 `assets/resource/data/combat/` 目录下：
+战斗数据存储在 `data/combat/` 目录下：
 
 - `items.json` - 战斗物品数据
 - `drop_index.json` - 关卡掉落索引

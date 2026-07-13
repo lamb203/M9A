@@ -1,4 +1,4 @@
----
+﻿---
 order: 2
 icon: ri:treasure-map-line
 ---
@@ -11,8 +11,8 @@ icon: ri:treasure-map-line
 
 ## Resource Location
 
-- Roguelike (SOS) items: `assets/resource/data/sos/items.json`
-- Combat items: `assets/resource/data/combat/items.json`
+- Roguelike (SOS) items: `data/sos/items.json`
+- Combat items: `data/combat/items.json`
 
 ## SOS Roguelike Item Data
 

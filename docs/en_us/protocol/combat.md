@@ -1,4 +1,4 @@
----
+﻿---
 order: 4
 icon: ri:sword-line
 ---
@@ -11,7 +11,7 @@ icon: ri:sword-line
 
 ## Resource Location
 
-Combat data is stored in the `assets/resource/data/combat/` directory:
+Combat data is stored in the `data/combat/` directory:
 
 - `items.json` - Combat item data
 - `drop_index.json` - Stage drop index

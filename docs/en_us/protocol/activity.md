@@ -1,4 +1,4 @@
----
+﻿---
 order: 3
 icon: ri:calendar-event-line
 ---
@@ -11,7 +11,7 @@ icon: ri:calendar-event-line
 
 ## Resource Location
 
-Activity data is stored by language in the `assets/resource/data/activity/` directory:
+Activity data is stored by language in the `data/activity/` directory:
 
 - `cn.json` - Simplified Chinese (CN Server)
 - `en.json` - English (Global Server)

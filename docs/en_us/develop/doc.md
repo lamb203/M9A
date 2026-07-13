@@ -154,9 +154,9 @@ Display project directory structure:
         - develop/
             - pipeline.md
             - custom.md
-- assets/
-    - resource/
-      :::
+- resource/
+
+:::
 ```
 
 ## More Features
