@@ -7,6 +7,10 @@ const lock = JSON.parse(readFileSync("maa-project.lock.json", "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const imports = interfaceJson.import ?? [];
 
+if (project.schemaVersion !== lock.schemaVersion) {
+    throw new Error("maa-project.json and maa-project.lock.json schemaVersion must match");
+}
+
 const interfaceUnmanaged = project.project?.interfaceUnmanaged === true;
 if (interfaceJson.name !== project.project?.slug) {
     console.warn(

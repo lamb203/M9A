@@ -1,4 +1,4 @@
 packages: []
 minimumReleaseAgeExclude:
-  - create-maa-project@1.2.0
+  - create-maa-project
   - prettier@3.9.4

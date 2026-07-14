@@ -50,7 +50,8 @@
         "spdx": "AGPL-3.0-or-later"
     },
     "maafw": {
-        "channel": "latest"
+        "channel": "stable",
+        "version": ""
     },
     "network": {
         "mode": "auto"
@@ -92,13 +93,15 @@
     ],
     "runtime": {
         "mfa": {
-            "channel": "v2.12.2-beta.3",
-            "enabled": true
+            "channel": "beta",
+            "enabled": true,
+            "version": ""
         },
         "mxu": {
-            "channel": "latest",
-            "enabled": true
+            "channel": "stable",
+            "enabled": true,
+            "version": ""
         }
     },
-    "schemaVersion": 1
+    "schemaVersion": 2
 }
