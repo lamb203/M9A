@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import subprocess
@@ -74,6 +75,9 @@ def test_release_package_excludes_python_cache_files(tmp_path: Path) -> None:
     assert (package_agent / "bootstrap.py").is_file()
     assert not (package_agent / "__pycache__").exists()
     assert not (package_agent / "main.pyo").exists()
+    requirements = (tmp_path / "dist/package-mfaa/requirements.txt").read_bytes()
+    marker = tmp_path / "dist/package-mfaa/python/.create-maa-project-requirements.sha256"
+    assert marker.read_text(encoding="utf-8") == hashlib.sha256(requirements).hexdigest() + "\n"
 
 
 def test_release_builder_rejects_paths_outside_project_root(tmp_path: Path) -> None:

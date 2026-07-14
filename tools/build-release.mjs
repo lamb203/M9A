@@ -10,12 +10,14 @@
     statSync,
     writeFileSync,
 } from "node:fs";
+import {createHash} from "node:crypto";
 import {basename, dirname, join} from "node:path";
 
 const dryRun = process.argv.includes("--dry-run");
 const releaseTagOverride = commandLineValue("--release-tag");
 const projectSlug = "m9a";
 const releaseArtifactName = "M9A";
+const requirementsMarker = ".create-maa-project-requirements.sha256";
 mkdirSync("dist", {recursive: true});
 
 const lock = readJson("maa-project.lock.json");
@@ -339,6 +341,7 @@ function prepareReleasePackage(guiKey, gui, packagePaths, interfaceJson, runtime
     }
     if (packageHasAgent(interfaceJson) && hasEmbeddedPythonRuntime(runtimePlatform)) {
         copyPath(pythonRuntimePath(runtimePlatform), join(pkgDir, "python"));
+        writeEmbeddedRequirementsMarker(pkgDir);
     }
     if (!gui.flatLayout) {
         prepareMxuMaafwRuntime(pkgDir, runtimePlatform);
@@ -450,6 +453,19 @@ function smokeReleasePackage(gui, root, packagePaths, runtimePlatform) {
         if (!existsSync(join(root, "agent", "bootstrap.py"))) {
             throw new Error("release package smoke failed: Agent bootstrap is missing");
         }
+        if (hasEmbeddedPythonRuntime(runtimePlatform)) {
+            const markerPath = join(root, "python", requirementsMarker);
+            if (!existsSync(markerPath)) {
+                throw new Error("release package smoke failed: Python requirements marker is missing");
+            }
+            const expectedDigest = requirementsDigest(join(root, "requirements.txt"));
+            const actualDigest = readFileSync(markerPath, "utf8").trim();
+            if (actualDigest !== expectedDigest) {
+                throw new Error(
+                    "release package smoke failed: Python requirements marker does not match requirements.txt",
+                );
+            }
+        }
     }
     assertUnixExecutablePermissions(root, runtimePlatform);
     for (const path of [
@@ -493,6 +509,15 @@ function copyDirectoryContents(source, target, options = {}) {
     for (const entry of readdirSync(source)) {
         copyPath(join(source, entry), join(target, entry), options);
     }
+}
+
+function requirementsDigest(requirementsPath) {
+    return createHash("sha256").update(readFileSync(requirementsPath)).digest("hex");
+}
+
+function writeEmbeddedRequirementsMarker(pkgDir) {
+    const digest = requirementsDigest(join(pkgDir, "requirements.txt"));
+    writeFileSync(join(pkgDir, "python", requirementsMarker), digest + "\n", "utf8");
 }
 
 function shouldCopyAgentPath(source) {
