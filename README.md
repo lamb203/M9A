@@ -70,9 +70,9 @@
 
 <a href="https://www.star-history.com/#MAA1999/M9A&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=MAA1999/M9A&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=MAA1999/M9A&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=MAA1999/M9A&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/MAA1999/star-history-assets/main/generated/MAA1999-M9A/dark.webp" />
+   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/MAA1999/star-history-assets/main/generated/MAA1999-M9A/light.webp" />
+   <img alt="Star History Chart" src="https://raw.githubusercontent.com/MAA1999/star-history-assets/main/generated/MAA1999-M9A/light.webp" />
  </picture>
 </a>
 
