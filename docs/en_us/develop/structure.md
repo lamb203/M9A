@@ -62,7 +62,6 @@ icon: hugeicons:structure-01
 - LICENSE # License file
 - logo.ico # Application icon
 - maa-project.json # MAA project configuration
-- maa-project.lock.json # MAA project lock file
 - maatools.config.mts # MAA Tools configuration
 - package.json # Node.js project configuration
 - pnpm-lock.yaml # pnpm dependency lock file

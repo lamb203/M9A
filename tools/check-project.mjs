@@ -1,14 +1,20 @@
-import {createHash} from "node:crypto";
 import {existsSync, readFileSync} from "node:fs";
 
 const interfaceJson = JSON.parse(readFileSync("interface.json", "utf8"));
 const project = JSON.parse(readFileSync("maa-project.json", "utf8"));
-const lock = JSON.parse(readFileSync("maa-project.lock.json", "utf8"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const imports = interfaceJson.import ?? [];
 
-if (project.schemaVersion !== lock.schemaVersion) {
-    throw new Error("maa-project.json and maa-project.lock.json schemaVersion must match");
+for (const path of [
+    "package.json",
+    "pnpm-workspace.yaml",
+    "tools/check-project.mjs",
+    "tools/validate-schema.mjs",
+    "tools/schema/interface.schema.json",
+]) {
+    if (!existsSync(path)) {
+        throw new Error(`required project file is missing: ${path}`);
+    }
 }
 
 const interfaceUnmanaged = project.project?.interfaceUnmanaged === true;
@@ -123,7 +129,6 @@ if (project.features?.vscode?.enabled) {
 }
 
 if (
-    !hasPending(lock, "node-deps") &&
     typeof packageJson.packageManager === "string" &&
     packageJson.packageManager.startsWith("pnpm@") &&
     !existsSync("pnpm-lock.yaml")
@@ -214,36 +219,7 @@ for (const path of [
     }
 }
 
-for (const [
-    path,
-    state,
-] of Object.entries(lock.managedFiles ?? {})) {
-    if (!existsSync(path)) {
-        throw new Error(`managed file is missing: ${path}`);
-    }
-    const hash = managedFileHash(path, readFileSync(path));
-    if (hash !== state.hash) {
-        throw new Error(`managed file changed since last accepted baseline: ${path}`);
-    }
-    if (state.acceptedAt) {
-        console.warn("[INFO] Managed file has accepted local changes: " + path);
-        console.warn("       Future template updates may conflict with this file.");
-    }
-}
-
-for (const item of lock.pending ?? []) {
-    console.error(`[ERR] Pending ${item.kind}: ${item.command}`);
-}
-
-if ((lock.pending ?? []).length > 0) {
-    throw new Error("project has pending actions; run create-maa-project --doctor");
-}
-
 console.log("[OK] project structure looks valid");
-
-function sha256(content) {
-    return createHash("sha256").update(content).digest("hex");
-}
 
 function projectControllerKinds(project) {
     const rawKinds = Array.isArray(project.controller?.kinds)
@@ -371,10 +347,6 @@ function addV(version) {
     return String(version ?? "").startsWith("v") ? version : "v" + version;
 }
 
-function hasPending(lock, kind) {
-    return (lock.pending ?? []).some((item) => item?.kind === kind);
-}
-
 function workflowPinsNode24(content) {
     return /node-version:\s*['"]?24['"]?/.test(content);
 }
@@ -413,34 +385,6 @@ function isProjectRelativePath(path) {
         !/^[A-Za-z]:/.test(stripped) &&
         !stripped.split("/").includes("..")
     );
-}
-
-function managedFileHash(path, content) {
-    if (isBinaryManagedPath(path)) {
-        return sha256(content);
-    }
-    const text = content.toString();
-    if (path === ".gitignore") {
-        return sha256(normalizeManagedText(extractGitignoreBlock(text) ?? text));
-    }
-    return sha256(normalizeManagedText(text));
-}
-
-function isBinaryManagedPath(path) {
-    return path.endsWith(".onnx");
-}
-
-function normalizeManagedText(content) {
-    return content.replace(/\r\n?/g, "\n");
-}
-
-function extractGitignoreBlock(content) {
-    const start = content.indexOf("# BEGIN create-maa-project");
-    if (start < 0) return undefined;
-    const markerEnd = content.indexOf("# END create-maa-project", start);
-    if (markerEnd < 0) return undefined;
-    const endOfLine = content.indexOf("\n", markerEnd);
-    return content.slice(start, endOfLine >= 0 ? endOfLine + 1 : content.length);
 }
 
 function parseTomlProjectMetadata(content) {
