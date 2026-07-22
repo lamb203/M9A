@@ -19,7 +19,9 @@
     },
     "managedFiles": {
         "pyproject.toml": {
-            "hash": "46be70671d9a02992d9f14d8aae6e41b164b90b3e323925e54c501002d277889",
+            "acceptedAt": "2026-07-22T08:52:01.711Z",
+            "acceptedBy": "create-maa-project@0.1.0",
+            "hash": "e207d60f9132ee591e98d8442ea90cb03143f0fddaef586631538c9f8301d1d7",
             "templateHash": "46be70671d9a02992d9f14d8aae6e41b164b90b3e323925e54c501002d277889"
         }
     },

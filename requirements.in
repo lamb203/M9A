@@ -1,0 +1,6 @@
+# Generated from [project].dependencies in pyproject.toml.
+maafw
+loguru
+pillow>=10.0
+pytz
+requests
