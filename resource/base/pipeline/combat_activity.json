@@ -209,6 +209,23 @@
             }
         }
     },
+    "ActivityCombatStageCost_color_filter": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "lower": [
+                    149,
+                    159,
+                    167
+                ],
+                "upper": [
+                    245,
+                    237,
+                    227
+                ]
+            }
+        }
+    },
     "ActivityTargetLevel": {
         "action": {
             "type": "Custom",

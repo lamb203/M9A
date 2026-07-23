@@ -949,5 +949,166 @@
                 }
             }
         }
+    },
+    "sp02": {
+        "version_name": "原子之心",
+        "start_time": 1784772000000,
+        "end_time": 1786741199000,
+        "activity": {
+            "combat": {
+                "event_type": "SideStory",
+                "start_time": 1784772000000,
+                "end_time": 1786481999000,
+                "override": {
+                    "FlagInActivityMain": {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    1140,
+                                    15,
+                                    130,
+                                    60
+                                ],
+                                "expected": "成就套装",
+                                "only_rec": true
+                            }
+                        }
+                    },
+                    "ActivityMainChapter": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    950,
+                                    540,
+                                    200,
+                                    150
+                                ]
+                            }
+                        }
+                    },
+                    "FlagInActivityStage": {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    958,
+                                    559,
+                                    101,
+                                    33
+                                ],
+                                "expected": "开始行动",
+                                "only_rec": true
+                            }
+                        }
+                    },
+                    "ActivityCombatStageNum": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    966,
+                                    76,
+                                    44,
+                                    31
+                                ],
+                                "only_rec": true
+                            }
+                        }
+                    },
+                    "ActivityCombatStageCost": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    818,
+                                    561,
+                                    119,
+                                    31
+                                ],
+                                "color_filter": "ActivityCombatStageCost_color_filter"
+                            }
+                        }
+                    },
+                    "ActivityTargetLevel": {
+                        "attach": {
+                            "clicks": [
+                                [
+                                    821,
+                                    187
+                                ],
+                                [
+                                    1023,
+                                    187
+                                ]
+                            ]
+                        }
+                    },
+                    "ActivityTargetLevelRec": {
+                        "recognition": {
+                            "param": {
+                                "roi": [
+                                    894,
+                                    175,
+                                    58,
+                                    26
+                                ]
+                            }
+                        }
+                    },
+                    "ActivityClickCurStage": {
+                        "recognition": {
+                            "type": "TemplateMatch",
+                            "param": {
+                                "roi": [
+                                    37,
+                                    93,
+                                    1211,
+                                    460
+                                ],
+                                "template": "Combat/Activity/Stage_sp02.png",
+                                "green_mask": true,
+                                "index": -1
+                            }
+                        },
+                        "action": {
+                            "type": "Click",
+                            "param": {
+                                "target": true
+                            }
+                        },
+                        "post_wait_freezes": {
+                            "time": 500,
+                            "target": [
+                                779,
+                                79,
+                                331,
+                                535
+                            ]
+                        }
+                    },
+                    "ActivityClickPreStage": {
+                        "action": {
+                            "type": "Click",
+                            "param": {
+                                "target": [
+                                    23,
+                                    335,
+                                    20,
+                                    30
+                                ]
+                            }
+                        },
+                        "post_wait_freezes": {
+                            "time": 700,
+                            "target": [
+                                779,
+                                79,
+                                331,
+                                535
+                            ]
+                        }
+                    }
+                }
+            }
+        }
     }
 }
