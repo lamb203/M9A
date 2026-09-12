@@ -520,8 +520,10 @@ function isMxuMaafwExcludedName(name) {
     );
 }
 
+// Windows hosts cannot represent Unix permission bits, so cross-building a non-Windows
+// package there must skip the executable-bit checks instead of failing the smoke test.
 function ensureUnixExecutablePermissions(root, runtimePlatform) {
-    if (runtimePlatform.startsWith("win-")) return;
+    if (process.platform === "win32" || runtimePlatform.startsWith("win-")) return;
     for (const path of findUnixExecutableFiles(root)) {
         const mode = statSync(path).mode;
         chmodSync(path, mode | 0o755);
@@ -529,7 +531,7 @@ function ensureUnixExecutablePermissions(root, runtimePlatform) {
 }
 
 function assertUnixExecutablePermissions(root, runtimePlatform) {
-    if (runtimePlatform.startsWith("win-")) return;
+    if (process.platform === "win32" || runtimePlatform.startsWith("win-")) return;
     for (const path of findUnixExecutableFiles(root)) {
         if ((statSync(path).mode & 0o111) === 0) {
             throw new Error(`release package smoke failed: executable bit is missing: ${path}`);
