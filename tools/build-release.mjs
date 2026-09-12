@@ -52,30 +52,16 @@ const GUI_TYPES = {
                       "mxu.exe",
                   ],
         flatLayout: false,
-        modifyInterface(iface, slug, ver, platform) {
+        modifyInterface(iface, slug, ver) {
             const modified = {...iface};
             const displayName =
                 typeof modified.label === "string" && modified.label.trim() ? modified.label.trim() : slug;
             modified.title = `${displayName} ${ver} | MXU`;
             modified.mirrorchyan_rid = "M9A-MXU";
-            if (Array.isArray(modified.agent) && modified.agent[0]) {
-                modified.agent = modified.agent.map((agent) =>
-                    isRecord(agent)
-                        ? {
-                              ...agent,
-                              child_exec: platform.startsWith("win-")
-                                  ? "./python/python.exe"
-                                  : platform.startsWith("osx-")
-                                    ? "./python/bin/python3"
-                                    : "python3",
-                              child_args: [
-                                  "-u",
-                                  "./agent/main.py",
-                              ],
-                          }
-                        : agent,
-                );
-            }
+            // Deliberately no agent override: prepareReleaseInterface already sets the
+            // platform-correct command (Linux -> agent/bootstrap.py for the venv and dependency
+            // install, win/mac -> agent/main.py with preinstalled deps), and MXU resolves
+            // relative child_exec paths against the project root on its own.
             return modified;
         },
     },
@@ -145,12 +131,7 @@ function main() {
         console.log(`\n--- Building ${gui.suffix} package ---`);
         const packagePaths = releasePackagePaths(interfaceJson, runtimePlatform, guiKey);
 
-        const guiInterface = gui.modifyInterface(
-            prepareReleaseInterface(interfaceJson, version, runtimePlatform),
-            projectSlug,
-            version,
-            runtimePlatform,
-        );
+        const guiInterface = releaseGuiInterface(guiKey, interfaceJson, version, runtimePlatform);
 
         if (!dryRun) {
             const guiPath = guiRuntimePath(gui.runtimeDir, runtimePlatform);
@@ -323,6 +304,21 @@ function prepareReleaseInterface(interfaceJson, version, runtimePlatform) {
         );
     }
     return releaseInterface;
+}
+
+// GUI tweaks always run on top of the per-platform release interface, so a GUI can never
+// replace the platform-correct Agent command set up by prepareReleaseInterface.
+function releaseGuiInterface(guiKey, interfaceJson, version, runtimePlatform) {
+    const gui = GUI_TYPES[guiKey];
+    if (!gui) {
+        throw new Error(`unknown GUI runtime: ${guiKey}`);
+    }
+    return gui.modifyInterface(
+        prepareReleaseInterface(interfaceJson, version, runtimePlatform),
+        projectSlug,
+        version,
+        runtimePlatform,
+    );
 }
 
 function prepareReleasePackage(guiKey, gui, packagePaths, interfaceJson, runtimePlatform) {
@@ -716,4 +712,4 @@ if (isMainModule()) {
     main();
 }
 
-export {releaseAgentChildArgs, releaseAgentChildExec};
+export {releaseAgentChildArgs, releaseAgentChildExec, releaseGuiInterface};

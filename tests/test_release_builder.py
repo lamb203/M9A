@@ -14,12 +14,13 @@ def prepare_release_project(
     root: Path,
     imports: list[str] | None = None,
     languages: dict[str, str] | None = None,
+    mxu: bool = False,
 ) -> None:
     root.mkdir(exist_ok=True)
     write_json(root / "maa-project.lock.json", {"pending": []})
     write_json(
         root / "maa-project.json",
-        {"runtime": {"mfa": {"enabled": True}, "mxu": {"enabled": False}}},
+        {"runtime": {"mfa": {"enabled": not mxu}, "mxu": {"enabled": mxu}}},
     )
     interface: dict[str, object] = {
         "name": "m9a",
@@ -40,12 +41,15 @@ def prepare_release_project(
         "plugins",
         "agent/__pycache__",
         ".create-maa-project/runtime/mfaa/win-x64",
+        ".create-maa-project/runtime/mxu/win-x64",
         ".create-maa-project/runtime/python/win-x64",
     ):
         (root / relative_path).mkdir(parents=True)
 
     (root / "runtimes/win-x64/native/MaaPiCli.exe").write_bytes(b"cli")
+    (root / "runtimes/win-x64/native/MaaFramework.dll").write_bytes(b"maafw")
     (root / ".create-maa-project/runtime/mfaa/win-x64/MFAAvalonia.exe").write_bytes(b"gui")
+    (root / ".create-maa-project/runtime/mxu/win-x64/mxu.exe").write_bytes(b"gui")
     (root / ".create-maa-project/runtime/python/win-x64/python.exe").write_bytes(b"python")
     (root / "agent/bootstrap.py").write_text("# bootstrap\n", encoding="utf-8")
     (root / "agent/main.py").write_text("# main\n", encoding="utf-8")
@@ -95,6 +99,37 @@ def test_release_agent_child_args_per_platform() -> None:
     ]
 
 
+def test_release_gui_agent_config_matches_platform() -> None:
+    script_url = (PROJECT_ROOT / "tools" / "build-release.mjs").as_uri()
+    code = (
+        "import {releaseGuiInterface} from " + json.dumps(script_url) + ";"
+        "const base = {name: 'm9a', agent: [{child_exec: 'uv', child_args: ['run', 'python', 'agent/main.py']}]};"
+        "const configs = {};"
+        "for (const gui of ['mfaa', 'mxu']) {"
+        "for (const platform of ['win-x64', 'osx-arm64', 'linux-x64']) {"
+        "configs[gui + ':' + platform] = releaseGuiInterface(gui, base, 'v0.0.0-test', platform).agent[0];"
+        "}"
+        "}"
+        "console.log(JSON.stringify(configs));"
+    )
+    result = subprocess.run(
+        ["node", "--input-type=module", "-e", code],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert json.loads(result.stdout.strip().splitlines()[-1]) == {
+        "mfaa:win-x64": {"child_exec": "python/python.exe", "child_args": ["-u", "agent/main.py"]},
+        "mfaa:osx-arm64": {"child_exec": "python/bin/python3", "child_args": ["-u", "agent/main.py"]},
+        "mfaa:linux-x64": {"child_exec": "python3", "child_args": ["-u", "agent/bootstrap.py"]},
+        "mxu:win-x64": {"child_exec": "python/python.exe", "child_args": ["-u", "agent/main.py"]},
+        "mxu:osx-arm64": {"child_exec": "python/bin/python3", "child_args": ["-u", "agent/main.py"]},
+        "mxu:linux-x64": {"child_exec": "python3", "child_args": ["-u", "agent/bootstrap.py"]},
+    }
+
+
 def test_release_package_excludes_python_cache_files(tmp_path: Path) -> None:
     prepare_release_project(tmp_path)
     result = run_release_builder(tmp_path)
@@ -111,6 +146,30 @@ def test_release_package_excludes_python_cache_files(tmp_path: Path) -> None:
     # win/mac runtimes ship with preinstalled dependencies: no wheelhouse inputs
     assert not (package_root / "requirements.txt").exists()
     assert not (package_root / "python/.create-maa-project-requirements.sha256").exists()
+
+
+def test_release_mxu_package_keeps_agent_command(tmp_path: Path) -> None:
+    prepare_release_project(tmp_path, mxu=True)
+
+    result = run_release_builder(tmp_path)
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert not (tmp_path / "dist/package-mfaa").exists()
+    package_root = tmp_path / "dist/package-mxu"
+    assert (package_root / "m9a.exe").is_file()
+    packaged_interface = json.loads((package_root / "interface.json").read_text(encoding="utf-8"))
+    assert packaged_interface["mirrorchyan_rid"] == "M9A-MXU"
+    assert packaged_interface["agent"][0]["child_exec"] == "python/python.exe"
+    # The MXU package must not re-declare the Agent command: on Linux it has to go through
+    # agent/bootstrap.py, otherwise the .venv is never built and dependencies are never installed.
+    assert packaged_interface["agent"][0]["child_args"] == ["-u", "agent/main.py"]
+    # MXU packages use the maafw layout instead of top-level runtimes/libs/plugins
+    for relative_path in ("runtimes", "libs", "plugins"):
+        assert not (package_root / relative_path).exists()
+    assert (package_root / "maafw/MaaFramework.dll").is_file()
+    assert not (package_root / "maafw/MaaPiCli.exe").exists()
+    assert (package_root / "maafw/MaaAgentBinary").is_dir()
+    assert (package_root / "python/python.exe").is_file()
 
 
 def test_release_package_includes_translation_files(tmp_path: Path) -> None:
