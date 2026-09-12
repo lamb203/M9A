@@ -58,17 +58,10 @@ def prepare_release_project(
     for gui in ("mfaa", "mxu"):
         entrypoint = root / f".create-maa-project/runtime/{gui}/{platform}/{gui_entrypoint(gui, platform)}"
         entrypoint.write_bytes(b"gui")
-    if platform.startswith("linux-"):
-        # Linux packages ship the wheelhouse instead of an embedded interpreter.
-        deps_directory = root / f".create-maa-project/runtime/python-deps/{platform}"
-        deps_directory.mkdir(parents=True)
-        (deps_directory / "maafw-0.0.0-py3-none-any.whl").write_bytes(b"wheel")
-    else:
-        interpreter = root / f".create-maa-project/runtime/python/{platform}"
-        interpreter = interpreter / ("python.exe" if platform.startswith("win-") else "bin/python3")
-        interpreter.parent.mkdir(parents=True, exist_ok=True)
-        interpreter.write_bytes(b"python")
-    (root / "agent/bootstrap.py").write_text("# bootstrap\n", encoding="utf-8")
+    interpreter = root / f".create-maa-project/runtime/python/{platform}"
+    interpreter = interpreter / ("python.exe" if platform.startswith("win-") else "bin/python3")
+    interpreter.parent.mkdir(parents=True, exist_ok=True)
+    interpreter.write_bytes(b"python")
     (root / "agent/main.py").write_text("# main\n", encoding="utf-8")
     (root / "agent/__pycache__/main.cpython-313.pyc").write_bytes(b"cache")
     (root / "agent/main.pyo").write_bytes(b"cache")
@@ -89,31 +82,6 @@ def run_release_builder(root: Path, platform: str = "win-x64") -> subprocess.Com
         text=True,
         check=False,
     )
-
-
-def test_release_agent_child_args_per_platform() -> None:
-    script_url = (PROJECT_ROOT / "tools" / "build-release.mjs").as_uri()
-    code = (
-        "import {releaseAgentChildArgs} from " + json.dumps(script_url) + ";"
-        "console.log(JSON.stringify(["
-        "releaseAgentChildArgs('win-x64'),"
-        "releaseAgentChildArgs('osx-arm64'),"
-        "releaseAgentChildArgs('linux-x64')"
-        "]));"
-    )
-    result = subprocess.run(
-        ["node", "--input-type=module", "-e", code],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    assert json.loads(result.stdout.strip().splitlines()[-1]) == [
-        ["-u", "agent/main.py"],
-        ["-u", "agent/main.py"],
-        ["-u", "agent/bootstrap.py"],
-    ]
 
 
 def test_release_gui_agent_config_matches_platform() -> None:
@@ -137,47 +105,15 @@ def test_release_gui_agent_config_matches_platform() -> None:
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
+    # Every platform now runs the bundled interpreter, so both GUIs and all platforms agree.
     assert json.loads(result.stdout.strip().splitlines()[-1]) == {
         "mfaa:win-x64": {"child_exec": "python/python.exe", "child_args": ["-u", "agent/main.py"]},
         "mfaa:osx-arm64": {"child_exec": "python/bin/python3", "child_args": ["-u", "agent/main.py"]},
-        "mfaa:linux-x64": {"child_exec": "python3", "child_args": ["-u", "agent/bootstrap.py"]},
+        "mfaa:linux-x64": {"child_exec": "python/bin/python3", "child_args": ["-u", "agent/main.py"]},
         "mxu:win-x64": {"child_exec": "python/python.exe", "child_args": ["-u", "agent/main.py"]},
         "mxu:osx-arm64": {"child_exec": "python/bin/python3", "child_args": ["-u", "agent/main.py"]},
-        "mxu:linux-x64": {"child_exec": "python3", "child_args": ["-u", "agent/bootstrap.py"]},
+        "mxu:linux-x64": {"child_exec": "python/bin/python3", "child_args": ["-u", "agent/main.py"]},
     }
-
-
-def test_release_wheelhouse_path_maps_to_deps_directory() -> None:
-    script_url = (PROJECT_ROOT / "tools" / "build-release.mjs").as_uri()
-    code = (
-        "import {linuxPythonDepsPath, releasePackagePath} from " + json.dumps(script_url) + ";"
-        "const platforms = ['linux-x64', 'linux-arm64'];"
-        "const backslash = String.fromCharCode(92);"
-        "console.log(JSON.stringify({"
-        "source: platforms.map((p) => linuxPythonDepsPath(p)),"
-        "mapped: platforms.map((p) => releasePackagePath(linuxPythonDepsPath(p))),"
-        "hostStyle: releasePackagePath(['.create-maa-project', 'runtime', 'python-deps', 'linux-x64'].join(backslash)),"
-        "passthrough: ['agent', 'requirements.txt'].map((p) => releasePackagePath(p))"
-        "}));"
-    )
-    result = subprocess.run(
-        ["node", "--input-type=module", "-e", code],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    packages = json.loads(result.stdout.strip().splitlines()[-1])
-    # A Linux package can be cross-built on Windows, where join() would produce backslashes
-    # and the wheelhouse would land in the package as .create-maa-project/... instead of deps/.
-    assert packages["source"] == [
-        ".create-maa-project/runtime/python-deps/linux-x64",
-        ".create-maa-project/runtime/python-deps/linux-arm64",
-    ]
-    assert packages["mapped"] == ["deps", "deps"]
-    assert packages["hostStyle"] == "deps"
-    assert packages["passthrough"] == ["agent", "requirements.txt"]
 
 
 def test_release_package_excludes_python_cache_files(tmp_path: Path) -> None:
@@ -187,15 +123,14 @@ def test_release_package_excludes_python_cache_files(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stdout + result.stderr
     package_root = tmp_path / "dist/package-mfaa"
     package_agent = package_root / "agent"
-    assert (package_agent / "bootstrap.py").is_file()
     assert (package_agent / "main.py").is_file()
     assert not (package_agent / "__pycache__").exists()
     assert not (package_agent / "main.pyo").exists()
     packaged_interface = json.loads((package_root / "interface.json").read_text(encoding="utf-8"))
     assert packaged_interface["agent"][0]["child_args"] == ["-u", "agent/main.py"]
-    # win/mac runtimes ship with preinstalled dependencies: no wheelhouse inputs
+    # Dependencies are preinstalled into the bundled interpreter: no wheelhouse inputs
     assert not (package_root / "requirements.txt").exists()
-    assert not (package_root / "python/.create-maa-project-requirements.sha256").exists()
+    assert not (package_root / "deps").exists()
 
 
 def test_release_mxu_package_keeps_agent_command(tmp_path: Path) -> None:
@@ -210,8 +145,7 @@ def test_release_mxu_package_keeps_agent_command(tmp_path: Path) -> None:
     packaged_interface = json.loads((package_root / "interface.json").read_text(encoding="utf-8"))
     assert packaged_interface["mirrorchyan_rid"] == "M9A-MXU"
     assert packaged_interface["agent"][0]["child_exec"] == "python/python.exe"
-    # The MXU package must not re-declare the Agent command: on Linux it has to go through
-    # agent/bootstrap.py, otherwise the .venv is never built and dependencies are never installed.
+    # The MXU package must not re-declare the Agent command: prepareReleaseInterface owns it.
     assert packaged_interface["agent"][0]["child_args"] == ["-u", "agent/main.py"]
     # MXU packages use the maafw layout instead of top-level runtimes/libs/plugins
     for relative_path in ("runtimes", "libs", "plugins"):
@@ -222,7 +156,7 @@ def test_release_mxu_package_keeps_agent_command(tmp_path: Path) -> None:
     assert (package_root / "python/python.exe").is_file()
 
 
-def test_release_linux_mxu_package_keeps_bootstrap_and_wheelhouse(tmp_path: Path) -> None:
+def test_release_linux_mxu_package_ships_embedded_python(tmp_path: Path) -> None:
     prepare_release_project(tmp_path, mxu=True, platform="linux-x64")
 
     result = run_release_builder(tmp_path, platform="linux-x64")
@@ -231,16 +165,15 @@ def test_release_linux_mxu_package_keeps_bootstrap_and_wheelhouse(tmp_path: Path
     package_root = tmp_path / "dist/package-mxu"
     assert (package_root / "m9a").is_file()
     packaged_interface = json.loads((package_root / "interface.json").read_text(encoding="utf-8"))
-    # Linux is the only platform whose Agent builds its own environment, so the packaged
-    # command must go through agent/bootstrap.py and the wheelhouse must travel with it.
+    # Linux now behaves like macOS: the bundled interpreter runs agent/main.py directly,
+    # so no .venv is built and no wheelhouse has to travel with the package.
     assert packaged_interface["agent"][0] == {
-        "child_exec": "python3",
-        "child_args": ["-u", "agent/bootstrap.py"],
+        "child_exec": "python/bin/python3",
+        "child_args": ["-u", "agent/main.py"],
     }
-    assert (package_root / "requirements.txt").is_file()
-    assert (package_root / "deps/maafw-0.0.0-py3-none-any.whl").is_file()
-    # Linux resolves python3 from PATH: no interpreter and no maafw-external layout at the root.
-    assert not (package_root / "python").exists()
+    assert (package_root / "python/bin/python3").is_file()
+    assert not (package_root / "requirements.txt").exists()
+    assert not (package_root / "deps").exists()
     for relative_path in ("runtimes", "libs", "plugins"):
         assert not (package_root / relative_path).exists()
 

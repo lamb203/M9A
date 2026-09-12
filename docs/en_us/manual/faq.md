@@ -106,20 +106,6 @@ Generally, MuMu12 or LDPlayer 9 are recommended.
 1. Update using [MirrorChyan](MirrorChyan.md).
 2. Ask for help in the community group / search online for related solutions.
 
-## Slow or Failed Dependency Installation (Linux)
-
-On Linux, M9A automatically creates a Python virtual environment and installs dependencies online on first launch. If dependency downloads are slow or fail, configure a pip mirror and launch M9A again:
-
-```bash
-export PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
-Or write it into pip's global configuration (applies to all future launches):
-
-```bash
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
 ## Yellow Warning Messages in Logs
 
 When starting tasks, you may see yellow warning messages similar to the following in the logs:

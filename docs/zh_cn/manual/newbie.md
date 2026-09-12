@@ -78,8 +78,7 @@ icon: ri:guide-fill
     </tr>
     <tr>
        <td><div align="center">需安装<br>Python</div></td>
-        <td colspan="6"><div align="center">压缩包自带，无需其他操作</div></td>
-        <td colspan="3"><div align="center">需要 Python 3.10 ≤ version < 3.14</div></td>
+        <td colspan="9"><div align="center">压缩包自带，无需其他操作</div></td>
     </tr>
   </tbody>
 </table>
@@ -158,7 +157,7 @@ Windows 用户**必须安装 VCRedist x64**：这是运行 M9A (无论是命令�
 
 #### 3. Python
 
-Linux 用户需要单独安装 Python 。
+各平台压缩包均自带 Python 运行时与全部依赖，无需单独安装。
 
 <details>
 
@@ -168,8 +167,8 @@ Linux 用户需要单独安装 Python 。
 
 <blockquote>
 
-- 您的系统需要安装 **Python 版本 ≥ 3.10**。这是 M9A 启动和管理其内部环境所必需的。
-- M9A 首次运行时会自动创建并使用独立的虚拟环境，并安装所需的 Python 依赖包 (来自 `requirements.txt`)。您**无需**手动创建虚拟环境或安装这些依赖。
+- 压缩包内的 `python/` 目录即为 M9A 使用的 Python 运行时（Python 3.13），依赖已随包预装，启动时无需联网。
+- 您**无需**安装系统 Python，也**无需**手动创建虚拟环境或安装依赖。
 
 </blockquote>
 

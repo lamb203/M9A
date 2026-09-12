@@ -101,20 +101,6 @@ icon: ph:question-fill
 1. 使用[Mirror酱](./MirrorChyan.md)更新
 2. 求助群友/到网上查询相关办法。
 
-## 依赖下载缓慢或失败（Linux）
-
-Linux 平台下，M9A 首次启动时会自动创建 Python 虚拟环境并在线安装依赖。若依赖下载缓慢或失败，可配置 pip 镜像源后重新启动 M9A：
-
-```bash
-export PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
-或写入 pip 全局配置（对今后所有启动生效）：
-
-```bash
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
 ## 日志黄字提示
 
 启动任务时，日志中可能出现类似以下的黄字提示:
