@@ -130,6 +130,39 @@ def test_release_gui_agent_config_matches_platform() -> None:
     }
 
 
+def test_release_wheelhouse_path_maps_to_deps_directory() -> None:
+    script_url = (PROJECT_ROOT / "tools" / "build-release.mjs").as_uri()
+    code = (
+        "import {linuxPythonDepsPath, releasePackagePath} from " + json.dumps(script_url) + ";"
+        "const platforms = ['linux-x64', 'linux-arm64'];"
+        "const backslash = String.fromCharCode(92);"
+        "console.log(JSON.stringify({"
+        "source: platforms.map((p) => linuxPythonDepsPath(p)),"
+        "mapped: platforms.map((p) => releasePackagePath(linuxPythonDepsPath(p))),"
+        "hostStyle: releasePackagePath(['.create-maa-project', 'runtime', 'python-deps', 'linux-x64'].join(backslash)),"
+        "passthrough: ['agent', 'requirements.txt'].map((p) => releasePackagePath(p))"
+        "}));"
+    )
+    result = subprocess.run(
+        ["node", "--input-type=module", "-e", code],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    packages = json.loads(result.stdout.strip().splitlines()[-1])
+    # A Linux package can be cross-built on Windows, where join() would produce backslashes
+    # and the wheelhouse would land in the package as .create-maa-project/... instead of deps/.
+    assert packages["source"] == [
+        ".create-maa-project/runtime/python-deps/linux-x64",
+        ".create-maa-project/runtime/python-deps/linux-arm64",
+    ]
+    assert packages["mapped"] == ["deps", "deps"]
+    assert packages["hostStyle"] == "deps"
+    assert packages["passthrough"] == ["agent", "requirements.txt"]
+
+
 def test_release_package_excludes_python_cache_files(tmp_path: Path) -> None:
     prepare_release_project(tmp_path)
     result = run_release_builder(tmp_path)

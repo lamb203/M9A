@@ -573,7 +573,11 @@ function removeFiles(root, shouldRemove) {
 }
 
 function releasePackagePath(path) {
-    return path.startsWith(".create-maa-project/runtime/python-deps/") ? "deps" : path;
+    // Source paths are project-relative and written with forward slashes, but a path built
+    // with join() uses the host separator (a Linux package can be cross-built on Windows),
+    // so match on a normalized copy instead of the raw string.
+    const normalized = path.replaceAll("\\", "/");
+    return normalized.startsWith(".create-maa-project/runtime/python-deps/") ? "deps" : path;
 }
 
 function guiRuntimePath(runtimeDir, runtimePlatform) {
@@ -585,7 +589,9 @@ function pythonRuntimePath(runtimePlatform) {
 }
 
 function linuxPythonDepsPath(runtimePlatform) {
-    return join(".create-maa-project", "runtime", "python-deps", runtimePlatform);
+    // Always POSIX-style: the value is both a source path (Node accepts forward slashes on
+    // Windows) and a package-layout key matched by releasePackagePath().
+    return `.create-maa-project/runtime/python-deps/${runtimePlatform}`;
 }
 
 function hasEmbeddedPythonRuntime(runtimePlatform) {
@@ -712,4 +718,4 @@ if (isMainModule()) {
     main();
 }
 
-export {releaseAgentChildArgs, releaseAgentChildExec, releaseGuiInterface};
+export {linuxPythonDepsPath, releaseAgentChildArgs, releaseAgentChildExec, releaseGuiInterface, releasePackagePath};
