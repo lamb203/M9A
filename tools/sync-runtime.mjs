@@ -14,6 +14,14 @@ import {dirname, join} from "node:path";
 
 const PYTHON_EMBED_VERSION = "3.13.14";
 const PYTHON_STANDALONE_MINOR = "3.13";
+// Must stay above the top-level `await syncPythonRuntime()` call below: `const` bindings are
+// not initialized before their statement runs, so a later declaration is a TDZ error here.
+const PYTHON_STANDALONE_TRIPLES = {
+    "linux-arm64": "aarch64-unknown-linux-gnu",
+    "linux-x64": "x86_64-unknown-linux-gnu",
+    "osx-arm64": "aarch64-apple-darwin",
+    "osx-x64": "x86_64-apple-darwin",
+};
 
 const project = JSON.parse(readFileSync("maa-project.json", "utf8"));
 
@@ -270,13 +278,6 @@ function findPythonExecutableCandidate(binDir) {
     }
     return readdirSync(binDir).find((name) => /^python3(?:\.\d+)?$/.test(name));
 }
-
-const PYTHON_STANDALONE_TRIPLES = {
-    "linux-arm64": "aarch64-unknown-linux-gnu",
-    "linux-x64": "x86_64-unknown-linux-gnu",
-    "osx-arm64": "aarch64-apple-darwin",
-    "osx-x64": "x86_64-apple-darwin",
-};
 
 async function resolvePythonStandaloneAsset(platform) {
     const response = await fetchGithubJson(
