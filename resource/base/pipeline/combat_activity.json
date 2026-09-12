@@ -347,6 +347,7 @@
         ]
     },
     "ActivityRe_releaseChapter": {
+        "max_hit": 5,
         "recognition": {
             "type": "Custom",
             "param": {
@@ -361,7 +362,8 @@
         },
         "post_delay": 3000,
         "next": [
-            "ActivityMainChapter"
+            "ActivityMainChapter",
+            "ActivityRe_releaseChapter"
         ],
         "on_error": [
             "ActivityRe_releaseChapterError"
