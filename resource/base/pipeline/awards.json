@@ -550,6 +550,7 @@
         }
     },
     "Sub_JukeboxBadge": {
+        "max_hit": 3,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -1247,11 +1248,65 @@
         "action": {
             "type": "Click"
         },
+        "next": ["Sub_JukeboxBadge_CarnivalAlbum_FlagInActivityMain"]
+    },
+    "Sub_JukeboxBadge_CarnivalAlbum_FlagInActivityMain": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    369,
+                    155,
+                    86,
+                    28
+                ],
+                "expected": ["分贝等级"]
+            }
+        },
         "next": [
             "[JumpBack]Sub_CollectJukebox",
             "HomeFlag",
             "[JumpBack]ObtainedAwards",
-            "[JumpBack]BackButton"
+            "[JumpBack]BackButton",
+            "[JumpBack]Sub_JukeboxBadge_CarnivalAlbum_FashionSilhouetteSpecial"
         ]
+    },
+    "Sub_JukeboxBadge_CarnivalAlbum_FashionSilhouetteSpecial": {
+        "desc": "风尚剪影特辑",
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    530,
+                    23,
+                    218,
+                    39
+                ],
+                "expected": ["风尚剪影特辑"]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    458,
+                    -15,
+                    -172,
+                    1
+                ]
+            }
+        },
+        "next": ["DisableSub_CollectJukebox"]
+    },
+    "DisableSub_CollectJukebox": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "DisableNode",
+                "custom_action_param": {
+                    "node_name": "Sub_CollectJukebox"
+                }
+            }
+        }
     }
 }
