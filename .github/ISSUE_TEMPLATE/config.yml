@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: MaaFramework 文档 / MaaFramework Documentation
-    url: https://github.com/MaaXYZ/MaaFramework/tree/main/docs
-    about: 提交 Issue 前可先查阅 MaaFramework 文档 / Check MaaFramework documentation before opening an issue.
+  - name: 常见问题 / FAQ
+    url: https://1999.fan/zh_cn/manual/faq.html
+    about: 提交 Issue 前请先阅读常见问题 / Please read the FAQ before submitting an issue
+  - name: M9A 交流群 / M9A QQ Group (175638678)
+    url: https://qm.qq.com/q/CFEDGsEU1y
+    about: 使用交流与提问（请先阅读群公告）/ Usage discussions and questions (read the group notice first)
