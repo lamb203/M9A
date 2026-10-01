@@ -299,9 +299,6 @@
                 ]
             }
         },
-        "action": {
-            "type": "Click"
-        },
         "next": [
             "[JumpBack]Confirm",
             "HomeFlagFirst",
