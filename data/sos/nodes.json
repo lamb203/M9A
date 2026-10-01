@@ -1246,6 +1246,15 @@
                     }
                 ],
                 "interrupts": "@TheOnlyWay"
+            },
+            "猴子旋律": {
+                "actions": [
+                    {
+                        "type": "SelectOption",
+                        "method": "HSV"
+                    }
+                ],
+                "interrupts": "@TheOnlyWay"
             }
         }
     },
