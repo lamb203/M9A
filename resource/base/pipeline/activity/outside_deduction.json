@@ -2399,7 +2399,8 @@
                     64,
                     64
                 ],
-                "template": "OutsideDeduction/SOD_Combating.png"
+                "template": "OutsideDeduction/SOD_Combating.png",
+                "threshold": 0.6
             }
         },
         "action": {
