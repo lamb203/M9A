@@ -13,7 +13,6 @@ from maa.tasker import Tasker, TaskerEventSink
 from utils.aspect_ratio import calculate_aspect_ratio, is_aspect_ratio_16x9
 from utils.logger import logger
 
-SWITCH_ACCOUNT_REQUIRED_RESOLUTION = (1280, 720)
 # maa 的 resolution 只有在本帧已有截图后才有值，缓存为空时读取会得到 (0, 0)。
 # 补截图后最多再重试这么多轮，仍读不到就由调用方跳过本次检查。
 MAX_RESOLUTION_RETRIES = 20
@@ -93,14 +92,6 @@ class AspectRatioChecker(TaskerEventSink):
             return
 
         logger.debug(f"实际未缩放分辨率: {format_resolution(width, height)}")
-
-        if detail.entry == "SwitchAccount":
-            if (width, height) != SWITCH_ACCOUNT_REQUIRED_RESOLUTION:
-                logger.error(f"切换账号仅支持 1280x720 实际未缩放分辨率，当前: {format_resolution(width, height)}")
-                tasker.post_stop()
-            else:
-                logger.debug(f"切换账号分辨率检查通过: {format_resolution(width, height)}")
-            return
 
         # 检查宽高比
         if not is_aspect_ratio_16x9(width, height):

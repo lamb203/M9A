@@ -92,9 +92,7 @@
         },
         "next": [
             "SwitchAccountMainExpandFlag",
-            "SwitchAccountMainExpandFlag_1440p",
-            "[JumpBack]SwitchAccountMainExpand",
-            "[JumpBack]SwitchAccountMainExpand_1440p"
+            "[JumpBack]SwitchAccountMainExpand"
         ]
     },
     "SwitchAccountMainExpandFlag": {
@@ -109,25 +107,8 @@
                 ],
                 "template": [
                     "SwitchAccount/AccountDel.png"
-                ]
-            }
-        },
-        "next": [
-            "SwitchLastAccountComplete",
-            "[JumpBack]SwitchAccountSelect"
-        ]
-    },
-    "SwitchAccountMainExpandFlag_1440p": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    673,
-                    362,
-                    47,
-                    99
                 ],
-                "expected": "[×xX✕✖]"
+                "threshold": 0.5
             }
         },
         "next": [
@@ -143,38 +124,6 @@
                 "custom_action_param": {
                     "account": ""
                 }
-            }
-        }
-    },
-    "SwitchAccountRowAnchor": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    682,
-                    353,
-                    184,
-                    278
-                ],
-                "template": [
-                    "SwitchAccount/AccountDel.png"
-                ],
-                "order_by": "Vertical"
-            }
-        }
-    },
-    "SwitchAccountRowAnchor_1440p": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    673,
-                    362,
-                    47,
-                    278
-                ],
-                "expected": "[×xX✕✖]",
-                "order_by": "Vertical"
             }
         }
     },
@@ -220,80 +169,6 @@
             ]
         }
     },
-    "SwitchLastAccount": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    682,
-                    353,
-                    184,
-                    278
-                ],
-                "template": [
-                    "SwitchAccount/AccountDel.png"
-                ],
-                "order_by": "Vertical",
-                "index": -1
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target_offset": [
-                    -150,
-                    0,
-                    0,
-                    0
-                ]
-            }
-        },
-        "post_wait_freezes": {
-            "time": 300,
-            "target": [
-                437,
-                297,
-                408,
-                246
-            ]
-        }
-    },
-    "SwitchLastAccount_1440p": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    673,
-                    362,
-                    47,
-                    99
-                ],
-                "expected": "[×xX✕✖]",
-                "order_by": "Vertical",
-                "index": -1
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target_offset": [
-                    -60,
-                    0,
-                    0,
-                    0
-                ]
-            }
-        },
-        "post_wait_freezes": {
-            "time": 300,
-            "target": [
-                437,
-                297,
-                408,
-                246
-            ]
-        }
-    },
     "SwitchAccountMainExpand": {
         "recognition": {
             "type": "TemplateMatch",
@@ -307,33 +182,7 @@
                 "template": [
                     "SwitchAccount/AccountMainExpand.png"
                 ],
-                "threshold": 0.65
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_wait_freezes": {
-            "time": 300,
-            "target": [
-                437,
-                297,
-                408,
-                246
-            ]
-        }
-    },
-    "SwitchAccountMainExpand_1440p": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    685,
-                    344,
-                    25,
-                    22
-                ],
-                "expected": "[v√V]"
+                "threshold": 0.5
             }
         },
         "action": {

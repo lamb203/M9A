@@ -140,14 +140,6 @@ def test_sink_stops_task_on_non_16x9_resolution() -> None:
     assert fake.post_stop_count == 1
 
 
-def test_sink_requires_exact_resolution_for_switch_account() -> None:
-    fake, tasker = _fake_tasker(_FakeController((1920, 1080)))
-
-    AspectRatioChecker().on_tasker_task(tasker, NotificationType.Starting, _detail("SwitchAccount"))
-
-    assert fake.post_stop_count == 1
-
-
 def test_sink_ignores_non_starting_events() -> None:
     controller = _FakeController()
     fake, tasker = _fake_tasker(controller)
