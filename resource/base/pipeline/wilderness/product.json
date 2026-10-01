@@ -8,6 +8,7 @@
         ]
     },
     "ExpandProduct": {
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
