@@ -107,7 +107,7 @@ sentry explore <org>/<project> --dataset spans \
 - `--reverse`：反转排序（如排查稳定性最高或改善最明显的任务）。
 - `--task <任务名>`：穿透查询单个任务（支持模糊匹配；匹配到多个候选会报错并列出候选）。
 - `--include-beta`：版本序列中包含 beta / rc 测试版（默认仅对比正式稳定版）。
-    - 注意：它切换的是**本项目自身版本号**的预发布标记，不是渠道（MFA / MXU）的版本号。因此当最新项目的正式版已经发布时，加不加这个开关结果可能完全相同——不要靠重复跑它来「换一个视角」。
+    - 注意：它切换的是**本项目自身版本号**的预发布标记，不是渠道（MFA / MXU / MaaFwApp）的版本号。因此当最新项目的正式版已经发布时，加不加这个开关结果可能完全相同——不要靠重复跑它来「换一个视角」。
 - `--period`：默认 `30d`。
 - `--no-fresh`：复用本地缓存，重复试跑时用。
 
@@ -149,6 +149,7 @@ sentry explore <org>/<project> --dataset spans \
     "project_prefix": "m9a",
     "release_pattern": null,
     "task_run_spans": [
+        "maafwapp.task_run",
         "mfa.task_run",
         "mxu.task_run"
     ],

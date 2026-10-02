@@ -8,6 +8,7 @@
 
 - **任务结果**：任务级 span 按 ok / internal_error / cancelled 分列，
   失败率 = 失败 trace 数 / 总 trace 数，是最接近“这个任务失败概率”的口径；
+  umbrella span 与配置声明忽略的内部 span 不计入（与 task-trend 大表口径一致）；
 - **失败节点标记**：仅在节点失败时才上报的 span 和系统级失败（控制器初始化失败等），
   没有成功样本，“触发次数”即触发该失败的运行数，不参与失败率计算；
 - **运行失败率**：各渠道 umbrella span 的 internal_error 占比，即“一次完整运行失败的概率”，
@@ -124,6 +125,19 @@ def _in_version(row: dict[str, Any], version_key: tuple[int, int, int, int, int]
     return release_version_key(release) == version_key
 
 
+def _is_umbrella_or_ignored(description: str) -> bool:
+    """umbrella span 与配置声明忽略的内部 span 不进任务表与失败标记表。
+
+    它们的运行口径由报告末尾的"运行失败率"分表单独呈现,混进任务表会以
+    全量运行数挤占前列并虚高失败率排序。
+    """
+    return (
+        description in TASK_RUN_SPANS
+        or any(description.startswith(prefix) for prefix in CONFIG.ignored_prefixes)
+        or any(description.endswith(suffix) for suffix in CONFIG.ignored_suffixes)
+    )
+
+
 def build_task_rows(
     totals: Iterable[dict[str, Any]],
     statuses: Iterable[dict[str, Any]],
@@ -140,7 +154,7 @@ def build_task_rows(
         if not _in_version(row, version_key):
             continue
         description = row.get("span.description")
-        if not isinstance(description, str):
+        if not isinstance(description, str) or _is_umbrella_or_ignored(description):
             continue
         count = _unique_trace_count(row, "count_unique(trace)")
         if count is not None:
@@ -150,7 +164,7 @@ def build_task_rows(
         if not _in_version(row, version_key):
             continue
         description = row.get("span.description")
-        if not isinstance(description, str):
+        if not isinstance(description, str) or _is_umbrella_or_ignored(description):
             continue
         count = _unique_trace_count(row, "count_unique(trace)")
         if count is None:

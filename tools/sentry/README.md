@@ -186,6 +186,7 @@ uv run python -m tools.sentry.cli task-failure [选项]
     "project_prefix": "m9a",
     "release_pattern": null,
     "task_run_spans": [
+        "maafwapp.task_run",
         "mfa.task_run",
         "mxu.task_run"
     ],

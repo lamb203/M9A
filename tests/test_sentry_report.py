@@ -18,6 +18,11 @@ class TestM9AReleaseVersionKey:
         assert report_common.m9a_release_version_key("MXU@2.4.5+m9a@v4.7.1") == (4, 7, 1, 2, 0)
         assert report_common.m9a_release_version_key("m9a@v4.7.1") == (4, 7, 1, 2, 0)
 
+    def test_parses_maafwapp_release_with_shell_prerelease(self) -> None:
+        # 外壳自身的 alpha 预发布版本不参与解析,只取内嵌的 m9a 版本
+        assert report_common.m9a_release_version_key("MaaFwApp@0.1.1-alpha.81+m9a@v4.11.1") == (4, 11, 1, 2, 0)
+        assert report_common.version_label("MaaFwApp@0.1.1-alpha.81+m9a@v4.11.1") == "v4.11.1"
+
     def test_parses_embedded_beta_version(self) -> None:
         assert report_common.m9a_release_version_key("MFA@v2.16.1-beta.3+m9a@v4.7.0-beta.1") == (4, 7, 0, 0, 1)
 
@@ -103,13 +108,30 @@ class TestBuildTaskRows:
             ),
         ]
         rows, markers = task_failure_report.build_task_rows(totals, statuses, None)
+        # umbrella span 有成功样本,但不属于业务任务,由"运行失败率"分表单独呈现
         assert [(row.task, row.total, row.failed, row.cancelled) for row in rows] == [
-            ("mfa.task_run", 200, 20, 0),
             ("领取奖励", 100, 7, 3),
         ]
         assert markers == []
-        assert rows[0].failure_rate == pytest.approx(0.1)
-        assert rows[1].failure_rate == pytest.approx(0.07)
+        assert rows[0].failure_rate == pytest.approx(0.07)
+
+    def test_excludes_umbrella_and_ignored_internal_spans(self) -> None:
+        totals = [
+            span_row(**{"span.description": "maafwapp.task_run", "count_unique(trace)": 45}),
+            span_row(**{"span.description": "__MXU_Internal", "count_unique(trace)": 12}),
+            span_row(**{"span.description": "领取奖励", "count_unique(trace)": 100}),
+        ]
+        statuses = [
+            span_row(**{"span.description": "maafwapp.task_run", "span.status": "ok", "count_unique(trace)": 9}),
+            span_row(
+                **{"span.description": "__MXU_Internal", "span.status": "internal_error", "count_unique(trace)": 12}
+            ),
+            span_row(**{"span.description": "领取奖励", "span.status": "ok", "count_unique(trace)": 100}),
+        ]
+        rows, markers = task_failure_report.build_task_rows(totals, statuses, None)
+        assert [row.task for row in rows] == ["领取奖励"]
+        # 仅失败上报的内部 span 同样不进失败标记表
+        assert markers == []
 
     def test_status_counts_stay_separate_per_status(self) -> None:
         totals = [span_row(**{"span.description": "收取荒原", "count_unique(trace)": 10})]
@@ -599,6 +621,8 @@ class TestConfig:
         assert CONFIG.target == "m9a/gui"
         assert CONFIG.project_prefix == "m9a"
         assert "mfa.task_run" in CONFIG.task_run_spans
+        assert "maafwapp.task_run" in CONFIG.task_run_spans
+        assert "mxu.task_run" in CONFIG.task_run_spans
 
     def test_raises_when_config_file_not_found(self, tmp_path: Path) -> None:
         from tools.sentry.config import load_config
