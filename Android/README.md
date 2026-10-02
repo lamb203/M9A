@@ -58,9 +58,9 @@ debug 包走 **Build Android APK**（push / PR 自动触发，手动 dispatch �
 
 | job | 资产 | 内容 |
 | --- | --- | --- |
-| `build` | `M9A-<tag>-universal.apk` | 双 ABI 通用包 |
-| `abi-split`（arm64-v8a） | `M9A-<tag>-arm64-v8a.apk` | 只铺 arm64 的 MaaFramework 与 agent 运行时 |
-| `abi-split`（x86_64） | `M9A-<tag>-x86_64.apk` | 同上，x86_64 |
+| `build` | `M9A-android-universal-<tag>.apk` | 双 ABI 通用包 |
+| `abi-split`（arm64-v8a） | `M9A-android-arm64-v8a-<tag>.apk` | 只铺 arm64 的 MaaFramework 与 agent 运行时 |
+| `abi-split`（x86_64） | `M9A-android-x86_64-<tag>.apk` | 同上，x86_64 |
 
 `abi-split` 每个包只建自己的那份运行时（`build_agent_bundle.py --abi <abi>`）并写 `build.releaseAbi=<abi>`；debug 包同理只建 arm64。配方里**不写死 `abi`**，外壳按 `agent-dist` 里实际存在的运行时打包，所以单 ABI 包里连 `bundle.zip` 也只有一份运行时，体积约为 universal 的一半。应用内更新优先选本机 ABI 的资产、选不到才回退 universal，所以单 ABI 包的 ABI 标记必须保留，而 universal 包不能带任何标记。
 

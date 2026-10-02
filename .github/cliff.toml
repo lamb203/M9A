@@ -85,9 +85,9 @@ footer = """
 | {{ self::asset(prefix="M9A-linux-aarch64-", suffix="-MFAA.tar.gz", label="M9A-MFAA", ver=ver, tag=latest_version) }} /（无 MXU 包） | Linux ARM64 |
 | {{ self::asset(prefix="M9A-macos-x86_64-", suffix="-MFAA.tar.gz", label="M9A-MFAA", ver=ver, tag=latest_version) }} / {{ self::asset(prefix="M9A-macos-x86_64-", suffix="-MXU.tar.gz", label="M9A-MXU", ver=ver, tag=latest_version) }} | macOS（Intel 芯片） |
 | {{ self::asset(prefix="M9A-macos-aarch64-", suffix="-MFAA.tar.gz", label="M9A-MFAA", ver=ver, tag=latest_version) }} / {{ self::asset(prefix="M9A-macos-aarch64-", suffix="-MXU.tar.gz", label="M9A-MXU", ver=ver, tag=latest_version) }} | macOS（Apple Silicon） |
-| {{ self::asset(prefix="M9A-", suffix="-arm64-v8a.apk", label="M9A-arm64-v8a.apk", ver=ver, tag=latest_version) }}（推荐） | Android 真机（ARM64），体积约为 universal 的一半 |
-| {{ self::asset(prefix="M9A-", suffix="-universal.apk", label="M9A-universal.apk", ver=ver, tag=latest_version) }} | Android 双架构通用包，真机 / 模拟器都能装，不确定选这个 |
-| {{ self::asset(prefix="M9A-", suffix="-x86_64.apk", label="M9A-x86_64.apk", ver=ver, tag=latest_version) }} | Android 模拟器等 x86 环境（Windows 上的蓝叠 / MuMu / 雷电等） |
+| {{ self::asset(prefix="M9A-android-arm64-v8a-", suffix=".apk", label="M9A-android-arm64-v8a.apk", ver=ver, tag=latest_version) }}（推荐） | Android 真机（ARM64），体积约为 universal 的一半 |
+| {{ self::asset(prefix="M9A-android-universal-", suffix=".apk", label="M9A-android-universal.apk", ver=ver, tag=latest_version) }} | Android 双架构通用包，真机 / 模拟器都能装，不确定选这个 |
+| {{ self::asset(prefix="M9A-android-x86_64-", suffix=".apk", label="M9A-android-x86_64.apk", ver=ver, tag=latest_version) }} | Android 模拟器等 x86 环境（Windows 上的蓝叠 / MuMu / 雷电等） |
 {%- if not latest_version %}
 以上版本号为占位 v?.?.?，release 页没找到对应包请点 show all assets
 {%- endif %}

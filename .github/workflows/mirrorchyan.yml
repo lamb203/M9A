@@ -102,7 +102,7 @@ jobs:
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
-          filename: ${{ format('*-{0}.apk', matrix.suffix) }}
+          filename: ${{ format('*-android-{0}-*.apk', matrix.suffix) }}
           mirrorchyan_rid: M9A_exec
           tag: ${{ inputs.tag || github.event.client_payload.tag }}
 

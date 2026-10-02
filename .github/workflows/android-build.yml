@@ -224,9 +224,10 @@ jobs:
             echo "预期恰好一个 release APK，实际 $count 个；多产物请改用按 ABI 命名"
             exit 1
           fi
+          # 命名与桌面资产同段序：prefix-平台-架构-tag
           # universal 包不能被误认成单 ABI 包：应用内更新按 asset 名选包
           # （GitHubUpdate.selectAsset），带 ABI 标记就会绕过 universal 回退
-          mv ./*.apk "${{ steps.maafw.outputs.artifact_prefix }}-${TAG}-${LABEL}.apk"
+          mv ./*.apk "${{ steps.maafw.outputs.artifact_prefix }}-android-${LABEL}-${TAG}.apk"
 
       - name: Upload Debug APK
         if: env.ASSEMBLE != 'release'
@@ -392,8 +393,9 @@ jobs:
             echo "预期恰好一个 release APK，实际 $count 个"
             exit 1
           fi
+          # 命名与桌面资产同段序：prefix-平台-架构-tag
           # 单 ABI 包必须带本机 ABI 标记，应用内更新才会优先选它
-          mv ./*.apk "${{ steps.maafw.outputs.artifact_prefix }}-${TAG}-${ABI}.apk"
+          mv ./*.apk "${{ steps.maafw.outputs.artifact_prefix }}-android-${ABI}-${TAG}.apk"
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v7
