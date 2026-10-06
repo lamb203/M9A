@@ -2341,13 +2341,13 @@
             }
         },
         "post_wait_freezes": {
+            "time": 500,
             "target": [
                 0,
                 0,
                 0,
                 0
             ],
-            "time": 500,
             "timeout": 1500
         }
     },
