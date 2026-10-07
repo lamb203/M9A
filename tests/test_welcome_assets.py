@@ -38,7 +38,5 @@ def test_welcome_markdown_images_resolve_from_project_root() -> None:
                 continue
 
             resolved = (PROJECT_ROOT / target).resolve()
-            assert resolved.is_relative_to(PROJECT_ROOT), (
-                f"image in {relative_path} escapes the project root: {target}"
-            )
+            assert resolved.is_relative_to(PROJECT_ROOT), f"image in {relative_path} escapes the project root: {target}"
             assert resolved.is_file(), f"image in {relative_path} is missing: {target}"
