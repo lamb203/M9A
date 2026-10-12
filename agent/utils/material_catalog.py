@@ -8,7 +8,8 @@
   货币）才需要在本目录写 `name`。不在仓库页的材料写 "source": "character"，
   改从角色升级页读取，不需要仓库图标。
 - 新增关卡族：先按 combat pipeline 既有结构补 ResourceChapter_<族> 入口节点与识别模板，
-  再登记到本模块 STAGE_FAMILIES。
+  再登记到本模块 STAGE_FAMILIES。资源关卡族默认 `legacy=False`，**不参与旧「均衡取最少」
+  流程**（洞悉本正因此天然被排除）；要让新族进旧流程，登记时显式写 `legacy=True`。
 
 维护清单见 docs/zh_cn/develop/depot-catalog.md；tests/test_depot_maintain.py 会核对本目录
 登记的材料图标、章节模板与入口节点是否齐全。
@@ -34,6 +35,10 @@ class FamilySpec:
     entry_node: str
     label: str
     templates: tuple[str, ...] = ()
+    # 该关卡族是否参与旧「均衡取最少」流程（`BalancedFarmingAnalyze`）—— 这是**产品策略**，
+    # 不是族的固有性质。**默认 False：新增关卡族必须显式置 True 才会被旧流程刷取**，
+    # 免得将来出现「体力贵但不是洞悉本」的族被默默纳入均衡（洞悉本正因此天然被排除）。
+    legacy: bool = False
 
 
 # 资源关卡族：族代码 → 关卡入口节点与识别模板（templates 为空表示该族用 OCR 识别章节标签）。
@@ -105,6 +110,11 @@ class MaterialStage:
         if self.family is None:
             return (MAIN_STORY_ENTRY_TEMPLATE.format(chapter=self.chapter),)
         return STAGE_FAMILIES[self.family].templates
+
+    @property
+    def is_legacy_farmable(self) -> bool:
+        """是否参与旧「均衡取最少」流程（主线没有 family，恒为 True）。"""
+        return self.family is None or STAGE_FAMILIES[self.family].legacy
 
 
 @dataclass(frozen=True)

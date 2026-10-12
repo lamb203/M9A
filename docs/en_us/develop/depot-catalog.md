@@ -9,7 +9,7 @@ Materials and stages of the "Smart Balanced Material Farming" task (depot mainta
 
 ## Data flow
 
-1. `data/combat/balanced_farming.json` — the catalog: item id → stage / difficulty (optional drop per run / reading source). Display names come from `data/combat/items.json` by default; only materials missing from that table (the currencies) write their own `name` here. The same file is also read by the original 智能均衡刷材料 (`BalancedFarmingAnalyze`), which only scans the depot — it skips `source: "character"` entries, so adding materials needs no extra work there
+1. `data/combat/balanced_farming.json` — the catalog: item id → stage / difficulty (optional drop per run / reading source). Display names come from `data/combat/items.json` by default; only materials missing from that table (the currencies) write their own `name` here. The same file is also read by the original 智能均衡刷材料 (`BalancedFarmingAnalyze`), which only scans the depot — it skips `source: "character"` entries and **insight-stage materials** (`ME`/`SL`/`SS`/`BW`; resource families default to `legacy=False` and must opt in with an explicit `True`), since those cost far more stamina per run and are only farmed by "Depot maintain" against per-material targets
 2. Target stock — the GUI "Depot maintain" master switch plus one switch per material with its own "target amount / candy uses" (the only entry point; there is no config file)
 3. `config/warehouse_inventory.json` — the material snapshot: depot materials are written by the `WarehouseInventory` task, Dust/Sharpodonty are merged in by `DepotCurrencyInspect` (character-upgrade page reading)
 4. `DepotMaintainPlan` (pipeline node `BF_Plan`) reads all three, picks the material with the largest deficit, overrides `SelectCombatStage`, `AllIn`, the round's candy and report settings, then enters battle
@@ -77,6 +77,7 @@ The four insight families drop per difficulty tier (checked 2026-10-07):
 | 木娑典 (`SS`, 深林之形) | 残篇 | 孤卷 | 全章 |
 | 兽涎典 (`BW`, 荒兽之野) | 残篇 | 孤卷 | 全章 |
 
+- **Not part of the old "farm the least" flow**: resource families default to `legacy=False` in `STAGE_FAMILIES` (they must opt in with an explicit `True`), so `BalancedFarmingAnalyze` skips them entirely when picking a material (otherwise "farm whoever has the least" would keep hitting the much more expensive insight stages); the four insight families are only farmed by "Depot maintain" against per-material targets.
 - Write stages as `ME-02` / `SS-04` / `BW-06` with `level: None`; this matches the `tasks/Combat.json` stage options (they also use `ME-02` plus `TargetStageName_OCR.expected: ["02"]`), so navigation reuses the existing resource-stage flow with no new code.
 - Drops scale with the **parity of the difficulty**: **even tiers (02/04/06) drop 2 per run, odd tiers (01/03/05) drop 1**; an odd tier costs slightly less stamina but yields only one, so it is the worse deal — the catalog therefore only uses even tiers and always writes `per_run: 2`. Even without a drop template the `ceil(deficit / 2)` estimate stays exact. Only when adding an odd-tier entry should `per_run` be 1 (and that is rarely worth adding).
 - The catalog always uses the top tier (全章 = 06); on an account that has not unlocked it yet the stage navigation will fail — an endgame-account trade-off.
@@ -94,7 +95,7 @@ The four insight families drop per difficulty tier (checked 2026-10-07):
 ## Adding a stage family
 
 1. Add the entry nodes to `resource/base/pipeline/combat.json` following the existing families: `ResourceChapter_<family>` → `ResourceChapter_<family>Enter`, recognizing the chapter label of that family (template or OCR)
-2. Register the family in `STAGE_FAMILIES` in `agent/utils/material_catalog.py`: family code → entry node / display name / recognition templates
+2. Register the family in `STAGE_FAMILIES` in `agent/utils/material_catalog.py`: family code → entry node / display name / recognition templates. Resource families default to `legacy=False` and stay out of the old "farm the least" flow; write `legacy=True` explicitly if the family should join it
 3. Run the same `-k shipped` validation
 
 `SelectCombatStage` splits `family-stage` into the family code and the stage number (zero-padded to two digits) and hands it to the matching Enter node, so no Python code is needed for a new family.

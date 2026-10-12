@@ -3,8 +3,8 @@ from types import SimpleNamespace
 import numpy as np
 from maa.define import BoxAndScoreResult, OCRResult, RecognitionDetail, Rect
 
-from agent.custom.action.balanced_farming import BalancedFarmingAnalyze, warehouse_materials
-from agent.utils.material_catalog import build_catalog, load_catalog
+from agent.custom.action.balanced_farming import BalancedFarmingAnalyze, balanced_candidates
+from agent.utils.material_catalog import FamilySpec, build_catalog, load_catalog, parse_stage_code
 
 
 def _icon_detail(box: tuple[int, int, int, int] | None) -> RecognitionDetail:
@@ -63,25 +63,47 @@ def _analyze() -> BalancedFarmingAnalyze:
     return BalancedFarmingAnalyze.__new__(BalancedFarmingAnalyze)
 
 
-def test_warehouse_materials_skips_character_source() -> None:
-    """货币类材料（source=character）不在仓库页，旧流程不能把它们算进「取最少」。"""
+def test_balanced_candidates_skips_character_and_insight() -> None:
+    """旧「均衡取最少」不参与均衡的两类材料。
+
+    货币（source=character）不在仓库页、扫不到；洞悉本（ME/SL/SS/BW）单局体力消耗高，
+    只在「库存保持」里按逐材料目标刷 —— 不排除的话，「谁最少刷谁」会一直往洞悉本上撞。
+    """
     raw = {
         "110103": {"name": "啮咬盒", "stage": "7-26", "level": "Hard"},
+        "115011": {"name": "岩中典残篇", "stage": "ME-02", "level": "None"},
+        "115042": {"name": "兽涎典孤卷", "stage": "BW-04", "level": "None"},
         "205": {"name": "微尘", "stage": "LP-06", "level": "None", "source": "character"},
         "203": {"name": "利齿子儿", "stage": "MA-06", "level": "None", "source": "character"},
     }
     catalog = build_catalog(raw, source="unit-test")
-    assert set(warehouse_materials(catalog)) == {"110103"}
+    assert set(balanced_candidates(catalog)) == {"110103"}
 
-    assert warehouse_materials({}) == {}
+    assert balanced_candidates({}) == {}
 
 
-def test_warehouse_materials_resolves_name_from_items_json() -> None:
+def test_stage_family_legacy_flag() -> None:
+    """资源关卡族默认不参与旧流程；主线（没有 family）恒参与。"""
+    for code in ("ME-02", "SL-04", "SS-06", "BW-04", "MA-06", "LP-06", "Psychube-01"):
+        assert not parse_stage_code(code).is_legacy_farmable, code
+    assert parse_stage_code("7-26").is_legacy_farmable
+
+
+def test_new_family_defaults_to_not_legacy_farmable() -> None:
+    """新增关卡族默认 `legacy=False` —— 必须显式置 True 才会被旧流程刷取。
+
+    这样将来出现「体力贵但不是洞悉本」的族时，不会被默默纳入均衡；洞悉本正因此天然被排除。
+    """
+    assert not FamilySpec("ResourceChapter_NEW", "新族").legacy
+    assert FamilySpec("ResourceChapter_NEW", "新族", legacy=True).legacy
+
+
+def test_balanced_candidates_resolves_name_from_items_json() -> None:
     """目录不写 name 时名称回退到 items.json —— 旧流程靠这一条拿到显示名。"""
     raw = {"110103": {"stage": "7-26", "level": "Hard"}}
     catalog = build_catalog(raw, source="unit-test", names={"110103": "啮咬盒"})
 
-    entry = warehouse_materials(catalog)["110103"]
+    entry = balanced_candidates(catalog)["110103"]
     assert (entry.name, entry.stage.code, entry.level) == ("啮咬盒", "7-26", "Hard")
 
 
@@ -92,7 +114,7 @@ def test_shipped_catalog_has_resolvable_names() -> None:
     若绕过 `load_catalog()` 直接读原始 JSON，就会在第一次取 `name` 时 KeyError ——
     而它是「库存保持」总开关关闭时的默认路径，没开新功能的用户全都会中招。
     """
-    materials = warehouse_materials(load_catalog())
+    materials = balanced_candidates(load_catalog())
 
     assert materials, "随仓库发布的目录里不应没有仓库材料"
     for item_id, entry in materials.items():
@@ -101,6 +123,8 @@ def test_shipped_catalog_has_resolvable_names() -> None:
     # 货币（source=character）走角色升级页，不在仓库页，旧流程必须排除掉
     assert "203" not in materials
     assert "205" not in materials
+    # 洞悉本（ME/SL/SS/BW）只在「库存保持」里按逐材料目标刷，旧流程必须排除掉
+    assert not [item_id for item_id, entry in materials.items() if not entry.stage.is_legacy_farmable]
 
 
 def test_count_roi_is_middle_half_anchored_to_icon_bottom() -> None:
@@ -163,18 +187,30 @@ class _FakeController:
         return object()
 
 
+# 目录里的一条洞悉本材料（岩中典残篇，ME-02）：run 级用例用它验证洞悉本被排除
+_INSIGHT_ITEM_ID = "115011"
+
+
 class _AnalyzeContext:
-    """驱动 `BalancedFarmingAnalyze.run` 的最小桩：图标全命中、数量都读成 5。"""
+    """驱动 `BalancedFarmingAnalyze.run` 的最小桩：图标全命中，数量读成固定值。
+
+    洞悉本材料（`_INSIGHT_ITEM_ID`）故意读成更小的 1、其余读成 5 —— 若读数相同，
+    `min(sorted(...))` 会挑 id 最小的 110103，洞悉本即使被错误纳入候选也看不出来；
+    给它更小的数量，混入时它才会成为「最少」被选中，让 run 级断言真的失败。
+    """
 
     def __init__(self) -> None:
         self.tasker = SimpleNamespace(controller=_FakeController())
         self.pipeline_overrides: list[dict] = []
+        self._item_id = ""
 
     def run_recognition(self, name: str, image: object, override: dict) -> RecognitionDetail:
         if name == "BF_ItemIcon":
+            template = override[name]["recognition"]["param"]["template"]
+            self._item_id = template.removeprefix("Warehouse/Item-").removesuffix(".png")
             return _icon_detail((100, 200, 87, 79))
         roi = override[name]["recognition"]["param"]["roi"]
-        return _count_detail("5", roi)
+        return _count_detail("1" if self._item_id == _INSIGHT_ITEM_ID else "5", roi)
 
     def override_pipeline(self, pipeline: dict) -> None:
         self.pipeline_overrides.append(pipeline)
@@ -193,6 +229,7 @@ def test_analyze_reads_shipped_catalog_without_name_field() -> None:
 
     assert result.success
     override = context.pipeline_overrides[-1]["SelectCombatStage"]
-    # 所有材料读数相同 → 取 id 最小的一种（110103 啮咬盒，7-26 Hard）
+    # 主线材料读数都是 5 → 取 id 最小的 110103（啮咬盒，7-26 Hard）；
+    # 洞悉本读数更小（1），一旦被错误纳入候选就会顶掉它 —— 这正是本用例要拦的回归。
     assert override["action"]["param"]["custom_action_param"]["stage"] == "7-26"
     assert override["attach"]["level"] == "Hard"

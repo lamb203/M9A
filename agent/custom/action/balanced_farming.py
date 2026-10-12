@@ -12,13 +12,25 @@ from utils.maa_types import best_box, ocr_text
 from utils.material_catalog import SOURCE_WAREHOUSE, CatalogError, MaterialEntry, load_catalog
 
 
-def warehouse_materials(catalog: Mapping[str, MaterialEntry]) -> dict[str, MaterialEntry]:
-    """只保留仓库页能扫到的材料：货币类材料（source=character）不在仓库里，旧流程要跳过。
+def balanced_candidates(catalog: Mapping[str, MaterialEntry]) -> dict[str, MaterialEntry]:
+    """旧「均衡取最少」流程（`BalancedFarmingAnalyze`）的候选材料。
+
+    两类排除：
+    - 货币类材料（source=character）不在仓库页，扫不到；
+    - **关卡族默认不参与**（`FamilySpec.legacy` 默认 False，必须显式置 True 才进候选）——
+      洞悉本（ME/SL/SS/BW）等资源关卡族因此被整体跳过，它们只在「库存保持」里按逐材料目标刷；
+      不排除的话「谁最少刷谁」会一直往洞悉本上撞。
+
+    当前候选只剩主线材料（主线没有 family，恒参与）。
 
     入参必须是 `load_catalog()` 的产物而不是原始 JSON —— 目录里的仓库材料已经不写 `name`
     （显示名的单一来源是 items.json），只有经过目录构建才拿得到名称。
     """
-    return {item_id: entry for item_id, entry in catalog.items() if entry.source == SOURCE_WAREHOUSE}
+    return {
+        item_id: entry
+        for item_id, entry in catalog.items()
+        if entry.source == SOURCE_WAREHOUSE and entry.stage.is_legacy_farmable
+    }
 
 
 @AgentServer.custom_action("BalancedFarmingAnalyze")
@@ -41,12 +53,21 @@ class BalancedFarmingAnalyze(CustomAction):
     ) -> CustomAction.RunResult:
 
         try:
-            materials = warehouse_materials(load_catalog(Path(self._DATA_PATH)))
+            catalog = load_catalog(Path(self._DATA_PATH))
         except CatalogError as e:
             logger.error(f"读取材料映射表失败: {self._DATA_PATH}, {e}")
             return CustomAction.RunResult(success=False)
+        materials = balanced_candidates(catalog)
+        # 被排除的材料由同一份策略推导，日志与实际过滤结果不会脱节
+        skipped = [
+            entry.name
+            for item_id, entry in catalog.items()
+            if entry.source == SOURCE_WAREHOUSE and item_id not in materials
+        ]
+        if skipped:
+            logger.info(f"均衡刷取不包含以下材料（请在「库存保持」里按目标刷取）: {'、'.join(skipped)}")
         if not materials:
-            logger.error(f"材料映射表里没有仓库材料: {self._DATA_PATH}")
+            logger.error(f"材料映射表里没有可均衡刷取的材料: {self._DATA_PATH}")
             return CustomAction.RunResult(success=False)
 
         # 每页都对全部材料做匹配，收集多次读数；
