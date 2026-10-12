@@ -48,13 +48,13 @@ git add Android/MaaFwApp
 
 ## CI
 
-debug 包走 **Build Android APK**（push / PR 自动触发，手动 dispatch 可选 release 只出签名工件，不发布）；正式包由 **Release** 流程在 `v*` tag 上统一收口：调 `android-build.yml` 出三个签名 APK，**等桌面包也就绪后一次性创建 Release**（桌面 11 个资产 + APK 3 个），随后派发 Mirror酱 一次传完桌面与 Android。构建逻辑本体在可复用的 `.github/workflows/android-build.yml`（`macos-latest` + JDK 25 + NDK 29 + Python 3.13），android.yml 与 release.yml 都只是调用方。
+debug 包走 **Build Android APK**（push / PR 自动触发，手动 dispatch 可选 release 出 APK 工件、不发布；缺 `KEYSTORE_BASE64` 时为未签名包）；正式包由 **Release** 流程在 `v*` tag 上统一收口：调 `android-build.yml` 出三个签名 APK，**等桌面包也就绪后一次性创建 Release**（桌面 11 个资产 + APK 3 个），随后派发 Mirror酱 一次传完桌面与 Android。构建逻辑本体在可复用的 `.github/workflows/android-build.yml`（`macos-latest` + JDK 25 + NDK 29 + Python 3.13），android.yml 与 release.yml 都只是调用方。
 
 包名与 MaaFW 版本都由 `tools/android-packaging.mjs` 解析（放在脚本里而不是 workflow 内联，是为了可单测、也方便别的项目复用；用 Node 而非 Python 是刻意的——纯 pipeline 项目不引入 Python）：资产前缀取 `maa-project.json` 的 `project.displayName`（不可用时退回 `slug`），MaaFW tag 按项目侧固定的版本配对内核 release。
 
 发布与桌面共用同一批 `v*` tag：tag 上 Release 流程把桌面与 Android 的资产一起传进**同一个 GitHub Release**。APK 的 `versionName` / `versionCode` 取自最外层仓库的 `git describe` 与提交数，所以 tag 统一后与应用内自更新的版本比较自动对齐。
 
-改 `Android/`、`agent/`、`tasks/`、`resource/`、`data/`、`locales/`、`config/`、`requirements.txt`、`tools/android-packaging.mjs` 或 `interface.json` 等会触发构建。
+改 `Android/`、`agent/`、`tasks/`、`resource/`、`data/`、`locales/`、`config/`、`requirements.txt`、`interface.json`、`maa-project.json`、`MaaCommonAssets`（子模块 gitlink；`MaaCommonAssets/**` 匹配不到）、`tools/android-packaging.mjs` 或 `tools/ci/download_drop_core.py` 等会触发构建。
 
 三个 APK 由 `android-build.yml` 的三个 job 出：
 
@@ -76,4 +76,4 @@ MaaFW 版本与桌面**同源固定**，发版不用改 yml：
 
 Mirror酱 上传由 release.yml 建完 Release 后派发的 `mirrorchyan-upload` 一次性收口：`mirrorchyan.yml` 里桌面走 `M9A` / `M9A-MXU` 两条资源流，Android 的「可执行包」走 `M9A_exec`，由 `mirrorchyan_android` job 按 universal → `arch: any`、arm64-v8a → `arch: arm64`、x86_64 → `arch: x64` 三条流上传。应用内更新查的是这条「可执行包」流——配方里的 `update.mirrorchyanRid: M9A_exec` 会压过 PI 的 `mirrorchyan_rid`（后者是桌面资源包）。
 
-Release 需要仓库 Secrets：`KEYSTORE_BASE64`、`KEYSTORE_PASSWORD`、`KEY_ALIAS`、`KEY_PASSWORD`，以及 `MirrorChyanUploadToken`。手动跑时可用 `maafw_tag` 指定 MaaFramework 的 tag，留空则按 requirements / maa-project.json 固定的版本解析。
+Release 需要仓库 Secrets：`KEYSTORE_BASE64`、`KEYSTORE_PASSWORD`、`KEY_ALIAS`、`KEY_PASSWORD`，以及 `MirrorChyanUploadToken`。缺 `KEYSTORE_BASE64` 时：非 tag 的运行（fork / 镜像仓 / 手动 dispatch）打 warning 出未签名包，tag 上直接失败——未签名 APK 装不上、也进不了应用内更新。手动跑时可用 `maafw_tag` 指定 MaaFramework 的 tag，留空则按 requirements / maa-project.json 固定的版本解析。
