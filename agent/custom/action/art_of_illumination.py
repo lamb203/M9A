@@ -9,8 +9,17 @@
 翻牌后约 2.06~3.04s 出现「获得物品」页（实测），由 `AOI_FlipRound` 的 `timeout` 兜住这段
 等待：页面出现即被 `AOI_ObtainedAwards` 认掉并点掉；**等不到就说明这一下没翻成——也就是
 可折射次数已用完**，由 `AOI_FlipRound` 的 `on_error` 走到收尾节点，正常结束。
-所以本模块只做两件事：**判断该不该点、点哪里**；翻完时用 `override_next` 把本节点的 next
-覆写成收尾节点，让引擎走正常结束，而不是靠超时收场。
+所以本模块只做两件事：**判断该不该点、点哪里**；该改流向时用 `override_next` 把本节点的
+next 覆写成翻页或收尾节点，让引擎走正常流转，而不是靠超时收场。
+
+**`override_next` 写的是持久补丁，不是一次性的**：它把节点当前定义物化后存进本任务的
+`Context::pipeline_override_`，此后每次取该节点的定义都优先命中这份补丁，直到任务结束
+（框架 5.14.3：`Context::override_next` → `pipeline_override_.insert_or_assign`，
+`get_pipeline_data` 查补丁优先；引擎每轮命中节点后也是拿这份补丁读 `next`）。
+所以**每条分支都要显式重设 next**，包括照常点击那条（重设回 `ROUND_NEXT`）：只在翻页/收尾
+分支写的话，翻过一次页之后 `AOI_FlipRound.next` 就永久停在 `AOI_PageSwitch` —— 之后每次点击
+都不再去 `AOI_ObtainedAwards`（引擎不再等、也不再点掉「获得物品」页，而是立刻又去翻页），
+两种详情面板的兜底同时失效，剩下的折射次数白白扔掉。
 
 判据（全部真机实测）：
 
@@ -83,11 +92,16 @@ __all__ = ["ArtOfIlluminationScratch"]
 FINISH_NODE = "AOI_ScratchCardDone"
 # 本页翻完、但计数条还有次数时交给它：去点棋盘的翻页「>」翻到另一幕布（多格光影幕布 I / II）
 SWITCH_NODE = "AOI_PageSwitch"
+# `AOI_FlipRound` 在 pipeline 里的出口三选一（正常翻牌弹「获得物品」页；误点已翻开的格子弹两种
+# 详情面板，各有一个关闭节点）。这是 JSON 那份列表的**副本**：补丁是持久的，所以点击分支每轮都
+# 得把它显式盖回去，否则上一轮的翻页/收尾补丁会一直生效（见模块 docstring）。
+# tests/test_art_of_illumination.py 有一条用例把这份副本与 JSON 钉在一起。
+ROUND_NEXT: tuple[str, ...] = ("AOI_ObtainedAwards", "AOI_PanelCloseItem", "AOI_PanelCloseCollection")
 
 
 @AgentServer.custom_action("ArtOfIlluminationScratch")
 class ArtOfIlluminationScratch(CustomAction):
-    """扫出未翻开的格子、**随机**点掉一个；没得翻就把本节点的 next 覆写成翻页或收尾节点。"""
+    """扫出未翻开的格子、**随机**点掉一个；每轮都重设本节点的 next（收尾 / 翻页 / 照常点击）。"""
 
     # ---- 实测几何（1280×720 控制器分辨率空间）：6×6 槽位中心 ----
     COL_X: tuple[int, ...] = (168, 261, 352, 444, 535, 626)
@@ -199,10 +213,22 @@ class ArtOfIlluminationScratch(CustomAction):
         return int(match.group(1)) if match is not None else None
 
     @staticmethod
-    def _finish(context: Context, node_name: str, target: str = FINISH_NODE) -> None:
-        """把本节点的 next 覆写成目标节点：由引擎走正常流转，而不是靠超时/异常。"""
+    def _set_next(context: Context, node_name: str, targets: tuple[str, ...]) -> None:
+        """把本节点的 next 覆写成 targets：由引擎走正常流转，而不是靠超时/异常。
+
+        注意 `override_next` 写的是**持久补丁**（物化节点定义 → 存进本任务的 Context → 此后每次取
+        节点定义都优先命中它，直到任务结束），不是一次性的，所以**本模块每条分支都要调**——尤其
+        是照常点击那条，必须重设回 `ROUND_NEXT`。只在翻页/收尾分支调的话，翻过一次页之后本节点的
+        next 就永久停在 `AOI_PageSwitch`：点击分支不再去 `AOI_ObtainedAwards`，引擎不再等也不再点
+        掉「获得物品」页，两种详情面板的兜底同时失效。
+        """
         if node_name:
-            context.override_next(node_name, [target])
+            context.override_next(node_name, list(targets))
+
+    @classmethod
+    def _finish(cls, context: Context, node_name: str, target: str = FINISH_NODE) -> None:
+        """收尾：把本节点的 next 覆写成收尾节点，由引擎走正常结束。"""
+        cls._set_next(context, node_name, (target,))
 
     # ---------------------------------------------------------------- 本轮决策
 
@@ -249,6 +275,9 @@ class ArtOfIlluminationScratch(CustomAction):
         row, col, cx, cy = cls._pick(cells)
         logger.info(f"[ArtOfIllumination] {node_name} 未开 {len(cells)} 格，次数 {counter} → 点 ({row},{col})")
         logger.debug(f"[ArtOfIllumination] 该格像素 ({cx},{cy})，帧间差 {float(motion[row - 1, col - 1]):.1f}")
+        # **必须显式把 next 重设回原始出口三选一**：上一轮若是翻页/收尾分支，它留下的补丁还在，
+        # 不重设的话这一跳会走成 AOI_PageSwitch（于是引擎不等「获得物品」页、直接又去翻页）。
+        # 重设之后，等页面出现仍由引擎的 next 轮询承担，本模块不等。
+        cls._set_next(context, node_name, ROUND_NEXT)
         context.tasker.controller.post_click(cx, cy).wait()
-        # next 保持指向 AOI_ObtainedAwards：由引擎的 next 轮询去等页面出现，本模块不等。
         return True

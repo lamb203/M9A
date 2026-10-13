@@ -183,7 +183,7 @@
     },
     // 刮卡循环体：页面标识与 AOI_OnActivityPage 同源（详见它的注释）。
     "AOI_FlipRound": {
-        "desc": "扫出未开格、随机点一个；没得翻就把 next 覆写成翻页或收尾节点",
+        "desc": "扫出未开格、随机点一个；每轮都显式重设本节点的 next（点击分支重设回下面三选一）",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -210,6 +210,9 @@
         "timeout": 10000,
         // 出口三选一：正常翻牌后弹「获得物品」页；万一点了已翻开的格子则弹详情面板
         // （两种面板、两个 ✕ 位置）——两条路都各有自己的关闭节点，都有出口。
+        // **这一串在自定义动作里有一份副本（ROUND_NEXT）**：override_next 写的是持久补丁，翻页 /
+        // 收尾分支改过 next 之后不会自己还原，所以点击分支每轮都要把这份列表显式盖回去；
+        // 漏掉的话翻过一次页后就永久停在 AOI_PageSwitch，弹窗与面板的兜底全部失效。
         "next": [
             "AOI_ObtainedAwards",
             "AOI_PanelCloseItem",
